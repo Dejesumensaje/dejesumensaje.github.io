@@ -7,20 +7,7 @@ body {
     color: #333;
 }
 
-.skip-link {
-    position: absolute;
-    top: -40px;
-    left: 0;
-    background: #000;
-    color: white;
-    padding: 8px;
-    z-index: 100;
-    transition: top 0.1s;
-}
 
-.skip-link:focus {
-    top: 0;
-}
 
 :focus-visible {
     outline: 3px solid #007da0;
@@ -31,7 +18,12 @@ html {
     scroll-behavior: smooth;
 }
 
-h1, h2, h3, h5, h6, a.button-cta {
+h1,
+h2,
+h3,
+h5,
+h6,
+a.button-cta {
     font-family: "Roboto", sans-serif;
     font-weight: 700;
     margin: 0 0 10px 0;
@@ -58,8 +50,7 @@ h2 a {
     line-height: 36px;
 }
 
-    font-size: 16px;
-}
+
 
 .work-category {
     display: block;
@@ -74,7 +65,8 @@ b {
     font-weight: bold;
 }
 
-a, p {
+a,
+p {
     font-size: 18px;
     line-height: 36px;
     margin: 0 0 20px 0;
@@ -86,7 +78,7 @@ a {
 }
 
 a:hover {
-    color:#007da0;
+    color: #007da0;
 }
 
 a.button-cta {
@@ -103,14 +95,14 @@ a.button-cta {
 }
 
 a.button-cta:hover {
-    background:#007da0;
+    background: #007da0;
 }
 
-a > img {
+a>img {
     transition: transform .2s;
 }
 
-a > img:hover {
+a>img:hover {
     transform: scale(1.05);
 }
 
@@ -136,24 +128,26 @@ section.resume p {
     font-size: 16px;
 }
 
-section.resume ul, .wrap ul {
+section.resume ul,
+.wrap ul {
     margin-bottom: 20px;
     margin-left: 20px;
     list-style: disc outside;
 }
 
-section.resume ul > li, .wrap ul > li {
+section.resume ul>li,
+.wrap ul>li {
     padding-left: 10px;
     margin: 0 0 10px 10px;
     display: list-item;
 }
 
-section.resume ul > li {
+section.resume ul>li {
     font-size: 16px;
     line-height: 22px;
 }
 
-.wrap ul > li {
+.wrap ul>li {
     font-size: 18px;
     line-height: 32px;
 }
@@ -204,7 +198,7 @@ header {
     justify-content: space-between;
 }
 
-.content-wrap ul > li {
+.content-wrap ul>li {
     width: 80px;
     text-align: center;
 }
@@ -312,7 +306,8 @@ section.resume .skill {
     display: block;
 }
 
-.details p, .details a {
+.details p,
+.details a {
     font-size: 12px;
     line-height: 18px;
     margin-bottom: 5px;
@@ -488,7 +483,9 @@ footer {
 
     /* Layout */
 
-    header, #hero, #hero-case {
+    header,
+    #hero,
+    #hero-case {
         padding: 40px 50px;
     }
 
@@ -648,6 +645,7 @@ footer {
     .details {
         width: 1200px;
     }
+
     section.overview figure {
         width: 1200px;
         margin: 0 auto;
