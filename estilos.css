@@ -1,7 +1,7 @@
 /* Estilos generales */
 
 body {
-    font-size: 16px;
+    font-size: 100%;
     font-family: "PT Serif", serif;
     line-height: 1.5;
     color: #333;
@@ -10,8 +10,8 @@ body {
 
 
 :focus-visible {
-    outline: 3px solid #007da0;
-    outline-offset: 2px;
+    outline: 0.1875rem solid #007da0;
+    outline-offset: 0.125rem;
 }
 
 html {
@@ -26,28 +26,28 @@ h6,
 a.button-cta {
     font-family: "Roboto", sans-serif;
     font-weight: 700;
-    margin: 0 0 10px 0;
+    margin: 0 0 0.625rem 0;
 }
 
 h1 {
-    font-size: 28px;
-    line-height: 36px;
+    font-size: 1.75rem;
+    line-height: 1.3;
 }
 
 h2 {
-    font-size: 24px;
-    line-height: 36px;
+    font-size: 1.5rem;
+    line-height: 1.5;
 }
 
 h3 {
-    font-size: 18px;
-    line-height: 22px;
-    margin-bottom: 10px;
+    font-size: 1.125rem;
+    line-height: 1.2;
+    margin-bottom: 0.625rem;
 }
 
 h2 a {
-    font-size: 24px;
-    line-height: 36px;
+    font-size: 1.5rem;
+    line-height: 1.5;
 }
 
 
@@ -56,8 +56,8 @@ h2 a {
     display: block;
     font-family: "PT Serif", serif;
     font-style: italic;
-    margin: 0 0 10px 0;
-    font-size: 16px;
+    margin: 0 0 0.625rem 0;
+    font-size: 1rem;
     color: #555;
 }
 
@@ -67,9 +67,9 @@ b {
 
 a,
 p {
-    font-size: 18px;
-    line-height: 36px;
-    margin: 0 0 20px 0;
+    font-size: 1.125rem;
+    line-height: 1.6;
+    margin: 0 0 1.25rem 0;
 }
 
 a {
@@ -85,12 +85,12 @@ a.button-cta {
     background: #333;
     color: #fff;
     text-align: center;
-    padding: 5px 0;
-    border-radius: 20px;
+    padding: 0.75rem 0;
+    border-radius: 1.25rem;
     box-sizing: border-box;
-    margin: 20px auto 0;
+    margin: 1.25rem auto 0;
     display: block;
-    width: 300px;
+    width: 18.75rem;
     transition: background-color .2s ease-out 50ms;
 }
 
@@ -108,47 +108,47 @@ a>img:hover {
 
 main .intro p {
     font-family: 'Roboto', sans-serif;
-    font-size: 32px;
-    line-height: 42px;
+    font-size: 2rem;
+    line-height: 1.3;
     font-weight: 700;
 }
 
 section.statement p:last-of-type {
-    margin-bottom: 50px;
+    margin-bottom: 3.125rem;
 }
 
 section.resume h3 {
     font-weight: normal;
-    margin-top: 20px;
+    margin-top: 1.25rem;
 }
 
 section.resume p {
-    margin: 0 0 15px;
+    margin: 0 0 0.9375rem;
     line-height: 22px;
-    font-size: 16px;
+    font-size: 1rem;
 }
 
 section.resume ul,
 .wrap ul {
-    margin-bottom: 20px;
-    margin-left: 20px;
+    margin-bottom: 1.25rem;
+    margin-left: 1.25rem;
     list-style: disc outside;
 }
 
 section.resume ul>li,
 .wrap ul>li {
-    padding-left: 10px;
-    margin: 0 0 10px 10px;
+    padding-left: 0.625rem;
+    margin: 0 0 0.625rem 0.625rem;
     display: list-item;
 }
 
 section.resume ul>li {
-    font-size: 16px;
+    font-size: 1rem;
     line-height: 22px;
 }
 
 .wrap ul>li {
-    font-size: 18px;
+    font-size: 1.125rem;
     line-height: 32px;
 }
 
@@ -156,23 +156,23 @@ section.resume h5 {
     font-family: "Pt serif", serif;
     width: fit-content;
     background: #C0E4E3;
-    padding: 5px 15px;
-    border-radius: 20px;
+    padding: 0.3125rem 0.9375rem;
+    border-radius: 1.25rem;
     font-weight: normal;
-    font-size: 14px;
-    margin-right: 10px;
+    font-size: 0.875rem;
+    margin-right: 0.625rem;
 }
 
 figcaption {
     text-align: center;
     font-style: italic;
-    margin-bottom: 50px;
+    margin-bottom: 3.125rem;
 }
 
 /* Layout */
 
 header {
-    padding: 20px 10px;
+    padding: 1.25rem 0.625rem;
 }
 
 #hero {
@@ -182,7 +182,7 @@ header {
     background: #C0E4E3;
     min-height: 100vh;
     box-sizing: border-box;
-    padding: 20px 10px;
+    padding: 1.25rem 0.625rem;
 }
 
 .content-wrap {
@@ -199,12 +199,12 @@ header {
 }
 
 .content-wrap ul>li {
-    width: 80px;
+    width: 5rem;
     text-align: center;
 }
 
 .content-wrap li:last-child {
-    margin-left: 20px;
+    margin-left: 1.25rem;
 }
 
 .hero-wrap {
@@ -221,11 +221,11 @@ header {
 }
 
 main {
-    padding: 125px 40px 0;
+    padding: 7.8125rem 2.5rem 0;
 }
 
 main.about {
-    padding: 60px 40px 20px;
+    padding: 3.75rem 2.5rem 1.25rem;
 }
 
 main .container {
@@ -235,7 +235,7 @@ main .container {
 }
 
 main .container figure {
-    margin-bottom: 40px;
+    margin-bottom: 2.5rem;
 }
 
 main.about img {
@@ -243,18 +243,18 @@ main.about img {
 }
 
 section.statement .container {
-    padding: 0 40px 60px;
+    padding: 0 2.5rem 3.75rem;
 }
 
 .work {
     display: flex;
     flex-direction: column;
     text-align: center;
-    margin-bottom: 120px;
+    margin-bottom: 7.5rem;
 }
 
 .img-work {
-    margin-bottom: 30px;
+    margin-bottom: 1.875rem;
 }
 
 .img-work img {
@@ -262,14 +262,14 @@ section.statement .container {
 }
 
 section.resume .container {
-    padding: 0 40px 60px;
+    padding: 0 2.5rem 3.75rem;
 }
 
 section.resume .skill {
     display: flex;
     justify-content: flex-start;
     flex-wrap: wrap;
-    margin-top: 25px;
+    margin-top: 1.5625rem;
 }
 
 #hero-case {
@@ -278,22 +278,22 @@ section.resume .skill {
     justify-content: space-around;
     background: #C0E4E3;
     box-sizing: border-box;
-    padding: 20px 10px;
+    padding: 1.25rem 0.625rem;
 }
 
 #hero-case .hero-wrap {
-    padding: 50px 0 30px;
+    padding: 3.125rem 0 1.875rem;
 }
 
 #hero-case .img-hero img {
     max-width: 80%;
-    padding-left: 20px;
+    padding-left: 1.25rem;
 }
 
 .details {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 30px;
+    gap: 1.875rem;
 }
 
 .details h4 {
@@ -308,23 +308,23 @@ section.resume .skill {
 
 .details p,
 .details a {
-    font-size: 12px;
-    line-height: 18px;
-    margin-bottom: 5px;
+    font-size: 0.75rem;
+    line-height: 1.5;
+    margin-bottom: 0.3125rem;
 }
 
 .challenge {
     text-align: center;
-    padding: 0 40px 100px;
+    padding: 0 2.5rem 6.25rem;
 }
 
 main#case {
-    padding: 100px 0;
+    padding: 6.25rem 0;
 }
 
 .overview {
     margin: 0 auto;
-    padding: 100px 40px;
+    padding: 6.25rem 2.5rem;
 }
 
 .bg-pink {
@@ -332,35 +332,35 @@ main#case {
 }
 
 .insights {
-    margin: 50px 0;
+    margin: 3.125rem 0;
 
 }
 
 .wrap-flex {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
-    gap: 25px 65px;
+    gap: 1.5625rem 4.0625rem;
 }
 
 .wrap-flex-problem {
     display: flex;
     flex-direction: column;
-    padding: 10px 10px 0;
+    padding: 0.625rem 0.625rem 0;
     justify-content: center;
 }
 
 figure img {
     max-width: 100%;
-    margin: 50px auto 20px;
+    margin: 3.125rem auto 1.25rem;
     display: block;
 }
 
 .insight {
     width: 240px;
-    padding: 20px;
+    padding: 1.25rem;
     background: #C0E4E3;
     border-radius: 10px;
-    margin: 0 auto 20px;
+    margin: 0 auto 1.25rem;
     height: fit-content;
 }
 
@@ -368,32 +368,32 @@ figure img {
 .insight p {
     margin-bottom: 0;
     line-height: normal;
-    font-size: 14px;
+    font-size: 0.875rem;
 }
 
 .insights h3 {
-    margin-bottom: 50px;
+    margin-bottom: 3.125rem;
     font-weight: normal;
 }
 
 .insights h4 {
     font-style: normal;
     font-weight: bold;
-    font-size: 18px;
+    font-size: 1.125rem;
 }
 
 .problem {
     max-width: 100%;
-    padding: 20px;
+    padding: 1.25rem;
     background: #C0E4E3;
     border-radius: 10px;
-    margin: 0 auto 40px;
+    margin: 0 auto 2.5rem;
     height: fit-content;
 }
 
 .hypothesis {
     max-width: 100%;
-    padding: 20px;
+    padding: 1.25rem;
     background: #F2EFAA;
     border-radius: 10px;
     margin: 0 auto;
@@ -402,9 +402,9 @@ figure img {
 
 .full-wrap {
     width: 100%;
-    height: 300px;
+    height: 18.75rem;
     position: relative;
-    margin: 20px 0 50px;
+    margin: 1.25rem 0 3.125rem;
 }
 
 main#case .full-wrap iframe {
@@ -417,7 +417,7 @@ main#case .full-wrap iframe {
 
 footer {
     background: #F2EFAA;
-    height: 400px;
+    height: 25rem;
     margin: 0;
     display: flex;
     align-items: center;
@@ -429,7 +429,7 @@ footer {
 }
 
 .contact h2 a {
-    font-size: 24px;
+    font-size: 1.5rem;
 }
 
 .links ul {
@@ -438,7 +438,7 @@ footer {
 }
 
 .links li {
-    margin: 0 20px 0 0;
+    margin: 0 1.25rem 0 0;
 }
 
 .links li:last-child {
@@ -453,32 +453,65 @@ footer {
 
 /* Responsive */
 
+@media (min-width: 768px) {
+    h1 {
+        font-size: 2.25rem;
+        line-height: 1.2;
+    }
+
+    h2 {
+        font-size: 1.875rem;
+        line-height: 1.3;
+    }
+
+    .work {
+        flex-direction: row;
+        text-align: left;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1.25rem;
+    }
+
+    .img-work,
+    .card {
+        width: 48%;
+    }
+
+    .img-work img {
+        max-width: 100%;
+    }
+
+    .details {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+}
+
 @media (min-width: 992px) {
 
     /* Generales */
 
     h1 {
-        font-size: 48px;
+        font-size: 3rem;
         line-height: 1.2;
     }
 
     h2 {
-        font-size: 36px;
+        font-size: 2.25rem;
         line-height: 1.3;
     }
 
     h2 a {
-        font-size: 36px;
+        font-size: 2.25rem;
         line-height: 1.3;
     }
 
     a.button-cta {
-        margin: 20px 0 0;
+        margin: 1.25rem 0 0;
     }
 
     main .intro p {
-        font-size: 48px;
-        line-height: 54px;
+        font-size: 3rem;
+        line-height: 1.2;
     }
 
     /* Layout */
@@ -486,7 +519,7 @@ footer {
     header,
     #hero,
     #hero-case {
-        padding: 40px 50px;
+        padding: 2.5rem 3.125rem;
     }
 
     .hero-wrap {
@@ -504,7 +537,7 @@ footer {
         text-align: left;
         justify-content: space-around;
         margin: 0 auto;
-        padding: 30px 100px 0;
+        padding: 1.875rem 6.25rem 0;
     }
 
     .text-hero {
@@ -523,10 +556,10 @@ footer {
         flex-direction: row;
         text-align: left;
         align-items: center;
-        margin-bottom: 200px;
+        margin-bottom: 12.5rem;
         justify-content: space-evenly;
         width: 90%;
-        margin: 0 auto 100px;
+        margin: 0 auto 6.25rem;
     }
 
     .img-work {
@@ -542,7 +575,7 @@ footer {
     }
 
     .contact h2 a {
-        font-size: 42px;
+        font-size: 2.625rem;
     }
 
     main .container {
@@ -560,23 +593,24 @@ footer {
     }
 
     section.statement .container {
-        width: 660px;
-        padding: 60px 0 60px;
+        width: 41.25rem;
+        padding: 3.75rem 0 3.75rem;
         margin: 0 auto;
     }
 
     section.resume .container {
         margin: 0 auto;
-        width: 950px;
+        max-width: 59.375rem;
+        width: 100%;
         display: grid;
         grid-template-columns: 50% 30%;
-        gap: 50px 100px;
-        padding: 0 0 150px;
+        gap: 3.125rem 6.25rem;
+        padding: 0 0 9.375rem;
     }
 
     section.resume .container h3 {
-        font-size: 24px;
-        line-height: 32px;
+        font-size: 1.5rem;
+        line-height: 1.3;
     }
 
     section.resume .container .education {
@@ -585,23 +619,27 @@ footer {
     }
 
     .details {
-        width: 900px;
+        max-width: 56.25rem;
+        width: 100%;
         margin: 0 auto;
     }
 
     .challenge {
-        width: 880px;
+        max-width: 55rem;
+        width: 100%;
         margin: 0 auto;
     }
 
     main#case .wrap {
-        width: 600px;
+        max-width: 37.5rem;
+        width: 100%;
         margin: 0 auto;
     }
 
     main#case .full-wrap {
-        width: 1000px;
-        margin: 0 auto 40px;
+        max-width: 62.5rem;
+        width: 100%;
+        margin: 0 auto 2.5rem;
         position: relative;
         padding-bottom: 56.25%;
         height: 0;
@@ -626,28 +664,31 @@ footer {
     }
 
     .insights {
-        width: 1000px;
-        margin: 50px auto;
+        max-width: 62.5rem;
+        width: 100%;
+        margin: 3.125rem auto;
     }
 
     .insight {
-        margin-left: 20px;
+        margin-left: 1.25rem;
     }
 
     .btn {
         flex-direction: row;
-        gap: 20px;
+        gap: 1.25rem;
         align-items: flex-start;
     }
 }
 
 @media (min-width: 1300px) {
     .details {
-        width: 1200px;
+        max-width: 75rem;
+        width: 100%;
     }
 
     section.overview figure {
-        width: 1200px;
+        max-width: 75rem;
+        width: 100%;
         margin: 0 auto;
     }
 }
@@ -655,22 +696,26 @@ footer {
 
 @media (min-width: 1600px) {
     main .container {
-        width: 1400px;
+        max-width: 87.5rem;
+        width: 100%;
         margin: 0 auto;
     }
 
     .content-wrap {
-        width: 1400px;
+        max-width: 87.5rem;
+        width: 100%;
         margin: 0 auto;
     }
 
     .hero-wrap {
-        width: 1300px;
+        max-width: 81.25rem;
+        width: 100%;
         margin: 0 auto;
     }
 
     .contact {
-        width: 1300px;
+        max-width: 81.25rem;
+        width: 100%;
     }
 
     main .intro {
@@ -678,11 +723,13 @@ footer {
     }
 
     section.statement .container {
-        width: 1000px;
+        max-width: 62.5rem;
+        width: 100%;
     }
 
     section.resume .container {
-        width: 1300px;
+        max-width: 81.25rem;
+        width: 100%;
     }
 
 }
