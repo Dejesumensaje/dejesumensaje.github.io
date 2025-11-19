@@ -1,8 +1,30 @@
 /* Estilos generales */
 
 body {
-    font-size: 14px;
+    font-size: 16px;
     font-family: "PT Serif", serif;
+    line-height: 1.5;
+    color: #333;
+}
+
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: #000;
+    color: white;
+    padding: 8px;
+    z-index: 100;
+    transition: top 0.1s;
+}
+
+.skip-link:focus {
+    top: 0;
+}
+
+:focus-visible {
+    outline: 3px solid #007da0;
+    outline-offset: 2px;
 }
 
 html {
@@ -36,11 +58,16 @@ h2 a {
     line-height: 36px;
 }
 
-h4 {
+    font-size: 16px;
+}
+
+.work-category {
+    display: block;
     font-family: "PT Serif", serif;
     font-style: italic;
     margin: 0 0 10px 0;
     font-size: 16px;
+    color: #555;
 }
 
 b {
@@ -59,7 +86,7 @@ a {
 }
 
 a:hover {
-    color:#00A6C7;
+    color:#007da0;
 }
 
 a.button-cta {
@@ -76,7 +103,7 @@ a.button-cta {
 }
 
 a.button-cta:hover {
-    background:#00A6C7;
+    background:#007da0;
 }
 
 a > img {
@@ -437,17 +464,17 @@ footer {
 
     h1 {
         font-size: 48px;
-        line-height: 60px;
+        line-height: 1.2;
     }
 
     h2 {
         font-size: 36px;
-        line-height: 48px;
+        line-height: 1.3;
     }
 
     h2 a {
         font-size: 36px;
-        line-height: 48px;
+        line-height: 1.3;
     }
 
     a.button-cta {
