@@ -17,6 +17,8 @@
 .about-editorial {
     position: relative;
     overflow-x: hidden;
+    padding-top: 0;
+    /* Override global main padding */
 }
 
 .about-editorial section {
@@ -30,9 +32,9 @@
 
 /* Opening específico - full height para centrado óptimo */
 .section-opening {
-    min-height: 100vh;
-    min-height: 100svh;
-    padding: calc(var(--grid-unit) * 4) calc(var(--grid-unit) * 2);
+    min-height: calc(100vh - 5rem);
+    min-height: calc(100svh - 5rem);
+    padding: 0 calc(var(--grid-unit) * 2);
 }
 
 /* Section Numbers - Technical Detail */
@@ -71,12 +73,29 @@
 }
 
 /* Easter egg: muestra palabra clave al hover */
-.section-opening .section-number::after { content: ' — Hello'; }
-.section-story .section-number::after { content: ' — Story'; }
-.section-experience .section-number::after { content: ' — Journey'; }
-.section-skills .section-number::after { content: ' — Craft'; }
-.section-beyond .section-number::after { content: ' — Curious'; }
-.section-cta .section-number::after { content: ' — Connect'; }
+.section-opening .section-number::after {
+    content: ' — Hello';
+}
+
+.section-story .section-number::after {
+    content: ' — Story';
+}
+
+.section-experience .section-number::after {
+    content: ' — Journey';
+}
+
+.section-skills .section-number::after {
+    content: ' — Craft';
+}
+
+.section-beyond .section-number::after {
+    content: ' — Curious';
+}
+
+.section-cta .section-number::after {
+    content: ' — Connect';
+}
 
 .section-number::after {
     opacity: 0;
@@ -682,7 +701,8 @@
     .timeline-line {
         left: 0;
         right: 0;
-        top: 1rem; /* Altura del marker (1rem) / 2 = 0.5rem, pero con border 3px queda en 1rem */
+        top: 1rem;
+        /* Altura del marker (1rem) / 2 = 0.5rem, pero con border 3px queda en 1rem */
         width: auto;
         height: 1px;
     }
@@ -701,12 +721,14 @@
 
     .point-marker {
         left: 50%;
-        top: 0.5rem; /* Posicionado para que el centro quede sobre la línea */
+        top: 0.5rem;
+        /* Posicionado para que el centro quede sobre la línea */
         transform: translateX(-50%);
     }
 
     .point-content {
-        margin-top: 2.5rem; /* Espacio desde el marker hasta el contenido */
+        margin-top: 2.5rem;
+        /* Espacio desde el marker hasta el contenido */
     }
 }
 
