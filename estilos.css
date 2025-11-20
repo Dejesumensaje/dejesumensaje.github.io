@@ -79,12 +79,40 @@ h3 {
     margin-bottom: 0.625rem;
 }
 
+h4 {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-primary);
+    margin-bottom: 0.5rem;
+}
+
 h2 a {
     font-size: 1.5rem;
     line-height: 1.5;
 }
 
+.text-hero h1 {
+    font-size: var(--text-display);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+    margin-bottom: 1.5rem;
+    color: var(--color-text);
+}
 
+.text-hero p {
+    font-family: var(--font-serif);
+    font-size: var(--text-lead);
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1.4;
+    margin-bottom: 2.5rem;
+    color: var(--color-text);
+    max-width: 30ch;
+}
 
 .work-category {
     display: block;
@@ -812,6 +840,13 @@ footer {
     font-size: 2.5rem;
     margin-bottom: 1.5rem;
     color: var(--color-text);
+}
+
+.hero-text.card h2 {
+    font-size: var(--text-h1);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    margin-bottom: 1rem;
 }
 
 .hero-text p {

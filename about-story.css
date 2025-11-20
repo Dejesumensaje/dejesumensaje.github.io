@@ -148,10 +148,13 @@
 .opening-image img {
     max-width: 100%;
     width: 100%;
-    max-width: 25rem;
+    max-width: 35rem;
+    /* Increased size for balance */
     border-radius: 4px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
     transition: transform 0.3s ease;
+    align-self: center;
+    /* Ensure vertical centering */
 }
 
 .opening-content {
@@ -161,8 +164,10 @@
 .mega-title {
     font-family: var(--font-sans);
     font-size: var(--text-display);
-    font-weight: 900;
-    line-height: 0.9;
+    font-weight: 800;
+    /* Reduced from 900 for elegance */
+    line-height: 1.05;
+    /* Slightly more breathing room */
     margin-bottom: calc(var(--grid-unit) * 3);
     letter-spacing: -0.04em;
     /* Tighter for massive display text */
