@@ -28,10 +28,11 @@
     transition: background-color var(--transition-smooth);
 }
 
-/* Opening específico - menos altura en mobile */
+/* Opening específico - full height para centrado óptimo */
 .section-opening {
-    min-height: auto;
-    padding: calc(var(--grid-unit) * 10) calc(var(--grid-unit) * 2);
+    min-height: 100vh;
+    min-height: 100svh;
+    padding: calc(var(--grid-unit) * 4) calc(var(--grid-unit) * 2);
 }
 
 /* Section Numbers - Technical Detail */
