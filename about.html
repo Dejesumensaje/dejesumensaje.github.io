@@ -8,16 +8,16 @@
     <meta name="theme-color" content="#C0E4E3">
     <title>About me | William Montoya</title>
     <meta name="description"
-        content="Hi, I'm William Montoya. This page is about me, my skills and experience as UX and product designer.">
+        content="Hi, I'm William Montoya. A UX designer, journalist, and teacher from Medellín.">
     <link rel="canonical" href="https://dejesumensaje.github.io/about.html">
-    <link rel="icon" href="/favicon.png" type="image/png">
+    <link rel="icon" href="./favicon.png" type="image/png">
 
-    <!-- Open Graph / Facebook -->
+    <!-- Open Graph -->
     <meta property="og:type" content="profile">
     <meta property="og:url" content="https://dejesumensaje.github.io/about.html">
     <meta property="og:title" content="About me | William Montoya">
     <meta property="og:description"
-        content="Hi, I'm William Montoya. This page is about me, my skills and experience as UX and product designer.">
+        content="Hi, I'm William Montoya. A UX designer, journalist, and teacher from Medellín.">
     <meta property="og:image" content="https://dejesumensaje.github.io/assets/william-montoya-profile.png">
 
     <!-- Twitter -->
@@ -25,7 +25,7 @@
     <meta property="twitter:url" content="https://dejesumensaje.github.io/about.html">
     <meta property="twitter:title" content="About me | William Montoya">
     <meta property="twitter:description"
-        content="Hi, I'm William Montoya. This page is about me, my skills and experience as UX and product designer.">
+        content="Hi, I'm William Montoya. A UX designer, journalist, and teacher from Medellín.">
     <meta property="twitter:image" content="https://dejesumensaje.github.io/assets/william-montoya-profile.png">
 
     <script type="application/ld+json">
@@ -45,36 +45,37 @@
       }
     }
     </script>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
     <link
-        href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&family=Roboto:wght@300;400;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&family=Roboto:wght@300;400;700;900&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="estilos.css">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
-    <script src="./functions.js"></script>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <link rel="stylesheet" href="./estilos.css">
+    <link rel="stylesheet" href="./about-story.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
+    <link rel="manifest" href="./site.webmanifest">
+
+    <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-WY1Y0XF6F5"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
-
         gtag('config', 'G-WY1Y0XF6F5');
     </script>
 </head>
 
 <body>
 
+    <!-- HEADER ORIGINAL -->
     <header>
         <div class="content-wrap">
             <div class="brand">
-                <a href="index.html"><img src="/assets/logo-wm.svg" alt="William Montoya Logo" /></a>
+                <a href="index.html"><img src="./assets/logo-wm.svg" alt="William Montoya Logo" /></a>
             </div>
             <nav>
                 <ul>
@@ -88,158 +89,208 @@
         </div>
     </header>
 
-    <main class="about-page">
+    <!-- MAIN ABOUT -->
+    <main class="about-editorial" id="about-main">
 
-        <!-- 1. Hero Greeting -->
-        <section class="hero-greeting container">
-            <div class="hero-image">
-                <figure>
-                    <img src="./assets/william-montoya-profile.png" alt="William Montoya" class="parallax-img">
-                </figure>
-            </div>
-            <div class="hero-text">
-                <h1>Hola, I’m William.</h1>
-                <p>I’m a UX designer and journalist from Medellín. I work at the intersection of design, education, technology, and public value.</p>
-                <p>This page is a bit different. It’s not only about what I’ve done — it’s about how I think, what shaped me, and why I design the way I do.</p>
-                <p class="scroll-hint">Scroll down to read my story.</p>
-            </div>
-        </section>
-
-        <!-- 2. Story Section -->
-        <section class="story-section container">
-            <div class="story-chapter fade-in">
-                <h2>Where I come from</h2>
-                <p>I started my career in Colombia’s Ministry of Education, designing digital platforms for teachers, students, and families across the country. Working in the public sector shaped my core belief: design is a tool to create access, capacity, and opportunity.</p>
-            </div>
-            <div class="story-chapter fade-in">
-                <h2>How I think and work</h2>
-                <p>Before becoming a designer, I studied journalism — and that background still influences everything I do. I research deeply, write to clarify my thinking, and treat information architecture as a way to create meaning. I like to simplify complexity without oversimplifying people.</p>
-            </div>
-            <div class="story-chapter fade-in">
-                <h2>What keeps me curious</h2>
-                <p>I teach sensory thinking at the University of Antioquia. I run a small film project called Alucine. I explore how AI can expand a designer’s analytical range.</p>
-                <p>Wherever I work, I’m paying attention to perception, narrative, and the ways people make sense of digital spaces.</p>
-            </div>
-        </section>
-
-        <!-- 6. Resume + LinkedIn Visibility (Moved up as per flow, but user asked for it after story or before timeline. Placing here feels right for flow) -->
-        <section class="cta-section container fade-in">
-            <div class="btn-group">
-                <a href="./assets/cv-william-montoya-2024-en.pdf" class="button-cta" download="">Download Resume</a>
-                <a href="https://www.linkedin.com/in/dejesumensaje/" target="_blank" class="button-cta">Visit my LinkedIn</a>
-            </div>
-        </section>
-
-        <!-- 3. How I Work (Principles) -->
-        <section class="principles-section container fade-in">
-            <h2>How I Work</h2>
-            <div class="principles-grid">
-                <div class="principle-item">
-                    <p>I design for systems, not surfaces.</p>
+        <!-- SECTION 01: OPENING -->
+        <section class="section-opening" data-section="01" data-bg="#C0E4E3">
+            <div class="section-number">01</div>
+            <div class="opening-grid">
+                <div class="opening-image" data-parallax="0.3">
+                    <img src="./assets/william-montoya-profile.png" alt="William Montoya">
                 </div>
-                <div class="principle-item">
-                    <p>I write to think clearly.</p>
-                </div>
-                <div class="principle-item">
-                    <p>I prioritize alignment over assumptions.</p>
-                </div>
-                <div class="principle-item">
-                    <p>I simplify without flattening meaning.</p>
-                </div>
-                <div class="principle-item">
-                    <p>I care about long-term impact.</p>
-                </div>
-                <div class="principle-item">
-                    <p>I use AI as a thinking partner, not a shortcut.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- 4. Professional Timeline -->
-        <section class="timeline-section container fade-in">
-            <h2>Experience</h2>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <span class="year">2017 — • — 2018</span>
-                    <div class="role-details">
-                        <h3>UNDP</h3>
-                        <p>Product Designer</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <span class="year">2019 — • — 2021</span>
-                    <div class="role-details">
-                        <h3>Ministry of Education</h3>
-                        <p>UX Lead</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <span class="year">2021 — • — 2022</span>
-                    <div class="role-details">
-                        <h3>Blackboard</h3>
-                        <p>Product Designer</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <span class="year">2022 — • — 2023</span>
-                    <div class="role-details">
-                        <h3>CashPak</h3>
-                        <p>UX Designer</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <span class="year">2023 — • — Present</span>
-                    <div class="role-details">
-                        <h3>Deloitte</h3>
-                        <p>UX & IA Designer</p>
+                <div class="opening-content">
+                    <h1 class="mega-title">Hola,<br>I'm William</h1>
+                    <div class="intro-text">
+                        <p class="lead">A UX designer, journalist, and teacher from Medellín.</p>
+                        <p>I work at the intersection of design, education, and public service. Journalism taught me to think through questions and write with precision. My years designing for the public sector taught me to treat technology as a responsibility, not an accessory. Teaching sensory thinking keeps me attentive to how people actually perceive, interpret, and inhabit digital spaces.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 5. Skills Section -->
-        <section class="skills-section container fade-in">
-            <h2>Skills</h2>
-            <div class="skills-grid">
-                <div class="skill-column">
-                    <h3>UX Core Skills</h3>
-                    <ul>
-                        <li>User Research</li>
-                        <li>Information Architecture</li>
-                        <li>Usability Testing</li>
-                        <li>UX Writing</li>
-                        <li>Wireframing</li>
-                        <li>Prototyping</li>
-                        <li>Design Strategy</li>
-                    </ul>
+        <!-- SECTION 02: STORY -->
+        <section class="section-story" data-section="02" data-bg="#ffffff">
+            <div class="section-number">02</div>
+            <div class="story-grid">
+                <div class="story-nav">
+                    <div class="story-nav-item active" data-story="origins">Origins</div>
+                    <div class="story-nav-item" data-story="thinking">Thinking</div>
+                    <div class="story-nav-item" data-story="values">Values</div>
                 </div>
-                <div class="skill-column">
-                    <h3>Tools</h3>
-                    <ul>
-                        <li>Figma</li>
-                        <li>Notion</li>
-                        <li>Miro</li>
-                        <li>InVision</li>
-                    </ul>
+                
+                <div class="story-content">
+                    <!-- Origins -->
+                    <div class="story-panel active" id="story-origins">
+                        <h2>Where I come from</h2>
+                        <p>I began as a journalist, trying to understand how information shapes people. That search brought me to Colombia's Ministry of Education, where I helped redesign national platforms used by teachers, students, and families. Working there transformed my understanding of design: it's not just about usability, it's about creating access, strengthening public capacity, and building tools that expand opportunity. That sense of purpose has guided my work ever since.</p>
+                    </div>
+
+                    <!-- Thinking -->
+                    <div class="story-panel" id="story-thinking">
+                        <h2>How I approach design</h2>
+                        <p>I see information architecture as the craft of giving shape to meaning. I work to simplify complexity without diluting what matters. I design from the system outward, not the surface inward. Writing is central to my process because it forces clarity. Research helps me dismantle assumptions. Iteration helps me stay honest. My goal is always to help people feel capable and grounded inside the products they use.</p>
+                    </div>
+
+                    <!-- Values -->
+                    <div class="story-panel" id="story-values">
+                        <h2>What I care about</h2>
+                        <p>Design should create understanding. It should respect people's intelligence, time, and context. It should reach those who usually get overlooked. I care about experiences that expand access, reduce cognitive noise, and support real decision-making. Whether I'm designing for education, fintech, or enterprise platforms, those commitments shape the decisions I make.</p>
+                    </div>
                 </div>
-                <div class="skill-column">
-                    <h3>Additional Strengths</h3>
-                    <ul>
-                        <li>Accessibility</li>
-                        <li>Design Systems</li>
-                        <li>Workshop Facilitation</li>
-                        <li>AI-assisted workflows</li>
-                    </ul>
+            </div>
+        </section>
+
+        <!-- SECTION 03: EXPERIENCE -->
+        <section class="section-experience" data-section="03" data-bg="#F2EFAA">
+            <div class="section-number">03</div>
+            <div class="experience-container">
+                <h2 class="section-title">Experience</h2>
+                
+                <div class="timeline-horizontal">
+                    <div class="timeline-line"></div>
+                    
+                    <div class="timeline-point" data-year="2017-2018">
+                        <div class="point-marker"></div>
+                        <div class="point-content">
+                            <span class="point-year">2017—2018</span>
+                            <h3>UNDP</h3>
+                            <p>Product Designer</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-point" data-year="2019-2021">
+                        <div class="point-marker"></div>
+                        <div class="point-content">
+                            <span class="point-year">2019—2021</span>
+                            <h3>Ministry of Education</h3>
+                            <p>UX Lead</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-point" data-year="2021-2022">
+                        <div class="point-marker"></div>
+                        <div class="point-content">
+                            <span class="point-year">2021—2022</span>
+                            <h3>Globant / Blackboard</h3>
+                            <p>Product Designer</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-point" data-year="2022-2023">
+                        <div class="point-marker"></div>
+                        <div class="point-content">
+                            <span class="point-year">2022—2023</span>
+                            <h3>Globant / CashPak</h3>
+                            <p>UX Designer</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-point" data-year="2023-present">
+                        <div class="point-marker"></div>
+                        <div class="point-content">
+                            <span class="point-year">2023—Present</span>
+                            <h3>Globant / Deloitte</h3>
+                            <p>UX & IA Designer</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 04: SKILLS -->
+        <section class="section-skills" data-section="04" data-bg="#ffffff">
+            <div class="section-number">04</div>
+            <div class="skills-container">
+                <h2 class="section-title">Skills</h2>
+                
+                <div class="skills-grid-editorial">
+                    <div class="skill-block">
+                        <div class="skill-label">UX Core Skills</div>
+                        <ul class="skill-list">
+                            <li>User Research</li>
+                            <li>Information Architecture</li>
+                            <li>Usability Testing</li>
+                            <li>UX Writing</li>
+                            <li>Wireframing</li>
+                            <li>Prototyping</li>
+                            <li>Design Strategy</li>
+                        </ul>
+                    </div>
+
+                    <div class="skill-block">
+                        <div class="skill-label">Tools</div>
+                        <ul class="skill-list">
+                            <li>Figma</li>
+                            <li>Notion</li>
+                            <li>Miro</li>
+                            <li>InVision</li>
+                        </ul>
+                    </div>
+
+                    <div class="skill-block">
+                        <div class="skill-label">Additional Strengths</div>
+                        <ul class="skill-list">
+                            <li>Accessibility</li>
+                            <li>Design Systems</li>
+                            <li>Workshop Facilitation</li>
+                            <li>AI-assisted workflows</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 05: BEYOND -->
+        <section class="section-beyond" data-section="05" data-bg="#EDC9D4">
+            <div class="section-number">05</div>
+            <div class="beyond-container">
+                <h2 class="section-title">What keeps me curious</h2>
+                
+                <div class="beyond-grid-editorial">
+                    <div class="beyond-card">
+                        <div class="beyond-number">01</div>
+                        <h3>Teaching</h3>
+                        <p>I teach sensory thinking at Universidad de Antioquia, exploring how perception, emotion, and attention shape the way people experience digital systems.</p>
+                    </div>
+
+                    <div class="beyond-card">
+                        <div class="beyond-number">02</div>
+                        <h3>Alucine</h3>
+                        <p>I run Alucine, a small project about film and culture. It's where I explore stories, symbols, and the ways narrative can shift how we understand the world.</p>
+                    </div>
+
+                    <div class="beyond-card">
+                        <div class="beyond-number">03</div>
+                        <h3>Games & Tools</h3>
+                        <p>Videogames taught me about systems, choice, and feedback loops. Lately, I've been working with AI tools to extend how I analyze, validate, and iterate design decisions.</p>
+                    </div>
+                </div>
+
+                <p class="beyond-closing">Wherever I work, I'm paying attention to how people make sense of digital spaces.</p>
+            </div>
+        </section>
+
+        <!-- SECTION 06: CTA -->
+        <section class="section-cta" data-section="06" data-bg="#C0E4E3">
+            <div class="section-number">06</div>
+            <div class="cta-container-editorial">
+                <h2 class="cta-title">Let's connect</h2>
+                <p class="cta-text">I'm currently designing at Globant on projects for Deloitte. Based in Medellín and always open to thoughtful conversations.</p>
+                <div class="cta-actions">
+                    <a href="./assets/cv-william-montoya-2024-en.pdf" class="button-cta" download>Download Resume</a>
+                    <a href="https://www.linkedin.com/in/dejesumensaje/" target="_blank" class="button-cta button-cta-secondary">Visit LinkedIn</a>
                 </div>
             </div>
         </section>
 
     </main>
 
+    <!-- FOOTER ORIGINAL -->
     <footer>
         <section class="contact">
             <h2><a href="mailto:william@dejesumensaje.com?subject=Hi, William!">william@dejesumensaje.com</a></h2>
-            <p>Let’s work, play, create together.</p>
+            <p>Let's work, play, create together.</p>
             <div class="links">
                 <ul>
                     <li><a href="https://www.linkedin.com/in/dejesumensaje/" target="_blank"
@@ -254,28 +305,8 @@
         </section>
     </footer>
 
-    <script>
-        // Simple Intersection Observer for fade-in effects
-        document.addEventListener("DOMContentLoaded", function() {
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.1
-            };
-
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, observerOptions);
-
-            const fadeElements = document.querySelectorAll('.fade-in');
-            fadeElements.forEach(el => observer.observe(el));
-        });
-    </script>
+    <!-- JavaScript -->
+    <script src="./about-story.js"></script>
 
 </body>
 
