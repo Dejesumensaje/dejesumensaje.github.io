@@ -49,7 +49,14 @@
     color: rgba(0, 0, 0, 0.2);
     letter-spacing: 0.1em;
     cursor: default;
-    transition: all 0.3s ease;
+    transition: all 0.6s ease;
+}
+
+.beyond-card:hover {
+    transform: translate3d(0, -10px, 0) !important;
+    /* Override JS transform if needed, but JS sets inline styles so we might need !important or just rely on the class structure */
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    z-index: 1;
 }
 
 .section-number::after {
@@ -156,6 +163,16 @@
     line-height: 0.9;
     margin-bottom: calc(var(--grid-unit) * 3);
     letter-spacing: -0.02em;
+    animation: revealText 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+@keyframes revealText {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .intro-text {
@@ -306,6 +323,10 @@
     font-weight: 700;
     margin-bottom: calc(var(--grid-unit) * 6);
     text-align: center;
+    opacity: 0;
+    animation: revealText 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    animation-timeline: view();
+    animation-range: entry 20% cover 30%;
 }
 
 /* MOBILE: Timeline vertical */
@@ -427,6 +448,13 @@
     font-size: 1.125rem;
     line-height: 2;
     color: var(--color-text);
+    transition: transform 0.3s ease, color 0.3s ease;
+    cursor: default;
+}
+
+.skill-list li:hover {
+    transform: translateX(10px);
+    color: var(--color-primary);
 }
 
 /* =========================================
@@ -633,6 +661,7 @@
 .button-cta:hover {
     background: var(--color-primary);
     color: var(--color-white);
+    transform: scale(1.05);
 }
 
 .button-cta-secondary {

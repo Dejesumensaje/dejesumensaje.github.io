@@ -12,6 +12,18 @@
     --font-sans: "Roboto", sans-serif;
 }
 
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-text: #e0e0e0;
+        --color-primary: #4db6ac;
+        --color-bg-light: #1a2626;
+        --color-bg-accent: #26261a;
+        --color-bg-pink: #261a1f;
+        --color-text-muted: #aaa;
+        --color-white: #121212;
+    }
+}
+
 body {
     font-size: 100%;
     font-family: var(--font-serif);
