@@ -72,19 +72,11 @@
 <body>
 
     <header>
-
-        <!-- Nav -->
-
         <div class="content-wrap">
-
             <div class="brand">
-
-                <a href="index.html"><img src="/assets/logo-wm.svg" /></a>
-
+                <a href="index.html"><img src="/assets/logo-wm.svg" alt="William Montoya Logo" /></a>
             </div>
-
             <nav>
-
                 <ul>
                     <li><a href="index.html#my-work">Work</a></li>
                     <li><a href="about.html">About</a></li>
@@ -92,182 +84,163 @@
                             href="mailto:william@dejesumensaje.com?subject=Exploring UX Collaboration Opportunities&body=Hello William,">Contact</a>
                     </li>
                 </ul>
-
             </nav>
-
         </div>
-
     </header>
 
-    <main class="about">
+    <main class="about-page">
 
-        <div class="container">
-
-            <figure>
-                <img src="./assets/william-montoya-profile.png" alt="William Montoya with his girlfriend and cat">
-            </figure>
-
-            <div class="intro">
-                <p>Hola! I'm William Montoya, a UX designer, journalist, and avid gamer 🎮 from Medellín, Colombia.</p>
+        <!-- 1. Hero Greeting -->
+        <section class="hero-greeting container">
+            <div class="hero-image">
+                <figure>
+                    <img src="./assets/william-montoya-profile.png" alt="William Montoya" class="parallax-img">
+                </figure>
             </div>
+            <div class="hero-text">
+                <h1>Hola, I’m William.</h1>
+                <p>I’m a UX designer and journalist from Medellín. I work at the intersection of design, education, technology, and public value.</p>
+                <p>This page is a bit different. It’s not only about what I’ve done — it’s about how I think, what shaped me, and why I design the way I do.</p>
+                <p class="scroll-hint">Scroll down to read my story.</p>
+            </div>
+        </section>
 
-        </div>
+        <!-- 2. Story Section -->
+        <section class="story-section container">
+            <div class="story-chapter fade-in">
+                <h2>Where I come from</h2>
+                <p>I started my career in Colombia’s Ministry of Education, designing digital platforms for teachers, students, and families across the country. Working in the public sector shaped my core belief: design is a tool to create access, capacity, and opportunity.</p>
+            </div>
+            <div class="story-chapter fade-in">
+                <h2>How I think and work</h2>
+                <p>Before becoming a designer, I studied journalism — and that background still influences everything I do. I research deeply, write to clarify my thinking, and treat information architecture as a way to create meaning. I like to simplify complexity without oversimplifying people.</p>
+            </div>
+            <div class="story-chapter fade-in">
+                <h2>What keeps me curious</h2>
+                <p>I teach sensory thinking at the University of Antioquia. I run a small film project called Alucine. I explore how AI can expand a designer’s analytical range.</p>
+                <p>Wherever I work, I’m paying attention to perception, narrative, and the ways people make sense of digital spaces.</p>
+            </div>
+        </section>
+
+        <!-- 6. Resume + LinkedIn Visibility (Moved up as per flow, but user asked for it after story or before timeline. Placing here feels right for flow) -->
+        <section class="cta-section container fade-in">
+            <div class="btn-group">
+                <a href="./assets/cv-william-montoya-2024-en.pdf" class="button-cta" download="">Download Resume</a>
+                <a href="https://www.linkedin.com/in/dejesumensaje/" target="_blank" class="button-cta">Visit my LinkedIn</a>
+            </div>
+        </section>
+
+        <!-- 3. How I Work (Principles) -->
+        <section class="principles-section container fade-in">
+            <h2>How I Work</h2>
+            <div class="principles-grid">
+                <div class="principle-item">
+                    <p>I design for systems, not surfaces.</p>
+                </div>
+                <div class="principle-item">
+                    <p>I write to think clearly.</p>
+                </div>
+                <div class="principle-item">
+                    <p>I prioritize alignment over assumptions.</p>
+                </div>
+                <div class="principle-item">
+                    <p>I simplify without flattening meaning.</p>
+                </div>
+                <div class="principle-item">
+                    <p>I care about long-term impact.</p>
+                </div>
+                <div class="principle-item">
+                    <p>I use AI as a thinking partner, not a shortcut.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Professional Timeline -->
+        <section class="timeline-section container fade-in">
+            <h2>Experience</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <span class="year">2017 — • — 2018</span>
+                    <div class="role-details">
+                        <h3>UNDP</h3>
+                        <p>Product Designer</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <span class="year">2019 — • — 2021</span>
+                    <div class="role-details">
+                        <h3>Ministry of Education</h3>
+                        <p>UX Lead</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <span class="year">2021 — • — 2022</span>
+                    <div class="role-details">
+                        <h3>Blackboard</h3>
+                        <p>Product Designer</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <span class="year">2022 — • — 2023</span>
+                    <div class="role-details">
+                        <h3>CashPak</h3>
+                        <p>UX Designer</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <span class="year">2023 — • — Present</span>
+                    <div class="role-details">
+                        <h3>Deloitte</h3>
+                        <p>UX & IA Designer</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Skills Section -->
+        <section class="skills-section container fade-in">
+            <h2>Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-column">
+                    <h3>UX Core Skills</h3>
+                    <ul>
+                        <li>User Research</li>
+                        <li>Information Architecture</li>
+                        <li>Usability Testing</li>
+                        <li>UX Writing</li>
+                        <li>Wireframing</li>
+                        <li>Prototyping</li>
+                        <li>Design Strategy</li>
+                    </ul>
+                </div>
+                <div class="skill-column">
+                    <h3>Tools</h3>
+                    <ul>
+                        <li>Figma</li>
+                        <li>Notion</li>
+                        <li>Miro</li>
+                        <li>InVision</li>
+                    </ul>
+                </div>
+                <div class="skill-column">
+                    <h3>Additional Strengths</h3>
+                    <ul>
+                        <li>Accessibility</li>
+                        <li>Design Systems</li>
+                        <li>Workshop Facilitation</li>
+                        <li>AI-assisted workflows</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
 
     </main>
 
-    <section class="statement">
-
-        <div class="container">
-
-            <p>With over four years of experience in UX Design, today <b>I'm part of the design studio at
-                    Globant 💼.</b></p>
-
-            <p>Before that, I led the transformation of Colombia Aprende into a digital ecosystem. Also, I honed my
-                craft as a production designer at UNDP.</p>
-
-            <p><b>If you're interested in discussing UX, movies, or games, let's connect! 🤖</b></p>
-
-
-            <div class="btn">
-                <a href="./assets/cv-william-montoya-2024-en.pdf" class="button-cta" download="">Resume</a>
-                <a href="https://www.linkedin.com/in/dejesumensaje/" target="_blank" class="button-cta">Linkedin</a>
-            </div>
-
-        </div>
-
-    </section>
-
-    <section class="resume">
-
-        <div class="container">
-
-            <div class="education">
-
-                <h2>Education</h2>
-
-                <h3>MSc, <b>Design and Social Management of Technology</b></h3>
-                <p>Universidad de los Andes, 2015</p>
-
-                <h3>BA, <b>Journalism</b></h3>
-                <p>Universidad de Antioquia, 2009</p>
-
-            </div>
-
-            <div class="experience">
-
-                <h2>Experience</h2>
-
-                <h3>UX Designer</h3>
-                <p>July 2023 - January 2024</p>
-                <h4>CashPak - Globant</h4>
-
-                <ul>
-                    <li>Collaborated in the development of Pako, a digital wallet for Central America.</li>
-                    <li>Conducted usability testing in Nicaragua and El Salvador, achieving 59% efficiency and 94/100
-                        satisfaction.</li>
-                    <li>Optimized UI based on insights, reducing cognitive load by 25% and misclicks by 15% through
-                        localized designs, enhancing overall UX.</li>
-                </ul>
-
-                <h3>Product Designer</h3>
-                <p>February 2022 - June 2023</p>
-                <h4>BlackBoard - Globant</h4>
-
-                <ul>
-                    <li>Revamped communication and collaboration features for improved student-instructor interactions,
-                        resolving technical debt.</li>
-                    <li>Conducted user research and workshops, leading to enhancements in course inbox, announcements,
-                        and messaging.</li>
-                    <li>Developed user personas, journey maps, and collaborated with cross-functional teams on design
-                        iterations.</li>
-                </ul>
-
-                <h3>UX Manager</h3>
-                <p>March 2019 - December 2021</p>
-                <h4>Ministry of National Education of Colombia</h4>
-
-                <ul>
-                    <li>Transformed the Ministry's educational website <a href="https://colombiaaprende.edu.co/"
-                            target="_blank">(Colombia Aprende)</a> into a comprehensive digital ecosystem, supporting
-                        teachers' and students' learning journeys.</li>
-                    <li>Achieved an 81% increase in educational content downloads across platforms.</li>
-                    <li>Introduced design thinking methodologies to foster stakeholder collaboration and implemented
-                        agile processes for timely delivery.</li>
-                </ul>
-
-                <h3>Product Designer</h3>
-                <p>June 2017 - December 2018</p>
-                <h4>Production designer / July 2017 - December 2018</h4>
-                <ul>
-                    <li>Led the development of a digital platform to enhance Colombia's public innovation call
-                        application process, resulting in a 20% increase in application success rates.</li>
-                    <li>Implemented UXresearch and gamification strategies on a platform dedicated to innovation and
-                        entrepreneurship, successfully increasing engagement among public digital innovators in
-                        Colombia.</li>
-                </ul>
-
-            </div>
-
-            <div class="skills">
-
-                <h2>Skills</h2>
-
-                <h3>General</h3>
-
-                <div class="skill">
-
-                    <h5>UX / UI</h5>
-                    <h5>Prototyping</h5>
-                    <h5>User Research</h5>
-                    <h5>Design Sprints</h5>
-                    <h5>UX Writing</h5>
-                    <h5>Front-end Dev</h5>
-                    <h5>Problem solving</h5>
-                    <h5>Wireframing</h5>
-                    <h5>Testing</h5>
-                    <h5>Project management</h5>
-
-                </div>
-
-                <h3>Design</h3>
-
-                <div class="skill">
-
-                    <h5>Figma</h5>
-                    <h5>Adobe XD</h5>
-                    <h5>Sketch</h5>
-                    <h5>After Effects</h5>
-                    <h5>InVision</h5>
-
-                </div>
-
-                <h3>Development</h3>
-
-                <div class="skill">
-
-                    <h5>HTML / CSS</h5>
-                    <h5>Gatsby</h5>
-                    <h5>Wordpress</h5>
-                    <h5>Git</h5>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
     <footer>
-
         <section class="contact">
-
             <h2><a href="mailto:william@dejesumensaje.com?subject=Hi, William!">william@dejesumensaje.com</a></h2>
-
             <p>Let’s work, play, create together.</p>
-
             <div class="links">
-
                 <ul>
                     <li><a href="https://www.linkedin.com/in/dejesumensaje/" target="_blank"
                             rel="noopener noreferrer"><img src="./assets/linkedin.svg" loading="lazy"
@@ -277,12 +250,32 @@
                     <li><a href="https://github.com/Dejesumensaje" target="_blank" rel="noopener noreferrer"><img
                                 src="./assets/github.svg" loading="lazy" alt="Github Logo"></a></li>
                 </ul>
-
             </div>
-
         </section>
-
     </footer>
+
+    <script>
+        // Simple Intersection Observer for fade-in effects
+        document.addEventListener("DOMContentLoaded", function() {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            const fadeElements = document.querySelectorAll('.fade-in');
+            fadeElements.forEach(el => observer.observe(el));
+        });
+    </script>
 
 </body>
 

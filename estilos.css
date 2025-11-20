@@ -745,3 +745,358 @@ footer {
     }
 
 }
+/* =========================================
+   About Page Redesign Styles
+   ========================================= */
+
+/* General Container Override for About Page */
+.about-page .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.25rem;
+}
+
+/* 1. Hero Greeting */
+.hero-greeting {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 4rem 0;
+    gap: 2rem;
+    min-height: 80vh;
+    justify-content: center;
+}
+
+.hero-image figure {
+    margin: 0;
+}
+
+.hero-image img {
+    max-width: 300px;
+    border-radius: 8px; /* Optional: adds a slight touch */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1); /* Soft shadow */
+}
+
+.hero-text {
+    max-width: 600px;
+}
+
+.hero-text h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--color-text);
+}
+
+.hero-text p {
+    font-size: 1.25rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    color: var(--color-text-muted);
+}
+
+.scroll-hint {
+    font-size: 0.9rem;
+    font-style: italic;
+    margin-top: 2rem;
+    opacity: 0.7;
+}
+
+@media (min-width: 768px) {
+    .hero-greeting {
+        flex-direction: row;
+        align-items: flex-start;
+        text-align: left;
+        gap: 4rem;
+        padding: 6rem 0;
+    }
+
+    .hero-image {
+        flex: 0 0 350px;
+    }
+
+    .hero-image img {
+        max-width: 100%;
+    }
+
+    .hero-text {
+        flex: 1;
+        padding-top: 1rem;
+    }
+    
+    .hero-text h1 {
+        font-size: 3.5rem;
+    }
+}
+
+/* 2. Story Section */
+.story-section {
+    max-width: 800px !important; /* Narrower for reading */
+    margin: 0 auto;
+    padding: 4rem 1.25rem;
+}
+
+.story-chapter {
+    margin-bottom: 5rem;
+}
+
+.story-chapter h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: var(--color-primary);
+}
+
+.story-chapter p {
+    font-size: 1.25rem;
+    line-height: 1.8;
+    color: var(--color-text);
+}
+
+/* 3. Principles Section (How I Work) */
+.principles-section {
+    padding: 4rem 1.25rem;
+}
+
+.principles-section h2 {
+    text-align: center;
+    margin-bottom: 3rem;
+    font-size: 2.5rem;
+}
+
+.principles-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.principle-item {
+    padding: 2rem;
+    background-color: var(--color-bg-light);
+    border-radius: 12px;
+    transition: transform 0.3s ease;
+}
+
+.principle-item:hover {
+    transform: translateY(-5px);
+}
+
+.principle-item p {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.4;
+    color: var(--color-text);
+}
+
+@media (min-width: 768px) {
+    .principles-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* 4. Timeline Section */
+.timeline-section {
+    padding: 4rem 1.25rem;
+}
+
+.timeline-section h2 {
+    text-align: center;
+    margin-bottom: 4rem;
+    font-size: 2.5rem;
+}
+
+.timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.timeline-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem;
+    border-left: 2px solid var(--color-primary);
+    position: relative;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -9px;
+    top: 1.5rem;
+    width: 16px;
+    height: 16px;
+    background-color: var(--color-bg-light);
+    border: 2px solid var(--color-primary);
+    border-radius: 50%;
+}
+
+.timeline-item .year {
+    font-family: var(--font-sans);
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: 0.5rem;
+}
+
+.role-details h3 {
+    font-size: 1.25rem;
+    margin: 0;
+}
+
+.role-details p {
+    font-size: 1rem;
+    margin: 0;
+    color: var(--color-text-muted);
+}
+
+@media (min-width: 768px) {
+    .timeline {
+        flex-direction: row;
+        justify-content: space-between;
+        border-left: none;
+        padding-top: 2rem;
+    }
+    
+    .timeline::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: var(--color-primary);
+    }
+
+    .timeline-item {
+        border-left: none;
+        align-items: center;
+        text-align: center;
+        padding: 0;
+        flex: 1;
+    }
+
+    .timeline-item::before {
+        top: -9px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    .role-details {
+        margin-top: 1rem;
+        opacity: 0;
+        transform: translateY(10px);
+        transition: all 0.3s ease;
+    }
+    
+    .timeline-item:hover .role-details {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 5. Skills Section */
+.skills-section {
+    padding: 4rem 1.25rem;
+    background-color: var(--color-bg-light); /* Subtle background distinction */
+    margin-top: 4rem;
+    border-radius: 20px;
+}
+
+.skills-section h2 {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.skill-column h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid var(--color-primary);
+    padding-bottom: 0.5rem;
+    display: inline-block;
+}
+
+.skill-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.skill-column li {
+    font-size: 1.125rem;
+    margin-bottom: 0.75rem;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.skill-column li::before {
+    content: '•';
+    color: var(--color-primary);
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+}
+
+@media (min-width: 768px) {
+    .skills-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* 6. CTA Section */
+.cta-section {
+    padding: 2rem 1.25rem;
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.btn-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+}
+
+@media (min-width: 768px) {
+    .btn-group {
+        flex-direction: row;
+        gap: 2rem;
+    }
+    
+    .btn-group .button-cta {
+        margin: 0; /* Reset existing margin */
+        width: auto;
+        min-width: 200px;
+        padding: 1rem 2rem;
+    }
+}
+
+/* Animations */
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Parallax Effect (Simple CSS only version for image) */
+.parallax-img {
+    transition: transform 0.1s ease-out;
+}
