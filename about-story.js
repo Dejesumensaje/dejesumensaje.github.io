@@ -63,7 +63,8 @@
                 // Only apply parallax when element is in viewport
                 if (scrollY + windowHeight > elementTop && scrollY < elementTop + elementHeight) {
                     const yPos = -(scrollY - elementTop) * speed;
-                    el.style.transform = `translateY(${yPos}px)`;
+                    // Use translate3d for hardware acceleration
+                    el.style.transform = `translate3d(0, ${yPos}px, 0)`;
                 }
             });
         }
@@ -100,16 +101,16 @@
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry, index) => {
                 if (entry.isIntersecting) {
-                    // Add stagger delay
-                    setTimeout(() => {
-                        entry.target.classList.add('visible');
-                    }, index * 100);
+                    // Use inline transition-delay for smoother staggering
+                    // This avoids JS timeout jank
+                    entry.target.style.transitionDelay = `${index * 100}ms`;
+                    entry.target.classList.add('visible');
                     observer.unobserve(entry.target);
                 }
             });
         }, {
             threshold: config.observerThreshold,
-            rootMargin: '0px 0px -100px 0px'
+            rootMargin: '0px 0px -50px 0px' // Slightly tighter trigger
         });
 
         elementsToReveal.forEach(el => observer.observe(el));
@@ -209,12 +210,14 @@
         window.addEventListener('scroll', () => {
             const currentScroll = window.pageYOffset;
 
-            // Add shadow when scrolled
-            if (currentScroll > 10) {
-                header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.08)';
-            } else {
-                header.style.boxShadow = 'none';
-            }
+            window.requestAnimationFrame(() => {
+                // Add shadow when scrolled
+                if (currentScroll > 10) {
+                    header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.08)';
+                } else {
+                    header.style.boxShadow = 'none';
+                }
+            });
 
             lastScroll = currentScroll;
         });
