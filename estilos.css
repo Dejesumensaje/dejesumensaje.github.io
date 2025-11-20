@@ -9,7 +9,14 @@
     --color-text-muted: #555;
     --color-white: #fff;
     --font-serif: "PT Serif", serif;
-    --font-sans: "Roboto", sans-serif;
+    --font-sans: "Inter", sans-serif;
+
+    /* Modular Scale (Perfect Fourth 1.333) */
+    --text-display: clamp(4rem, 15vw, 9rem);
+    --text-h1: clamp(2.5rem, 5vw, 4rem);
+    --text-lead: clamp(1.5rem, 3vw, 2.25rem);
+    --text-body: 1.125rem;
+    --text-small: 0.875rem;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -27,7 +34,8 @@
 body {
     font-size: 100%;
     font-family: var(--font-serif);
-    line-height: 1.5;
+    line-height: 1.6;
+    /* Optimal readability */
     color: var(--color-text);
 }
 
@@ -51,6 +59,8 @@ a.button-cta {
     font-family: var(--font-sans);
     font-weight: 700;
     margin: 0 0 0.625rem 0;
+    letter-spacing: -0.02em;
+    /* Tight tracking for headings */
 }
 
 h1 {
@@ -94,6 +104,8 @@ p {
     font-size: 1.125rem;
     line-height: 1.6;
     margin: 0 0 1.25rem 0;
+    max-width: 65ch;
+    /* Optimal line length */
 }
 
 a {
