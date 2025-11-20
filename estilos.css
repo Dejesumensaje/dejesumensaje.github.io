@@ -233,7 +233,7 @@ header {
 }
 
 main {
-    padding: 7.8125rem 2.5rem 0;
+    padding: 0 2.5rem 0;
 }
 
 main.about {
@@ -745,6 +745,7 @@ footer {
     }
 
 }
+
 /* =========================================
    About Page Redesign Styles
    ========================================= */
@@ -773,8 +774,10 @@ footer {
 
 .hero-image img {
     max-width: 300px;
-    border-radius: 8px; /* Optional: adds a slight touch */
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1); /* Soft shadow */
+    border-radius: 8px;
+    /* Optional: adds a slight touch */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    /* Soft shadow */
 }
 
 .hero-text {
@@ -822,7 +825,7 @@ footer {
         flex: 1;
         padding-top: 1rem;
     }
-    
+
     .hero-text h1 {
         font-size: 3.5rem;
     }
@@ -830,7 +833,8 @@ footer {
 
 /* 2. Story Section */
 .story-section {
-    max-width: 800px !important; /* Narrower for reading */
+    max-width: 800px !important;
+    /* Narrower for reading */
     margin: 0 auto;
     padding: 4rem 1.25rem;
 }
@@ -961,7 +965,7 @@ footer {
         border-left: none;
         padding-top: 2rem;
     }
-    
+
     .timeline::before {
         content: '';
         position: absolute;
@@ -985,14 +989,14 @@ footer {
         left: 50%;
         transform: translateX(-50%);
     }
-    
+
     .role-details {
         margin-top: 1rem;
         opacity: 0;
         transform: translateY(10px);
         transition: all 0.3s ease;
     }
-    
+
     .timeline-item:hover .role-details {
         opacity: 1;
         transform: translateY(0);
@@ -1002,7 +1006,8 @@ footer {
 /* 5. Skills Section */
 .skills-section {
     padding: 4rem 1.25rem;
-    background-color: var(--color-bg-light); /* Subtle background distinction */
+    background-color: var(--color-bg-light);
+    /* Subtle background distinction */
     margin-top: 4rem;
     border-radius: 20px;
 }
@@ -1075,9 +1080,10 @@ footer {
         flex-direction: row;
         gap: 2rem;
     }
-    
+
     .btn-group .button-cta {
-        margin: 0; /* Reset existing margin */
+        margin: 0;
+        /* Reset existing margin */
         width: auto;
         min-width: 200px;
         padding: 1rem 2rem;
