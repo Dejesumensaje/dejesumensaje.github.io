@@ -225,6 +225,7 @@
     text-align: center;
 }
 
+/* MOBILE: Timeline vertical */
 .timeline-horizontal {
     position: relative;
     display: flex;
@@ -520,17 +521,17 @@
         right: calc(var(--grid-unit) * 4);
     }
 
+    /* DESKTOP: Timeline horizontal */
     .timeline-horizontal {
         flex-direction: row;
         justify-content: space-between;
-        padding-top: calc(var(--grid-unit) * 3);
+        gap: 0;
     }
 
     .timeline-line {
         left: 0;
         right: 0;
-        top: 0;
-        bottom: auto;
+        top: 1rem; /* Altura del marker (1rem) / 2 = 0.5rem, pero con border 3px queda en 1rem */
         width: auto;
         height: 1px;
     }
@@ -538,7 +539,7 @@
     .timeline-point {
         flex: 1;
         padding-left: 0;
-        padding-top: calc(var(--grid-unit) * 3);
+        padding-top: 0;
         text-align: center;
         transform: translateY(20px);
     }
@@ -549,12 +550,12 @@
 
     .point-marker {
         left: 50%;
-        top: -0.5rem; /* Ajustado para quedar exactamente sobre la línea */
+        top: 0.5rem; /* Posicionado para que el centro quede sobre la línea */
         transform: translateX(-50%);
     }
 
     .point-content {
-        margin-top: calc(var(--grid-unit) * 1);
+        margin-top: 2.5rem; /* Espacio desde el marker hasta el contenido */
     }
 }
 
