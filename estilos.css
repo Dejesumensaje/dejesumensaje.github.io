@@ -64,13 +64,13 @@ a.button-cta {
 }
 
 h1 {
-    font-size: 1.75rem;
-    line-height: 1.3;
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.2;
 }
 
 h2 {
-    font-size: 1.5rem;
-    line-height: 1.5;
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    line-height: 1.3;
 }
 
 h3 {
@@ -94,11 +94,23 @@ h2 a {
     line-height: 1.5;
 }
 
-.text-hero h1 {
-    font-size: var(--text-display);
+/* Homepage Hero */
+#hero .text-hero h1 {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
     font-weight: 800;
-    line-height: 1.05;
-    letter-spacing: -0.04em;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    margin-bottom: 1.5rem;
+    color: var(--color-text);
+}
+
+/* Case Study Hero */
+#hero-case .text-hero h1 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    /* Smaller, readable for long titles */
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
     margin-bottom: 1.5rem;
     color: var(--color-text);
 }
