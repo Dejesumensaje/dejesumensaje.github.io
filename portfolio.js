@@ -118,6 +118,27 @@
         update();
     }
 
+    /* ── DARK NAV (about page) ─────────────────────── */
+    function initDarkNav() {
+        const darkSections = document.querySelectorAll('.about-hero, .about-cta-dark');
+        if (!darkSections.length) return;
+
+        const headerH = document.querySelector('.site-header')?.offsetHeight || 72;
+
+        const update = () => {
+            const scrollY = window.scrollY;
+            const isDark = Array.from(darkSections).some(section => {
+                const top = section.offsetTop;
+                const bottom = top + section.offsetHeight;
+                return scrollY + headerH > top && scrollY < bottom;
+            });
+            document.body.classList.toggle('dark-nav', isDark);
+        };
+
+        window.addEventListener('scroll', update, { passive: true });
+        update();
+    }
+
     /* ── SMOOTH SCROLL ─────────────────────────────── */
     function initSmoothScroll() {
         document.querySelectorAll('a[href^="#"]').forEach(a => {
@@ -142,6 +163,7 @@
             initStickyHeader();
             initScrollReveal();
             initColorTransitions();
+            initDarkNav();
             initStoryNav();
             initParallax();
             initSmoothScroll();
