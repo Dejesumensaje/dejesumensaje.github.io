@@ -24,20 +24,17 @@
 
 .about-editorial section {
     position: relative;
-    min-height: 100vh;
     display: flex;
     align-items: center;
-    align-items: center;
-    padding: calc(var(--grid-unit) * 8) calc(var(--grid-unit) * 2);
-    /* More vertical breathing room */
+    padding: calc(var(--grid-unit) * 6) calc(var(--grid-unit) * 2);
     transition: background-color var(--transition-smooth);
 }
 
-/* Opening específico - full height para centrado óptimo */
+/* Opening — full height only here */
 .section-opening {
-    min-height: calc(100vh - 5rem);
-    min-height: calc(100svh - 5rem);
-    padding: 0 calc(var(--grid-unit) * 2);
+    min-height: calc(100vh - var(--header-height, 4.5rem));
+    min-height: calc(100svh - var(--header-height, 4.5rem));
+    padding: calc(var(--grid-unit) * 4) calc(var(--grid-unit) * 2);
 }
 
 /* Section Numbers - Technical Detail */
@@ -537,93 +534,6 @@
     margin: 0 auto calc(var(--grid-unit) * 4);
 }
 
-/* Currently exploring */
-.currently-exploring {
-    max-width: 50rem;
-    margin: 0 auto;
-    padding: calc(var(--grid-unit) * 3);
-    background: rgba(255, 255, 255, 0.5);
-    border-radius: 10px;
-    border-left: 3px solid var(--color-primary);
-}
-
-.currently-exploring h3 {
-    font-family: var(--font-sans);
-    font-size: 0.875rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--color-primary);
-    margin-bottom: calc(var(--grid-unit) * 1.5);
-}
-
-.exploring-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.exploring-list li {
-    font-size: 1rem;
-    line-height: 1.7;
-    padding: 0.5rem 0;
-    padding-left: 1.5rem;
-    position: relative;
-}
-
-.exploring-list li::before {
-    content: '→';
-    position: absolute;
-    left: 0;
-    color: var(--color-primary);
-    font-weight: 700;
-}
-
-/* Currently exploring */
-.currently-exploring {
-    max-width: 50rem;
-    margin: calc(var(--grid-unit) * 6) auto 0;
-    padding: calc(var(--grid-unit) * 3);
-    background: rgba(255, 255, 255, 0.5);
-    border-radius: 10px;
-    border-left: 3px solid var(--color-primary);
-}
-
-.currently-exploring h3 {
-    font-family: var(--font-sans);
-    font-size: 1rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--color-primary);
-    margin-bottom: calc(var(--grid-unit) * 1.5);
-}
-
-.exploring-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.exploring-list li {
-    font-size: 1.125rem;
-    line-height: 1.8;
-    padding-left: 1.5rem;
-    position: relative;
-    margin-bottom: 0.75rem;
-}
-
-.exploring-list li:last-child {
-    margin-bottom: 0;
-}
-
-.exploring-list li::before {
-    content: '→';
-    position: absolute;
-    left: 0;
-    color: var(--color-primary);
-    font-weight: 700;
-}
 
 /* =========================================
    SECTION 06: CTA
@@ -659,35 +569,11 @@
     align-items: center;
 }
 
-.button-cta {
-    display: inline-block;
-    padding: 1rem 2.5rem;
-    background: var(--color-text);
-    color: var(--color-white);
-    font-family: var(--font-sans);
-    font-weight: 700;
-    font-size: 1rem;
-    text-decoration: none;
-    border-radius: 20px;
-    transition: background-color 0.2s ease-out 50ms;
-    min-width: 15rem;
-    text-align: center;
-}
-
-.button-cta:hover {
-    background: var(--color-primary);
-    color: var(--color-white);
-    transform: scale(1.05);
-}
-
+/* Buttons inherit from estilos.css */
 .button-cta-secondary {
-    background: var(--color-text);
-    color: var(--color-white);
-}
-
-.button-cta-secondary:hover {
-    background: var(--color-primary);
-    color: var(--color-white);
+    background: transparent;
+    color: var(--color-text);
+    border: 1.5px solid rgba(26, 26, 26, 0.25);
 }
 
 /* =========================================
