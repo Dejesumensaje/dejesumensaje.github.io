@@ -1738,6 +1738,14 @@ footer:not(.site-footer) {
         max-height: calc(100vh - var(--header-height) - 5rem);
         overflow-y: auto;
         scrollbar-width: none;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.35s ease;
+    }
+
+    .case-toc.toc--visible {
+        opacity: 1;
+        pointer-events: auto;
     }
 
     .case-toc::-webkit-scrollbar { display: none; }

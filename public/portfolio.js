@@ -232,6 +232,15 @@
 
         sections.forEach(section => io.observe(section));
         setActive(sections[0].id);
+
+        // Reveal only after the hero scrolls out of view
+        const hero = document.getElementById('hero-case');
+        if (hero) {
+            const heroObserver = new IntersectionObserver(([entry]) => {
+                toc.classList.toggle('toc--visible', !entry.isIntersecting);
+            }, { threshold: 0 });
+            heroObserver.observe(hero);
+        }
     }
 
     /* ── INIT ───────────────────────────────────────── */
