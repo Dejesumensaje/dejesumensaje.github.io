@@ -67,14 +67,16 @@
 
 <body>
 
+    <a class="skip-link" href="#hero-case">Skip to main content</a>
+
     <header class="site-header">
         <div class="nav-wrap">
             <div class="brand">
                 <a href="index.html"><img src="/assets/logo-wm.svg" alt="William Montoya" /></a>
             </div>
-            <nav>
+            <nav aria-label="Primary navigation">
                 <ul>
-                    <li><a href="index.html#my-work">Work</a></li>
+                    <li><a href="index.html#work">Work</a></li>
                     <li><a href="about.html">About</a></li>
                     <li><a href="mailto:william@dejesumensaje.com?subject=Exploring UX Collaboration Opportunities&body=Hello William,">Contact</a></li>
                 </ul>
@@ -82,29 +84,28 @@
         </div>
     </header>
 
-    <section id="hero-case">
+    <main>
+
+    <section id="hero-case" aria-labelledby="case-heading">
 
         <div class="case-breadcrumb">
-            <a href="index.html#my-work">← Work</a>
+            <a href="index.html#work">← Work</a>
         </div>
 
-        <!-- Hero content -->
-
-        <div class="hero-wrap">
-
-            <div class="text-hero">
-                <h1>Simplifying Colombia Aprende for inclusion and equity</h1>
+        <div class="case-title-wrap">
+            <div class="case-num-row">
+                <span class="case-num">01</span>
+                <span class="work-category">UX · Research · Product Design · Education</span>
             </div>
-
-            <div class="img-hero">
-
-                <img src="./assets/colombia-aprende-mockup.png" alt="Colombia Aprende portal mockup on laptop">
-
-            </div>
-
+            <h1 id="case-heading">Simplifying Colombia Aprende for inclusion and equity</h1>
         </div>
 
-        <!-- Specifics -->
+        <div class="case-full-image">
+            <div class="img-placeholder">
+                <span>Colombia Aprende — hero mockup</span>
+            </div>
+            <p class="media-slot__caption">Case study cover slot</p>
+        </div>
 
         <div class="details">
 
@@ -154,25 +155,41 @@
 
     </section>
 
-    <!-- Project summary -->
-    <div class="project-summary">
+    <section class="project-summary project-summary--hero" aria-label="Project summary">
         <div class="summary-item">
             <span class="summary-label">Challenge</span>
-            <p>Transform a 17-year-old portal used by millions to improve content discovery, retention, and educational equity.</p>
+            <p>Transform a long-running national education platform into a clearer and more equitable experience.</p>
         </div>
         <div class="summary-item">
-            <span class="summary-label">My Role</span>
-            <p>UX Lead — research, information architecture, prototyping, usability testing, and project management.</p>
+            <span class="summary-label">Scope</span>
+            <p>User research, information architecture, prototyping, testing, and cross-functional product direction.</p>
+        </div>
+        <div class="summary-item">
+            <span class="summary-label">Complexity</span>
+            <p>81,000 resources, 70+ microsites, multiple audiences, and strong internal resistance to change.</p>
         </div>
         <div class="summary-item">
             <span class="summary-label">Outcome</span>
-            <p>Significant increase in content conversion after launch. New IA adopted as the platform's long-term standard.</p>
+            <p>Higher conversion, better content discovery, and more room to keep iterating with stakeholder buy-in.</p>
         </div>
-    </div>
+    </section>
 
-    <main id="case">
+    <nav class="case-toc" aria-label="Case study navigation">
+        <div class="case-toc__inner">
+            <span class="case-toc__label">On this page</span>
+            <a href="#case-challenge">Challenge</a>
+            <a href="#case-background">Background</a>
+            <a href="#case-process">Process</a>
+            <a href="#case-understanding">Research</a>
+            <a href="#case-roadmap">Strategy</a>
+            <a href="#case-testing">Testing</a>
+            <a href="#case-results">Results</a>
+        </div>
+    </nav>
 
-        <section class="challenge">
+    <section id="case">
+
+        <section class="challenge case-section" id="case-challenge">
 
             <h4>Challenge</h4>
 
@@ -181,7 +198,7 @@
 
         </section>
 
-        <section class="overview bg-pink">
+        <section class="overview bg-pink case-section" id="case-background">
 
             <div class="wrap">
 
@@ -201,7 +218,7 @@
 
         </section>
 
-        <section class="overview">
+        <section class="overview case-section" id="case-process">
 
             <div class="wrap">
 
@@ -265,7 +282,7 @@
 
         </section>
 
-        <section class="overview bg-pink">
+        <section class="overview bg-pink case-section" id="case-understanding">
 
             <div class="wrap">
 
@@ -293,7 +310,7 @@
 
         </section>
 
-        <section class="overview">
+        <section class="overview case-section" id="case-roadmap">
 
             <div class="wrap">
 
@@ -338,7 +355,7 @@
 
         </section>
 
-        <section class="overview bg-pink">
+        <section class="overview bg-pink case-section" id="case-testing">
 
             <div class="wrap">
 
@@ -366,7 +383,7 @@
 
         </section>
 
-        <section class="overview">
+        <section class="overview case-section" id="case-results">
 
             <div class="wrap">
 
@@ -397,6 +414,8 @@
 
         </section>
 
+
+    </section>
 
     </main>
 

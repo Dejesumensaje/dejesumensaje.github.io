@@ -58,14 +58,16 @@
 
 <body class="about-page">
 
+    <a class="skip-link" href="#about-main">Skip to main content</a>
+
     <header class="site-header">
         <div class="nav-wrap">
             <div class="brand">
                 <a href="index.html"><img src="./assets/logo-wm.svg" alt="William Montoya" /></a>
             </div>
-            <nav>
+            <nav aria-label="Primary navigation">
                 <ul>
-                    <li><a href="index.html#my-work">Work</a></li>
+                    <li><a href="index.html#work">Work</a></li>
                     <li><a href="about.html">About</a></li>
                     <li><a href="mailto:william@dejesumensaje.com?subject=Exploring UX Collaboration Opportunities&body=Hello William,">Contact</a></li>
                 </ul>
@@ -76,95 +78,76 @@
     <main id="about-main">
 
         <!-- 01 — IDENTITY -->
-        <section class="about-hero" data-bg="var(--color-text)">
+        <section class="about-hero" data-bg="var(--color-text)" aria-labelledby="about-heading">
             <div class="about-hero__photo">
                 <img src="./assets/william-montoya.jpg" alt="William Montoya" />
             </div>
             <div class="about-hero__content">
                 <span class="about-eyebrow">UX &amp; IA Designer · Medellín</span>
-                <h1 class="about-name">William<br>Montoya.</h1>
+                <h1 id="about-heading" class="about-name">William<br>Montoya.</h1>
                 <p class="about-tagline">Designing at the intersection of systems,<br>education, and human possibility.</p>
             </div>
         </section>
 
-        <!-- 02 — STORY -->
-        <section class="about-origin" data-bg="var(--color-bg-light)">
-            <div class="about-origin__inner">
+        <!-- 02 — STORY + EXPERIENCE -->
+        <section class="about-story" data-bg="var(--canvas)">
+            <div class="about-story__inner">
 
-                <div class="about-chapter">
-                    <span class="chapter-label">Where I come from</span>
-                    <blockquote class="about-pull">I began as a journalist, trying to understand how information shapes people.</blockquote>
-                    <p>That search brought me to Colombia's Ministry of Education, where I helped redesign national platforms used by teachers, students, and families. Working there transformed my understanding of design: it's not just about usability, it's about creating access, strengthening public capacity, and building tools that expand opportunity. That sense of purpose has guided my work ever since.</p>
-                </div>
+                <blockquote class="about-pull">
+                    I began as a journalist, trying to understand how information shapes people.
+                </blockquote>
 
-                <div class="about-chapter">
-                    <span class="chapter-label">How I think</span>
+                <div class="about-story__body">
+                    <p>That search brought me to Colombia's Ministry of Education, where I helped redesign national platforms used by teachers, students, and families across the country. Working there transformed my understanding of design: it's not just about usability, it's about creating access, strengthening public capacity, and building tools that expand opportunity. That sense of purpose has guided my work ever since.</p>
                     <p>I see information architecture as the craft of giving shape to meaning. I work to simplify complexity without diluting what matters. I design from the system outward, not the surface inward. Writing is central to my process because it forces clarity. Research helps me dismantle assumptions. Iteration keeps me honest.</p>
-                </div>
-
-                <div class="about-chapter">
-                    <span class="chapter-label">What I care about</span>
                     <p>Design should create understanding. It should respect people's intelligence, time, and context. It should reach those who usually get overlooked. Whether I'm designing for education, fintech, or enterprise platforms — those commitments shape the decisions I make.</p>
                 </div>
 
-            </div>
-        </section>
+                <div class="about-story__xp">
+                    <span class="section-label">Experience</span>
+                    <div class="xp-grid">
 
-        <!-- 03 — EXPERIENCE -->
-        <section class="about-xp" data-bg="var(--color-bg-accent)">
-            <div class="about-xp__inner">
-                <h2 class="about-section-title">Experience</h2>
-                <div class="xp-list">
-
-                    <div class="xp-item">
-                        <span class="xp-year">2023 — Now</span>
-                        <div class="xp-detail">
+                        <div class="xp-item">
+                            <span class="xp-year">2023 — Now</span>
                             <span class="xp-company">Globant / Deloitte</span>
                             <span class="xp-role">UX &amp; IA Designer</span>
                         </div>
-                    </div>
 
-                    <div class="xp-item">
-                        <span class="xp-year">2022 — 2023</span>
-                        <div class="xp-detail">
+                        <div class="xp-item">
+                            <span class="xp-year">2022 — 2023</span>
                             <span class="xp-company">Globant / CashPak</span>
                             <span class="xp-role">UX Designer</span>
                         </div>
-                    </div>
 
-                    <div class="xp-item">
-                        <span class="xp-year">2021 — 2022</span>
-                        <div class="xp-detail">
+                        <div class="xp-item">
+                            <span class="xp-year">2021 — 2022</span>
                             <span class="xp-company">Globant / Blackboard</span>
                             <span class="xp-role">Product Designer</span>
                         </div>
-                    </div>
 
-                    <div class="xp-item">
-                        <span class="xp-year">2019 — 2021</span>
-                        <div class="xp-detail">
+                        <div class="xp-item">
+                            <span class="xp-year">2019 — 2021</span>
                             <span class="xp-company">Ministry of Education</span>
                             <span class="xp-role">UX Lead</span>
                         </div>
-                    </div>
 
-                    <div class="xp-item">
-                        <span class="xp-year">2017 — 2018</span>
-                        <div class="xp-detail">
+                        <div class="xp-item">
+                            <span class="xp-year">2017 — 2018</span>
                             <span class="xp-company">UNDP</span>
                             <span class="xp-role">Product Designer</span>
                         </div>
-                    </div>
 
+                    </div>
                 </div>
+
             </div>
         </section>
 
-        <!-- 04 — CRAFT + BEYOND -->
-        <section class="about-craft" data-bg="var(--color-white)">
+        <!-- 03 — CRAFT + BEYOND -->
+        <section class="about-craft" data-bg="var(--color-surface)">
             <div class="about-craft__inner">
 
-                <h2 class="about-section-title">Craft</h2>
+                <h2 class="craft-heading">Craft</h2>
 
                 <div class="craft-groups">
                     <div class="craft-group">
@@ -200,30 +183,38 @@
                 </div>
 
                 <div class="about-beyond">
-                    <h3 class="about-section-title about-section-title--sm">Beyond design</h3>
+                    <h3 class="beyond-heading">Beyond design</h3>
                     <div class="beyond-strips">
 
                         <div class="beyond-strip">
-                            <span class="beyond-num">01</span>
-                            <div class="beyond-content">
+                            <div class="beyond-label">
+                                <span class="beyond-num">01</span>
                                 <p class="beyond-title">Teaching</p>
+                            </div>
+                            <div class="beyond-body">
                                 <p>I teach sensory thinking at Universidad de Antioquia — exploring how perception, emotion, and attention shape the way people experience digital systems.</p>
                             </div>
                         </div>
 
                         <div class="beyond-strip">
-                            <span class="beyond-num">02</span>
-                            <div class="beyond-content">
+                            <div class="beyond-label">
+                                <span class="beyond-num">02</span>
                                 <p class="beyond-title">Alucine</p>
+                            </div>
+                            <div class="beyond-body">
                                 <p>I run Alucine, a project about film and culture. It's where I explore stories, symbols, and the ways narrative can shift how we understand the world.</p>
+                                <a href="https://alucine.co/" target="_blank" rel="noopener noreferrer" class="beyond-link">alucine.co ↗</a>
                             </div>
                         </div>
 
                         <div class="beyond-strip">
-                            <span class="beyond-num">03</span>
-                            <div class="beyond-content">
+                            <div class="beyond-label">
+                                <span class="beyond-num">03</span>
                                 <p class="beyond-title">Games &amp; Tools</p>
+                            </div>
+                            <div class="beyond-body">
                                 <p>Videogames taught me about systems, choice, and feedback loops. Lately I've been working with AI tools to extend how I analyze, validate, and iterate on design decisions.</p>
+                                <a href="https://backloggd.com/u/dejesumensaje/" target="_blank" rel="noopener noreferrer" class="beyond-link">backloggd ↗</a>
                             </div>
                         </div>
 
@@ -233,7 +224,7 @@
             </div>
         </section>
 
-        <!-- 05 — CTA DARK -->
+        <!-- 04 — CTA DARK -->
         <section class="about-cta-dark" data-bg="var(--color-text)">
             <div class="about-cta-inner">
                 <span class="cta-overline">Currently at Globant · Working on Deloitte · Open to conversations</span>

@@ -152,6 +152,47 @@
         });
     }
 
+    /* ── CASE TOC ─────────────────────────── */
+    function initCaseTOC() {
+        const toc = document.querySelector('.case-toc');
+        if (!toc) return;
+
+        const links = Array.from(toc.querySelectorAll('a[href^="#"]'));
+        const sections = links
+            .map(link => document.querySelector(link.getAttribute('href')))
+            .filter(Boolean);
+
+        if (!links.length || !sections.length) return;
+
+        const setActive = (id) => {
+            links.forEach(link => {
+                const target = link.getAttribute('href') === `#${id}`;
+                link.classList.toggle('active', target);
+                if (target) {
+                    link.setAttribute('aria-current', 'true');
+                } else {
+                    link.removeAttribute('aria-current');
+                }
+            });
+        };
+
+        const io = new IntersectionObserver((entries) => {
+            const visible = entries
+                .filter(entry => entry.isIntersecting)
+                .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+
+            if (visible.length) {
+                setActive(visible[0].target.id);
+            }
+        }, {
+            threshold: [0.15, 0.35, 0.6],
+            rootMargin: '-20% 0px -55% 0px'
+        });
+
+        sections.forEach(section => io.observe(section));
+        setActive(sections[0].id);
+    }
+
     /* ── INIT ───────────────────────────────────────── */
     function init() {
         if (document.readyState === 'loading') {
@@ -167,6 +208,7 @@
             initStoryNav();
             initParallax();
             initSmoothScroll();
+            initCaseTOC();
         } catch (e) {
             // Graceful degradation
             document.querySelectorAll(

@@ -67,14 +67,16 @@
 
 <body>
 
+    <a class="skip-link" href="#hero-case">Skip to main content</a>
+
     <header class="site-header">
         <div class="nav-wrap">
             <div class="brand">
                 <a href="index.html"><img src="/assets/logo-wm.svg" alt="William Montoya" /></a>
             </div>
-            <nav>
+            <nav aria-label="Primary navigation">
                 <ul>
-                    <li><a href="index.html#my-work">Work</a></li>
+                    <li><a href="index.html#work">Work</a></li>
                     <li><a href="about.html">About</a></li>
                     <li><a href="mailto:william@dejesumensaje.com?subject=Exploring UX Collaboration Opportunities&body=Hello William,">Contact</a></li>
                 </ul>
@@ -82,29 +84,28 @@
         </div>
     </header>
 
-    <section id="hero-case">
+    <main>
+
+    <section id="hero-case" aria-labelledby="case-heading">
 
         <div class="case-breadcrumb">
-            <a href="index.html#my-work">← Work</a>
+            <a href="index.html#work">← Work</a>
         </div>
 
-        <!-- Hero content -->
-
-        <div class="hero-wrap">
-
-            <div class="text-hero">
-                <h1>Creating opportunities for the rural teachers of Colombia</h1>
+        <div class="case-title-wrap">
+            <div class="case-num-row">
+                <span class="case-num">02</span>
+                <span class="work-category">UX · Product Design · Education</span>
             </div>
-
-            <div class="img-hero">
-
-                <img src="./assets/aprender-digital-hero.png" alt="Aprender Digital platform homepage">
-
-            </div>
-
+            <h1 id="case-heading">Creating opportunities for the rural teachers of Colombia</h1>
         </div>
 
-        <!-- Specifics -->
+        <div class="case-full-image">
+            <div class="img-placeholder">
+                <span>Aprender Digital — hero mockup</span>
+            </div>
+            <p class="media-slot__caption">Case study cover slot</p>
+        </div>
 
         <div class="details">
 
@@ -153,25 +154,41 @@
 
     </section>
 
-    <!-- Project summary -->
-    <div class="project-summary">
+    <section class="project-summary project-summary--hero" aria-label="Project summary">
         <div class="summary-item">
             <span class="summary-label">Challenge</span>
-            <p>Provide rural teachers with quality educational resources in regions where internet connectivity is unreliable or absent.</p>
+            <p>Create a product model for rural teachers who cannot rely on internet access as a default.</p>
         </div>
         <div class="summary-item">
-            <span class="summary-label">My Role</span>
-            <p>UX Designer & IA — defining the offline-first content architecture and validating flows with teachers in the field.</p>
+            <span class="summary-label">Scope</span>
+            <p>UX, information architecture, value-proposition work, and prototyping across a short timeline.</p>
+        </div>
+        <div class="summary-item">
+            <span class="summary-label">Research</span>
+            <p>Desk research plus interviews with 10 teachers and 5 ICT leaders serving low-connectivity schools.</p>
         </div>
         <div class="summary-item">
             <span class="summary-label">Outcome</span>
-            <p>A sustainable content distribution model that reached thousands of teachers across Colombia's rural zones.</p>
+            <p>An offline-ready content package model supported by a simpler publishing workflow and clearer value proposition.</p>
         </div>
-    </div>
+    </section>
 
-    <main id="case">
+    <nav class="case-toc" aria-label="Case study navigation">
+        <div class="case-toc__inner">
+            <span class="case-toc__label">On this page</span>
+            <a href="#case-challenge">Challenge</a>
+            <a href="#case-background">Background</a>
+            <a href="#case-process">Process</a>
+            <a href="#case-users">Users</a>
+            <a href="#case-value">Value</a>
+            <a href="#case-testing">Testing</a>
+            <a href="#case-lessons">Lessons</a>
+        </div>
+    </nav>
 
-        <section class="challenge">
+    <section id="case">
+
+        <section class="challenge case-section" id="case-challenge">
 
             <h4>Challenge</h4>
 
@@ -180,7 +197,7 @@
 
         </section>
 
-        <section class="overview bg-pink">
+        <section class="overview bg-pink case-section" id="case-background">
 
             <div class="wrap">
 
@@ -201,7 +218,7 @@
 
         </section>
 
-        <section class="overview">
+        <section class="overview case-section" id="case-process">
 
             <div class="wrap">
 
@@ -261,7 +278,7 @@
 
         </section>
 
-        <section class="overview bg-pink">
+        <section class="overview bg-pink case-section" id="case-users">
 
             <div class="wrap">
 
@@ -285,7 +302,7 @@
 
         </section>
 
-        <section class="overview">
+        <section class="overview case-section" id="case-value">
 
             <div class="wrap">
 
@@ -333,7 +350,7 @@
 
         </section>
 
-        <section class="overview bg-pink">
+        <section class="overview bg-pink case-section" id="case-testing">
 
             <div class="wrap">
 
@@ -362,7 +379,7 @@
 
         </section>
 
-        <section class="overview">
+        <section class="overview case-section" id="case-lessons">
 
             <div class="wrap">
 
@@ -384,6 +401,8 @@
 
         </section>
 
+
+    </section>
 
     </main>
 
