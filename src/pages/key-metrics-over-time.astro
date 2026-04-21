@@ -1,0 +1,316 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Key Metrics Over Time | William Montoya"
+  description="How to replace a manual Excel reporting process with an interactive feature that puts KFC franchisees in control of their own performance data."
+  ogType="article"
+  themeColor="#C8DDE3"
+>
+  <Fragment slot="head">
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="stylesheet" href="/password-gate.css" />
+    <script type="application/ld+json" is:inline>{JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Key Metrics Over Time Case Study",
+      "author": { "@type": "Person", "name": "William Montoya" },
+      "publisher": { "@type": "Person", "name": "William Montoya" },
+      "description": "How to replace a manual Excel reporting process with an interactive feature that puts KFC franchisees in control of their own performance data."
+    })}</script>
+    <script is:inline>
+    (function () {
+        var KEY  = 'converge_auth';
+        var PASS = 'Deloitte';
+
+        if (sessionStorage.getItem(KEY) === '1') return;
+
+        document.documentElement.style.visibility = 'hidden';
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var pageChildren = Array.from(document.body.children);
+            pageChildren.forEach(function (el) { el.style.display = 'none'; });
+
+            document.body.style.cssText = 'margin:0;padding:0;background:#0f0f0f;min-height:100vh;display:flex;align-items:center;justify-content:center;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;box-sizing:border-box;';
+
+            var gate = document.createElement('div');
+            gate.style.cssText = 'width:100%;max-width:25rem;padding:2rem;box-sizing:border-box;';
+            gate.innerHTML = ''
+                + '<p style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:rgba(255,255,255,.5);margin:0 0 1.5rem">Confidential · Deloitte / Globant · NDA</p>'
+                + '<h1 style="font-size:clamp(2rem,6vw,3rem);font-weight:800;line-height:1.05;color:#fff;margin:0 0 .75rem;letter-spacing:-.02em">This case study<br>is under NDA.</h1>'
+                + '<p style="font-size:.875rem;line-height:1.65;color:rgba(255,255,255,.65);margin:0 0 2rem">Enter the password to view the Key Metrics Over Time case study. If you received this link from William, the password is in the same message.</p>'
+                + '<form id="js-gate-form" novalidate style="display:flex;gap:.625rem;flex-wrap:wrap">'
+                +   '<input type="password" id="js-gate-pw" placeholder="Enter password" autocomplete="off" aria-label="Password"'
+                +     ' style="flex:1;min-width:150px;padding:.875rem 1rem;font-size:1rem;color:#fff;caret-color:#fff;background:rgba(255,255,255,.12);border:2px solid rgba(255,255,255,.65);border-radius:6px;outline:none;box-sizing:border-box;-webkit-text-fill-color:#fff;">'
+                +   '<button type="submit" style="padding:.875rem 1.5rem;font-size:.875rem;font-weight:700;background:#fff;color:#0f0f0f;border:none;border-radius:6px;cursor:pointer;white-space:nowrap;flex-shrink:0;">Unlock →</button>'
+                + '</form>'
+                + '<p id="js-gate-err" style="display:none;color:#ff8f8f;font-size:.8rem;margin:.625rem 0 0;font-weight:500;">Incorrect password. Try again.</p>'
+                + '<div style="margin:2rem 0 0;padding:1.25rem 0 0;border-top:1px solid rgba(255,255,255,.15);display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">'
+                +   '<a href="/" style="color:rgba(255,255,255,.8);font-size:.875rem;font-weight:500;text-decoration:none;">← Back to portfolio</a>'
+                +   '<span style="color:rgba(255,255,255,.45);font-size:.75rem;">No password? Contact William.</span>'
+                + '</div>';
+
+            document.body.appendChild(gate);
+            document.documentElement.style.visibility = '';
+            document.getElementById('js-gate-pw').focus();
+
+            document.getElementById('js-gate-form').addEventListener('submit', function (e) {
+                e.preventDefault();
+                var pw  = document.getElementById('js-gate-pw');
+                var err = document.getElementById('js-gate-err');
+                if (pw.value === PASS) {
+                    sessionStorage.setItem(KEY, '1');
+                    gate.remove();
+                    document.body.style.cssText = '';
+                    pageChildren.forEach(function (el) { el.style.display = ''; });
+                    document.querySelectorAll('.overview, .challenge, .insights, .project-summary').forEach(function (el) {
+                        el.style.transitionDelay = '0ms';
+                        el.classList.add('visible');
+                    });
+                    document.body.classList.add('page-reveal');
+                    requestAnimationFrame(function () { requestAnimationFrame(function () { document.body.classList.add('loaded'); }); });
+                } else {
+                    err.style.display = 'block';
+                    pw.value = '';
+                    pw.focus();
+                }
+            });
+        });
+    })();
+    </script>
+  </Fragment>
+
+  <main>
+
+    <section id="hero-case" aria-labelledby="case-heading" style="background: var(--steel);">
+
+      <div class="case-breadcrumb">
+        <a href="/#work">← Work</a>
+      </div>
+
+      <div class="case-title-wrap">
+        <div class="case-num-row">
+          <span class="case-num">04</span>
+          <span class="work-category">UX · Data Visualization · Enterprise</span>
+        </div>
+        <h1 id="case-heading">Turning pricing data into a self-service experience</h1>
+        <div class="case-metrics">
+          <div class="case-metric">
+            <span class="case-metric__value">6</span>
+            <span class="case-metric__label">KPIs tracked</span>
+          </div>
+          <div class="case-metric">
+            <span class="case-metric__value">12 mo.</span>
+            <span class="case-metric__label">Data range</span>
+          </div>
+          <div class="case-metric">
+            <span class="case-metric__value">Launched</span>
+            <span class="case-metric__label">2024</span>
+          </div>
+        </div>
+      </div>
+
+      <section class="project-summary project-summary--hero" aria-label="Project summary">
+        <div class="summary-item">
+          <span class="summary-label">Challenge</span>
+          <p>Replace a manual Excel reporting process with a self-service feature that gives KFC franchisees direct access to their own data.</p>
+        </div>
+        <div class="summary-item">
+          <span class="summary-label">Scope</span>
+          <p>Independent UX/UI design, animation specification, and complete interactive prototyping with Figma Make.</p>
+        </div>
+        <div class="summary-item">
+          <span class="summary-label">Method</span>
+          <p>SME working session to define metrics scope; rapid prototyping with Claude to cover every filter state before stakeholder review.</p>
+        </div>
+        <div class="summary-item">
+          <span class="summary-label">Outcome</span>
+          <p>Launched. Approved quickly due to complete prototype coverage. Collecting user feedback — foundation built to scale.</p>
+        </div>
+      </section>
+
+      <div class="case-full-image">
+        <div class="nda-placeholder">
+          <span class="nda-placeholder__icon">🔒</span>
+          <span class="nda-placeholder__label">NDA — Hero mockup not shown</span>
+        </div>
+      </div>
+
+      <div class="details">
+        <div class="detail">
+          <h4>Role</h4>
+          <p>UX/UI Designer &amp; Front-End Prototyper (independent)</p>
+        </div>
+        <div class="detail">
+          <h4>Date</h4>
+          <p>2024 — launched</p>
+        </div>
+        <div class="detail">
+          <h4>Client</h4>
+          <p>KFC franchisees via Converge for Restaurants</p>
+        </div>
+        <div class="detail">
+          <h4>Platform</h4>
+          <p>Deloitte Converge · Franchisee Portal</p>
+        </div>
+        <div class="detail">
+          <h4>Sector</h4>
+          <p>Restaurant / Enterprise</p>
+        </div>
+      </div>
+
+    </section>
+
+    <nav class="case-toc" aria-label="Case study navigation">
+      <div class="case-toc__inner">
+        <span class="case-toc__label">On this page</span>
+        <a href="#case-challenge">Challenge</a>
+        <a href="#case-background">Background</a>
+        <a href="#case-process">Process</a>
+        <a href="#case-feedback">Feedback</a>
+        <a href="#case-handoff">Handoff</a>
+        <a href="#case-decisions">Decisions</a>
+        <a href="#case-results">Results</a>
+      </div>
+    </nav>
+
+    <section class="challenge case-section" id="case-challenge">
+      <h4>Challenge</h4>
+      <h2>How do you replace a slow, manual Excel reporting process with something that gives operators direct access to their own performance data — and actually changes how they explore it?</h2>
+    </section>
+
+    <section class="overview bg-steel case-section" id="case-background">
+      <div class="wrap">
+        <h2>Background</h2>
+        <p><em>Key Metrics Over Time</em> is an interactive report within the KFC franchisee portal in Converge, Deloitte's pricing optimization platform. It allows franchise owners to explore the month-over-month performance of their six most critical business metrics — Total Sales, Margin, Guest Count, Food &amp; Paper, Price Change, and Average Check — at whatever level of granularity they need.</p>
+        <p>Before this feature existed, Deloitte's price advisors assigned to KFC generated these reports manually from Excel files. The process was slow, error-prone, and entirely out of the franchisee's hands. Operators had no direct access to their own performance data.</p>
+        <p>The goal was straightforward: bring that report into the portal, make it self-service, and give franchisees the ability to explore their data on their own terms.</p>
+      </div>
+    </section>
+
+    <section class="overview case-section" id="case-process">
+      <div class="wrap">
+        <h2>Process</h2>
+        <p>The first step was a working session with the Deloitte price advisor assigned to KFC. As both a subject matter expert and a frequent user of the Excel report, they were the primary source for understanding which metrics mattered, how they were interpreted, and what the most common analysis patterns looked like.</p>
+        <p>This session defined the feature's scope: six key metrics expressed as month-over-month percentage variation, with the ability to combine different levels of geographic and channel filtering.</p>
+      </div>
+
+      <figure>
+        <div class="nda-placeholder">
+          <span class="nda-placeholder__icon">🔒</span>
+          <span class="nda-placeholder__label">Workshop notes — under NDA</span>
+        </div>
+        <figcaption>The Excel report that price advisors built manually — the starting point for understanding what operators actually needed.</figcaption>
+      </figure>
+
+      <div class="wrap">
+        <h2>Rapid prototyping with AI</h2>
+        <p>Rather than iterating slowly through static wireframes, I used <strong>Figma Make with Claude Sonnet</strong> to build a functional, high-fidelity prototype in a fraction of the usual time.</p>
+        <p>It's worth being precise about how AI was used here: the goal was not to delegate the solution to the model, but to use it as a speed tool. I provided the precise instructions — design system components, interaction logic, edge cases — and the AI executed the iterations. Design judgment, UX decisions, and product direction remained mine throughout.</p>
+        <p>This made it possible to build a prototype covering every possible filter combination and state before presenting it to the team — which turned out to be critical for stakeholder alignment.</p>
+      </div>
+
+      <figure>
+        <div class="nda-placeholder">
+          <span class="nda-placeholder__icon">🔒</span>
+          <span class="nda-placeholder__label">Full prototype — under NDA</span>
+        </div>
+        <figcaption>The complete prototype covering all filter combinations, metric states, and edge cases — built before the first stakeholder review.</figcaption>
+      </figure>
+    </section>
+
+    <section class="overview bg-steel case-section" id="case-feedback">
+      <div class="wrap">
+        <h2>The feedback that changed the feature</h2>
+        <p>The problem was never the report itself — the report already existed in Excel. The real gap was that users couldn't maintain visual context when switching between metrics: they got lost, couldn't tell which element belonged to which line, couldn't track what was active and what wasn't.</p>
+        <p>The solution wasn't to reorganize the information. It was to redesign the <strong>sequence of attention</strong>: one metric active by default, with animations that turn each activation into a deliberate, visible event — both in the KPI card and in the line chart. Users enable metrics one at a time, and each activation gets its own moment.</p>
+        <p>The side effect was unexpected: instead of scanning the dashboard like a passive report, users shifted into exploration mode. The animations put them in a mindset of curiosity — discovering each metric combination with a sense of delight. That wasn't in the brief. It was a consequence of designing attention with intention.</p>
+      </div>
+
+      <figure>
+        <div class="nda-placeholder">
+          <span class="nda-placeholder__icon">🔒</span>
+          <span class="nda-placeholder__label">KPI dashboard — under NDA</span>
+        </div>
+        <figcaption>The sequence of attention: one metric active by default, each activation a visible event in both the KPI card and the chart.</figcaption>
+      </figure>
+    </section>
+
+    <section class="overview case-section" id="case-handoff">
+      <div class="wrap">
+        <h2>Handoff with animation specifications</h2>
+        <p>The Figma handoff file included not just designs, but detailed annotations on animations and transitions — because each one had a specific functional justification:</p>
+        <ul>
+          <li><strong>Fade out → update → fade in on KPI cards</strong> when filters change, to signal unambiguously that the data has changed. An in-place update is too subtle and undermines confidence in the data.</li>
+          <li><strong>Lines drawing left to right</strong> on initial chart render, to guide temporal reading.</li>
+          <li><strong>30ms stagger between cards</strong> to avoid a jarring pop-in and create a sense of progressive response.</li>
+        </ul>
+        <p>Documenting this in the handoff ensures that the design intent reaches the final product — not just the visual appearance.</p>
+      </div>
+
+      <figure>
+        <div class="nda-placeholder">
+          <span class="nda-placeholder__icon">🔒</span>
+          <span class="nda-placeholder__label">Handoff annotations — under NDA</span>
+        </div>
+        <figcaption>Animation specifications from the handoff: timing, easing, stagger values, and the functional justification for each transition.</figcaption>
+      </figure>
+    </section>
+
+    <section class="overview bg-steel case-section" id="case-decisions">
+      <div class="wrap">
+        <h2>Key design decisions</h2>
+      </div>
+
+      <div class="insights">
+        <div class="wrap-flex">
+          <div class="insight">
+            <p><strong>One metric active by default.</strong> Not all metrics active from the start. Reduces initial cognitive load so users build context progressively instead of parsing everything at once.</p>
+          </div>
+          <div class="insight">
+            <p><strong>Visible gap for missing data.</strong> Not connecting the points or showing zero. A 0% value and a missing data point are different interpretations — the chart had to communicate that clearly.</p>
+          </div>
+          <div class="insight">
+            <p><strong>KPI cards show 12-month averages.</strong> Not the most recent month. Cards are a stable summary; the chart is for exploration. Mixing the two responsibilities would confuse both.</p>
+          </div>
+          <div class="insight">
+            <p><strong>Accounting notation (5.2)% for negatives.</strong> Not standard -5.2%. Financial convention for business users — more readable in the context where franchisees are already used to accounting formats.</p>
+          </div>
+          <div class="insight">
+            <p><strong>Fade out/in when filters change.</strong> Not in-place update. A clear signal that the data has changed builds trust in data freshness — critical when operators are making pricing decisions based on what they see.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="overview case-section" id="case-results">
+      <div class="wrap">
+        <h2>Results and lessons learned</h2>
+        <p>The feature was approved quickly because the prototype covered every possible state and interaction combination. This eliminated ambiguity in reviews with stakeholders and developers, significantly reducing the back-and-forth typical of approval cycles.</p>
+        <p>It launched and is currently in the user feedback collection phase. The foundation built — filter system, metrics architecture, animation logic — is designed to grow without starting from scratch.</p>
+        <ul>
+          <li><strong>Attention is a design resource, not an assumption.</strong> The report had all the right information from the beginning. What was missing was a way to manage how users process it. Redesigning the sequence of attention — not the content — was what solved the real problem.</li>
+          <li><strong>Well-justified animation changes user behavior.</strong> Every transition had a function: building trust in the data, guiding attention, signaling state changes. Delight was the outcome, not the goal.</li>
+          <li><strong>AI as an iteration accelerator has a clear ROI.</strong> The value wasn't in generating the solution — it was in compressing the time between a design decision and its validation. Showing a complete, functional prototype changed the quality of every stakeholder conversation.</li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <section class="case-reflections" aria-label="Senior reflection">
+    <div class="case-reflections__inner">
+      <span class="case-reflections__label">Reflection</span>
+      <p class="case-reflections__text">The most unexpected outcome of this project was discovering that animation can shift user behavior, not just delight them. Designing attention as a resource — deciding what the user sees first, in what sequence, with what rhythm — turned a reporting dashboard into an exploration tool. That reframing now applies to every data-heavy interface I design.</p>
+    </div>
+  </section>
+
+  <section class="case-next">
+    <a href="/crust-upcharge-configurator.html">
+      <span class="case-next-label">Next case study</span>
+      <h3>Designing pricing clarity for franchise operators →</h3>
+    </a>
+  </section>
+
+</BaseLayout>

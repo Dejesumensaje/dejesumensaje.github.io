@@ -570,7 +570,6 @@ nav ul li:last-child a:hover { background: var(--ocean); color: var(--white); }
     align-items: flex-start;
     padding-top: var(--header-height);
     box-sizing: border-box;
-    border-bottom: 1px solid var(--ink-faint);
 }
 
 .hero-inner {

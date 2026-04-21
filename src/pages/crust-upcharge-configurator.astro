@@ -1,0 +1,312 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Crust Upcharge Configurator | William Montoya"
+  description="How to give Pizza Hut franchise operators granular control over complex pricing recommendations without eroding their trust in the data."
+  ogType="article"
+  themeColor="#EDC9D4"
+>
+  <Fragment slot="head">
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="stylesheet" href="/password-gate.css" />
+    <script type="application/ld+json" is:inline>{JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Crust Upcharge Configurator Case Study",
+      "author": { "@type": "Person", "name": "William Montoya" },
+      "publisher": { "@type": "Person", "name": "William Montoya" },
+      "description": "How to give Pizza Hut franchise operators granular control over complex pricing recommendations without eroding their trust in the data."
+    })}</script>
+    <script is:inline>
+    (function () {
+        var KEY  = 'converge_auth';
+        var PASS = 'Deloitte';
+
+        if (sessionStorage.getItem(KEY) === '1') return;
+
+        document.documentElement.style.visibility = 'hidden';
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var pageChildren = Array.from(document.body.children);
+            pageChildren.forEach(function (el) { el.style.display = 'none'; });
+
+            document.body.style.cssText = 'margin:0;padding:0;background:#0f0f0f;min-height:100vh;display:flex;align-items:center;justify-content:center;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;box-sizing:border-box;';
+
+            var gate = document.createElement('div');
+            gate.style.cssText = 'width:100%;max-width:25rem;padding:2rem;box-sizing:border-box;';
+            gate.innerHTML = ''
+                + '<p style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:rgba(255,255,255,.5);margin:0 0 1.5rem">Confidential · Deloitte / Globant · NDA</p>'
+                + '<h1 style="font-size:clamp(2rem,6vw,3rem);font-weight:800;line-height:1.05;color:#fff;margin:0 0 .75rem;letter-spacing:-.02em">This case study<br>is under NDA.</h1>'
+                + '<p style="font-size:.875rem;line-height:1.65;color:rgba(255,255,255,.65);margin:0 0 2rem">Enter the password to view the Crust Upcharge Configurator case study. If you received this link from William, the password is in the same message.</p>'
+                + '<form id="js-gate-form" novalidate style="display:flex;gap:.625rem;flex-wrap:wrap">'
+                +   '<input type="password" id="js-gate-pw" placeholder="Enter password" autocomplete="off" aria-label="Password"'
+                +     ' style="flex:1;min-width:150px;padding:.875rem 1rem;font-size:1rem;color:#fff;caret-color:#fff;background:rgba(255,255,255,.12);border:2px solid rgba(255,255,255,.65);border-radius:6px;outline:none;box-sizing:border-box;-webkit-text-fill-color:#fff;">'
+                +   '<button type="submit" style="padding:.875rem 1.5rem;font-size:.875rem;font-weight:700;background:#fff;color:#0f0f0f;border:none;border-radius:6px;cursor:pointer;white-space:nowrap;flex-shrink:0;">Unlock →</button>'
+                + '</form>'
+                + '<p id="js-gate-err" style="display:none;color:#ff8f8f;font-size:.8rem;margin:.625rem 0 0;font-weight:500;">Incorrect password. Try again.</p>'
+                + '<div style="margin:2rem 0 0;padding:1.25rem 0 0;border-top:1px solid rgba(255,255,255,.15);display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">'
+                +   '<a href="/" style="color:rgba(255,255,255,.8);font-size:.875rem;font-weight:500;text-decoration:none;">← Back to portfolio</a>'
+                +   '<span style="color:rgba(255,255,255,.45);font-size:.75rem;">No password? Contact William.</span>'
+                + '</div>';
+
+            document.body.appendChild(gate);
+            document.documentElement.style.visibility = '';
+            document.getElementById('js-gate-pw').focus();
+
+            document.getElementById('js-gate-form').addEventListener('submit', function (e) {
+                e.preventDefault();
+                var pw  = document.getElementById('js-gate-pw');
+                var err = document.getElementById('js-gate-err');
+                if (pw.value === PASS) {
+                    sessionStorage.setItem(KEY, '1');
+                    gate.remove();
+                    document.body.style.cssText = '';
+                    pageChildren.forEach(function (el) { el.style.display = ''; });
+                    document.querySelectorAll('.overview, .challenge, .insights, .project-summary').forEach(function (el) {
+                        el.style.transitionDelay = '0ms';
+                        el.classList.add('visible');
+                    });
+                    document.body.classList.add('page-reveal');
+                    requestAnimationFrame(function () { requestAnimationFrame(function () { document.body.classList.add('loaded'); }); });
+                } else {
+                    err.style.display = 'block';
+                    pw.value = '';
+                    pw.focus();
+                }
+            });
+        });
+    })();
+    </script>
+  </Fragment>
+
+  <main>
+
+    <section id="hero-case" aria-labelledby="case-heading" style="background: var(--blush);">
+
+      <div class="case-breadcrumb">
+        <a href="/#work">← Work</a>
+      </div>
+
+      <div class="case-title-wrap">
+        <div class="case-num-row">
+          <span class="case-num">03</span>
+          <span class="work-category">UX · UI · Prototyping · Enterprise</span>
+        </div>
+        <h1 id="case-heading">Designing pricing clarity for franchise operators</h1>
+        <div class="case-metrics">
+          <div class="case-metric">
+            <span class="case-metric__value">4-step</span>
+            <span class="case-metric__label">Wizard architecture</span>
+          </div>
+          <div class="case-metric">
+            <span class="case-metric__value">30+</span>
+            <span class="case-metric__label">State combinations</span>
+          </div>
+          <div class="case-metric">
+            <span class="case-metric__value">2024</span>
+            <span class="case-metric__label">Upcoming launch</span>
+          </div>
+        </div>
+      </div>
+
+      <section class="project-summary project-summary--hero" aria-label="Project summary">
+        <div class="summary-item">
+          <span class="summary-label">Challenge</span>
+          <p>Give Pizza Hut franchisees granular pricing control without eroding their trust in Deloitte's recommendations.</p>
+        </div>
+        <div class="summary-item">
+          <span class="summary-label">Scope</span>
+          <p>Independent UX/UI design, product architecture, and high-fidelity prototyping using Figma Make and Claude.</p>
+        </div>
+        <div class="summary-item">
+          <span class="summary-label">Constraints</span>
+          <p>Enterprise design system, NDA-bound client data, and solo ownership from research through handoff.</p>
+        </div>
+        <div class="summary-item">
+          <span class="summary-label">Outcome</span>
+          <p>A four-step wizard with comparison matrix validated by a franchisee; interest from other Converge brands confirmed.</p>
+        </div>
+      </section>
+
+      <div class="case-full-image">
+        <div class="nda-placeholder">
+          <span class="nda-placeholder__icon">🔒</span>
+          <span class="nda-placeholder__label">NDA — Hero mockup not shown</span>
+        </div>
+      </div>
+
+      <div class="details">
+        <div class="detail">
+          <h4>Role</h4>
+          <p>UX/UI Designer &amp; Front-End Prototyper (independent)</p>
+        </div>
+        <div class="detail">
+          <h4>Date</h4>
+          <p>2024 — upcoming launch</p>
+        </div>
+        <div class="detail">
+          <h4>Client</h4>
+          <p>Pizza Hut franchisees via Converge for Restaurants</p>
+        </div>
+        <div class="detail">
+          <h4>Platform</h4>
+          <p>Deloitte Converge · Franchisee Portal</p>
+        </div>
+        <div class="detail">
+          <h4>Sector</h4>
+          <p>Restaurant / Enterprise</p>
+        </div>
+      </div>
+
+    </section>
+
+    <nav class="case-toc" aria-label="Case study navigation">
+      <div class="case-toc__inner">
+        <span class="case-toc__label">On this page</span>
+        <a href="#case-challenge">Challenge</a>
+        <a href="#case-background">Background</a>
+        <a href="#case-process">Process</a>
+        <a href="#case-validation">Validation</a>
+        <a href="#case-decisions">Decisions</a>
+        <a href="#case-results">Results</a>
+      </div>
+    </nav>
+
+    <section class="challenge case-section" id="case-challenge">
+      <h4>Challenge</h4>
+      <h2>How do you give franchise operators visibility into complex pricing recommendations without overwhelming them — or undermining their autonomy?</h2>
+    </section>
+
+    <section class="overview bg-pink case-section" id="case-background">
+      <div class="wrap">
+        <h2>Background</h2>
+        <p>The Crust Upcharge Configurator is a pricing configuration tool within the Pizza Hut franchisee portal in Converge, Deloitte's pricing optimization platform.</p>
+        <p>A Pizza Hut pizza price isn't a single number. It's the result of a combination between variety (Cheese, Supreme, Meat Lovers, Veggie Lovers) and crust type (Hand &amp; Tossed, Thin &amp; Crispy, Tavern, Pan, Stuffed Crust). On top of that, some crust types carry an upcharge over the base price, and that upcharge can vary by size and by each franchisee's local market conditions.</p>
+        <p>Deloitte's price advisors generated recommendations for these combinations, but franchisees had no real visibility into how those numbers were built or tools to adjust them with any confidence. The result was an opaque process that eroded operator trust in the recommendations and limited their ability to make informed pricing decisions.</p>
+      </div>
+    </section>
+
+    <section class="overview case-section" id="case-process">
+      <div class="wrap">
+        <h2>Process</h2>
+        <p>Before designing anything, I spent time understanding how pizza pricing is configured across other franchise brands — existing UI patterns, industry conventions, and operator mental models.</p>
+        <p>The most important finding wasn't about interface. It was about the business: <strong>medium and large are not just different sizes, they are different product contexts.</strong> A large pizza's greater surface area enables ingredient combinations that don't exist on medium, which means different pricing conditions apply. Understanding this before designing determined a fundamental architectural decision: the first choice in the flow had to be size — not variety, not crust — because size defines the entire space of possibilities that follows.</p>
+      </div>
+
+      <figure>
+        <div class="nda-placeholder">
+          <span class="nda-placeholder__icon">🔒</span>
+          <span class="nda-placeholder__label">Research artifacts — under NDA</span>
+        </div>
+        <figcaption>Early desk research: understanding pizza pricing structures across franchise brands.</figcaption>
+      </figure>
+
+      <div class="wrap">
+        <h2>From research to architecture</h2>
+        <p>With the research findings in hand, I used Claude to build a first version of the concept as a conversation artifact for an early review with the PM and the price advisor assigned to Pizza Hut.</p>
+        <p>That session produced the most structurally significant change in the project: <strong>dropping the idea of solving everything on a single screen.</strong> The information density — sizes, varieties, crusts, upcharges, recommendations, manual adjustments — made a single view unworkable without sacrificing clarity. A fully integrated table was logically correct, but it didn't match how the operator actually processes those decisions.</p>
+        <p>Breaking it into a <strong>four-step wizard</strong> wasn't simplification — it was respecting the order in which the user thinks.</p>
+      </div>
+
+      <figure>
+        <div class="nda-placeholder">
+          <span class="nda-placeholder__icon">🔒</span>
+          <span class="nda-placeholder__label">Early wireframe — under NDA</span>
+        </div>
+        <figcaption>The first version built for PM and price advisor review, before the wizard architecture was defined.</figcaption>
+      </figure>
+
+      <div class="wrap">
+        <h2>Full prototyping</h2>
+        <p>With the architecture defined, I used Figma Make to build the complete interactive prototype — every state combination, every interaction, every edge case. The goal was to arrive at user validation with something that behaved like the real product, not static screens.</p>
+      </div>
+
+      <figure>
+        <div class="nda-placeholder">
+          <span class="nda-placeholder__icon">🔒</span>
+          <span class="nda-placeholder__label">Full prototype — under NDA</span>
+        </div>
+        <figcaption>The complete four-step wizard built in Figma Make: size selection, variety, crust, and comparison matrix.</figcaption>
+      </figure>
+    </section>
+
+    <section class="overview bg-pink case-section" id="case-validation">
+      <div class="wrap">
+        <h2>Validation with a franchisee</h2>
+        <p>Validation took the form of a demo with open conversation with one of the franchisees. The element that worked better than expected was the <strong>comparison matrix</strong> in the final step: a view that crosses each pizza variety against each crust type, shows the user's adjusted price against the original recommendation, and includes a toggle to return to the recommendation at any time.</p>
+        <p>For the franchisee, it solved something that previously required multiple files and manual comparisons. Seeing the intersection of pizza adjustments and crust adjustments — all visible at a glance — fundamentally simplified how they understand the impact of each pricing decision.</p>
+        <p>The session also confirmed something about the feature's audience. The franchisee said it directly: this configurator is not a primary screen — it's an <strong>advanced settings entry point</strong>. Not every operator will use it. But those who do are the ones most invested in the detail of their business, and for them, the level of control the wizard provides is exactly what they need.</p>
+      </div>
+
+      <figure>
+        <div class="nda-placeholder">
+          <span class="nda-placeholder__icon">🔒</span>
+          <span class="nda-placeholder__label">Comparison matrix — under NDA</span>
+        </div>
+        <figcaption>The comparison matrix: each variety against each crust, adjusted price vs. recommendation, with a toggle to reset.</figcaption>
+      </figure>
+    </section>
+
+    <section class="overview case-section" id="case-decisions">
+      <div class="wrap">
+        <h2>Key design decisions</h2>
+        <p>Each of these decisions had a discarded alternative. The reasoning behind each choice was as important as the choice itself.</p>
+      </div>
+
+      <div class="insights">
+        <div class="wrap-flex">
+          <div class="insight">
+            <p><strong>Size as the first step.</strong> Not variety, not crust — size, because medium and large are different product contexts. Size defines the entire space of possibilities that follows.</p>
+          </div>
+          <div class="insight">
+            <p><strong>A four-step wizard over a single view.</strong> Information density on one screen broke clarity. The wizard wasn't a simplification — it respected the order in which the operator actually thinks.</p>
+          </div>
+          <div class="insight">
+            <p><strong>Comparison matrix at the final step.</strong> Surfacing the comparison earlier could have anchored users to corporate recommendations and suppressed legitimate local pricing decisions.</p>
+          </div>
+          <div class="insight">
+            <p><strong>Toggle to return to recommendation.</strong> Lower friction than a reset button with confirmation. Users can compare without fear of losing their reference point.</p>
+          </div>
+          <div class="insight">
+            <p><strong>Deviation badges as information, not errors.</strong> Deviations from the recommendation are valid decisions. Framing them as errors from the start would undermine operator autonomy.</p>
+          </div>
+          <div class="insight">
+            <p><strong>Feature positioned as advanced settings.</strong> Not all franchisees need this level of granularity. Designing for the power user without imposing it on everyone was a deliberate choice.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="overview bg-pink case-section" id="case-results">
+      <div class="wrap">
+        <h2>Results and lessons learned</h2>
+        <p>The feature is approaching launch. Validation with the franchisee confirmed that the comparison matrix — the highest-risk design element — generated the most perceived value.</p>
+        <p>Beyond Pizza Hut, price advisors from other franchise brands who saw the feature in an internal demo have already expressed interest in a similar solution. This suggests the problem it solves — giving operators granularity and visibility without compromising the integrity of the recommendations — is category-wide, not specific to this client.</p>
+        <ul>
+          <li><strong>Research the business before designing the interface.</strong> Understanding that medium and large are different product contexts, not just sizes, determined the flow structure from the outset. That wouldn't have come from reviewing UI patterns.</li>
+          <li><strong>Design for the user's mental model, not the system's logic.</strong> The integrated table was correct from a data logic standpoint. It wasn't correct from a user logic standpoint. The wizard was an empathy decision.</li>
+          <li><strong>Knowing who you're not designing for matters.</strong> Recognizing that this feature is for power users, and designing accordingly — without trying to make it work for everyone — was what made it possible to give that user the level of control they actually need.</li>
+          <li><strong>Respecting user autonomy is a product decision.</strong> Showing the comparison at the end — not during editing — is a deliberate stance: franchisees have the right to make local pricing decisions without the system framing them as errors from the start.</li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <section class="case-reflections" aria-label="Senior reflection">
+    <div class="case-reflections__inner">
+      <span class="case-reflections__label">Reflection</span>
+      <p class="case-reflections__text">Working independently on a product inside a large enterprise context sharpened something I'd taken for granted in team settings: the discipline of design documentation. Every decision needed to be self-explanatory because I wouldn't be in the room when engineers and stakeholders reviewed it. That pressure made my thinking more precise, and my decisions better defended.</p>
+    </div>
+  </section>
+
+  <section class="case-next">
+    <a href="/key-metrics-over-time.html">
+      <span class="case-next-label">Next case study</span>
+      <h3>Turning pricing data into a self-service experience →</h3>
+    </a>
+  </section>
+
+</BaseLayout>

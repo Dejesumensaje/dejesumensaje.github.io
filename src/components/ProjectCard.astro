@@ -1,0 +1,644 @@
+---
+import type { Project } from '../data/projects';
+
+interface Props {
+  project: Project;
+  variant: 'featured' | 'brief' | 'row';
+}
+
+const { project, variant } = Astro.props;
+const isFeatured = variant === 'featured';
+const isRow = variant === 'row';
+---
+
+{isRow ? (
+
+  <article class="row-card" data-reveal data-index={project.index}>
+
+    <span class="row-card__num" aria-hidden="true">{project.index}</span>
+
+    <div class="row-card__body">
+      <div class="row-card__meta">
+        <span class="row-card__context">{project.context}</span>
+        {project.confidential && (
+          <span class="label label--confidential">Confidential</span>
+        )}
+      </div>
+      <h2 class="row-card__title">
+        <a href={project.href}>{project.title}</a>
+      </h2>
+      <p class="row-card__desc">{project.description}</p>
+      <a href={project.href} class="row-card__cta">Read case study →</a>
+    </div>
+
+    <a
+      class:list={[
+        'row-card__image',
+        project.confidential && 'row-card__image--confidential',
+      ]}
+      href={project.href}
+      aria-label={`View ${project.title} case study`}
+      tabindex="-1"
+      style={`--card-bg: ${project.accent}`}
+    >
+      <img src={project.image} alt={project.imageAlt} loading="lazy" />
+      {project.confidential && (
+        <div class="confidential-badge" aria-hidden="true">Confidential · NDA</div>
+      )}
+    </a>
+
+  </article>
+
+) : isFeatured ? (
+  <article class="feature-card" data-reveal data-index={project.index}>
+
+    <div class="feature-card__header">
+      <div class="feature-card__meta-top">
+        <span class="label">{project.tags.join(' · ')}</span>
+        {project.confidential && (
+          <span class="label label--confidential">Confidential</span>
+        )}
+      </div>
+      <span class="feature-card__context">{project.context}</span>
+      <h2 class="feature-card__title">
+        <a href={project.href}>{project.title}</a>
+      </h2>
+      <p class="feature-card__desc">{project.description}</p>
+    </div>
+
+    <a
+      class:list={[
+        'feature-card__image',
+        project.confidential && 'feature-card__image--confidential',
+      ]}
+      href={project.href}
+      aria-label={`View ${project.title} case study`}
+      style={`--card-bg: ${project.accent}`}
+    >
+      <img
+        src={project.image}
+        alt={project.imageAlt}
+        loading="eager"
+        fetchpriority="high"
+      />
+      {project.confidential && (
+        <div class="confidential-badge" aria-hidden="true">Confidential · NDA</div>
+      )}
+    </a>
+
+    <div class="feature-card__snapshot">
+      {project.snapshot.map(point => (
+        <div class="feature-card__point">
+          <span class="feature-card__point-label">{point.label}</span>
+          <p>{point.body}</p>
+        </div>
+      ))}
+    </div>
+
+    <div class="feature-card__actions">
+      <a href={project.href} class="feature-card__cta">Read case study →</a>
+    </div>
+
+  </article>
+) : (
+  <article class="brief-card" data-reveal data-index={project.index}>
+
+    <div class="brief-card__header">
+      <span class="brief-card__index">{project.index}</span>
+      <div class="brief-card__copy">
+        <span class="brief-card__context">{project.context}</span>
+        <h3 class="brief-card__title">
+          <a href={project.href}>{project.title}</a>
+        </h3>
+        <p class="brief-card__desc">{project.description}</p>
+      </div>
+    </div>
+
+    <a
+      class:list={[
+        'brief-card__image',
+        project.confidential && 'brief-card__image--confidential',
+      ]}
+      href={project.href}
+      aria-label={`View ${project.title} case study`}
+      style={`--card-bg: ${project.accent}`}
+    >
+      <img src={project.image} alt={project.imageAlt} loading="lazy" />
+      {project.confidential && (
+        <div class="confidential-badge" aria-hidden="true">Confidential · NDA</div>
+      )}
+    </a>
+
+    <div class="brief-card__footer">
+      <span class="brief-card__tags">{project.tags.join(' · ')}</span>
+      <a href={project.href} class="brief-card__cta">Read →</a>
+    </div>
+
+  </article>
+)}
+
+<style>
+
+/* ────────────────────────────────────────────────────
+   ROW CARD — Editorial list (Option A)
+   Three-column: [index] [copy] [image]
+──────────────────────────────────────────────────── */
+
+.row-card {
+  display: grid;
+  grid-template-columns: 1fr;         /* mobile: copy only */
+  gap: 1.25rem;
+  padding: clamp(2rem, 4vw, 3rem) var(--gutter);
+  border-top: 1px solid var(--ink-faint);
+}
+
+.row-card:first-child {
+  border-top: 2px solid var(--ink);   /* opening broadsheet rule */
+}
+
+/* Index number */
+.row-card__num {
+  display: none;                      /* revealed at 768px+ */
+  font-family: var(--font-sans);
+  font-size: var(--text-micro);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: rgba(15, 15, 15, 0.2);
+  padding-top: 0.125rem;              /* optical align with context line */
+  align-self: start;
+}
+
+/* Context line */
+.row-card__meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.5rem;
+}
+
+.row-card__context {
+  font-family: var(--font-sans);
+  font-size: var(--text-micro);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  color: var(--ink-muted);
+}
+
+/* Title — editorial weight */
+.row-card__title {
+  font-family: var(--font-sans);
+  font-size: clamp(1.625rem, 3vw, 2.5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: var(--tracking-tight);
+  color: var(--ink);
+  margin: 0 0 0.875rem;
+  max-width: 24ch;
+}
+
+.row-card__title a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.row-card__title a:hover { color: var(--ocean); }
+
+/* Description — serif italic, matches estilos.css body convention */
+.row-card__desc {
+  font-family: var(--font-serif);
+  font-size: var(--text-body);
+  font-style: italic;
+  color: var(--ink-muted);
+  line-height: var(--lh-lead);
+  margin: 0 0 1.25rem;
+  max-width: 44ch;
+}
+
+/* CTA inline arrow link */
+.row-card__cta {
+  font-family: var(--font-sans);
+  font-size: var(--text-small);
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: 0.01em;
+  display: inline-flex;
+  align-items: center;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+.row-card__cta:hover {
+  color: var(--ocean);
+  transform: translateX(4px);
+}
+
+/* Image — landscape, right column */
+.row-card__image {
+  display: block;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--card-bg, var(--teal));
+  position: relative;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.row-card__image:hover {
+  box-shadow: 0 16px 48px rgba(15, 15, 15, 0.12);
+  transform: translateY(-3px);
+}
+
+.row-card__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
+
+.row-card__image--confidential img {
+  filter: blur(5px) brightness(0.97);
+  transform: scale(1.03);
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+.row-card__image--confidential:hover img {
+  filter: blur(3px) brightness(0.97);
+}
+
+/* ── RESPONSIVE — 768px: activate three-column grid ── */
+
+@media (min-width: 768px) {
+  .row-card {
+    grid-template-columns: 2.5rem 1fr 40%;
+    gap: 0 clamp(2rem, 3.5vw, 3rem);
+    align-items: center;
+  }
+  .row-card__num { display: block; }
+}
+
+/* ── RESPONSIVE — 992px: wider gutter ─────────────── */
+
+@media (min-width: 992px) {
+  .row-card {
+    padding: clamp(2.5rem, 4vw, 3.5rem) calc(var(--space-unit) * 3);
+    grid-template-columns: 3rem 1fr 38%;
+  }
+}
+
+/* ── RESPONSIVE — 1440px: large screen ────────────── */
+
+@media (min-width: 1440px) {
+  .row-card {
+    padding-left: calc(var(--space-unit) * 5);
+    padding-right: calc(var(--space-unit) * 5);
+    grid-template-columns: 3rem 1fr 36%;
+    gap: 0 4rem;
+  }
+}
+
+/* ────────────────────────────────────────────────────
+   FEATURED CARD (01 — Colombia Aprende)
+──────────────────────────────────────────────────── */
+
+.feature-card {
+  display: grid;
+  gap: clamp(1.25rem, 2.5vw, 1.875rem);
+}
+
+.feature-card__meta-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.625rem;
+}
+
+.feature-card__context {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: var(--text-micro);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  color: var(--ink-muted);
+}
+
+.feature-card__title {
+  font-family: var(--font-sans);
+  font-size: clamp(1.875rem, 4.5vw, 3.5rem);
+  font-weight: 900;
+  line-height: 1.0;
+  letter-spacing: var(--tracking-display);
+  color: var(--ink);
+  max-width: 22ch;
+  margin: 0;
+}
+
+.feature-card__title a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.feature-card__title a:hover { color: var(--ocean); }
+
+.feature-card__desc {
+  font-family: var(--font-serif);
+  font-size: var(--text-body);
+  font-style: italic;
+  color: var(--ink-muted);
+  line-height: var(--lh-lead);
+  max-width: 46ch;
+  margin: 0;
+}
+
+/* Image — landscape on mobile, portrait on desktop */
+.feature-card__image {
+  display: block;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--card-bg, var(--teal));
+  position: relative;
+  box-shadow: 0 12px 40px rgba(15, 15, 15, 0.1);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.feature-card__image:hover {
+  box-shadow: 0 22px 56px rgba(15, 15, 15, 0.15);
+  transform: translateY(-3px);
+}
+
+.feature-card__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
+
+.feature-card__image--confidential img {
+  filter: blur(5px) brightness(0.97);
+  transform: scale(1.03);
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+.feature-card__image--confidential:hover img {
+  filter: blur(3px) brightness(0.97);
+}
+
+/* Three-column snapshot strip */
+.feature-card__snapshot {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  border-top: 1px solid var(--ink-faint);
+  padding-top: clamp(1rem, 2vw, 1.5rem);
+}
+
+.feature-card__point { display: grid; gap: 0.35rem; }
+
+.feature-card__point-label {
+  font-family: var(--font-sans);
+  font-size: var(--text-micro);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  color: var(--ink-muted);
+  display: block;
+}
+
+.feature-card__point p {
+  font-family: var(--font-sans);
+  font-size: var(--text-small);
+  color: var(--ink);
+  line-height: var(--lh-body);
+  margin: 0;
+  max-width: none;
+}
+
+/* CTA */
+.feature-card__actions { display: flex; }
+
+.feature-card__cta {
+  font-family: var(--font-sans);
+  font-size: var(--text-small);
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: 0.01em;
+  display: inline-flex;
+  align-items: center;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+.feature-card__cta:hover {
+  color: var(--ocean);
+  transform: translateX(4px);
+}
+
+/* ────────────────────────────────────────────────────
+   BRIEF CARDS (02 03 04) — Wire-service sidebar
+──────────────────────────────────────────────────── */
+
+.brief-card {
+  padding: clamp(1.25rem, 2.5vw, 2rem) var(--gutter);
+  border-top: 1px solid var(--ink-faint);
+  display: grid;
+  gap: 0.875rem;
+}
+
+.brief-card:first-child { border-top: none; }
+
+.brief-card__header {
+  display: grid;
+  gap: 0.375rem;
+}
+
+.brief-card__index {
+  font-family: var(--font-sans);
+  font-size: var(--text-micro);
+  font-weight: 700;
+  color: rgba(15, 15, 15, 0.18);
+  letter-spacing: 0.06em;
+  display: block;
+}
+
+.brief-card__context {
+  font-family: var(--font-sans);
+  font-size: var(--text-micro);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  color: var(--ink-muted);
+  display: block;
+}
+
+.brief-card__title {
+  font-family: var(--font-sans);
+  font-size: clamp(1rem, 1.6vw, 1.25rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: var(--tracking-tight);
+  color: var(--ink);
+  margin: 0;
+}
+
+.brief-card__title a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.brief-card__title a:hover { color: var(--ocean); }
+
+.brief-card__desc {
+  font-family: var(--font-sans);
+  font-size: var(--text-small);
+  color: var(--ink-muted);
+  line-height: var(--lh-lead);
+  margin: 0;
+  max-width: none;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.brief-card__image {
+  display: block;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--card-bg, var(--teal));
+  position: relative;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.brief-card__image:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(15, 15, 15, 0.12);
+}
+
+.brief-card__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.brief-card__image--confidential img {
+  filter: blur(4px) brightness(0.97);
+  transform: scale(1.03);
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+.brief-card__image--confidential:hover img {
+  filter: blur(2px);
+}
+
+.brief-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.brief-card__tags {
+  font-family: var(--font-sans);
+  font-size: var(--text-micro);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  color: var(--ink-muted);
+  opacity: 0.65;
+}
+
+.brief-card__cta {
+  font-family: var(--font-sans);
+  font-size: var(--text-small);
+  font-weight: 600;
+  color: var(--ink);
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+.brief-card__cta:hover {
+  color: var(--ocean);
+  transform: translateX(3px);
+}
+
+/* ── CONFIDENTIAL BADGE ─────────────────────────────── */
+
+.confidential-badge {
+  position: absolute;
+  bottom: 0.75rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(15, 15, 15, 0.72);
+  color: rgba(255, 255, 255, 0.9);
+  font-family: var(--font-sans);
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.35rem 0.75rem;
+  border-radius: 100px;
+  white-space: nowrap;
+  backdrop-filter: blur(4px);
+  pointer-events: none;
+}
+
+/* ── REVEAL ANIMATIONS ─────────────────────────────── */
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+
+[data-reveal].visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] { opacity: 1 !important; transform: none !important; }
+}
+
+/* ── RESPONSIVE — 640px+ ───────────────────────────── */
+
+@media (min-width: 640px) {
+  .feature-card__snapshot {
+    grid-template-columns: repeat(3, 1fr);
+    gap: calc(var(--space-unit) * 1.5);
+  }
+}
+
+/* ── RESPONSIVE — 768px+ ───────────────────────────── */
+
+@media (min-width: 768px) {
+  /* Portrait image on desktop — the magazine splash */
+  .feature-card__image {
+    aspect-ratio: 3 / 4;
+  }
+
+  /* First brief card gets a heavy top rule matching .work-newspaper */
+  .brief-card:first-child {
+    border-top: 2px solid var(--ink);
+  }
+}
+
+/* ── RESPONSIVE — 992px+ ───────────────────────────── */
+
+@media (min-width: 992px) {
+  .brief-card {
+    padding: calc(var(--space-unit) * 2.5) calc(var(--space-unit) * 3);
+  }
+}
+
+/* ── RESPONSIVE — 1440px+ ──────────────────────────── */
+
+@media (min-width: 1440px) {
+  .brief-card {
+    padding: calc(var(--space-unit) * 3) calc(var(--space-unit) * 5);
+  }
+}
+
+</style>

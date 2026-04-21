@@ -1,0 +1,167 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { projects } from '../data/projects';
+
+// all projects render as editorial rows
+---
+
+<BaseLayout
+  title="William Montoya — Senior Product Designer"
+  description="Senior Product Designer with 8+ years making complex systems usable — from public-sector education platforms to enterprise data tools. Currently at Globant/Deloitte, based in Medellín."
+>
+
+  <main id="main-content">
+
+    <!-- ── HERO ──────────────────────────────────────── -->
+    <section id="hero" aria-labelledby="hero-heading">
+      <div class="hero-inner">
+
+        <div class="hero-copy">
+          <p class="hero-label">
+            <span class="status-dot"></span>
+            Senior Product Designer · Medellín, Colombia
+          </p>
+          <h1 id="hero-heading">William<br>Montoya</h1>
+          <p class="hero-tagline">
+            From journalism to public-sector design to enterprise data tools —
+            8+ years making complex systems usable.
+          </p>
+          <div class="hero-available" aria-label="Open to work">
+            <span class="status-dot"></span>
+            Available for Senior/Staff roles
+          </div>
+          <div class="hero-actions">
+            <a href="#work" class="btn btn--primary">View work</a>
+            <a
+              href="mailto:william@dejesumensaje.com?subject=Hi, William!"
+              class="btn btn--ghost"
+            >
+              Email me
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-portrait">
+          <figure class="media-slot media-slot--portrait">
+            <div class="portrait-frame">
+              <img
+                src="/assets/william-montoya.jpg"
+                alt="William Montoya"
+                class="portrait-img"
+                fetchpriority="high"
+              />
+            </div>
+          </figure>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── SELECTED WORK ───────────────────────────── -->
+    <section id="work" aria-label="Selected work">
+
+      <div class="work-intro">
+        <div class="work-intro__copy">
+          <span class="label">Selected Work</span>
+          <p class="work-lead">
+            Case studies from public education platforms and enterprise pricing
+            tools — complex systems made clearer.
+          </p>
+        </div>
+      </div>
+
+      <div class="work-roll">
+        {projects.map(project => (
+          <ProjectCard project={project} variant="row" />
+        ))}
+      </div>
+
+    </section>
+
+  </main>
+
+</BaseLayout>
+
+<!-- ───────────────────────────────────────────────────
+     SELECTED WORK — section shell only.
+     Row card styles live in ProjectCard.astro.
+──────────────────────────────────────────────────── -->
+<style>
+
+/* ── WORK SECTION ──────────────────────────────────── */
+
+#work {
+  background: var(--white);
+  padding-top: var(--section-pad);
+  padding-bottom: 0;
+}
+
+.work-intro {
+  max-width: var(--layout-width);
+  margin: 0 auto;
+  padding: 0 var(--gutter) clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.work-intro__copy {
+  display: grid;
+  gap: 0.5rem;
+  max-width: 44rem;
+}
+
+.work-lead {
+  font-family: var(--font-sans);
+  font-size: var(--text-small);
+  color: var(--ink-muted);
+  line-height: var(--lh-lead);
+  margin: 0;
+  max-width: none;
+}
+
+.work-roll {
+  max-width: var(--layout-width);
+  margin: 0 auto;
+}
+
+@media (min-width: 992px) {
+  .work-intro {
+    padding-left: calc(var(--space-unit) * 3);
+    padding-right: calc(var(--space-unit) * 3);
+  }
+}
+
+@media (min-width: 1440px) {
+  .work-intro {
+    padding-left: calc(var(--space-unit) * 5);
+    padding-right: calc(var(--space-unit) * 5);
+  }
+}
+
+</style>
+
+<!-- ── REVEAL OBSERVER ────────────────────────────── -->
+<script>
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const cards = document.querySelectorAll<HTMLElement>('[data-reveal]');
+
+  if (reduced) {
+    cards.forEach(el => el.classList.add('visible'));
+  } else {
+    const io = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          const idx = parseInt(
+            (entry.target as HTMLElement).dataset.index ?? '1',
+            10
+          );
+          (entry.target as HTMLElement).style.transitionDelay = `${(idx - 1) * 80}ms`;
+          entry.target.classList.add('visible');
+          io.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
+    );
+    cards.forEach(el => io.observe(el));
+  }
+</script>

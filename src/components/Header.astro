@@ -1,0 +1,84 @@
+---
+// Three-column header: [Brand] — [Local Time (centered)] — [Navigation]
+// Clock ticks are driven by portfolio.js → initMedellinClock()
+---
+
+<header class="site-header">
+  <div class="nav-wrap">
+
+    <div class="brand">
+      <a href="/"><img src="/assets/logo-wm.svg" alt="William Montoya" /></a>
+    </div>
+
+    <div class="header-time" aria-label="Current time in Medellín" aria-live="off">
+      <span class="header-time__city">Medellín</span>
+      <time class="header-clock" id="mde-clock"></time>
+    </div>
+
+    <nav aria-label="Primary navigation">
+      <ul>
+        <li><a href="/#work">Work</a></li>
+        <li><a href="/about.html">About</a></li>
+        <li>
+          <a href="mailto:william@dejesumensaje.com?subject=Exploring UX Collaboration Opportunities&body=Hello William,">
+            Contact
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+  </div>
+</header>
+
+<style is:global>
+  /* ── THREE-COLUMN HEADER ───────────────────────────── */
+  /* Overrides the flex layout in estilos.css             */
+
+  .site-header .nav-wrap {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: var(--gutter);
+  }
+
+  .site-header .brand       { justify-self: start; }
+  .site-header .header-time { justify-self: center; }
+  .site-header nav          { justify-self: end; }
+
+  /* Time widget — hidden on mobile, shown at 840px+ */
+  .header-time {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.1rem;
+    text-align: center;
+    user-select: none;
+  }
+
+  .header-time__city {
+    font-family: var(--font-sans);
+    font-size: 0.6rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink-muted);
+    opacity: 0.45;
+    line-height: 1;
+    display: block;
+  }
+
+  /* .header-clock is already styled in estilos.css */
+
+  @media (min-width: 840px) {
+    .header-time { display: flex; }
+  }
+
+  /* ── DARK NAV (about page) overrides ───────────────── */
+  .dark-nav .site-header:not(.scrolled) .header-time__city {
+    color: rgba(255, 255, 255, 0.38);
+    opacity: 1;
+  }
+  .dark-nav .site-header:not(.scrolled) .header-clock {
+    color: rgba(255, 255, 255, 0.5);
+  }
+</style>

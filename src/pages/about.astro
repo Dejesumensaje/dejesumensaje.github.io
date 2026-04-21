@@ -1,0 +1,241 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="About — William Montoya"
+  description="I'm William Montoya. A UX designer, journalist, and teacher from Medellín designing at the intersection of systems, education, and human possibility."
+  ogImage="https://dejesumensaje.com/assets/william-montoya.jpg"
+  ogType="website"
+  themeColor="#1a1a1a"
+  bodyClass="about-page"
+  hideFooter={true}
+>
+  <Fragment slot="head">
+    <link rel="stylesheet" href="/about-story.css" />
+    <script type="application/ld+json" is:inline>{JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "ProfilePage",
+      "mainEntity": {
+        "@type": "Person",
+        "name": "William Montoya",
+        "jobTitle": "UX & IA Designer",
+        "url": "https://dejesumensaje.com/about.html",
+        "sameAs": [
+          "https://www.linkedin.com/in/dejesumensaje/",
+          "https://medium.com/@dejesumensaje",
+          "https://github.com/Dejesumensaje"
+        ]
+      }
+    })}</script>
+  </Fragment>
+
+  <main id="about-main">
+
+    <!-- 01 — IDENTITY -->
+    <section class="about-hero" data-bg="var(--color-text)" aria-labelledby="about-heading">
+      <div class="about-hero__photo">
+        <img src="/assets/william-montoya.jpg" alt="William Montoya" />
+      </div>
+      <div class="about-hero__content">
+        <span class="about-eyebrow">UX &amp; IA Designer · Medellín</span>
+        <h1 id="about-heading" class="about-name">William<br>Montoya.</h1>
+        <p class="about-tagline">Designing at the intersection of systems,<br>education, and human possibility.</p>
+      </div>
+    </section>
+
+    <!-- 02 — STORY + EXPERIENCE -->
+    <section class="about-story" data-bg="var(--canvas)">
+      <div class="about-story__inner">
+
+        <blockquote class="about-pull">
+          I began as a journalist, trying to understand how information shapes people.
+        </blockquote>
+
+        <div class="about-story__body">
+          <p>That search brought me to Colombia's Ministry of Education, where I helped redesign national platforms used by teachers, students, and families across the country. Working there transformed my understanding of design: it's not just about usability, it's about creating access, strengthening public capacity, and building tools that expand opportunity. That sense of purpose has guided my work ever since.</p>
+          <p>I see information architecture as the craft of giving shape to meaning. I work to simplify complexity without diluting what matters. I design from the system outward, not the surface inward. Writing is central to my process because it forces clarity. Research helps me dismantle assumptions. Iteration keeps me honest.</p>
+          <p>Design should create understanding. It should respect people's intelligence, time, and context. It should reach those who usually get overlooked. Whether I'm designing for education or enterprise platforms — those commitments shape the decisions I make.</p>
+        </div>
+
+        <div class="about-snapshot">
+          <div class="snapshot-item">
+            <span class="snapshot-label">Currently</span>
+            <p>Embedded with Deloitte through Globant, working across product, UX, and information architecture.</p>
+          </div>
+          <div class="snapshot-item">
+            <span class="snapshot-label">Focus</span>
+            <p>Complex service flows, content-heavy ecosystems, and interfaces that need clearer structure.</p>
+          </div>
+          <div class="snapshot-item">
+            <span class="snapshot-label">Strengths</span>
+            <p>Turning research, systems thinking, and design direction into decisions teams can actually build.</p>
+          </div>
+        </div>
+
+        <div class="about-story__xp">
+          <span class="section-label">Experience</span>
+          <div class="xp-grid">
+
+            <div class="xp-item">
+              <span class="xp-year">2023 — Now</span>
+              <span class="xp-company">Globant / Deloitte</span>
+              <span class="xp-role">UX &amp; IA Designer</span>
+            </div>
+
+            <div class="xp-item">
+              <span class="xp-year">2022 — 2023</span>
+              <span class="xp-company">Globant / CashPak</span>
+              <span class="xp-role">UX Designer</span>
+            </div>
+
+            <div class="xp-item">
+              <span class="xp-year">2021 — 2022</span>
+              <span class="xp-company">Globant / Blackboard</span>
+              <span class="xp-role">Product Designer</span>
+            </div>
+
+            <div class="xp-item">
+              <span class="xp-year">2019 — 2021</span>
+              <span class="xp-company">Ministry of Education</span>
+              <span class="xp-role">UX Lead</span>
+            </div>
+
+            <div class="xp-item">
+              <span class="xp-year">2017 — 2018</span>
+              <span class="xp-company">UNDP</span>
+              <span class="xp-role">Product Designer</span>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 03 — CRAFT + BEYOND -->
+    <section class="about-craft" data-bg="var(--color-surface)">
+      <div class="about-craft__inner">
+
+        <h2 class="craft-heading">Craft</h2>
+
+        <div class="craft-groups">
+          <div class="craft-group">
+            <p class="craft-group-label">UX Core</p>
+            <div class="craft-tags">
+              <span class="tag">User Research</span>
+              <span class="tag">Information Architecture</span>
+              <span class="tag">Usability Testing</span>
+              <span class="tag">UX Writing</span>
+              <span class="tag">Wireframing</span>
+              <span class="tag">Prototyping</span>
+              <span class="tag">Design Strategy</span>
+            </div>
+          </div>
+          <div class="craft-group">
+            <p class="craft-group-label">Tools</p>
+            <div class="craft-tags">
+              <span class="tag">Figma</span>
+              <span class="tag">Notion</span>
+              <span class="tag">Miro</span>
+            </div>
+          </div>
+          <div class="craft-group">
+            <p class="craft-group-label">Strengths</p>
+            <div class="craft-tags">
+              <span class="tag">Accessibility</span>
+              <span class="tag">Design Systems</span>
+              <span class="tag">Workshop Facilitation</span>
+              <span class="tag">AI-assisted workflows</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="about-workflow">
+          <h3 class="workflow-heading">How I work today</h3>
+          <div class="workflow-items">
+
+            <div class="workflow-item">
+              <span class="workflow-tool">Claude</span>
+              <p>I use Claude as a thinking partner throughout the design process — not to generate answers, but to sharpen questions. Research synthesis, writing structure, edge-case mapping, stakeholder argument preparation. It extends the thinking, never replaces it.</p>
+            </div>
+
+            <div class="workflow-item">
+              <span class="workflow-tool">Figma + Figma Make</span>
+              <p>Figma is where I design. Figma Make is where I prototype at speed — full interaction coverage, every state, before the first stakeholder review. The AI executes the iterations; the design decisions are mine.</p>
+            </div>
+
+            <div class="workflow-item">
+              <span class="workflow-tool">Notion</span>
+              <p>Documentation, research synthesis, and project tracking all live in Notion. I write to think — before meetings, after research sessions, and whenever a design decision needs a clear rationale that will survive the room.</p>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="about-beyond">
+          <h3 class="beyond-heading">Beyond design</h3>
+          <div class="beyond-strips">
+
+            <div class="beyond-strip">
+              <div class="beyond-label">
+                <span class="beyond-num">01</span>
+                <p class="beyond-title">Teaching</p>
+              </div>
+              <div class="beyond-body">
+                <p>I teach sensory thinking at Universidad de Antioquia — exploring how perception, emotion, and attention shape the way people experience digital systems.</p>
+              </div>
+            </div>
+
+            <div class="beyond-strip">
+              <div class="beyond-label">
+                <span class="beyond-num">02</span>
+                <p class="beyond-title">Alucine</p>
+              </div>
+              <div class="beyond-body">
+                <p>I run Alucine, a project about film and culture. It's where I explore stories, symbols, and the ways narrative can shift how we understand the world.</p>
+                <a href="https://alucine.co/" target="_blank" rel="noopener noreferrer" class="beyond-link">alucine.co ↗</a>
+              </div>
+            </div>
+
+            <div class="beyond-strip">
+              <div class="beyond-label">
+                <span class="beyond-num">03</span>
+                <p class="beyond-title">Games &amp; Tools</p>
+              </div>
+              <div class="beyond-body">
+                <p>Videogames taught me about systems, choice, and feedback loops. AI is now a regular part of how I design — accelerating iteration, not replacing judgment.</p>
+                <a href="https://backloggd.com/u/dejesumensaje/" target="_blank" rel="noopener noreferrer" class="beyond-link">backloggd ↗</a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 04 — CTA DARK -->
+    <section class="about-cta-dark" data-bg="var(--color-text)">
+      <div class="about-cta-inner">
+        <span class="cta-overline">Currently at Globant · Working on Deloitte · Open to conversations</span>
+        <h2 class="cta-big">Let's<br>connect.</h2>
+        <a href="mailto:william@dejesumensaje.com?subject=Hi, William!" class="cta-email">william@dejesumensaje.com</a>
+        <div class="cta-actions">
+          <a href="/assets/cv-william-montoya-2024-en.pdf" class="button-cta button-cta--light" download>Download Resume</a>
+          <a href="https://www.linkedin.com/in/dejesumensaje/" target="_blank" rel="noopener noreferrer" class="button-secondary button-secondary--light">LinkedIn ↗</a>
+        </div>
+        <div class="cta-social">
+          <a href="https://medium.com/@dejesumensaje" target="_blank" rel="noopener noreferrer">
+            <img src="/assets/medium.svg" loading="lazy" alt="Medium" />
+          </a>
+          <a href="https://github.com/Dejesumensaje" target="_blank" rel="noopener noreferrer">
+            <img src="/assets/github.svg" loading="lazy" alt="GitHub" />
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+</BaseLayout>
