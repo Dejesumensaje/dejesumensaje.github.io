@@ -62,7 +62,6 @@
             <div class="brand">
                 <a href="index.html"><img src="/assets/logo-wm.svg" alt="William Montoya" /></a>
             </div>
-            <time class="header-clock" id="mde-clock" aria-label="Current time in Medellín"></time>
             <nav aria-label="Primary navigation">
                 <ul>
                     <li><a href="#work">Work</a></li>
@@ -70,6 +69,10 @@
                     <li><a href="mailto:william@dejesumensaje.com?subject=Exploring UX Collaboration Opportunities&body=Hello William,">Contact</a></li>
                 </ul>
             </nav>
+            <div class="header-meta" aria-label="Current time in Medellín">
+                <span class="header-meta__label">Medellín</span>
+                <time class="header-clock" id="mde-clock"></time>
+            </div>
         </div>
     </header>
 
@@ -278,22 +281,18 @@
     </section>
 
     <!-- FOOTER -->
-    <footer class="site-footer">
-        <div class="footer-inner">
-            <h2 class="footer-email">
-                <a href="mailto:william@dejesumensaje.com?subject=Hi, William!">william@dejesumensaje.com</a>
-            </h2>
-            <p class="footer-tagline">Let's work, play, create together.</p>
-            <div class="footer-social">
-                <a href="https://www.linkedin.com/in/dejesumensaje/" target="_blank" rel="noopener noreferrer">
-                    <img src="./assets/linkedin.svg" loading="lazy" alt="LinkedIn">
-                </a>
-                <a href="https://medium.com/@dejesumensaje" target="_blank" rel="noopener noreferrer">
-                    <img src="./assets/medium.svg" loading="lazy" alt="Medium">
-                </a>
-                <a href="https://github.com/Dejesumensaje" target="_blank" rel="noopener noreferrer">
-                    <img src="./assets/github.svg" loading="lazy" alt="GitHub">
-                </a>
+    <footer class="site-cta" aria-label="Contact">
+        <div class="site-cta__inner">
+            <span class="site-cta__overline">Currently at Globant · Working on Deloitte · Open to conversations</span>
+            <h2 class="site-cta__heading">Let's<br>connect.</h2>
+            <a href="mailto:william@dejesumensaje.com?subject=Hi, William!" class="site-cta__email">william@dejesumensaje.com</a>
+            <div class="site-cta__actions">
+                <a href="./assets/cv-william-montoya-2024-en.pdf" class="button-cta button-cta--light" download>Download Resume</a>
+                <a href="https://www.linkedin.com/in/dejesumensaje/" target="_blank" rel="noopener noreferrer" class="button-secondary button-secondary--light">LinkedIn ↗</a>
+            </div>
+            <div class="site-cta__social">
+                <a href="https://medium.com/@dejesumensaje" target="_blank" rel="noopener noreferrer"><img src="./assets/medium.svg" loading="lazy" alt="Medium"></a>
+                <a href="https://github.com/Dejesumensaje" target="_blank" rel="noopener noreferrer"><img src="./assets/github.svg" loading="lazy" alt="GitHub"></a>
             </div>
         </div>
     </footer>

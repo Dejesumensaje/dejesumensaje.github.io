@@ -35,21 +35,75 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="estilos.css">
     <link rel="stylesheet" href="password-gate.css">
+
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
 
-    <!-- Password gate — inline to prevent content flash -->
+    <!-- Password gate -->
     <script>
     (function () {
-        if (sessionStorage.getItem('converge_auth') !== '1') {
-            document.documentElement.style.visibility = 'hidden';
-            document.addEventListener('DOMContentLoaded', function () {
-                document.body.classList.add('gate-locked');
-                document.documentElement.style.visibility = '';
+        var KEY  = 'converge_auth';
+        var PASS = 'Deloitte';
+
+        if (sessionStorage.getItem(KEY) === '1') return;
+
+        document.documentElement.style.visibility = 'hidden';
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Hide all existing page content
+            var pageChildren = Array.from(document.body.children);
+            pageChildren.forEach(function (el) { el.style.display = 'none'; });
+
+            // Set body to dark gate background
+            document.body.style.cssText = 'margin:0;padding:0;background:#0f0f0f;min-height:100vh;display:flex;align-items:center;justify-content:center;font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;box-sizing:border-box;';
+
+            // Build gate card
+            var gate = document.createElement('div');
+            gate.style.cssText = 'width:100%;max-width:25rem;padding:2rem;box-sizing:border-box;';
+            gate.innerHTML = ''
+                + '<p style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:rgba(255,255,255,.5);margin:0 0 1.5rem">Confidential · Deloitte / Globant · NDA</p>'
+                + '<h1 style="font-size:clamp(2rem,6vw,3rem);font-weight:800;line-height:1.05;color:#fff;margin:0 0 .75rem;letter-spacing:-.02em">This case study<br>is under NDA.</h1>'
+                + '<p style="font-size:.875rem;line-height:1.65;color:rgba(255,255,255,.65);margin:0 0 2rem">Enter the password to view the Key Metrics Over Time case study. If you received this link from William, the password is in the same message.</p>'
+                + '<form id="js-gate-form" novalidate style="display:flex;gap:.625rem;flex-wrap:wrap">'
+                +   '<input type="password" id="js-gate-pw" placeholder="Enter password" autocomplete="off" aria-label="Password"'
+                +     ' style="flex:1;min-width:150px;padding:.875rem 1rem;font-size:1rem;color:#fff;caret-color:#fff;background:rgba(255,255,255,.12);border:2px solid rgba(255,255,255,.65);border-radius:6px;outline:none;box-sizing:border-box;-webkit-text-fill-color:#fff;">'
+                +   '<button type="submit" style="padding:.875rem 1.5rem;font-size:.875rem;font-weight:700;background:#fff;color:#0f0f0f;border:none;border-radius:6px;cursor:pointer;white-space:nowrap;flex-shrink:0;">Unlock →</button>'
+                + '</form>'
+                + '<p id="js-gate-err" style="display:none;color:#ff8f8f;font-size:.8rem;margin:.625rem 0 0;font-weight:500;">Incorrect password. Try again.</p>'
+                + '<div style="margin:2rem 0 0;padding:1.25rem 0 0;border-top:1px solid rgba(255,255,255,.15);display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">'
+                +   '<a href="index.html" style="color:rgba(255,255,255,.8);font-size:.875rem;font-weight:500;text-decoration:none;">← Back to portfolio</a>'
+                +   '<span style="color:rgba(255,255,255,.45);font-size:.75rem;">No password? Contact William.</span>'
+                + '</div>';
+
+            document.body.appendChild(gate);
+            document.documentElement.style.visibility = '';
+            document.getElementById('js-gate-pw').focus();
+
+            document.getElementById('js-gate-form').addEventListener('submit', function (e) {
+                e.preventDefault();
+                var pw  = document.getElementById('js-gate-pw');
+                var err = document.getElementById('js-gate-err');
+                if (pw.value === PASS) {
+                    sessionStorage.setItem(KEY, '1');
+                    // Remove gate, restore body, show page
+                    gate.remove();
+                    document.body.style.cssText = '';
+                    pageChildren.forEach(function (el) { el.style.display = ''; });
+                    document.querySelectorAll('.overview, .challenge, .insights, .project-summary').forEach(function (el) {
+                        el.style.transitionDelay = '0ms';
+                        el.classList.add('visible');
+                    });
+                    document.body.classList.add('page-reveal');
+                    requestAnimationFrame(function () { requestAnimationFrame(function () { document.body.classList.add('loaded'); }); });
+                } else {
+                    err.style.display = 'block';
+                    pw.value = '';
+                    pw.focus();
+                }
             });
-        }
+        });
     })();
     </script>
 
@@ -67,30 +121,11 @@
 
     <a class="skip-link" href="#hero-case">Skip to main content</a>
 
-    <!-- PASSWORD GATE -->
-    <div id="password-gate" role="dialog" aria-modal="true" aria-labelledby="gate-heading">
-        <div class="gate-inner">
-            <span class="gate-label">Confidential · Deloitte / Globant · NDA</span>
-            <h1 id="gate-heading" class="gate-title">This case study<br>is under NDA.</h1>
-            <p class="gate-desc">Enter the password to view the Key Metrics Over Time case study. If you received this link from William, the password is in the same message.</p>
-            <form id="gate-form" class="gate-form" novalidate>
-                <input type="password" id="gate-input" class="gate-input" placeholder="Password" autocomplete="off" aria-label="Case study password">
-                <button type="submit" class="gate-btn">Unlock →</button>
-            </form>
-            <p id="gate-error" class="gate-error" hidden>Incorrect password. Try again.</p>
-            <div class="gate-nav">
-                <a href="index.html" class="gate-back">Back to portfolio</a>
-                <span class="gate-hint">No password? Reach out to William directly.</span>
-            </div>
-        </div>
-    </div>
-
     <header class="site-header">
         <div class="nav-wrap">
             <div class="brand">
                 <a href="index.html"><img src="/assets/logo-wm.svg" alt="William Montoya" /></a>
             </div>
-            <time class="header-clock" id="mde-clock" aria-label="Current time in Medellín"></time>
             <nav aria-label="Primary navigation">
                 <ul>
                     <li><a href="index.html#work">Work</a></li>
@@ -98,6 +133,10 @@
                     <li><a href="mailto:william@dejesumensaje.com?subject=Exploring UX Collaboration Opportunities&body=Hello William,">Contact</a></li>
                 </ul>
             </nav>
+            <div class="header-meta" aria-label="Current time in Medellín">
+                <span class="header-meta__label">Medellín</span>
+                <time class="header-clock" id="mde-clock"></time>
+            </div>
         </div>
     </header>
 
@@ -390,59 +429,24 @@
         </a>
     </section>
 
-    <footer>
-        <div class="contact">
-            <h2><a href="mailto:william@dejesumensaje.com?subject=Hi, William!">william@dejesumensaje.com</a></h2>
-            <p>Let's work, play, create together.</p>
-            <div class="links">
-                <ul>
-                    <li><a href="https://www.linkedin.com/in/dejesumensaje/" target="_blank" rel="noopener noreferrer"><img src="./assets/linkedin.svg" loading="lazy" alt="LinkedIn"></a></li>
-                    <li><a href="https://medium.com/@dejesumensaje" target="_blank" rel="noopener noreferrer"><img src="./assets/medium.svg" loading="lazy" alt="Medium"></a></li>
-                    <li><a href="https://github.com/Dejesumensaje" target="_blank" rel="noopener noreferrer"><img src="./assets/github.svg" loading="lazy" alt="GitHub"></a></li>
-                </ul>
+    <footer class="site-cta" aria-label="Contact">
+        <div class="site-cta__inner">
+            <span class="site-cta__overline">Currently at Globant · Working on Deloitte · Open to conversations</span>
+            <h2 class="site-cta__heading">Let's<br>connect.</h2>
+            <a href="mailto:william@dejesumensaje.com?subject=Hi, William!" class="site-cta__email">william@dejesumensaje.com</a>
+            <div class="site-cta__actions">
+                <a href="./assets/cv-william-montoya-2024-en.pdf" class="button-cta button-cta--light" download>Download Resume</a>
+                <a href="https://www.linkedin.com/in/dejesumensaje/" target="_blank" rel="noopener noreferrer" class="button-secondary button-secondary--light">LinkedIn ↗</a>
+            </div>
+            <div class="site-cta__social">
+                <a href="https://medium.com/@dejesumensaje" target="_blank" rel="noopener noreferrer"><img src="./assets/medium.svg" loading="lazy" alt="Medium"></a>
+                <a href="https://github.com/Dejesumensaje" target="_blank" rel="noopener noreferrer"><img src="./assets/github.svg" loading="lazy" alt="GitHub"></a>
             </div>
         </div>
     </footer>
 
     <script src="./portfolio.js"></script>
 
-    <!-- Password gate logic -->
-    <script>
-    (function () {
-        var PASS = 'Deloitte';
-        var KEY  = 'converge_auth';
-
-        if (sessionStorage.getItem(KEY) === '1') return; // already unlocked
-
-        var form  = document.getElementById('gate-form');
-        var input = document.getElementById('gate-input');
-        var error = document.getElementById('gate-error');
-
-        form.addEventListener('submit', function (e) {
-            e.preventDefault();
-            if (input.value === PASS) {
-                sessionStorage.setItem(KEY, '1');
-                document.body.classList.remove('gate-locked');
-                // Reveal scroll-animated elements immediately (they were display:none during IO observation)
-                document.querySelectorAll('.overview, .challenge, .insights, .project-summary').forEach(function (el) {
-                    el.style.transitionDelay = '0ms';
-                    el.classList.add('visible');
-                });
-                // Fade the page in
-                document.body.classList.add('page-reveal');
-                requestAnimationFrame(function () {
-                    requestAnimationFrame(function () {
-                        document.body.classList.add('loaded');
-                    });
-                });
-            } else {
-                error.hidden = false;
-                input.value = '';
-                input.focus();
-            }
-        });
-    })();
-    </script>
 
 </body>
 
