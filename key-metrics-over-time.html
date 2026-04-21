@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#C0E4E3">
+    <meta name="theme-color" content="#C8DDE3">
     <title>Key Metrics Over Time | William Montoya</title>
     <meta name="description" content="How to replace a manual Excel reporting process with an interactive feature that puts KFC franchisees in control of their own performance data.">
     <link rel="canonical" href="https://dejesumensaje.github.io/key-metrics-over-time.html">
@@ -78,7 +78,10 @@
                 <button type="submit" class="gate-btn">Unlock →</button>
             </form>
             <p id="gate-error" class="gate-error" hidden>Incorrect password. Try again.</p>
-            <a href="index.html" class="gate-back">← Back to portfolio</a>
+            <div class="gate-nav">
+                <a href="index.html" class="gate-back">Back to portfolio</a>
+                <span class="gate-hint">No password? Reach out to William directly.</span>
+            </div>
         </div>
     </div>
 
@@ -87,6 +90,7 @@
             <div class="brand">
                 <a href="index.html"><img src="/assets/logo-wm.svg" alt="William Montoya" /></a>
             </div>
+            <time class="header-clock" id="mde-clock" aria-label="Current time in Medellín"></time>
             <nav aria-label="Primary navigation">
                 <ul>
                     <li><a href="index.html#work">Work</a></li>
@@ -99,7 +103,7 @@
 
     <main>
 
-    <section id="hero-case" aria-labelledby="case-heading">
+    <section id="hero-case" aria-labelledby="case-heading" style="background: var(--steel);">
 
         <div class="case-breadcrumb">
             <a href="index.html#work">← Work</a>
@@ -111,11 +115,45 @@
                 <span class="work-category">UX · Data Visualization · Enterprise</span>
             </div>
             <h1 id="case-heading">Turning pricing data into a self-service experience</h1>
+            <div class="case-metrics">
+                <div class="case-metric">
+                    <span class="case-metric__value">6</span>
+                    <span class="case-metric__label">KPIs tracked</span>
+                </div>
+                <div class="case-metric">
+                    <span class="case-metric__value">12 mo.</span>
+                    <span class="case-metric__label">Data range</span>
+                </div>
+                <div class="case-metric">
+                    <span class="case-metric__value">Launched</span>
+                    <span class="case-metric__label">2024</span>
+                </div>
+            </div>
         </div>
 
+        <section class="project-summary project-summary--hero" aria-label="Project summary">
+            <div class="summary-item">
+                <span class="summary-label">Challenge</span>
+                <p>Replace a manual Excel reporting process with a self-service feature that gives KFC franchisees direct access to their own data.</p>
+            </div>
+            <div class="summary-item">
+                <span class="summary-label">Scope</span>
+                <p>Independent UX/UI design, animation specification, and complete interactive prototyping with Figma Make.</p>
+            </div>
+            <div class="summary-item">
+                <span class="summary-label">Method</span>
+                <p>SME working session to define metrics scope; rapid prototyping with Claude to cover every filter state before stakeholder review.</p>
+            </div>
+            <div class="summary-item">
+                <span class="summary-label">Outcome</span>
+                <p>Launched. Approved quickly due to complete prototype coverage. Collecting user feedback — foundation built to scale.</p>
+            </div>
+        </section>
+
         <div class="case-full-image">
-            <div class="img-placeholder">
-                <span>Key Metrics Over Time — hero mockup</span>
+            <div class="nda-placeholder">
+                <span class="nda-placeholder__icon">🔒</span>
+                <span class="nda-placeholder__label">NDA — Hero mockup not shown</span>
             </div>
         </div>
 
@@ -150,14 +188,25 @@
 
     </section>
 
-    <section id="case">
+    <nav class="case-toc" aria-label="Case study navigation">
+        <div class="case-toc__inner">
+            <span class="case-toc__label">On this page</span>
+            <a href="#case-challenge">Challenge</a>
+            <a href="#case-background">Background</a>
+            <a href="#case-process">Process</a>
+            <a href="#case-feedback">Feedback</a>
+            <a href="#case-handoff">Handoff</a>
+            <a href="#case-decisions">Decisions</a>
+            <a href="#case-results">Results</a>
+        </div>
+    </nav>
 
-        <section class="challenge">
+        <section class="challenge case-section" id="case-challenge">
             <h4>Challenge</h4>
             <h2>How do you replace a slow, manual Excel reporting process with something that gives operators direct access to their own performance data — and actually changes how they explore it?</h2>
         </section>
 
-        <section class="overview bg-pink">
+        <section class="overview bg-steel case-section" id="case-background">
 
             <div class="wrap">
 
@@ -173,7 +222,7 @@
 
         </section>
 
-        <section class="overview">
+        <section class="overview case-section" id="case-process">
 
             <div class="wrap">
 
@@ -186,8 +235,9 @@
             </div>
 
             <figure>
-                <div class="img-placeholder">
-                    <span>Screenshot slot — SME workshop notes / Excel report reference</span>
+                <div class="nda-placeholder">
+                    <span class="nda-placeholder__icon">🔒</span>
+                    <span class="nda-placeholder__label">Workshop notes — under NDA</span>
                 </div>
                 <figcaption>The Excel report that price advisors built manually — the starting point for understanding what operators actually needed.</figcaption>
             </figure>
@@ -205,15 +255,16 @@
             </div>
 
             <figure>
-                <div class="img-placeholder">
-                    <span>Screenshot slot — full prototype with all filter states</span>
+                <div class="nda-placeholder">
+                    <span class="nda-placeholder__icon">🔒</span>
+                    <span class="nda-placeholder__label">Full prototype — under NDA</span>
                 </div>
                 <figcaption>The complete prototype covering all filter combinations, metric states, and edge cases — built before the first stakeholder review.</figcaption>
             </figure>
 
         </section>
 
-        <section class="overview bg-pink">
+        <section class="overview bg-steel case-section" id="case-feedback">
 
             <div class="wrap">
 
@@ -228,15 +279,16 @@
             </div>
 
             <figure>
-                <div class="img-placeholder">
-                    <span>Screenshot slot — KPI cards + line chart in exploration mode</span>
+                <div class="nda-placeholder">
+                    <span class="nda-placeholder__icon">🔒</span>
+                    <span class="nda-placeholder__label">KPI dashboard — under NDA</span>
                 </div>
                 <figcaption>The sequence of attention: one metric active by default, each activation a visible event in both the KPI card and the chart.</figcaption>
             </figure>
 
         </section>
 
-        <section class="overview">
+        <section class="overview case-section" id="case-handoff">
 
             <div class="wrap">
 
@@ -255,15 +307,16 @@
             </div>
 
             <figure>
-                <div class="img-placeholder">
-                    <span>Screenshot slot — animation specification from handoff file</span>
+                <div class="nda-placeholder">
+                    <span class="nda-placeholder__icon">🔒</span>
+                    <span class="nda-placeholder__label">Handoff annotations — under NDA</span>
                 </div>
                 <figcaption>Animation specifications from the handoff: timing, easing, stagger values, and the functional justification for each transition.</figcaption>
             </figure>
 
         </section>
 
-        <section class="overview bg-pink">
+        <section class="overview bg-steel case-section" id="case-decisions">
 
             <div class="wrap">
 
@@ -301,7 +354,7 @@
 
         </section>
 
-        <section class="overview">
+        <section class="overview case-section" id="case-results">
 
             <div class="wrap">
 
@@ -321,9 +374,14 @@
 
         </section>
 
-    </section>
-
     </main>
+
+    <section class="case-reflections" aria-label="Senior reflection">
+        <div class="case-reflections__inner">
+            <span class="case-reflections__label">Reflection</span>
+            <p class="case-reflections__text">The most unexpected outcome of this project was discovering that animation can shift user behavior, not just delight them. Designing attention as a resource — deciding what the user sees first, in what sequence, with what rhythm — turned a reporting dashboard into an exploration tool. That reframing now applies to every data-heavy interface I design.</p>
+        </div>
+    </section>
 
     <section class="case-next">
         <a href="crust-upcharge-configurator.html">
@@ -333,25 +391,17 @@
     </section>
 
     <footer>
-
-        <section class="contact">
-
+        <div class="contact">
             <h2><a href="mailto:william@dejesumensaje.com?subject=Hi, William!">william@dejesumensaje.com</a></h2>
-
             <p>Let's work, play, create together.</p>
-
             <div class="links">
-
                 <ul>
-                    <li><a href="https://www.linkedin.com/in/dejesumensaje/" target="_blank" rel="noopener noreferrer"><img src="./assets/linkedin.svg" loading="lazy" alt="Linkedin Logo"></a></li>
-                    <li><a href="https://medium.com/@dejesumensaje" target="_blank" rel="noopener noreferrer"><img src="./assets/medium.svg" loading="lazy" alt="Medium Logo"></a></li>
-                    <li><a href="https://github.com/Dejesumensaje" target="_blank" rel="noopener noreferrer"><img src="./assets/github.svg" loading="lazy" alt="Github Logo"></a></li>
+                    <li><a href="https://www.linkedin.com/in/dejesumensaje/" target="_blank" rel="noopener noreferrer"><img src="./assets/linkedin.svg" loading="lazy" alt="LinkedIn"></a></li>
+                    <li><a href="https://medium.com/@dejesumensaje" target="_blank" rel="noopener noreferrer"><img src="./assets/medium.svg" loading="lazy" alt="Medium"></a></li>
+                    <li><a href="https://github.com/Dejesumensaje" target="_blank" rel="noopener noreferrer"><img src="./assets/github.svg" loading="lazy" alt="GitHub"></a></li>
                 </ul>
-
             </div>
-
-        </section>
-
+        </div>
     </footer>
 
     <script src="./portfolio.js"></script>

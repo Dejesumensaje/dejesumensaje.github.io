@@ -233,6 +233,45 @@ h1.about-name {
 }
 
 
+/* ── SNAPSHOT (Currently / Focus / Strengths) ── */
+
+.about-snapshot {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    margin-bottom: calc(var(--space-unit) * 6);
+    border-top: 1px solid var(--ink-faint);
+}
+
+.snapshot-item {
+    padding: calc(var(--space-unit) * 1.5) 0;
+    border-bottom: 1px solid var(--ink-faint);
+    display: grid;
+    grid-template-columns: 7rem 1fr;
+    gap: 0 calc(var(--space-unit) * 2);
+    align-items: baseline;
+}
+
+.snapshot-label {
+    font-family: var(--font-sans);
+    font-size: var(--text-micro);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+    color: var(--ocean);
+    flex-shrink: 0;
+    padding-top: 0.2em;
+}
+
+.snapshot-item p {
+    font-family: var(--font-sans);
+    font-size: var(--text-small);
+    line-height: var(--lh-lead);
+    color: var(--color-text);
+    margin: 0;
+    max-width: 48ch;
+}
+
 /* ── 03  CRAFT + BEYOND ───────────────────── */
 
 .about-craft {
@@ -298,6 +337,67 @@ h1.about-name {
 
 .tag:hover {
     background: #ffffff;
+}
+
+/* How I work today */
+.about-workflow {
+    padding-top: calc(var(--space-unit) * 5);
+    padding-bottom: calc(var(--space-unit) * 5);
+    border-top: 1px solid var(--ink-faint);
+    margin-bottom: 0;
+}
+
+.workflow-heading {
+    font-family: var(--font-sans);
+    font-size: var(--text-micro);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+    color: var(--color-text-muted);
+    margin-bottom: calc(var(--space-unit) * 3);
+}
+
+.workflow-items {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.workflow-item {
+    padding: calc(var(--space-unit) * 2.5) 0;
+    border-top: 1px solid var(--ink-faint);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.625rem;
+}
+
+.workflow-item:last-child {
+    border-bottom: 1px solid var(--ink-faint);
+}
+
+.workflow-tool {
+    font-family: var(--font-sans);
+    font-size: var(--text-small);
+    font-weight: 700;
+    color: var(--color-text);
+    letter-spacing: -0.01em;
+}
+
+.workflow-item p {
+    font-family: var(--font-sans);
+    font-size: var(--text-small);
+    line-height: var(--lh-prose);
+    color: var(--color-text-muted);
+    margin: 0;
+    max-width: 52ch;
+}
+
+@media (min-width: 768px) {
+    .workflow-item {
+        grid-template-columns: 11rem 1fr;
+        gap: 0 calc(var(--space-unit) * 3);
+        align-items: baseline;
+    }
 }
 
 /* Beyond design */

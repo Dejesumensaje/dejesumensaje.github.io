@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#C0E4E3">
+    <meta name="theme-color" content="#EDC9D4">
     <title>Crust Upcharge Configurator | William Montoya</title>
     <meta name="description" content="How to give Pizza Hut franchise operators granular control over complex pricing recommendations without eroding their trust in the data.">
     <link rel="canonical" href="https://dejesumensaje.github.io/crust-upcharge-configurator.html">
@@ -78,7 +78,10 @@
                 <button type="submit" class="gate-btn">Unlock →</button>
             </form>
             <p id="gate-error" class="gate-error" hidden>Incorrect password. Try again.</p>
-            <a href="index.html" class="gate-back">← Back to portfolio</a>
+            <div class="gate-nav">
+                <a href="index.html" class="gate-back">Back to portfolio</a>
+                <span class="gate-hint">No password? Reach out to William directly.</span>
+            </div>
         </div>
     </div>
 
@@ -87,6 +90,7 @@
             <div class="brand">
                 <a href="index.html"><img src="/assets/logo-wm.svg" alt="William Montoya" /></a>
             </div>
+            <time class="header-clock" id="mde-clock" aria-label="Current time in Medellín"></time>
             <nav aria-label="Primary navigation">
                 <ul>
                     <li><a href="index.html#work">Work</a></li>
@@ -99,7 +103,7 @@
 
     <main>
 
-    <section id="hero-case" aria-labelledby="case-heading">
+    <section id="hero-case" aria-labelledby="case-heading" style="background: var(--blush);">
 
         <div class="case-breadcrumb">
             <a href="index.html#work">← Work</a>
@@ -111,11 +115,45 @@
                 <span class="work-category">UX · UI · Prototyping · Enterprise</span>
             </div>
             <h1 id="case-heading">Designing pricing clarity for franchise operators</h1>
+            <div class="case-metrics">
+                <div class="case-metric">
+                    <span class="case-metric__value">4-step</span>
+                    <span class="case-metric__label">Wizard architecture</span>
+                </div>
+                <div class="case-metric">
+                    <span class="case-metric__value">30+</span>
+                    <span class="case-metric__label">State combinations</span>
+                </div>
+                <div class="case-metric">
+                    <span class="case-metric__value">2024</span>
+                    <span class="case-metric__label">Upcoming launch</span>
+                </div>
+            </div>
         </div>
 
+        <section class="project-summary project-summary--hero" aria-label="Project summary">
+            <div class="summary-item">
+                <span class="summary-label">Challenge</span>
+                <p>Give Pizza Hut franchisees granular pricing control without eroding their trust in Deloitte's recommendations.</p>
+            </div>
+            <div class="summary-item">
+                <span class="summary-label">Scope</span>
+                <p>Independent UX/UI design, product architecture, and high-fidelity prototyping using Figma Make and Claude.</p>
+            </div>
+            <div class="summary-item">
+                <span class="summary-label">Constraints</span>
+                <p>Enterprise design system, NDA-bound client data, and solo ownership from research through handoff.</p>
+            </div>
+            <div class="summary-item">
+                <span class="summary-label">Outcome</span>
+                <p>A four-step wizard with comparison matrix validated by a franchisee; interest from other Converge brands confirmed.</p>
+            </div>
+        </section>
+
         <div class="case-full-image">
-            <div class="img-placeholder">
-                <span>Crust Upcharge Configurator — hero mockup</span>
+            <div class="nda-placeholder">
+                <span class="nda-placeholder__icon">🔒</span>
+                <span class="nda-placeholder__label">NDA — Hero mockup not shown</span>
             </div>
         </div>
 
@@ -150,14 +188,24 @@
 
     </section>
 
-    <section id="case">
+    <nav class="case-toc" aria-label="Case study navigation">
+        <div class="case-toc__inner">
+            <span class="case-toc__label">On this page</span>
+            <a href="#case-challenge">Challenge</a>
+            <a href="#case-background">Background</a>
+            <a href="#case-process">Process</a>
+            <a href="#case-validation">Validation</a>
+            <a href="#case-decisions">Decisions</a>
+            <a href="#case-results">Results</a>
+        </div>
+    </nav>
 
-        <section class="challenge">
+        <section class="challenge case-section" id="case-challenge">
             <h4>Challenge</h4>
             <h2>How do you give franchise operators visibility into complex pricing recommendations without overwhelming them — or undermining their autonomy?</h2>
         </section>
 
-        <section class="overview bg-pink">
+        <section class="overview bg-pink case-section" id="case-background">
 
             <div class="wrap">
 
@@ -173,7 +221,7 @@
 
         </section>
 
-        <section class="overview">
+        <section class="overview case-section" id="case-process">
 
             <div class="wrap">
 
@@ -186,8 +234,9 @@
             </div>
 
             <figure>
-                <div class="img-placeholder">
-                    <span>Screenshot slot — desk research notes / competitive analysis</span>
+                <div class="nda-placeholder">
+                    <span class="nda-placeholder__icon">🔒</span>
+                    <span class="nda-placeholder__label">Research artifacts — under NDA</span>
                 </div>
                 <figcaption>Early desk research: understanding pizza pricing structures across franchise brands.</figcaption>
             </figure>
@@ -205,8 +254,9 @@
             </div>
 
             <figure>
-                <div class="img-placeholder">
-                    <span>Screenshot slot — first wireframe / AI artifact from review session</span>
+                <div class="nda-placeholder">
+                    <span class="nda-placeholder__icon">🔒</span>
+                    <span class="nda-placeholder__label">Early wireframe — under NDA</span>
                 </div>
                 <figcaption>The first version built for PM and price advisor review, before the wizard architecture was defined.</figcaption>
             </figure>
@@ -220,15 +270,16 @@
             </div>
 
             <figure>
-                <div class="img-placeholder">
-                    <span>Screenshot slot — full wizard prototype (all 4 steps)</span>
+                <div class="nda-placeholder">
+                    <span class="nda-placeholder__icon">🔒</span>
+                    <span class="nda-placeholder__label">Full prototype — under NDA</span>
                 </div>
                 <figcaption>The complete four-step wizard built in Figma Make: size selection, variety, crust, and comparison matrix.</figcaption>
             </figure>
 
         </section>
 
-        <section class="overview bg-pink">
+        <section class="overview bg-pink case-section" id="case-validation">
 
             <div class="wrap">
 
@@ -243,15 +294,16 @@
             </div>
 
             <figure>
-                <div class="img-placeholder">
-                    <span>Screenshot slot — comparison matrix (final step)</span>
+                <div class="nda-placeholder">
+                    <span class="nda-placeholder__icon">🔒</span>
+                    <span class="nda-placeholder__label">Comparison matrix — under NDA</span>
                 </div>
                 <figcaption>The comparison matrix: each variety against each crust, adjusted price vs. recommendation, with a toggle to reset.</figcaption>
             </figure>
 
         </section>
 
-        <section class="overview">
+        <section class="overview case-section" id="case-decisions">
 
             <div class="wrap">
 
@@ -295,7 +347,7 @@
 
         </section>
 
-        <section class="overview bg-pink">
+        <section class="overview bg-pink case-section" id="case-results">
 
             <div class="wrap">
 
@@ -320,6 +372,13 @@
 
     </main>
 
+    <section class="case-reflections" aria-label="Senior reflection">
+        <div class="case-reflections__inner">
+            <span class="case-reflections__label">Reflection</span>
+            <p class="case-reflections__text">Working independently on a product inside a large enterprise context sharpened something I'd taken for granted in team settings: the discipline of design documentation. Every decision needed to be self-explanatory because I wouldn't be in the room when engineers and stakeholders reviewed it. That pressure made my thinking more precise, and my decisions better defended.</p>
+        </div>
+    </section>
+
     <section class="case-next">
         <a href="key-metrics-over-time.html">
             <span class="case-next-label">Next case study</span>
@@ -328,25 +387,17 @@
     </section>
 
     <footer>
-
-        <section class="contact">
-
+        <div class="contact">
             <h2><a href="mailto:william@dejesumensaje.com?subject=Hi, William!">william@dejesumensaje.com</a></h2>
-
             <p>Let's work, play, create together.</p>
-
             <div class="links">
-
                 <ul>
-                    <li><a href="https://www.linkedin.com/in/dejesumensaje/" target="_blank" rel="noopener noreferrer"><img src="./assets/linkedin.svg" loading="lazy" alt="Linkedin Logo"></a></li>
-                    <li><a href="https://medium.com/@dejesumensaje" target="_blank" rel="noopener noreferrer"><img src="./assets/medium.svg" loading="lazy" alt="Medium Logo"></a></li>
-                    <li><a href="https://github.com/Dejesumensaje" target="_blank" rel="noopener noreferrer"><img src="./assets/github.svg" loading="lazy" alt="Github Logo"></a></li>
+                    <li><a href="https://www.linkedin.com/in/dejesumensaje/" target="_blank" rel="noopener noreferrer"><img src="./assets/linkedin.svg" loading="lazy" alt="LinkedIn"></a></li>
+                    <li><a href="https://medium.com/@dejesumensaje" target="_blank" rel="noopener noreferrer"><img src="./assets/medium.svg" loading="lazy" alt="Medium"></a></li>
+                    <li><a href="https://github.com/Dejesumensaje" target="_blank" rel="noopener noreferrer"><img src="./assets/github.svg" loading="lazy" alt="GitHub"></a></li>
                 </ul>
-
             </div>
-
-        </section>
-
+        </div>
     </footer>
 
     <script src="./portfolio.js"></script>

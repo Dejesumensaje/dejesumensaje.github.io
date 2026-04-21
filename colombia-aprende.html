@@ -74,6 +74,7 @@
             <div class="brand">
                 <a href="index.html"><img src="/assets/logo-wm.svg" alt="William Montoya" /></a>
             </div>
+            <time class="header-clock" id="mde-clock" aria-label="Current time in Medellín"></time>
             <nav aria-label="Primary navigation">
                 <ul>
                     <li><a href="index.html#work">Work</a></li>
@@ -98,13 +99,43 @@
                 <span class="work-category">UX · Research · Product Design · Education</span>
             </div>
             <h1 id="case-heading">Simplifying Colombia Aprende for inclusion and equity</h1>
+            <div class="case-metrics">
+                <div class="case-metric">
+                    <span class="case-metric__value">81K+</span>
+                    <span class="case-metric__label">Resources catalogued</span>
+                </div>
+                <div class="case-metric">
+                    <span class="case-metric__value">70+</span>
+                    <span class="case-metric__label">Microsites unified</span>
+                </div>
+                <div class="case-metric">
+                    <span class="case-metric__value">2020</span>
+                    <span class="case-metric__label">Launch year</span>
+                </div>
+            </div>
         </div>
 
-        <div class="case-full-image">
-            <div class="img-placeholder">
-                <span>Colombia Aprende — hero mockup</span>
+        <section class="project-summary project-summary--hero" aria-label="Project summary">
+            <div class="summary-item">
+                <span class="summary-label">Challenge</span>
+                <p>Transform a long-running national education platform into a clearer and more equitable experience.</p>
             </div>
-            <p class="media-slot__caption">Case study cover slot</p>
+            <div class="summary-item">
+                <span class="summary-label">Scope</span>
+                <p>User research, information architecture, prototyping, testing, and cross-functional product direction.</p>
+            </div>
+            <div class="summary-item">
+                <span class="summary-label">Complexity</span>
+                <p>81,000 resources, 70+ microsites, multiple audiences, and strong internal resistance to change.</p>
+            </div>
+            <div class="summary-item">
+                <span class="summary-label">Outcome</span>
+                <p>Higher conversion, better content discovery, and more room to keep iterating with stakeholder buy-in.</p>
+            </div>
+        </section>
+
+        <div class="case-full-image">
+            <img src="./assets/colombia-aprende-mockup.png" alt="Colombia Aprende platform redesign mockup" loading="eager">
         </div>
 
         <div class="details">
@@ -155,25 +186,6 @@
 
     </section>
 
-    <section class="project-summary project-summary--hero" aria-label="Project summary">
-        <div class="summary-item">
-            <span class="summary-label">Challenge</span>
-            <p>Transform a long-running national education platform into a clearer and more equitable experience.</p>
-        </div>
-        <div class="summary-item">
-            <span class="summary-label">Scope</span>
-            <p>User research, information architecture, prototyping, testing, and cross-functional product direction.</p>
-        </div>
-        <div class="summary-item">
-            <span class="summary-label">Complexity</span>
-            <p>81,000 resources, 70+ microsites, multiple audiences, and strong internal resistance to change.</p>
-        </div>
-        <div class="summary-item">
-            <span class="summary-label">Outcome</span>
-            <p>Higher conversion, better content discovery, and more room to keep iterating with stakeholder buy-in.</p>
-        </div>
-    </section>
-
     <nav class="case-toc" aria-label="Case study navigation">
         <div class="case-toc__inner">
             <span class="case-toc__label">On this page</span>
@@ -187,8 +199,6 @@
         </div>
     </nav>
 
-    <section id="case">
-
         <section class="challenge case-section" id="case-challenge">
 
             <h4>Challenge</h4>
@@ -198,7 +208,7 @@
 
         </section>
 
-        <section class="overview bg-pink case-section" id="case-background">
+        <section class="overview bg-teal case-section" id="case-background">
 
             <div class="wrap">
 
@@ -282,7 +292,7 @@
 
         </section>
 
-        <section class="overview bg-pink case-section" id="case-understanding">
+        <section class="overview bg-teal case-section" id="case-understanding">
 
             <div class="wrap">
 
@@ -355,7 +365,7 @@
 
         </section>
 
-        <section class="overview bg-pink case-section" id="case-testing">
+        <section class="overview bg-teal case-section" id="case-testing">
 
             <div class="wrap">
 
@@ -414,10 +424,14 @@
 
         </section>
 
-
-    </section>
-
     </main>
+
+    <section class="case-reflections" aria-label="Senior reflection">
+        <div class="case-reflections__inner">
+            <span class="case-reflections__label">Reflection</span>
+            <p class="case-reflections__text">Redesigning a 17-year-old national platform taught me that the hardest design problem is almost never the interface. Convincing an institution that change is safe — and building the research evidence to back that up — was a more difficult and more valuable skill than any Figma deliverable. Stakeholder alignment is a design problem too.</p>
+        </div>
+    </section>
 
     <section class="case-next">
         <a href="aprender-digital.html">
@@ -427,29 +441,17 @@
     </section>
 
     <footer>
-
-        <section class="contact">
-
+        <div class="contact">
             <h2><a href="mailto:william@dejesumensaje.com?subject=Hi, William!">william@dejesumensaje.com</a></h2>
-
             <p>Let’s work, play, create together.</p>
-
             <div class="links">
-
                 <ul>
-                    <li><a href="https://www.linkedin.com/in/dejesumensaje/" target="_blank"
-                            rel="noopener noreferrer"><img src="./assets/linkedin.svg" loading="lazy"
-                                alt="Linkedin Logo"></a></li>
-                    <li><a href="https://medium.com/@dejesumensaje" target="_blank" rel="noopener noreferrer"><img
-                                src="./assets/medium.svg" loading="lazy" alt="Medium Logo"></a></li>
-                    <li><a href="https://github.com/Dejesumensaje" target="_blank" rel="noopener noreferrer"><img
-                                src="./assets/github.svg" loading="lazy" alt="Github Logo"></a></li>
+                    <li><a href="https://www.linkedin.com/in/dejesumensaje/" target="_blank" rel="noopener noreferrer"><img src="./assets/linkedin.svg" loading="lazy" alt="LinkedIn"></a></li>
+                    <li><a href="https://medium.com/@dejesumensaje" target="_blank" rel="noopener noreferrer"><img src="./assets/medium.svg" loading="lazy" alt="Medium"></a></li>
+                    <li><a href="https://github.com/Dejesumensaje" target="_blank" rel="noopener noreferrer"><img src="./assets/github.svg" loading="lazy" alt="GitHub"></a></li>
                 </ul>
-
             </div>
-
-        </section>
-
+        </div>
     </footer>
 
     <script src="./portfolio.js"></script>

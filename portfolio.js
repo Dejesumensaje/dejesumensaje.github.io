@@ -152,6 +152,47 @@
         });
     }
 
+    /* ── MEDELLÍN CLOCK ─────────────────────── */
+    function initMedellinClock() {
+        const el = document.getElementById('mde-clock');
+        if (!el) return;
+
+        const tick = () => {
+            const now = new Date();
+            const mde = new Date(now.toLocaleString('en-US', { timeZone: 'America/Bogota' }));
+            const h = String(mde.getHours()).padStart(2, '0');
+            const m = String(mde.getMinutes()).padStart(2, '0');
+            const s = String(mde.getSeconds()).padStart(2, '0');
+            el.textContent = `${h}:${m}:${s} MDE`;
+        };
+
+        tick();
+        setInterval(tick, 1000);
+    }
+
+    /* ── CARD STAGGER ───────────────────────── */
+    function initCardStagger() {
+        const cards = document.querySelectorAll('.project-card');
+        if (!cards.length) return;
+
+        if (reduced) {
+            cards.forEach(c => c.classList.add('visible'));
+            return;
+        }
+
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                const idx = parseInt(entry.target.getAttribute('data-index') || '1', 10);
+                entry.target.style.transitionDelay = `${(idx - 1) * 90}ms`;
+                entry.target.classList.add('visible');
+                io.unobserve(entry.target);
+            });
+        }, { threshold: 0.07, rootMargin: '0px 0px -48px 0px' });
+
+        cards.forEach(c => io.observe(c));
+    }
+
     /* ── CASE TOC ─────────────────────────── */
     function initCaseTOC() {
         const toc = document.querySelector('.case-toc');
@@ -203,17 +244,19 @@
             initPageReveal();
             initStickyHeader();
             initScrollReveal();
+            initCardStagger();
             initColorTransitions();
             initDarkNav();
             initStoryNav();
             initParallax();
             initSmoothScroll();
             initCaseTOC();
+            initMedellinClock();
         } catch (e) {
             // Graceful degradation
             document.querySelectorAll(
                 '.overview, .challenge, .insights, .project-summary, ' +
-                '.timeline-point, .skill-block, .beyond-card, .page-reveal'
+                '.timeline-point, .skill-block, .beyond-card, .page-reveal, .project-card'
             ).forEach(el => el.classList.add('visible', 'loaded'));
         }
     }

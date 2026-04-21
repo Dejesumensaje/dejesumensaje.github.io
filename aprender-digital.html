@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#C0E4E3">
+    <meta name="theme-color" content="#F2EFAA">
     <title>Aprender Digital | William Montoya</title>
     <meta name="description"
         content="How to provide rural teachers with educational content resources when they don’t have access to Internet?">
@@ -74,6 +74,7 @@
             <div class="brand">
                 <a href="index.html"><img src="/assets/logo-wm.svg" alt="William Montoya" /></a>
             </div>
+            <time class="header-clock" id="mde-clock" aria-label="Current time in Medellín"></time>
             <nav aria-label="Primary navigation">
                 <ul>
                     <li><a href="index.html#work">Work</a></li>
@@ -86,7 +87,7 @@
 
     <main>
 
-    <section id="hero-case" aria-labelledby="case-heading">
+    <section id="hero-case" aria-labelledby="case-heading" style="background: var(--lime);">
 
         <div class="case-breadcrumb">
             <a href="index.html#work">← Work</a>
@@ -98,13 +99,43 @@
                 <span class="work-category">UX · Product Design · Education</span>
             </div>
             <h1 id="case-heading">Creating opportunities for the rural teachers of Colombia</h1>
+            <div class="case-metrics">
+                <div class="case-metric">
+                    <span class="case-metric__value">7M+</span>
+                    <span class="case-metric__label">Rural users targeted</span>
+                </div>
+                <div class="case-metric">
+                    <span class="case-metric__value">15</span>
+                    <span class="case-metric__label">Interviews conducted</span>
+                </div>
+                <div class="case-metric">
+                    <span class="case-metric__value">3 mo.</span>
+                    <span class="case-metric__label">MVP timeline</span>
+                </div>
+            </div>
         </div>
 
-        <div class="case-full-image">
-            <div class="img-placeholder">
-                <span>Aprender Digital — hero mockup</span>
+        <section class="project-summary project-summary--hero" aria-label="Project summary">
+            <div class="summary-item">
+                <span class="summary-label">Challenge</span>
+                <p>Create a product model for rural teachers who cannot rely on internet access as a default.</p>
             </div>
-            <p class="media-slot__caption">Case study cover slot</p>
+            <div class="summary-item">
+                <span class="summary-label">Scope</span>
+                <p>UX, information architecture, value-proposition work, and prototyping across a short timeline.</p>
+            </div>
+            <div class="summary-item">
+                <span class="summary-label">Research</span>
+                <p>Desk research plus interviews with 10 teachers and 5 ICT leaders serving low-connectivity schools.</p>
+            </div>
+            <div class="summary-item">
+                <span class="summary-label">Outcome</span>
+                <p>An offline-ready content package model supported by a simpler publishing workflow and clearer value proposition.</p>
+            </div>
+        </section>
+
+        <div class="case-full-image">
+            <img src="./assets/aprender-digital-hero.png" alt="Aprender Digital platform interface" loading="eager">
         </div>
 
         <div class="details">
@@ -154,25 +185,6 @@
 
     </section>
 
-    <section class="project-summary project-summary--hero" aria-label="Project summary">
-        <div class="summary-item">
-            <span class="summary-label">Challenge</span>
-            <p>Create a product model for rural teachers who cannot rely on internet access as a default.</p>
-        </div>
-        <div class="summary-item">
-            <span class="summary-label">Scope</span>
-            <p>UX, information architecture, value-proposition work, and prototyping across a short timeline.</p>
-        </div>
-        <div class="summary-item">
-            <span class="summary-label">Research</span>
-            <p>Desk research plus interviews with 10 teachers and 5 ICT leaders serving low-connectivity schools.</p>
-        </div>
-        <div class="summary-item">
-            <span class="summary-label">Outcome</span>
-            <p>An offline-ready content package model supported by a simpler publishing workflow and clearer value proposition.</p>
-        </div>
-    </section>
-
     <nav class="case-toc" aria-label="Case study navigation">
         <div class="case-toc__inner">
             <span class="case-toc__label">On this page</span>
@@ -186,8 +198,6 @@
         </div>
     </nav>
 
-    <section id="case">
-
         <section class="challenge case-section" id="case-challenge">
 
             <h4>Challenge</h4>
@@ -197,7 +207,7 @@
 
         </section>
 
-        <section class="overview bg-pink case-section" id="case-background">
+        <section class="overview bg-lime case-section" id="case-background">
 
             <div class="wrap">
 
@@ -278,7 +288,7 @@
 
         </section>
 
-        <section class="overview bg-pink case-section" id="case-users">
+        <section class="overview bg-lime case-section" id="case-users">
 
             <div class="wrap">
 
@@ -350,7 +360,7 @@
 
         </section>
 
-        <section class="overview bg-pink case-section" id="case-testing">
+        <section class="overview bg-lime case-section" id="case-testing">
 
             <div class="wrap">
 
@@ -401,10 +411,14 @@
 
         </section>
 
-
-    </section>
-
     </main>
+
+    <section class="case-reflections" aria-label="Senior reflection">
+        <div class="case-reflections__inner">
+            <span class="case-reflections__label">Reflection</span>
+            <p class="case-reflections__text">We launched fast and got something real into teachers' hands, which was right. But speed created a debt: content design lagged behind UX design, and that gap showed in the first weeks. The lesson I carried forward is that content strategy and product design can't be sequenced — they need to run in parallel from the first sprint.</p>
+        </div>
+    </section>
 
     <section class="case-next">
         <a href="colombia-aprende.html">
@@ -414,29 +428,17 @@
     </section>
 
     <footer>
-
-        <section class="contact">
-
+        <div class="contact">
             <h2><a href="mailto:william@dejesumensaje.com?subject=Hi, William!">william@dejesumensaje.com</a></h2>
-
             <p>Let’s work, play, create together.</p>
-
             <div class="links">
-
                 <ul>
-                    <li><a href="https://www.linkedin.com/in/dejesumensaje/" target="_blank"
-                            rel="noopener noreferrer"><img src="./assets/linkedin.svg" loading="lazy"
-                                alt="Linkedin Logo"></a></li>
-                    <li><a href="https://medium.com/@dejesumensaje" target="_blank" rel="noopener noreferrer"><img
-                                src="./assets/medium.svg" loading="lazy" alt="Medium Logo"></a></li>
-                    <li><a href="https://github.com/Dejesumensaje" target="_blank" rel="noopener noreferrer"><img
-                                src="./assets/github.svg" loading="lazy" alt="Github Logo"></a></li>
+                    <li><a href="https://www.linkedin.com/in/dejesumensaje/" target="_blank" rel="noopener noreferrer"><img src="./assets/linkedin.svg" loading="lazy" alt="LinkedIn"></a></li>
+                    <li><a href="https://medium.com/@dejesumensaje" target="_blank" rel="noopener noreferrer"><img src="./assets/medium.svg" loading="lazy" alt="Medium"></a></li>
+                    <li><a href="https://github.com/Dejesumensaje" target="_blank" rel="noopener noreferrer"><img src="./assets/github.svg" loading="lazy" alt="GitHub"></a></li>
                 </ul>
-
             </div>
-
-        </section>
-
+        </div>
     </footer>
 
     <script src="./portfolio.js"></script>
