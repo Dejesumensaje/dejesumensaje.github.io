@@ -1731,11 +1731,12 @@ footer:not(.site-footer) {
     .case-toc {
         display: block;
         position: fixed;
-        top: calc(var(--header-height) + 3rem);
+        top: 50%;
+        transform: translateY(-50%);
         right: 2rem;
         width: 140px;
         z-index: 80;
-        max-height: calc(100vh - var(--header-height) - 5rem);
+        max-height: 60vh;
         overflow-y: auto;
         scrollbar-width: none;
         opacity: 0;

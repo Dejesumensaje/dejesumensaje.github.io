@@ -217,21 +217,26 @@
             });
         };
 
-        const io = new IntersectionObserver((entries) => {
-            const visible = entries
-                .filter(entry => entry.isIntersecting)
-                .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-
-            if (visible.length) {
-                setActive(visible[0].target.id);
+        const updateActive = () => {
+            const trigger = window.innerHeight * 0.35;
+            let current = sections[0].id;
+            for (const section of sections) {
+                if (section.getBoundingClientRect().top <= trigger) {
+                    current = section.id;
+                }
             }
-        }, {
-            threshold: [0.15, 0.35, 0.6],
-            rootMargin: '-20% 0px -55% 0px'
-        });
+            setActive(current);
+        };
 
-        sections.forEach(section => io.observe(section));
-        setActive(sections[0].id);
+        let ticking = false;
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                requestAnimationFrame(() => { updateActive(); ticking = false; });
+                ticking = true;
+            }
+        }, { passive: true });
+
+        updateActive();
 
         // Reveal only after the hero scrolls out of view
         const hero = document.getElementById('hero-case');
