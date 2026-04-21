@@ -193,60 +193,6 @@
         cards.forEach(c => io.observe(c));
     }
 
-    /* ── CASE TOC ─────────────────────────── */
-    function initCaseTOC() {
-        const toc = document.querySelector('.case-toc');
-        if (!toc) return;
-
-        const links = Array.from(toc.querySelectorAll('a[href^="#"]'));
-        const sections = links
-            .map(link => document.querySelector(link.getAttribute('href')))
-            .filter(Boolean);
-
-        if (!links.length || !sections.length) return;
-
-        const setActive = (id) => {
-            links.forEach(link => {
-                const target = link.getAttribute('href') === `#${id}`;
-                link.classList.toggle('active', target);
-                if (target) {
-                    link.setAttribute('aria-current', 'true');
-                } else {
-                    link.removeAttribute('aria-current');
-                }
-            });
-        };
-
-        const updateActive = () => {
-            const trigger = window.innerHeight * 0.35;
-            let current = sections[0].id;
-            for (const section of sections) {
-                if (section.getBoundingClientRect().top <= trigger) {
-                    current = section.id;
-                }
-            }
-            setActive(current);
-        };
-
-        let ticking = false;
-        window.addEventListener('scroll', () => {
-            if (!ticking) {
-                requestAnimationFrame(() => { updateActive(); ticking = false; });
-                ticking = true;
-            }
-        }, { passive: true });
-
-        updateActive();
-
-        // Reveal only after the hero scrolls out of view
-        const hero = document.getElementById('hero-case');
-        if (hero) {
-            const heroObserver = new IntersectionObserver(([entry]) => {
-                toc.classList.toggle('toc--visible', !entry.isIntersecting);
-            }, { threshold: 0 });
-            heroObserver.observe(hero);
-        }
-    }
 
     /* ── INIT ───────────────────────────────────────── */
     function init() {
@@ -264,8 +210,7 @@
             initStoryNav();
             initParallax();
             initSmoothScroll();
-            initCaseTOC();
-            initMedellinClock();
+initMedellinClock();
         } catch (e) {
             // Graceful degradation
             document.querySelectorAll(

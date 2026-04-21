@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import CaseTOC from '../components/CaseTOC.astro';
 ---
 
 <BaseLayout
@@ -162,18 +163,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
     </section>
 
-    <nav class="case-toc" aria-label="Case study navigation">
-      <div class="case-toc__inner">
-        <span class="case-toc__label">On this page</span>
-        <a href="#case-challenge">Challenge</a>
-        <a href="#case-background">Background</a>
-        <a href="#case-process">Process</a>
-        <a href="#case-feedback">Feedback</a>
-        <a href="#case-handoff">Handoff</a>
-        <a href="#case-decisions">Decisions</a>
-        <a href="#case-results">Results</a>
-      </div>
-    </nav>
+    <CaseTOC sections={[
+      { id: 'case-challenge',  label: 'Challenge'   },
+      { id: 'case-background', label: 'Background'  },
+      { id: 'case-process',    label: 'Process'     },
+      { id: 'case-feedback',   label: 'Feedback'    },
+      { id: 'case-handoff',    label: 'Handoff'     },
+      { id: 'case-decisions',  label: 'Decisions'   },
+      { id: 'case-results',    label: 'Results'     },
+    ]} />
 
     <section class="challenge case-section" id="case-challenge">
       <h4>Challenge</h4>

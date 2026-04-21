@@ -1,0 +1,137 @@
+---
+interface Section {
+  id: string;
+  label: string;
+}
+interface Props {
+  sections: Section[];
+}
+const { sections } = Astro.props;
+---
+
+<nav data-case-toc aria-label="On this page">
+  <span class="toc-label">On this page</span>
+  {sections.map(s => (
+    <a href={`#${s.id}`} class="toc-link">{s.label}</a>
+  ))}
+</nav>
+
+<style>
+  nav {
+    display: none;
+  }
+
+  @media (min-width: 1280px) {
+    nav {
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      right: 1.75rem;
+      width: 136px;
+      z-index: 90;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+
+    nav.is-visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .toc-label {
+      font-family: var(--font-sans);
+      font-size: var(--text-micro);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: var(--tracking-wide);
+      color: rgba(15, 15, 15, 0.25);
+      margin-bottom: 0.5rem;
+      transition: color 0.25s ease;
+    }
+
+    nav:hover .toc-label {
+      color: rgba(15, 15, 15, 0.55);
+    }
+
+    .toc-link {
+      font-family: var(--font-sans);
+      font-size: var(--text-micro);
+      font-weight: 500;
+      color: rgba(15, 15, 15, 0.25);
+      text-decoration: none;
+      display: block;
+      padding: 0.3rem 0 0.3rem 0.625rem;
+      border-left: 2px solid transparent;
+      transition: color 0.2s ease, border-color 0.2s ease;
+      line-height: 1.35;
+    }
+
+    nav:hover .toc-link {
+      color: rgba(15, 15, 15, 0.55);
+    }
+
+    .toc-link.is-active {
+      color: var(--ink);
+      border-left-color: var(--ink);
+      font-weight: 600;
+    }
+
+    nav:hover .toc-link.is-active,
+    nav:hover .toc-link:hover {
+      color: var(--ink);
+      border-left-color: var(--ink);
+    }
+  }
+</style>
+
+<script>
+  const toc = document.querySelector<HTMLElement>('[data-case-toc]');
+  if (toc) {
+    const links = Array.from(toc.querySelectorAll<HTMLAnchorElement>('.toc-link'));
+    const sections = links
+      .map(l => document.getElementById(l.getAttribute('href')!.replace('#', '')))
+      .filter((s): s is HTMLElement => s !== null);
+
+    // ── Active state ──────────────────────────────────
+    const setActive = (id: string) => {
+      links.forEach(l => {
+        const active = l.getAttribute('href') === `#${id}`;
+        l.classList.toggle('is-active', active);
+        active ? l.setAttribute('aria-current', 'true') : l.removeAttribute('aria-current');
+      });
+    };
+
+    const update = () => {
+      const trigger = window.innerHeight * 0.4;
+      let current = sections[0]?.id ?? '';
+      for (const s of sections) {
+        if (s.getBoundingClientRect().top < trigger) current = s.id;
+      }
+      setActive(current);
+    };
+
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(() => { update(); ticking = false; });
+        ticking = true;
+      }
+    }, { passive: true });
+
+    update();
+
+    // ── Visibility: hide during hero, show after ──────
+    const hero = document.getElementById('hero-case');
+    if (hero) {
+      new IntersectionObserver(
+        ([entry]) => toc.classList.toggle('is-visible', !entry.isIntersecting),
+        { threshold: 0 }
+      ).observe(hero);
+    } else {
+      toc.classList.add('is-visible');
+    }
+  }
+</script>

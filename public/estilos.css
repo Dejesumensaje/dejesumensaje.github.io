@@ -1244,24 +1244,6 @@ footer.site-footer {
     color: var(--ink);
 }
 
-/* TOC hidden on small/mid screens — shown only at 1440px as ambient sidebar */
-.case-toc { display: none; }
-
-.case-toc__label {
-    font-family: var(--font-sans);
-    font-size: var(--text-micro);
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: var(--tracking-wide);
-}
-
-.case-toc a {
-    font-family: var(--font-sans);
-    font-size: var(--text-micro);
-    font-weight: 500;
-    display: block;
-    transition: color 0.2s ease, border-color 0.2s ease;
-}
 
 /* ── CASE STUDY CONTENT ──────────────────── */
 
@@ -1726,76 +1708,6 @@ footer:not(.site-footer) {
     .project-card::before { left: calc(var(--space-unit) * 5); }
     .project-card__tags   { padding-left: calc(var(--space-unit) * 5 + 2.25rem); }
     .project-card__headline { padding-left: calc(var(--space-unit) * 5 + 2.25rem); }
-
-    /* Ambient right-side TOC */
-    .case-toc {
-        display: block;
-        position: fixed;
-        top: 50%;
-        transform: translateY(-50%);
-        right: 2rem;
-        width: 140px;
-        z-index: 80;
-        max-height: 60vh;
-        overflow-y: auto;
-        scrollbar-width: none;
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity 0.35s ease;
-    }
-
-    .case-toc.toc--visible {
-        opacity: 1;
-        pointer-events: auto;
-    }
-
-    .case-toc::-webkit-scrollbar { display: none; }
-
-    .case-toc__inner {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0;
-        padding: 0;
-        overflow-x: unset;
-        max-width: none;
-        margin: 0;
-    }
-
-    .case-toc__label {
-        color: rgba(15, 15, 15, 0.28);
-        margin-bottom: 0.5rem;
-        transition: color 0.25s ease;
-    }
-
-    .case-toc:hover .case-toc__label {
-        color: rgba(15, 15, 15, 0.55);
-    }
-
-    .case-toc a {
-        padding: 0.3rem 0 0.3rem 0.625rem;
-        border-left: 2px solid transparent;
-        width: 100%;
-        box-sizing: border-box;
-        font-size: var(--text-micro);
-        font-weight: 500;
-        color: rgba(15, 15, 15, 0.28);
-    }
-
-    .case-toc a.active {
-        color: var(--ink);
-        border-left-color: var(--ink);
-        font-weight: 600;
-    }
-
-    .case-toc:hover a {
-        color: rgba(15, 15, 15, 0.55);
-    }
-
-    .case-toc:hover a.active,
-    .case-toc:hover a:hover {
-        color: var(--ink);
-    }
 
     .case-section {
         scroll-margin-top: calc(var(--header-height) + 1.5rem);
