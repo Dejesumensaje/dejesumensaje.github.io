@@ -110,7 +110,7 @@ h1.about-name {
 }
 
 .about-story__inner {
-    max-width: var(--layout-width);
+    max-width: 52rem;
     margin: 0 auto;
 }
 
@@ -140,8 +140,8 @@ h1.about-name {
 
 /* Story body text */
 .about-story__body {
-    max-width: 62ch;
-    margin-bottom: calc(var(--space-unit) * 7);
+    max-width: none;
+    margin-bottom: calc(var(--space-unit) * 4);
 }
 
 .about-story__body p {
@@ -215,15 +215,11 @@ h1.about-name {
     line-height: 1.4;
 }
 
-@media (min-width: 600px) {
-    .xp-grid {
-        max-width: 36rem;
-    }
-}
+/* xp-grid fills the column at all widths (no narrow left-hug) */
 
 @media (min-width: 992px) {
     .about-story {
-        padding: calc(var(--space-unit) * 11) calc(var(--space-unit) * 3);
+        padding: calc(var(--space-unit) * 8) calc(var(--space-unit) * 3);
     }
 
     .about-pull {
@@ -239,7 +235,7 @@ h1.about-name {
     display: grid;
     grid-template-columns: 1fr;
     gap: 0;
-    margin-bottom: calc(var(--space-unit) * 6);
+    margin-bottom: calc(var(--space-unit) * 4);
     border-top: 1px solid var(--ink-faint);
 }
 
@@ -269,7 +265,7 @@ h1.about-name {
     line-height: var(--lh-lead);
     color: var(--color-text);
     margin: 0;
-    max-width: 48ch;
+    max-width: none;
 }
 
 /* ── 03  CRAFT + BEYOND ───────────────────── */
@@ -280,7 +276,7 @@ h1.about-name {
 }
 
 .about-craft__inner {
-    max-width: var(--layout-width);
+    max-width: 52rem;
     margin: 0 auto;
 }
 
@@ -389,7 +385,7 @@ h1.about-name {
     line-height: var(--lh-prose);
     color: var(--color-text-muted);
     margin: 0;
-    max-width: 52ch;
+    max-width: none;
 }
 
 @media (min-width: 768px) {
@@ -465,7 +461,7 @@ h1.about-name {
     font-size: var(--text-small);
     line-height: var(--lh-prose);
     color: var(--color-text-muted);
-    max-width: 50ch;
+    max-width: none;
     margin: 0;
 }
 
@@ -477,7 +473,7 @@ h1.about-name {
     font-weight: 600;
     color: var(--color-text);
     text-decoration: none;
-    opacity: 0.45;
+    opacity: 0.7;
     border-bottom: 1px solid currentColor;
     padding-bottom: 1px;
     transition: opacity 0.2s ease;
@@ -503,7 +499,7 @@ h1.about-name {
 
 @media (min-width: 992px) {
     .about-craft {
-        padding: calc(var(--space-unit) * 10) calc(var(--space-unit) * 3);
+        padding: calc(var(--space-unit) * 8) calc(var(--space-unit) * 3);
     }
 }
 
@@ -516,7 +512,7 @@ h1.about-name {
 }
 
 .about-cta-inner {
-    max-width: var(--layout-width);
+    max-width: 52rem;
     margin: 0 auto;
 }
 
@@ -620,7 +616,7 @@ h2.cta-big {
 
 @media (min-width: 992px) {
     .about-cta-dark {
-        padding: calc(var(--space-unit) * 10) calc(var(--space-unit) * 3);
+        padding: calc(var(--space-unit) * 8) calc(var(--space-unit) * 3);
     }
 }
 

@@ -5,7 +5,7 @@
 /* ── TOKENS ──────────────────────────────── */
 :root {
     --ink:          #0f0f0f;
-    --ink-muted:    #6b6b6b;
+    --ink-muted:    #595959;
     --ink-faint:    rgba(15, 15, 15, 0.09);
     --canvas:       #fafaf8;
     --surface:      #f2f2f0;
@@ -18,7 +18,7 @@
 
     /* Compatibility aliases (used by about-story.css) */
     --color-text:       #0f0f0f;
-    --color-text-muted: #6b6b6b;
+    --color-text-muted: #595959;
     --color-primary:    #007da0;
     --color-bg-light:   #C0E4E3;
     --color-bg-accent:  #F2EFAA;
