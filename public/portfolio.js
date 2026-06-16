@@ -17,12 +17,56 @@
         }));
     }
 
-    /* ── STICKY HEADER ─────────────────────────────── */
+    /* ── STICKY HEADER (hide on scroll down, reveal on up) ── */
     function initStickyHeader() {
         const header = document.querySelector('.site-header');
         if (!header) return;
-        const update = () => header.classList.toggle('scrolled', window.scrollY > 10);
-        window.addEventListener('scroll', update, { passive: true });
+        const headerH = header.offsetHeight || 72;
+        let lastY = window.scrollY;
+        let ticking = false;
+
+        const update = () => {
+            const y = window.scrollY;
+            header.classList.toggle('scrolled', y > 10);
+
+            // Reveal near the top and whenever scrolling up; hide when scrolling
+            // down past the header height. Skip the menu-open / reduced-motion edge.
+            if (y <= headerH) {
+                header.classList.remove('header-hidden');
+            } else if (y > lastY + 4) {
+                header.classList.add('header-hidden');
+            } else if (y < lastY - 4) {
+                header.classList.remove('header-hidden');
+            }
+            lastY = y;
+            ticking = false;
+        };
+
+        window.addEventListener('scroll', () => {
+            if (!ticking) { requestAnimationFrame(update); ticking = true; }
+        }, { passive: true });
+        update();
+    }
+
+    /* ── READING PROGRESS BAR ──────────────────────── */
+    function initReadingProgress() {
+        const bar = document.getElementById('reading-progress');
+        if (!bar) return;
+        // Reading aid — only on case studies (long-form pages).
+        if (!document.getElementById('hero-case')) return;
+
+        const update = () => {
+            const max = document.documentElement.scrollHeight - window.innerHeight;
+            if (max <= 0) { bar.style.opacity = '0'; return; }
+            bar.style.opacity = '1';
+            bar.style.transform = `scaleX(${Math.min(window.scrollY / max, 1)})`;
+        };
+
+        let ticking = false;
+        window.addEventListener('scroll', () => {
+            if (!ticking) { requestAnimationFrame(() => { update(); ticking = false; }); ticking = true; }
+        }, { passive: true });
+        window.addEventListener('resize', update, { passive: true });
         update();
     }
 
@@ -203,6 +247,7 @@
         try {
             initPageReveal();
             initStickyHeader();
+            initReadingProgress();
             initScrollReveal();
             initCardStagger();
             initColorTransitions();

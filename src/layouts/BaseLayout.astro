@@ -9,7 +9,7 @@ interface Props {
   ogType?: 'website' | 'article';
   themeColor?: string;
   bodyClass?: string;
-  hideFooter?: boolean;
+  footerBridge?: boolean;
 }
 
 const {
@@ -19,7 +19,7 @@ const {
   ogType = 'website',
   themeColor = '#fafaf8',
   bodyClass,
-  hideFooter = false,
+  footerBridge = true,
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
@@ -86,9 +86,10 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
 
   <body class={bodyClass}>
     <a class="skip-link" href="#main-content">Skip to main content</a>
+    <div id="reading-progress" aria-hidden="true"></div>
     <Header />
     <slot />
-    {!hideFooter && <Footer />}
+    <Footer showBridge={footerBridge} />
     <!-- Shared interactions: sticky header, clock, smooth scroll, etc. -->
     <script src="/portfolio.js" defer></script>
   </body>
