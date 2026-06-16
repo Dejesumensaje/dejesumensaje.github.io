@@ -8,8 +8,28 @@ import { projects } from '../data/projects';
 
 <BaseLayout
   title="William Montoya — Senior Product Designer"
-  description="Senior Product Designer with 8+ years making complex systems usable — from public-sector education platforms to enterprise data tools. Currently at Globant/Deloitte, based in Medellín."
+  description="Senior Product Designer with 8+ years turning complex, high-stakes systems into clear, usable products — from public-sector education platforms to enterprise data tools. Currently at Globant/Deloitte, based in Medellín."
 >
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>{JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "William Montoya",
+      "jobTitle": "Senior Product Designer",
+      "url": "https://dejesumensaje.com",
+      "image": "https://dejesumensaje.com/assets/william-montoya.jpg",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Medellín",
+        "addressCountry": "CO"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/in/dejesumensaje/",
+        "https://medium.com/@dejesumensaje",
+        "https://github.com/Dejesumensaje"
+      ]
+    })}</script>
+  </Fragment>
 
   <main id="main-content">
 
@@ -23,8 +43,9 @@ import { projects } from '../data/projects';
           </p>
           <h1 id="hero-heading">William<br>Montoya</h1>
           <p class="hero-tagline">
-            From journalism to public-sector design to enterprise data tools —
-            8+ years making complex systems usable.
+            I turn complex, high-stakes systems into products people actually
+            understand — from national education platforms to enterprise pricing
+            tools. 8+ years across the public sector and enterprise.
           </p>
           <div class="hero-available" aria-label="Open to work">
             <span class="status-dot"></span>
@@ -64,8 +85,9 @@ import { projects } from '../data/projects';
         <div class="work-intro__copy">
           <span class="label">Selected Work</span>
           <p class="work-lead">
-            Case studies from public education platforms and enterprise pricing
-            tools — complex systems made clearer.
+            Selected case studies from national education platforms and enterprise
+            pricing tools — where research and information architecture do the
+            heavy lifting.
           </p>
         </div>
       </div>

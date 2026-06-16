@@ -53,7 +53,7 @@ export const projects: Project[] = [
     tags: ['UX', 'Product Design'],
     confidential: false,
     context: 'Ministry of Education · Rural Education · Colombia',
-    title: 'Creating opportunities for those without Internet',
+    title: 'Bringing learning to rural classrooms without internet',
     href: '/aprender-digital.html',
     description:
       "How to enable capabilities in Colombia's rural areas where connectivity is a barrier, not an assumption.",
