@@ -1,0 +1,222 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CaseTOC from '../components/CaseTOC.astro';
+import PasswordGate from '../components/PasswordGate.astro';
+---
+
+<BaseLayout
+  title="Converge Design System | William Montoya"
+  description="How I turned a design system that AI demos were bypassing into a code package — and a governance model — that humans and agents both build on."
+  ogType="article"
+  themeColor="#CFE8DF"
+>
+  <Fragment slot="head">
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="stylesheet" href="/password-gate.css" />
+    <script type="application/ld+json" is:inline>{JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Converge Design System Case Study",
+      "author": { "@type": "Person", "name": "William Montoya" },
+      "publisher": { "@type": "Person", "name": "William Montoya" },
+      "description": "Operationalizing a design system for humans and AI agents."
+    })}</script>
+    <!-- Lock content before paint unless already authenticated this session. -->
+    <script is:inline>
+      if (sessionStorage.getItem('converge_auth') !== '1') {
+        document.documentElement.classList.add('gate-locked');
+      }
+    </script>
+  </Fragment>
+
+  <PasswordGate caseName="Converge Design System" />
+
+  <main>
+
+    <section id="hero-case" aria-labelledby="case-heading" style="background: var(--mint);">
+
+      <div class="case-breadcrumb">
+        <a href="/#work">← Work</a>
+      </div>
+
+      <div class="case-title-wrap">
+        <div class="case-num-row">
+          <span class="case-num">01</span>
+          <span class="work-category">Design Systems · AI · Front-End · Enterprise</span>
+        </div>
+        <h1 id="case-heading">Operationalizing a design system for humans and AI agents</h1>
+      </div>
+
+      <section class="project-summary project-summary--hero" aria-label="Project summary">
+        <div class="summary-item">
+          <span class="summary-label">Challenge</span>
+          <p>A polished Figma design system was being bypassed the moment PMs prototyped with AI tools — it lived where those tools couldn't reach.</p>
+        </div>
+        <div class="summary-item">
+          <span class="summary-label">Scope</span>
+          <p>React implementation of the library, token architecture, a published npm package, a component playground, and the governance model for AI tooling.</p>
+        </div>
+        <div class="summary-item">
+          <span class="summary-label">Constraints</span>
+          <p>NDA-bound enterprise context; components must render safely anywhere; rules must be unambiguous enough for an agent to follow.</p>
+        </div>
+        <div class="summary-item">
+          <span class="summary-label">Outcome</span>
+          <p>A published package and Figma Make Kit, adoption across teams, and an independent review layer that keeps AI-generated UI on-system.</p>
+        </div>
+      </section>
+
+      <div class="case-full-image">
+        <div class="nda-placeholder">
+          <span class="nda-placeholder__icon">🔒</span>
+          <span class="nda-placeholder__label">NDA — System overview not shown</span>
+        </div>
+      </div>
+
+      <div class="details">
+        <div class="detail">
+          <h4>Role</h4>
+          <p>Design Systems Engineering, Token Architecture, AI Tooling &amp; Governance</p>
+        </div>
+        <div class="detail">
+          <h4>Date</h4>
+          <p>2025 — ongoing</p>
+        </div>
+        <div class="detail">
+          <h4>Client</h4>
+          <p>Deloitte Converge for Restaurants</p>
+        </div>
+        <div class="detail">
+          <h4>Design system in Figma</h4>
+          <p>Grecia Gabriel &amp; Rebecca Bradley</p>
+        </div>
+        <div class="detail">
+          <h4>Sector</h4>
+          <p>Enterprise / Design Systems</p>
+        </div>
+      </div>
+
+    </section>
+
+    <CaseTOC sections={[
+      { id: 'case-challenge',    label: 'Challenge'  },
+      { id: 'case-problem',      label: 'Problem'    },
+      { id: 'case-contribution', label: 'Approach'   },
+      { id: 'case-decisions',    label: 'Decisions'  },
+      { id: 'case-entry-points', label: 'Rollout'    },
+      { id: 'case-results',      label: 'Outcome'    },
+    ]} />
+
+    <section class="challenge case-section" id="case-challenge">
+      <h4>Challenge</h4>
+      <h2>How do you make a design system that AI tools and agents will actually use — instead of approximating?</h2>
+    </section>
+
+    <section class="overview bg-mint case-section" id="case-problem">
+      <div class="wrap">
+        <h2>The problem</h2>
+        <p>The design team already had a strong system in Figma: well-crafted components, clear visual foundations, and a mature library. That work belonged to <strong>Grecia Gabriel</strong> and <strong>Rebecca Bradley</strong>, and it was solid.</p>
+        <p>The problem appeared when Product Managers started using Claude Code and Figma Make to explore ideas with clients. The system was no longer part of the conversation — not because it was poorly designed, but because it lived somewhere those tools could not reach.</p>
+        <p>The speed of exploration increased dramatically. Consistency declined just as quickly. Demos were fast to build, but they no longer shared the system's visual language, interaction patterns, or UX principles. Every PM was effectively reinventing the wheel, and the carefully built design system became decorative — present, but untouchable by anything AI could use.</p>
+      </div>
+
+      <figure>
+        <div class="nda-placeholder">
+          <span class="nda-placeholder__icon">🔒</span>
+          <span class="nda-placeholder__label">Inconsistent AI-generated demos — under NDA</span>
+        </div>
+        <figcaption>Fast AI explorations that drifted from the real system's language.</figcaption>
+      </figure>
+
+      <div class="wrap">
+        <h2>Why a strong system wasn't enough</h2>
+        <p>Figma Make can bring real design systems into AI-generated prototypes through <strong>Make Kits</strong> — a component package, the tokens and styles from a Figma library, and usage guidelines, so generated experiences align with the real system instead of approximating it.</p>
+        <p>The catch: a Make Kit cannot be built from a Figma file. It needs a code package. The first prerequisite is a published React npm package — only then can it become part of a Make Kit, and only then can guidelines be layered on top.</p>
+        <p>That was exactly what did not exist. The system was strong in Figma, but Figma Make had no implementation package to consume. Without it, the tool generates its own versions — approximating the components, the tokens, the colors, the behavior. The result looks close to the brand, but it is not the system. That was the root cause: the design system, as it existed, was not consumable by the workflows that now mattered. It needed to become code.</p>
+      </div>
+    </section>
+
+    <section class="overview case-section" id="case-contribution">
+      <div class="wrap">
+        <h2>My contribution</h2>
+        <p>I took the system the team had built in Figma and led its translation into a functional code package — the prerequisite a Make Kit requires to exist.</p>
+        <p>That meant implementing the component library in React, designing the token architecture, packaging it as a consumable npm library, and building a playground where the system could be explored and validated component by component before exposing it to broader teams.</p>
+        <p>But building the package was not the most important part. The important part was deciding how to ensure that, once consumed by AI tools, it would keep behaving according to the principles of the original system. Building the code was the vehicle. Governing it was the real challenge.</p>
+      </div>
+    </section>
+
+    <section class="overview bg-mint case-section" id="case-decisions">
+      <div class="wrap">
+        <h2>The decisions that hold the system together</h2>
+        <p>A package consumed by agents only works if its rules don't depend on human judgment to be applied correctly. A skilled designer can navigate ambiguity; an agent cannot — it does exactly what its rules allow. So the rules had to be right before they were exposed.</p>
+      </div>
+
+      <div class="insights">
+        <div class="wrap-flex">
+          <div class="insight">
+            <p><strong>Brand color is scarce.</strong> The Deloitte green is reserved for the single most important action and its focus rings — nothing merely active or selected. It depends on a token, not on taste, so an agent can apply it without ambiguity (and rebranding stays clean).</p>
+          </div>
+          <div class="insight">
+            <p><strong>Contrast is measured, not assumed.</strong> The warning color looked acceptable. I measured it: 2.37:1, against a WCAG requirement of 4.5:1. It failed. Warning text now uses a darker token that passes — and the rule lives in an automated review layer, not just docs.</p>
+          </div>
+          <div class="insight">
+            <p><strong>The system refuses to touch what it doesn't own.</strong> Because I don't control where components render — an unfinished prototype or a legacy app full of CSS — the package never styles raw HTML globally. No bare <code>h1</code>, <code>body</code>, or <code>button</code> selectors; each component ships its own scoped reset.</p>
+          </div>
+          <div class="insight">
+            <p><strong>Tokens are contracts.</strong> Token names map directly to Figma, preserving even the quirks of the original naming. The designer reading the Figma library and the engineer or agent reading the code see exactly the same concepts. Changing a token without agreement breaks a contract people already built on.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="wrap">
+        <h2>The real challenge was organizational</h2>
+        <p>We needed PMs to explore ideas with clients using AI without turning those explorations into disconnected, inconsistent, hard-to-maintain experiences. The answer wasn't to limit exploration — it was to give it structure: a controlled environment, real production components in a playground, a set of guiding principles, and a process where explored concepts return to the design team for refinement before reaching production. Not a restriction. A framework.</p>
+      </div>
+    </section>
+
+    <section class="overview case-section" id="case-entry-points">
+      <div class="wrap">
+        <h2>One system, two entry points</h2>
+        <p>Once the package existed, the next challenge was connecting it to the two environments where people and agents actually work.</p>
+        <h2>Figma Make</h2>
+        <p>Through Make Kits. I combined the npm package with the tokens and variables from Grecia and Rebecca's Figma library and layered usage guidelines on top — teaching Figma Make not only which components exist, but how and when they should be used. Once published, PMs could prototype with the same production components engineers would later consume.</p>
+        <h2>Claude Code</h2>
+        <p>Through a <code>CLAUDE.md</code> file and a collection of reusable skills. The <code>CLAUDE.md</code> encodes the architecture and hard rules — brand scarcity, token governance, implementation constraints. The skills capture repeatable procedures for building, validating, and documenting components.</p>
+        <p>On top sits a review layer of three read-only auditors that evaluate every component in parallel: one for token usage, one for accessibility (including measured contrast), one for QA and consistency. They never modify code — they only report. Generation is fast and confidently wrong; discipline lives in an independent review layer with no incentive to approve its own work. Two entry points, the same governance model behind both.</p>
+      </div>
+
+      <figure>
+        <div class="nda-placeholder">
+          <span class="nda-placeholder__icon">🔒</span>
+          <span class="nda-placeholder__label">Governance &amp; review layer — under NDA</span>
+        </div>
+        <figcaption>One package, two entry points (Figma Make and Claude Code), one governance model.</figcaption>
+      </figure>
+    </section>
+
+    <section class="overview bg-mint case-section" id="case-results">
+      <div class="wrap">
+        <h2>Early outcomes</h2>
+        <p>The system keeps evolving, but it has already produced tangible results: a working Make Kit integration for Figma Make, a published npm package consumed across teams, knowledge-transfer sessions for teams working with Claude Code, and a roadmap for expanding adoption across the organization.</p>
+        <p>The most meaningful outcome, though, has been cultural. The conversation shifted away from whether AI replaces design work — and toward how design can define the principles, rules, and structures that let quality scale in environments where more and more solutions are generated with AI assistance.</p>
+        <p>That, ultimately, is the real deliverable. Not a component package, but a way for the judgment embedded in a design system to keep governing the experience — even when the person assembling the screen is a PM with a prompt, or an agent with a <code>CLAUDE.md</code>.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <section class="case-reflections" aria-label="Senior reflection">
+    <div class="case-reflections__inner">
+      <span class="case-reflections__label">Reflection</span>
+      <p class="case-reflections__text">The most valuable thing I built here wasn't code — it was a way for design judgment to survive contact with automation. Once anyone can generate a screen in seconds, the leverage moves from drawing the screen to encoding the rules that keep thousands of generated screens coherent. That's increasingly where senior design lives.</p>
+    </div>
+  </section>
+
+  <section class="case-next">
+    <a href="/key-metrics-over-time.html">
+      <span class="case-next-label">Next case study</span>
+      <h3>Turning pricing data into a self-service experience →</h3>
+    </a>
+  </section>
+
+</BaseLayout>

@@ -13,6 +13,7 @@
     --lime:         #F2EFAA;
     --blush:        #EDC9D4;
     --steel:        #C8DDE3;
+    --mint:         #CFE8DF;
     --ocean:        #007da0;
     --white:        #ffffff;
 
@@ -1330,6 +1331,7 @@ footer.site-footer {
 .bg-teal  { background: var(--teal);  }
 .bg-lime  { background: var(--lime);  }
 .bg-steel { background: var(--steel); }
+.bg-mint  { background: var(--mint);  }
 
 .wrap { max-width: var(--content-width); margin: 0 auto; }
 .wrap p + h2 { margin-top: 2rem; }

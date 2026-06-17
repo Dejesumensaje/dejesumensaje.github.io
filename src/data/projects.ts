@@ -20,8 +20,36 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    slug: 'key-metrics-over-time',
+    slug: 'converge-design-system',
     index: '01',
+    tags: ['Design Systems', 'AI', 'Front-End'],
+    confidential: true,
+    context: 'Deloitte · Converge for Restaurants · Design Systems',
+    title: 'Operationalizing a design system for humans and AI agents',
+    href: '/converge-design-system.html',
+    description:
+      'How I turned a design system that AI demos were bypassing into a code package — and a governance model — that humans and agents both build on.',
+    image: '/assets/converge-design-system.webp',
+    imageAlt: 'Converge design system',
+    accent: 'var(--mint)',
+    snapshot: [
+      {
+        label: 'Challenge',
+        body: 'A strong Figma design system was being bypassed the moment PMs started prototyping with AI tools.',
+      },
+      {
+        label: 'Contribution',
+        body: 'Led its translation into a published React package, token architecture, and a governance model agents can follow.',
+      },
+      {
+        label: 'Outcome',
+        body: 'A working Make Kit, an npm package consumed across teams, and an independent review layer that keeps AI output on-system.',
+      },
+    ],
+  },
+  {
+    slug: 'key-metrics-over-time',
+    index: '02',
     tags: ['UX', 'Data Visualization', 'Enterprise'],
     confidential: true,
     context: 'Deloitte · Converge for Restaurants · KFC',
@@ -29,7 +57,7 @@ export const projects: Project[] = [
     href: '/key-metrics-over-time.html',
     description:
       'How to replace a manual Excel reporting process with an interactive feature that puts KFC franchisees in control of their own performance data.',
-    image: '/assets/key-metrics-over-time.png',
+    image: '/assets/key-metrics-over-time.webp',
     imageAlt: 'Key Metrics Over Time dashboard',
     accent: 'var(--steel)',
     snapshot: [
@@ -49,7 +77,7 @@ export const projects: Project[] = [
   },
   {
     slug: 'crust-upcharge-configurator',
-    index: '02',
+    index: '03',
     tags: ['UX', 'UI', 'Enterprise'],
     confidential: true,
     context: 'Deloitte · Converge for Restaurants · Pizza Hut',
@@ -57,7 +85,7 @@ export const projects: Project[] = [
     href: '/crust-upcharge-configurator.html',
     description:
       'How to give Pizza Hut franchisees granular control over complex pricing recommendations without eroding their trust in the data.',
-    image: '/assets/crust-upcharge-configurator.png',
+    image: '/assets/crust-upcharge-configurator.webp',
     imageAlt: 'Crust Upcharge Configurator interface',
     accent: 'var(--blush)',
     snapshot: [
@@ -77,7 +105,7 @@ export const projects: Project[] = [
   },
   {
     slug: 'colombia-aprende',
-    index: '03',
+    index: '04',
     tags: ['UX', 'Research', 'Product Design'],
     confidential: false,
     context: 'Ministry of Education · Public Sector · Colombia',
@@ -85,7 +113,7 @@ export const projects: Project[] = [
     href: '/colombia-aprende.html',
     description:
       'How to transform a 17-year-old national platform with millions of users so teachers and students could actually find what they need.',
-    image: '/assets/colombia-aprende-imagen.png',
+    image: '/assets/colombia-aprende-imagen.webp',
     imageAlt: 'Colombia Aprende platform redesign',
     accent: 'var(--lime)',
     snapshot: [
@@ -105,7 +133,7 @@ export const projects: Project[] = [
   },
   {
     slug: 'aprender-digital',
-    index: '04',
+    index: '05',
     tags: ['UX', 'Product Design'],
     confidential: false,
     context: 'Ministry of Education · Rural Education · Colombia',
@@ -113,7 +141,7 @@ export const projects: Project[] = [
     href: '/aprender-digital.html',
     description:
       "How to enable capabilities in Colombia's rural areas where connectivity is a barrier, not an assumption.",
-    image: '/assets/aprender-digital-versoin-ligera.png',
+    image: '/assets/aprender-digital-versoin-ligera.webp',
     imageAlt: 'Aprender Digital Versión Ligera interface',
     accent: 'var(--lime)',
     snapshot: [
