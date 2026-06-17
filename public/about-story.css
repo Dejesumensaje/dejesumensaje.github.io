@@ -504,73 +504,8 @@ h1.about-name {
 }
 
 
-/* ── 04  CTA DARK ─────────────────────────── */
+/* ── BUTTON VARIANTS (dark background) — used by the shared Footer ── */
 
-.about-cta-dark {
-    background: var(--color-text);
-    padding: calc(var(--space-unit) * 8) calc(var(--space-unit) * 1.5);
-}
-
-.about-cta-inner {
-    max-width: 52rem;
-    margin: 0 auto;
-}
-
-.cta-overline {
-    display: block;
-    font-family: var(--font-sans);
-    font-size: var(--text-micro);
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: var(--tracking-wide);
-    color: rgba(255, 255, 255, 0.35);
-    margin-bottom: calc(var(--space-unit) * 2);
-}
-
-h2.cta-big {
-    font-family: var(--font-sans);
-    font-size: var(--text-display);
-    font-weight: 800;
-    line-height: var(--lh-display);
-    letter-spacing: var(--tracking-display);
-    color: #ffffff;
-    margin-bottom: calc(var(--space-unit) * 2.5);
-}
-
-.cta-email {
-    display: inline-block;
-    font-family: var(--font-sans);
-    font-size: var(--text-lead);
-    font-weight: 500;
-    color: rgba(255, 255, 255, 0.6);
-    text-decoration: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    padding-bottom: 2px;
-    margin: 0 0 calc(var(--space-unit) * 3);
-    line-height: 1.4;
-    transition: color 0.2s ease, border-color 0.2s ease;
-}
-
-.cta-email:hover {
-    color: #ffffff;
-    border-color: rgba(255, 255, 255, 0.5);
-}
-
-.about-cta-dark .cta-actions {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    align-items: flex-start;
-    margin-bottom: calc(var(--space-unit) * 3);
-}
-
-@media (min-width: 600px) {
-    .about-cta-dark .cta-actions {
-        flex-direction: row;
-    }
-}
-
-/* Button variants for dark background */
 .button-cta--light {
     background: #ffffff;
     color: #1a1a1a;
@@ -589,35 +524,6 @@ h2.cta-big {
 .button-secondary--light:hover {
     color: #ffffff;
     border-color: rgba(255, 255, 255, 0.65);
-}
-
-.cta-social {
-    display: flex;
-    gap: calc(var(--space-unit) * 1.5);
-    align-items: center;
-}
-
-.cta-social a {
-    display: flex;
-    align-items: center;
-}
-
-.cta-social img {
-    height: 1.25rem;
-    width: auto;
-    opacity: 0.38;
-    filter: invert(1);
-    transition: opacity 0.2s ease;
-}
-
-.cta-social a:hover img {
-    opacity: 0.85;
-}
-
-@media (min-width: 992px) {
-    .about-cta-dark {
-        padding: calc(var(--space-unit) * 8) calc(var(--space-unit) * 3);
-    }
 }
 
 
@@ -655,8 +561,7 @@ h2.cta-big {
 
 @media (prefers-reduced-motion: reduce) {
     .about-hero__photo img,
-    .tag,
-    .cta-email {
+    .tag {
         transition: none;
     }
 }
