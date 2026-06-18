@@ -1,24 +1,28 @@
 ---
 // Three-column header: [Brand] — [Local Time (centered)] — [Navigation]
 // Clock ticks are driven by portfolio.js → initMedellinClock()
+const path = Astro.url.pathname;
+const isAbout = path === '/about.html' || path === '/about/';
+// Home and every case study live under "Work".
+const isWork = !isAbout;
 ---
 
 <header class="site-header">
   <div class="nav-wrap">
 
     <div class="brand">
-      <a href="/"><img src="/assets/logo-wm.svg" alt="William Montoya" /></a>
+      <a href="/" aria-label="William Montoya — home"><img src="/assets/logo-wm.svg" alt="" /></a>
     </div>
 
     <div class="header-time" aria-label="Current time in Medellín" aria-live="off">
-      <span class="header-time__city">Medellín</span>
+      <span class="header-time__city" lang="es">Medellín</span>
       <time class="header-clock" id="mde-clock"></time>
     </div>
 
     <nav aria-label="Primary navigation">
       <ul>
-        <li><a href="/#work">Work</a></li>
-        <li><a href="/about.html">About</a></li>
+        <li><a href="/#work" aria-current={isWork ? 'page' : undefined}>Work</a></li>
+        <li><a href="/about.html" aria-current={isAbout ? 'page' : undefined}>About</a></li>
         <li>
           <a href="mailto:william@dejesumensaje.com?subject=Exploring UX Collaboration Opportunities&body=Hello William,">
             Contact
@@ -45,6 +49,25 @@
   .site-header .header-time { justify-self: center; }
   .site-header nav          { justify-self: end; }
 
+  /* Active page indicator */
+  .site-header nav a[aria-current="page"] {
+    color: var(--ink);
+    position: relative;
+  }
+  .site-header nav a[aria-current="page"]::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -0.35rem;
+    height: 2px;
+    background: var(--ocean);
+    border-radius: 2px;
+  }
+  .dark-nav .site-header:not(.scrolled) nav a[aria-current="page"] {
+    color: #fff;
+  }
+
   /* Time widget — hidden on mobile, shown at 840px+ */
   .header-time {
     display: none;
@@ -62,7 +85,7 @@
     text-transform: uppercase;
     letter-spacing: 0.1em;
     color: var(--ink-muted);
-    opacity: 0.45;
+    opacity: 0.75;
     line-height: 1;
     display: block;
   }
@@ -75,7 +98,7 @@
 
   /* ── DARK NAV (about page) overrides ───────────────── */
   .dark-nav .site-header:not(.scrolled) .header-time__city {
-    color: rgba(255, 255, 255, 0.38);
+    color: rgba(255, 255, 255, 0.6);
     opacity: 1;
   }
   .dark-nav .site-header:not(.scrolled) .header-clock {

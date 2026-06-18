@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CaseTOC from '../components/CaseTOC.astro';
+import CaseNav from '../components/CaseNav.astro';
 import PasswordGate from '../components/PasswordGate.astro';
 ---
 
@@ -32,7 +33,7 @@ import PasswordGate from '../components/PasswordGate.astro';
 
   <PasswordGate caseName="Crust Upcharge Configurator" />
 
-  <main>
+  <main id="main-content">
 
     <section id="hero-case" aria-labelledby="case-heading" style="background: var(--blush);">
 
@@ -46,6 +47,11 @@ import PasswordGate from '../components/PasswordGate.astro';
           <span class="work-category">UX · UI · Prototyping · Enterprise</span>
         </div>
         <h1 id="case-heading">Designing pricing clarity for franchise operators</h1>
+        <div class="case-metrics">
+          <div class="case-metric"><span class="case-metric__value">4-step</span><span class="case-metric__label">Configurator wizard</span></div>
+          <div class="case-metric"><span class="case-metric__value">Solo</span><span class="case-metric__label">Research to handoff</span></div>
+          <div class="case-metric"><span class="case-metric__value">Validated</span><span class="case-metric__label">Live franchisee session</span></div>
+        </div>
       </div>
 
       <section class="project-summary project-summary--hero" aria-label="Project summary">
@@ -76,23 +82,23 @@ import PasswordGate from '../components/PasswordGate.astro';
 
       <div class="details">
         <div class="detail">
-          <h4>Role</h4>
+          <p class="eyebrow">Role</p>
           <p>UX/UI Designer &amp; Front-End Prototyper (independent)</p>
         </div>
         <div class="detail">
-          <h4>Date</h4>
+          <p class="eyebrow">Date</p>
           <p>2024 — upcoming launch</p>
         </div>
         <div class="detail">
-          <h4>Client</h4>
+          <p class="eyebrow">Client</p>
           <p>Pizza Hut franchisees via Converge for Restaurants</p>
         </div>
         <div class="detail">
-          <h4>Platform</h4>
+          <p class="eyebrow">Platform</p>
           <p>Deloitte Converge · Franchisee Portal</p>
         </div>
         <div class="detail">
-          <h4>Sector</h4>
+          <p class="eyebrow">Sector</p>
           <p>Restaurant / Enterprise</p>
         </div>
       </div>
@@ -109,7 +115,7 @@ import PasswordGate from '../components/PasswordGate.astro';
     ]} />
 
     <section class="challenge case-section" id="case-challenge">
-      <h4>Challenge</h4>
+      <p class="eyebrow">Challenge</p>
       <h2>How do you give franchise operators visibility into complex pricing recommendations without overwhelming them — or undermining their autonomy?</h2>
     </section>
 
@@ -236,11 +242,6 @@ import PasswordGate from '../components/PasswordGate.astro';
     </div>
   </section>
 
-  <section class="case-next">
-    <a href="/colombia-aprende.html">
-      <span class="case-next-label">Next case study</span>
-      <h3>Simplifying Colombia Aprende for inclusion and equity →</h3>
-    </a>
-  </section>
+  <CaseNav slug="crust-upcharge-configurator" />
 
 </BaseLayout>

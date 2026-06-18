@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CaseTOC from '../components/CaseTOC.astro';
+import CaseNav from '../components/CaseNav.astro';
 ---
 
 <BaseLayout
@@ -22,7 +23,7 @@ import CaseTOC from '../components/CaseTOC.astro';
     })}</script>
   </Fragment>
 
-  <main>
+  <main id="main-content">
 
     <section id="hero-case" aria-labelledby="case-heading" style="background: var(--lime);">
 
@@ -72,29 +73,29 @@ import CaseTOC from '../components/CaseTOC.astro';
       </section>
 
       <div class="case-full-image">
-        <img src="/assets/aprender-digital-hero.png" alt="Aprender Digital platform interface" loading="eager" />
+        <img src="/assets/aprender-digital-hero.png" width="1026" height="823" alt="Aprender Digital platform interface" loading="eager" />
       </div>
 
       <div class="details">
         <div class="detail">
-          <h4>Role</h4>
+          <p class="eyebrow">Role</p>
           <p>UX, Information Architecture</p>
         </div>
         <div class="detail">
-          <h4>Date</h4>
+          <p class="eyebrow">Date</p>
           <p>July 2021 - ongoing</p>
         </div>
         <div class="detail">
-          <h4>Team</h4>
+          <p class="eyebrow">Team</p>
           <p>Camilo Beltrán - development lead</p>
           <p>Natalia Torres - visual designer</p>
         </div>
         <div class="detail">
-          <h4>Link</h4>
+          <p class="eyebrow">Link</p>
           <p><a href="https://contenidos.colombiaaprende.edu.co" target="_blank" rel="noopener noreferrer">Aprender Digital</a></p>
         </div>
         <div class="detail">
-          <h4>Sector</h4>
+          <p class="eyebrow">Sector</p>
           <p>Education</p>
         </div>
       </div>
@@ -112,7 +113,7 @@ import CaseTOC from '../components/CaseTOC.astro';
     ]} />
 
     <section class="challenge case-section" id="case-challenge">
-      <h4>Challenge</h4>
+      <p class="eyebrow">Challenge</p>
       <h2>How do you get educational resources to rural teachers when internet access can't be assumed?</h2>
     </section>
 
@@ -143,11 +144,11 @@ import CaseTOC from '../components/CaseTOC.astro';
       <div class="insights">
         <div class="wrap-flex-problem">
           <div class="problem">
-            <h4>Problem statement</h4>
+            <p class="insight-title">Problem statement</p>
             <p>The lack of access to educational resources is increasing the gap between rich and poor, and it's also damaging the performance of the rural teachers.</p>
           </div>
           <div class="hypothesis">
-            <h4>Hypothesis</h4>
+            <p class="insight-title">Hypothesis</p>
             <p>If we can deliver educational resources and guidelines consistently — even without internet — we can improve rural teachers' performance and, with it, the quality of education.</p>
           </div>
         </div>
@@ -200,6 +201,8 @@ import CaseTOC from '../components/CaseTOC.astro';
 
       <div class="full-wrap">
         <iframe
+          title="Aprender Digital website prototype (Figma)"
+          loading="lazy"
           style="border: 1px solid rgba(0, 0, 0, 0.1);"
           src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FSRpGGNHHdLTeOvaZIIjZVz%2FAprender-Digital%3Fpage-id%3D0%253A1%26node-id%3D42%253A2211%26viewport%3D241%252C48%252C0.04%26scaling%3Dmin-zoom%26starting-point-node-id%3D42%253A2211"
           allowfullscreen
@@ -208,6 +211,8 @@ import CaseTOC from '../components/CaseTOC.astro';
 
       <div class="full-wrap">
         <iframe
+          title="Offline content package prototype (Figma)"
+          loading="lazy"
           style="border: 1px solid rgba(0, 0, 0, 0.1);"
           src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2F2OZPNtWxdH1iKL6p4GrCO5%2FContenido-offline%3Fpage-id%3D0%253A1%26node-id%3D4%253A2%26viewport%3D241%252C48%252C0.12%26scaling%3Dmin-zoom%26starting-point-node-id%3D4%253A2"
           allowfullscreen
@@ -233,11 +238,6 @@ import CaseTOC from '../components/CaseTOC.astro';
     </div>
   </section>
 
-  <section class="case-next">
-    <a href="/converge-design-system.html">
-      <span class="case-next-label">Next case study</span>
-      <h3>Operationalizing a design system for humans and AI agents →</h3>
-    </a>
-  </section>
+  <CaseNav slug="aprender-digital" />
 
 </BaseLayout>

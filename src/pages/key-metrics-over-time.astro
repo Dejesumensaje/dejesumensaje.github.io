@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CaseTOC from '../components/CaseTOC.astro';
+import CaseNav from '../components/CaseNav.astro';
 import PasswordGate from '../components/PasswordGate.astro';
 ---
 
@@ -32,7 +33,7 @@ import PasswordGate from '../components/PasswordGate.astro';
 
   <PasswordGate caseName="Key Metrics Over Time" />
 
-  <main>
+  <main id="main-content">
 
     <section id="hero-case" aria-labelledby="case-heading" style="background: var(--steel);">
 
@@ -46,6 +47,11 @@ import PasswordGate from '../components/PasswordGate.astro';
           <span class="work-category">UX · Data Visualization · Enterprise</span>
         </div>
         <h1 id="case-heading">Turning pricing data into a self-service experience</h1>
+        <div class="case-metrics">
+          <div class="case-metric"><span class="case-metric__value">6</span><span class="case-metric__label">Key metrics</span></div>
+          <div class="case-metric"><span class="case-metric__value">All states</span><span class="case-metric__label">Prototyped before review</span></div>
+          <div class="case-metric"><span class="case-metric__value">Launched</span><span class="case-metric__label">Approved in first review</span></div>
+        </div>
       </div>
 
       <section class="project-summary project-summary--hero" aria-label="Project summary">
@@ -76,23 +82,23 @@ import PasswordGate from '../components/PasswordGate.astro';
 
       <div class="details">
         <div class="detail">
-          <h4>Role</h4>
+          <p class="eyebrow">Role</p>
           <p>UX/UI Designer &amp; Front-End Prototyper (independent)</p>
         </div>
         <div class="detail">
-          <h4>Date</h4>
+          <p class="eyebrow">Date</p>
           <p>2024 — launched</p>
         </div>
         <div class="detail">
-          <h4>Client</h4>
+          <p class="eyebrow">Client</p>
           <p>KFC franchisees via Converge for Restaurants</p>
         </div>
         <div class="detail">
-          <h4>Platform</h4>
+          <p class="eyebrow">Platform</p>
           <p>Deloitte Converge · Franchisee Portal</p>
         </div>
         <div class="detail">
-          <h4>Sector</h4>
+          <p class="eyebrow">Sector</p>
           <p>Restaurant / Enterprise</p>
         </div>
       </div>
@@ -110,7 +116,7 @@ import PasswordGate from '../components/PasswordGate.astro';
     ]} />
 
     <section class="challenge case-section" id="case-challenge">
-      <h4>Challenge</h4>
+      <p class="eyebrow">Challenge</p>
       <h2>How do you replace a slow, manual Excel reporting process with something that gives operators direct access to their own performance data — and actually changes how they explore it?</h2>
     </section>
 
@@ -240,11 +246,6 @@ import PasswordGate from '../components/PasswordGate.astro';
     </div>
   </section>
 
-  <section class="case-next">
-    <a href="/crust-upcharge-configurator.html">
-      <span class="case-next-label">Next case study</span>
-      <h3>Designing pricing clarity for franchise operators →</h3>
-    </a>
-  </section>
+  <CaseNav slug="key-metrics-over-time" />
 
 </BaseLayout>

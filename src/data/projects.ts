@@ -23,7 +23,7 @@ export const projects: Project[] = [
     slug: 'converge-design-system',
     index: '01',
     tags: ['Design Systems', 'AI', 'Front-End'],
-    confidential: true,
+    confidential: false,
     context: 'Deloitte · Converge for Restaurants · Design Systems',
     title: 'Operationalizing a design system for humans and AI agents',
     href: '/converge-design-system.html',
@@ -141,8 +141,8 @@ export const projects: Project[] = [
     href: '/aprender-digital.html',
     description:
       "How to enable capabilities in Colombia's rural areas where connectivity is a barrier, not an assumption.",
-    image: '/assets/aprender-digital-versoin-ligera.webp',
-    imageAlt: 'Aprender Digital Versión Ligera interface',
+    image: '/assets/aprender-digital-version-ligera.webp',
+    imageAlt: 'Aprender Digital lightweight (offline) version interface',
     accent: 'var(--lime)',
     snapshot: [
       {

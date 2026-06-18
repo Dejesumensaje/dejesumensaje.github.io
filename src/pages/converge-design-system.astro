@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CaseTOC from '../components/CaseTOC.astro';
-import PasswordGate from '../components/PasswordGate.astro';
+import CaseNav from '../components/CaseNav.astro';
 ---
 
 <BaseLayout
@@ -11,8 +11,6 @@ import PasswordGate from '../components/PasswordGate.astro';
   themeColor="#CFE8DF"
 >
   <Fragment slot="head">
-    <meta name="robots" content="noindex, nofollow" />
-    <link rel="stylesheet" href="/password-gate.css" />
     <script type="application/ld+json" is:inline>{JSON.stringify({
       "@context": "https://schema.org",
       "@type": "Article",
@@ -21,17 +19,9 @@ import PasswordGate from '../components/PasswordGate.astro';
       "publisher": { "@type": "Person", "name": "William Montoya" },
       "description": "Operationalizing a design system for humans and AI agents."
     })}</script>
-    <!-- Lock content before paint unless already authenticated this session. -->
-    <script is:inline>
-      if (sessionStorage.getItem('converge_auth') !== '1') {
-        document.documentElement.classList.add('gate-locked');
-      }
-    </script>
   </Fragment>
 
-  <PasswordGate caseName="Converge Design System" />
-
-  <main>
+  <main id="main-content">
 
     <section id="hero-case" aria-labelledby="case-heading" style="background: var(--mint);">
 
@@ -45,6 +35,11 @@ import PasswordGate from '../components/PasswordGate.astro';
           <span class="work-category">Design Systems · AI · Front-End · Enterprise</span>
         </div>
         <h1 id="case-heading">Operationalizing a design system for humans and AI agents</h1>
+        <div class="case-metrics">
+          <div class="case-metric"><span class="case-metric__value">2</span><span class="case-metric__label">Entry points (Make + Code)</span></div>
+          <div class="case-metric"><span class="case-metric__value">3</span><span class="case-metric__label">Automated review auditors</span></div>
+          <div class="case-metric"><span class="case-metric__value">1</span><span class="case-metric__label">Published npm package</span></div>
+        </div>
       </div>
 
       <section class="project-summary project-summary--hero" aria-label="Project summary">
@@ -75,23 +70,23 @@ import PasswordGate from '../components/PasswordGate.astro';
 
       <div class="details">
         <div class="detail">
-          <h4>Role</h4>
+          <p class="eyebrow">Role</p>
           <p>Design Systems Engineering, Token Architecture, AI Tooling &amp; Governance</p>
         </div>
         <div class="detail">
-          <h4>Date</h4>
+          <p class="eyebrow">Date</p>
           <p>2025 — ongoing</p>
         </div>
         <div class="detail">
-          <h4>Client</h4>
+          <p class="eyebrow">Client</p>
           <p>Deloitte Converge for Restaurants</p>
         </div>
         <div class="detail">
-          <h4>Design system in Figma</h4>
+          <p class="eyebrow">Design system in Figma</p>
           <p>Grecia Gabriel &amp; Rebecca Bradley</p>
         </div>
         <div class="detail">
-          <h4>Sector</h4>
+          <p class="eyebrow">Sector</p>
           <p>Enterprise / Design Systems</p>
         </div>
       </div>
@@ -108,7 +103,7 @@ import PasswordGate from '../components/PasswordGate.astro';
     ]} />
 
     <section class="challenge case-section" id="case-challenge">
-      <h4>Challenge</h4>
+      <p class="eyebrow">Challenge</p>
       <h2>How do you make a design system that AI tools and agents will actually use — instead of approximating?</h2>
     </section>
 
@@ -212,11 +207,6 @@ import PasswordGate from '../components/PasswordGate.astro';
     </div>
   </section>
 
-  <section class="case-next">
-    <a href="/key-metrics-over-time.html">
-      <span class="case-next-label">Next case study</span>
-      <h3>Turning pricing data into a self-service experience →</h3>
-    </a>
-  </section>
+  <CaseNav slug="converge-design-system" />
 
 </BaseLayout>

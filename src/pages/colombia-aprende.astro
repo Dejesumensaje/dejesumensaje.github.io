@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CaseTOC from '../components/CaseTOC.astro';
+import CaseNav from '../components/CaseNav.astro';
 ---
 
 <BaseLayout
@@ -22,7 +23,7 @@ import CaseTOC from '../components/CaseTOC.astro';
     })}</script>
   </Fragment>
 
-  <main>
+  <main id="main-content">
 
     <section id="hero-case" aria-labelledby="case-heading">
 
@@ -72,30 +73,30 @@ import CaseTOC from '../components/CaseTOC.astro';
       </section>
 
       <div class="case-full-image">
-        <img src="/assets/colombia-aprende-mockup.png" alt="Colombia Aprende platform redesign mockup" loading="eager" />
+        <img src="/assets/colombia-aprende-mockup.png" width="1026" height="822" alt="Colombia Aprende platform redesign mockup" loading="eager" />
       </div>
 
       <div class="details">
         <div class="detail">
-          <h4>Role</h4>
+          <p class="eyebrow">Role</p>
           <p>User Research, Information Architecture, Prototyping, Testing, Project Management</p>
         </div>
         <div class="detail">
-          <h4>Date</h4>
+          <p class="eyebrow">Date</p>
           <p>March 2020 - ongoing</p>
         </div>
         <div class="detail">
-          <h4>Team</h4>
+          <p class="eyebrow">Team</p>
           <p>Camilo Beltrán - development lead</p>
           <p>Catalina Mendoza - visual and interaction designer</p>
           <p>Natalia Torres - visual designer</p>
         </div>
         <div class="detail">
-          <h4>Link</h4>
+          <p class="eyebrow">Link</p>
           <p><a href="https://colombiaaprende.edu.co" target="_blank" rel="noopener noreferrer">Colombia Aprende</a></p>
         </div>
         <div class="detail">
-          <h4>Sector</h4>
+          <p class="eyebrow">Sector</p>
           <p>Education</p>
         </div>
       </div>
@@ -113,7 +114,7 @@ import CaseTOC from '../components/CaseTOC.astro';
     ]} />
 
     <section class="challenge case-section" id="case-challenge">
-      <h4>Challenge</h4>
+      <p class="eyebrow">Challenge</p>
       <h2>How do you transform a 17-year-old national platform with millions of users to improve discovery, retention, and conversion?</h2>
     </section>
 
@@ -231,11 +232,6 @@ import CaseTOC from '../components/CaseTOC.astro';
     </div>
   </section>
 
-  <section class="case-next">
-    <a href="/aprender-digital.html">
-      <span class="case-next-label">Next case study</span>
-      <h3>Bringing learning to rural classrooms without internet →</h3>
-    </a>
-  </section>
+  <CaseNav slug="colombia-aprende" />
 
 </BaseLayout>

@@ -111,6 +111,10 @@
 
 html { scroll-behavior: smooth; }
 
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+}
+
 body {
     font-family: var(--font-serif);
     font-size: var(--text-body);
@@ -120,8 +124,16 @@ body {
 }
 
 :focus-visible {
-    outline: 2px solid var(--ocean);
+    outline: 2px solid var(--ink);
     outline-offset: 3px;
+    border-radius: 1px;
+}
+
+/* Focus ring on dark surfaces needs a light color to stay ≥3:1 */
+.site-cta :focus-visible,
+#password-gate :focus-visible,
+.about-hero :focus-visible {
+    outline-color: var(--canvas);
 }
 
 /* ── TYPOGRAPHY ──────────────────────────── */
@@ -147,6 +159,19 @@ h4 {
     color: var(--ocean);
     margin-bottom: 0.5rem;
     line-height: 1.2;
+}
+
+/* Eyebrow label (a <p>, not a heading) — keeps heading levels from skipping */
+.eyebrow {
+    font-family: var(--font-sans);
+    font-size: var(--text-micro);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+    color: var(--ocean);
+    margin: 0 0 0.5rem;
+    line-height: 1.2;
+    max-width: none;
 }
 
 p {
@@ -380,7 +405,7 @@ figcaption {
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: var(--tracking-wide);
-    color: rgba(255, 255, 255, 0.35);
+    color: rgba(255, 255, 255, 0.6);
     margin-bottom: calc(var(--space-unit) * 2);
 }
 
@@ -429,7 +454,13 @@ figcaption {
     gap: calc(var(--space-unit) * 1.5);
     align-items: center;
 }
-.site-cta__social a { display: flex; align-items: center; }
+.site-cta__social a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.6rem;
+    margin: -0.6rem;
+}
 .site-cta__social img {
     height: 1.25rem;
     width: auto;
@@ -1160,7 +1191,7 @@ footer.site-footer {
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: var(--tracking-wide);
-    color: rgba(0,0,0,0.4);
+    color: rgba(0,0,0,0.65);
     margin: 0; max-width: none;
     transition: color 0.2s ease;
 }
@@ -1184,7 +1215,7 @@ footer.site-footer {
     font-family: var(--font-sans);
     font-size: var(--text-micro);
     font-weight: 700;
-    color: rgba(0,0,0,0.28);
+    color: rgba(0,0,0,0.6);
     letter-spacing: 0.05em;
 }
 
@@ -1230,8 +1261,8 @@ footer.site-footer {
     background: var(--white);
 }
 
-.details h4 { margin-bottom: 0.4rem; }
-.details h4::after { content: url(./assets/line-detail.svg); display: block; }
+.details .eyebrow { margin-bottom: 0.4rem; }
+.details .eyebrow::after { content: url(./assets/line-detail.svg); display: block; }
 
 .details p, .details a {
     font-size: var(--text-small);
@@ -1308,7 +1339,7 @@ footer.site-footer {
 }
 
 .challenge.visible { opacity: 1; transform: translateY(0); }
-.challenge h4 { margin-bottom: 1rem; }
+.challenge .eyebrow { margin-bottom: 1rem; }
 
 .challenge h2 {
     font-size: var(--text-h2);
@@ -1376,14 +1407,16 @@ footer.site-footer {
 
 .insight p { font-size: var(--text-small); line-height: 1.6; margin: 0; max-width: none; }
 
-.insights h4 {
+.insight-title {
+    font-family: var(--font-sans);
     font-style: normal;
     font-size: var(--text-small);
     font-weight: 700;
     text-transform: none;
     letter-spacing: 0;
     color: var(--ink);
-    margin-bottom: 0.5rem;
+    margin: 0 0 0.5rem;
+    max-width: none;
 }
 
 figure img {
@@ -1460,7 +1493,7 @@ figure img {
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: var(--tracking-wide);
-    color: rgba(0,0,0,0.45);
+    color: rgba(0,0,0,0.6);
     line-height: 1.4;
     max-width: 12ch;
 }

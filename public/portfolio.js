@@ -73,8 +73,7 @@
     /* ── SCROLL REVEAL ─────────────────────────────── */
     function initScrollReveal() {
         const els = document.querySelectorAll(
-            '.overview, .challenge, .insights, .project-summary, ' +
-            '.timeline-point, .skill-block, .beyond-card'
+            '.overview, .challenge, .insights, .project-summary'
         );
 
         if (reduced) { els.forEach(el => el.classList.add('visible')); return; }
@@ -210,8 +209,14 @@
             el.textContent = `${h}:${m}:${s} MDE`;
         };
 
-        tick();
-        setInterval(tick, 1000);
+        let timer = null;
+        const start = () => { if (!timer) { tick(); timer = setInterval(tick, 1000); } };
+        const stop = () => { if (timer) { clearInterval(timer); timer = null; } };
+        // Don't keep ticking while the tab is in the background.
+        document.addEventListener('visibilitychange', () => {
+            document.hidden ? stop() : start();
+        });
+        start();
     }
 
     /* ── CARD STAGGER ───────────────────────── */
@@ -259,9 +264,9 @@ initMedellinClock();
         } catch (e) {
             // Graceful degradation
             document.querySelectorAll(
-                '.overview, .challenge, .insights, .project-summary, ' +
-                '.timeline-point, .skill-block, .beyond-card, .page-reveal, .project-card'
-            ).forEach(el => el.classList.add('visible', 'loaded'));
+                '.overview, .challenge, .insights, .project-summary, [data-reveal]'
+            ).forEach(el => el.classList.add('visible'));
+            document.body.classList.add('page-reveal', 'loaded');
         }
     }
 
