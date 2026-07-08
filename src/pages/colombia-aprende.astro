@@ -8,6 +8,9 @@ import CaseNav from '../components/CaseNav.astro';
   title="Colombia Aprende | William Montoya"
   description="How do you transform a 17-year-old national platform with millions of users to improve discovery, retention, and conversion?"
   ogImage="https://dejesumensaje.com/assets/colombia-aprende-mockup.png"
+  ogImageAlt="Colombia Aprende platform redesign mockup"
+  ogImageWidth={1026}
+  ogImageHeight={822}
   ogType="article"
   themeColor="#C0E4E3"
 >
@@ -15,11 +18,24 @@ import CaseNav from '../components/CaseNav.astro';
     <script type="application/ld+json" is:inline>{JSON.stringify({
       "@context": "https://schema.org",
       "@type": "Article",
-      "headline": "Colombia Aprende Case Study",
+      "headline": "Simplifying Colombia Aprende for inclusion and equity",
+      "alternativeHeadline": "Colombia Aprende Case Study",
       "image": "https://dejesumensaje.com/assets/colombia-aprende-mockup.png",
-      "author": { "@type": "Person", "name": "William Montoya" },
+      "author": { "@type": "Person", "name": "William Montoya", "url": "https://dejesumensaje.com" },
       "publisher": { "@type": "Person", "name": "William Montoya" },
+      "datePublished": "2026-04-21",
+      "dateModified": "2026-06-18",
+      "mainEntityOfPage": "https://dejesumensaje.com/colombia-aprende.html",
       "description": "How do you transform a 17-year-old national platform with millions of users to improve discovery, retention, and conversion?"
+    })}</script>
+    <script type="application/ld+json" is:inline>{JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://dejesumensaje.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Work", "item": "https://dejesumensaje.com/#work" },
+        { "@type": "ListItem", "position": 3, "name": "Colombia Aprende" }
+      ]
     })}</script>
   </Fragment>
 
@@ -155,7 +171,7 @@ import CaseNav from '../components/CaseNav.astro';
       </div>
 
       <figure>
-        <img src="/assets/double-diamond.svg" loading="lazy" alt="Double Diamond design process diagram" />
+        <img src="/assets/double-diamond.svg" width="849" height="470" loading="lazy" alt="Double Diamond design process diagram" />
       </figure>
     </section>
 
@@ -184,8 +200,8 @@ import CaseNav from '../components/CaseNav.astro';
       </div>
 
       <figure>
-        <img src="/assets/userflow-colombiaaprende.webp" loading="lazy" alt="User flow diagram for Colombia Aprende" />
-        <figcaption>The first version of the new user flow</figcaption>
+        <img src="/assets/userflow-colombiaaprende.webp" width="1400" height="779" loading="lazy" alt="User flow diagram for Colombia Aprende" />
+        <figcaption>The first version of the new user flow (diagram in Spanish).</figcaption>
       </figure>
 
       <div class="wrap">
@@ -204,8 +220,8 @@ import CaseNav from '../components/CaseNav.astro';
       </div>
 
       <figure>
-        <img src="/assets/mockup-aprender-digital.webp" loading="lazy" alt="A/B testing results comparison" />
-        <figcaption>We've used A/B testing to get to this point.</figcaption>
+        <img src="/assets/mockup-aprender-digital.webp" width="1400" height="1061" loading="lazy" alt="Final Colombia Aprende interface, refined through A/B testing" />
+        <figcaption>We used A/B testing to get to this point (interface in Spanish).</figcaption>
       </figure>
     </section>
 

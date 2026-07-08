@@ -14,6 +14,8 @@ export interface Project {
   description: string;
   image: string;
   imageAlt: string;
+  imageWidth: number;
+  imageHeight: number;
   accent: string;
   snapshot: ProjectSnapshot[];
 }
@@ -31,6 +33,8 @@ export const projects: Project[] = [
       'How I turned a design system that AI demos were bypassing into a code package — and a governance model — that humans and agents both build on.',
     image: '/assets/converge-design-system.webp',
     imageAlt: 'Converge design system',
+    imageWidth: 1600,
+    imageHeight: 1000,
     accent: 'var(--mint)',
     snapshot: [
       {
@@ -56,9 +60,11 @@ export const projects: Project[] = [
     title: 'Turning pricing data into a self-service experience',
     href: '/key-metrics-over-time.html',
     description:
-      'How to replace a manual Excel reporting process with an interactive feature that puts KFC franchisees in control of their own performance data.',
+      'Replacing a manual Excel reporting process with an interactive feature that puts KFC franchisees in control of their own performance data.',
     image: '/assets/key-metrics-over-time.webp',
     imageAlt: 'Key Metrics Over Time dashboard',
+    imageWidth: 1400,
+    imageHeight: 788,
     accent: 'var(--steel)',
     snapshot: [
       {
@@ -87,6 +93,8 @@ export const projects: Project[] = [
       'How to give Pizza Hut franchisees granular control over complex pricing recommendations without eroding their trust in the data.',
     image: '/assets/crust-upcharge-configurator.webp',
     imageAlt: 'Crust Upcharge Configurator interface',
+    imageWidth: 1400,
+    imageHeight: 1028,
     accent: 'var(--blush)',
     snapshot: [
       {
@@ -115,6 +123,8 @@ export const projects: Project[] = [
       'How to transform a 17-year-old national platform with millions of users so teachers and students could actually find what they need.',
     image: '/assets/colombia-aprende-imagen.webp',
     imageAlt: 'Colombia Aprende platform redesign',
+    imageWidth: 1400,
+    imageHeight: 700,
     accent: 'var(--lime)',
     snapshot: [
       {
@@ -140,9 +150,11 @@ export const projects: Project[] = [
     title: 'Bringing learning to rural classrooms without internet',
     href: '/aprender-digital.html',
     description:
-      "How to enable capabilities in Colombia's rural areas where connectivity is a barrier, not an assumption.",
+      'Designing an offline-first product so rural teachers in Colombia can keep teaching where connectivity is a barrier, not an assumption.',
     image: '/assets/aprender-digital-version-ligera.webp',
     imageAlt: 'Aprender Digital lightweight (offline) version interface',
+    imageWidth: 1400,
+    imageHeight: 700,
     accent: 'var(--lime)',
     snapshot: [
       {

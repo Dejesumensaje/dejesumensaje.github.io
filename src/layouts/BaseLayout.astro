@@ -6,6 +6,9 @@ interface Props {
   title: string;
   description: string;
   ogImage?: string;
+  ogImageAlt?: string;
+  ogImageWidth?: number;
+  ogImageHeight?: number;
   ogType?: 'website' | 'article';
   themeColor?: string;
   bodyClass?: string;
@@ -16,6 +19,9 @@ const {
   title,
   description,
   ogImage = 'https://dejesumensaje.com/assets/william-montoya.jpg',
+  ogImageAlt = 'William Montoya, Senior Product Designer based in Medellín, Colombia',
+  ogImageWidth = 1000,
+  ogImageHeight = 750,
   ogType = 'website',
   themeColor = '#fafaf8',
   bodyClass,
@@ -36,16 +42,22 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
     <link rel="canonical" href={canonicalURL} />
 
     <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content="William Montoya" />
+    <meta property="og:locale" content="en_US" />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content={String(ogImageWidth)} />
+    <meta property="og:image:height" content={String(ogImageHeight)} />
+    <meta property="og:image:alt" content={ogImageAlt} />
 
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content={canonicalURL} />
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content={ogImage} />
+    <meta property="twitter:image:alt" content={ogImageAlt} />
 
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
@@ -53,22 +65,40 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="manifest" href="/site.webmanifest" />
 
-    <!-- Reset -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.css"
-    />
+    <!-- Reset (Meyer 2.0, inlined — avoids a render-blocking third-party request) -->
+    <style>
+      html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline}
+      article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}
+      body{line-height:1}
+      ol,ul{list-style:none}
+      blockquote,q{quotes:none}
+      blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}
+      table{border-collapse:collapse;border-spacing:0}
+    </style>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap"
       rel="stylesheet"
     />
 
     <!-- Global design tokens + shared component styles -->
     <link rel="stylesheet" href="/estilos.css" />
+
+    <!-- No-JS fallback: scroll-reveal sections start at opacity 0 and depend on
+         portfolio.js adding .visible — without JS, show everything. -->
+    <noscript>
+      <style>
+        .page-reveal { opacity: 1 !important; }
+        .overview, .challenge, .insights, .project-summary,
+        .project-card, [data-reveal] {
+          opacity: 1 !important;
+          transform: none !important;
+        }
+      </style>
+    </noscript>
 
     <!-- Per-page head injections (extra CSS, meta, scripts) -->
     <slot name="head" />

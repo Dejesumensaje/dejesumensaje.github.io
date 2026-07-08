@@ -8,6 +8,9 @@ import CaseNav from '../components/CaseNav.astro';
   title="Aprender Digital | William Montoya"
   description="How do you get educational resources to rural teachers when internet access can't be assumed?"
   ogImage="https://dejesumensaje.com/assets/aprender-digital-hero.png"
+  ogImageAlt="Aprender Digital platform interface"
+  ogImageWidth={1026}
+  ogImageHeight={823}
   ogType="article"
   themeColor="#F2EFAA"
 >
@@ -15,11 +18,24 @@ import CaseNav from '../components/CaseNav.astro';
     <script type="application/ld+json" is:inline>{JSON.stringify({
       "@context": "https://schema.org",
       "@type": "Article",
-      "headline": "Aprender Digital Case Study",
+      "headline": "Bringing learning to rural classrooms without internet",
+      "alternativeHeadline": "Aprender Digital Case Study",
       "image": "https://dejesumensaje.com/assets/aprender-digital-hero.png",
-      "author": { "@type": "Person", "name": "William Montoya" },
+      "author": { "@type": "Person", "name": "William Montoya", "url": "https://dejesumensaje.com" },
       "publisher": { "@type": "Person", "name": "William Montoya" },
+      "datePublished": "2026-04-21",
+      "dateModified": "2026-06-18",
+      "mainEntityOfPage": "https://dejesumensaje.com/aprender-digital.html",
       "description": "How do you get educational resources to rural teachers when internet access can't be assumed?"
+    })}</script>
+    <script type="application/ld+json" is:inline>{JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://dejesumensaje.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Work", "item": "https://dejesumensaje.com/#work" },
+        { "@type": "ListItem", "position": 3, "name": "Aprender Digital" }
+      ]
     })}</script>
   </Fragment>
 
@@ -134,7 +150,7 @@ import CaseNav from '../components/CaseNav.astro';
       </div>
 
       <figure>
-        <img src="/assets/lean-ux-framework.webp" width="600" loading="lazy" alt="Lean UX Framework diagram" />
+        <img src="/assets/lean-ux-framework.webp" width="600" height="600" loading="lazy" alt="Lean UX Framework diagram" />
       </figure>
 
       <div class="wrap">
@@ -163,8 +179,8 @@ import CaseNav from '../components/CaseNav.astro';
       </div>
 
       <figure>
-        <img src="/assets/user-persona.webp" loading="lazy" alt="User Persona profile card" />
-        <figcaption>The user persona of a rural teacher in Colombia.</figcaption>
+        <img src="/assets/user-persona.webp" width="1100" height="1080" loading="lazy" alt="User persona profile card for Carmen Gómez, a rural teacher in Colombia" />
+        <figcaption>The user persona of a rural teacher in Colombia. Artifact in Spanish — the research was conducted in Spanish with rural teachers.</figcaption>
       </figure>
     </section>
 
@@ -175,8 +191,8 @@ import CaseNav from '../components/CaseNav.astro';
       </div>
 
       <figure>
-        <img src="/assets/value-proposition-canvas.webp" loading="lazy" alt="Value Proposition Canvas" />
-        <figcaption>We've used the Value Proposition Canvas for this exercise.</figcaption>
+        <img src="/assets/value-proposition-canvas.webp" width="1200" height="363" loading="lazy" alt="Value Proposition Canvas workshop artifact, in Spanish" />
+        <figcaption>We used the Value Proposition Canvas for this exercise (artifact in Spanish).</figcaption>
       </figure>
 
       <div class="wrap">
@@ -184,8 +200,8 @@ import CaseNav from '../components/CaseNav.astro';
       </div>
 
       <figure>
-        <img src="/assets/value-proposition-final.webp" loading="lazy" alt="Refined Value Proposition" />
-        <figcaption>Our new value proposition.</figcaption>
+        <img src="/assets/value-proposition-final.webp" width="1200" height="423" loading="lazy" alt="Refined value proposition statement, in Spanish" />
+        <figcaption>Our new value proposition (in Spanish): curated, offline-ready content packages that Secretariats can request and teachers can carry to schools as a single file.</figcaption>
       </figure>
 
       <div class="wrap">
@@ -200,23 +216,37 @@ import CaseNav from '../components/CaseNav.astro';
       </div>
 
       <div class="full-wrap">
-        <iframe
-          title="Aprender Digital website prototype (Figma)"
-          loading="lazy"
-          style="border: 1px solid rgba(0, 0, 0, 0.1);"
-          src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FSRpGGNHHdLTeOvaZIIjZVz%2FAprender-Digital%3Fpage-id%3D0%253A1%26node-id%3D42%253A2211%26viewport%3D241%252C48%252C0.04%26scaling%3Dmin-zoom%26starting-point-node-id%3D42%253A2211"
-          allowfullscreen
-        ></iframe>
+        <div
+          class="figma-facade"
+          data-figma-title="Aprender Digital website prototype (Figma)"
+          data-figma-src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FSRpGGNHHdLTeOvaZIIjZVz%2FAprender-Digital%3Fpage-id%3D0%253A1%26node-id%3D42%253A2211%26viewport%3D241%252C48%252C0.04%26scaling%3Dmin-zoom%26starting-point-node-id%3D42%253A2211"
+        >
+          <p class="figma-facade__label">Aprender Digital — website prototype</p>
+          <button type="button" class="figma-facade__load">Load interactive prototype</button>
+          <a
+            class="figma-facade__link"
+            href="https://www.figma.com/proto/SRpGGNHHdLTeOvaZIIjZVz/Aprender-Digital?page-id=0%3A1&node-id=42%3A2211&scaling=min-zoom&starting-point-node-id=42%3A2211"
+            target="_blank"
+            rel="noopener noreferrer"
+          >Open in Figma ↗</a>
+        </div>
       </div>
 
       <div class="full-wrap">
-        <iframe
-          title="Offline content package prototype (Figma)"
-          loading="lazy"
-          style="border: 1px solid rgba(0, 0, 0, 0.1);"
-          src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2F2OZPNtWxdH1iKL6p4GrCO5%2FContenido-offline%3Fpage-id%3D0%253A1%26node-id%3D4%253A2%26viewport%3D241%252C48%252C0.12%26scaling%3Dmin-zoom%26starting-point-node-id%3D4%253A2"
-          allowfullscreen
-        ></iframe>
+        <div
+          class="figma-facade"
+          data-figma-title="Offline content package prototype (Figma)"
+          data-figma-src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2F2OZPNtWxdH1iKL6p4GrCO5%2FContenido-offline%3Fpage-id%3D0%253A1%26node-id%3D4%253A2%26viewport%3D241%252C48%252C0.12%26scaling%3Dmin-zoom%26starting-point-node-id%3D4%253A2"
+        >
+          <p class="figma-facade__label">Offline content package — prototype</p>
+          <button type="button" class="figma-facade__load">Load interactive prototype</button>
+          <a
+            class="figma-facade__link"
+            href="https://www.figma.com/proto/2OZPNtWxdH1iKL6p4GrCO5/Contenido-offline?page-id=0%3A1&node-id=4%3A2&scaling=min-zoom&starting-point-node-id=4%3A2"
+            target="_blank"
+            rel="noopener noreferrer"
+          >Open in Figma ↗</a>
+        </div>
       </div>
     </section>
 
@@ -241,3 +271,71 @@ import CaseNav from '../components/CaseNav.astro';
   <CaseNav slug="aprender-digital" />
 
 </BaseLayout>
+
+<style>
+  /* Click-to-load facade for Figma embeds: keeps the page light and avoids
+     the blank frame the embed shows while (or if) it loads. */
+  .figma-facade {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: var(--radius);
+    background: repeating-linear-gradient(
+      -45deg,
+      rgba(0, 0, 0, 0.025),
+      rgba(0, 0, 0, 0.025) 12px,
+      transparent 12px,
+      transparent 24px
+    );
+  }
+
+  .figma-facade__label {
+    font-family: var(--font-sans);
+    font-size: var(--text-micro);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+    color: var(--ink-muted);
+    margin: 0;
+    padding: 0 1rem;
+    text-align: center;
+  }
+
+  .figma-facade__load {
+    font-family: var(--font-sans);
+    font-size: var(--text-small);
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 99px;
+    background: var(--ink, #0f0f0f);
+    color: #fff;
+    cursor: pointer;
+  }
+
+  .figma-facade__load:hover { opacity: 0.85; }
+
+  .figma-facade__link {
+    font-family: var(--font-sans);
+    font-size: var(--text-small);
+    color: var(--ink-muted);
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.figma-facade').forEach((facade) => {
+    facade.querySelector('.figma-facade__load')?.addEventListener('click', () => {
+      const iframe = document.createElement('iframe');
+      iframe.src = facade.dataset.figmaSrc ?? '';
+      iframe.title = facade.dataset.figmaTitle ?? 'Figma prototype';
+      iframe.allowFullscreen = true;
+      iframe.style.border = '1px solid rgba(0, 0, 0, 0.1)';
+      facade.replaceWith(iframe);
+    });
+  });
+</script>

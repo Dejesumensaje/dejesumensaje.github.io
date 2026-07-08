@@ -7,8 +7,8 @@ import { projects } from '../data/projects';
 ---
 
 <BaseLayout
-  title="William Montoya — Senior Product Designer"
-  description="Senior Product Designer with 8+ years turning complex, high-stakes systems into clear, usable products — from public-sector education platforms to enterprise data tools. Currently at Globant/Deloitte, based in Medellín."
+  title="William Montoya — Senior Product Designer (UX/UI) · Medellín"
+  description="Senior Product Designer (UX/UI) with 8+ years turning complex systems into clear, usable products. Design systems, information architecture, research. Remote."
 >
   <Fragment slot="head">
     <script type="application/ld+json" is:inline>{JSON.stringify({
@@ -16,8 +16,25 @@ import { projects } from '../data/projects';
       "@type": "Person",
       "name": "William Montoya",
       "jobTitle": "Senior Product Designer",
+      "description": "Senior Product Designer with 8+ years across public-sector education platforms and enterprise data tools. Focused on information architecture, design systems, and AI-assisted design workflows.",
       "url": "https://dejesumensaje.com",
       "image": "https://dejesumensaje.com/assets/william-montoya.jpg",
+      "email": "mailto:william@dejesumensaje.com",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Globant"
+      },
+      "knowsAbout": [
+        "User Experience Design",
+        "User Interface Design",
+        "Information Architecture",
+        "Design Systems",
+        "User Research",
+        "UX Writing",
+        "Accessibility",
+        "AI-assisted design workflows"
+      ],
+      "knowsLanguage": ["es", "en"],
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Medellín",
@@ -41,7 +58,7 @@ import { projects } from '../data/projects';
           <p class="hero-label">
             Senior Product Designer · Medellín, Colombia
           </p>
-          <h1 id="hero-heading">William<br>Montoya</h1>
+          <h1 id="hero-heading">William <br>Montoya</h1>
           <p class="hero-tagline">
             I turn complex, high-stakes systems into products people actually
             understand — from national education platforms to enterprise pricing
@@ -49,7 +66,7 @@ import { projects } from '../data/projects';
           </p>
           <div class="hero-available" aria-label="Open to work">
             <span class="status-dot"></span>
-            Available for Senior/Staff roles
+            Available for Senior/Staff roles · Remote · EN/ES
           </div>
           <div class="hero-actions">
             <a href="#work" class="btn btn--primary">View work</a>
@@ -65,16 +82,52 @@ import { projects } from '../data/projects';
         <div class="hero-portrait">
           <figure class="media-slot media-slot--portrait">
             <div class="portrait-frame">
-              <img
-                src="/assets/william-montoya.jpg" width="1000" height="750"
-                alt="William Montoya"
-                class="portrait-img"
-                fetchpriority="high"
-              />
+              <picture>
+                <source srcset="/assets/william-montoya.webp" type="image/webp" />
+                <img
+                  src="/assets/william-montoya.jpg" width="1000" height="750"
+                  alt="William Montoya"
+                  class="portrait-img"
+                  fetchpriority="high"
+                />
+              </picture>
             </div>
           </figure>
         </div>
 
+      </div>
+    </section>
+
+    <!-- ── WHAT I DO ───────────────────────────────── -->
+    <section id="expertise" aria-labelledby="expertise-heading">
+      <div class="expertise-inner">
+        <h2 id="expertise-heading" class="label">What I do</h2>
+        <div class="expertise-grid">
+          <div class="expertise-item">
+            <h3>Product &amp; UX design</h3>
+            <p>
+              End-to-end design for complex products — research, flows,
+              prototyping, and usability testing. From national education
+              platforms to enterprise pricing tools.
+            </p>
+          </div>
+          <div class="expertise-item">
+            <h3>Information architecture</h3>
+            <p>
+              Structure for content-heavy ecosystems: taxonomies, navigation,
+              and content models that help people find what they need without
+              thinking about it.
+            </p>
+          </div>
+          <div class="expertise-item">
+            <h3>Design systems &amp; AI</h3>
+            <p>
+              Design systems that humans and AI agents can both build on —
+              token architecture, governance, and AI-assisted workflows that
+              keep quality at scale.
+            </p>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -109,6 +162,41 @@ import { projects } from '../data/projects';
      Row card styles live in ProjectCard.astro.
 ──────────────────────────────────────────────────── -->
 <style>
+
+/* ── WHAT I DO ─────────────────────────────────────── */
+
+#expertise {
+  background: var(--canvas);
+  padding: var(--section-pad) var(--gutter);
+}
+
+.expertise-inner {
+  max-width: var(--layout-width);
+  margin: 0 auto;
+  display: grid;
+  gap: clamp(1.25rem, 3vw, 2rem);
+}
+
+.expertise-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: clamp(1.5rem, 4vw, 3rem);
+}
+
+.expertise-item h3 {
+  font-family: var(--font-sans);
+  font-size: var(--text-h3);
+  font-weight: 700;
+  margin-bottom: 0.6rem;
+}
+
+.expertise-item p {
+  font-family: var(--font-sans);
+  font-size: var(--text-small);
+  color: var(--ink-muted);
+  line-height: var(--lh-lead);
+  margin: 0;
+}
 
 /* ── WORK SECTION ──────────────────────────────────── */
 

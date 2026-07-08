@@ -35,12 +35,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <!-- 01 — IDENTITY -->
     <section class="about-hero" data-bg="var(--color-text)" aria-labelledby="about-heading">
       <div class="about-hero__photo">
-        <img src="/assets/william-montoya.jpg" width="1000" height="750" alt="William Montoya" />
+        <picture>
+          <source srcset="/assets/william-montoya.webp" type="image/webp" />
+          <img src="/assets/william-montoya.jpg" width="1000" height="750" alt="William Montoya" />
+        </picture>
       </div>
       <div class="about-hero__content">
         <span class="about-eyebrow">Senior Product Designer · Medellín</span>
-        <h1 id="about-heading" class="about-name">William<br>Montoya.</h1>
-        <p class="about-tagline">Designing at the intersection of systems,<br>education, and human possibility.</p>
+        <h1 id="about-heading" class="about-name">William <br>Montoya.</h1>
+        <p class="about-tagline">Designing at the intersection of systems, <br>education, and human possibility.</p>
       </div>
     </section>
 
@@ -81,30 +84,41 @@ import BaseLayout from '../layouts/BaseLayout.astro';
               <span class="xp-year">2023 — Now</span>
               <span class="xp-company">Globant / Deloitte</span>
               <span class="xp-role">Senior Product Designer</span>
+              <p class="xp-note">Design systems, pricing tools, and AI governance for Converge for Restaurants (KFC, Pizza Hut).</p>
             </div>
 
             <div class="xp-item">
               <span class="xp-year">2022 — 2023</span>
               <span class="xp-company">Globant / CashPak</span>
               <span class="xp-role">UX Designer</span>
+              <!-- TODO(William): one-line impact, e.g.
+              <p class="xp-note">Designed X for Y, improving Z.</p>
+              -->
             </div>
 
             <div class="xp-item">
               <span class="xp-year">2021 — 2022</span>
               <span class="xp-company">Globant / Blackboard</span>
               <span class="xp-role">Product Designer</span>
+              <!-- TODO(William): one-line impact, e.g.
+              <p class="xp-note">Designed X for Y, improving Z.</p>
+              -->
             </div>
 
             <div class="xp-item">
               <span class="xp-year">2019 — 2021</span>
               <span class="xp-company">Ministry of Education</span>
               <span class="xp-role">UX Lead</span>
+              <p class="xp-note">Led the redesign of Colombia Aprende and Aprender Digital — national platforms serving millions of teachers and students.</p>
             </div>
 
             <div class="xp-item">
               <span class="xp-year">2017 — 2018</span>
               <span class="xp-company">UNDP</span>
               <span class="xp-role">Product Designer</span>
+              <!-- TODO(William): one-line impact, e.g.
+              <p class="xp-note">Designed X for Y, improving Z.</p>
+              -->
             </div>
 
           </div>
