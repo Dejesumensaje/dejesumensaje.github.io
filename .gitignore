@@ -6,3 +6,8 @@ dist/
 !.env.example
 .DS_Store
 **/.DS_Store
+
+# Local agent tooling (skills installed via `npx skills add`, Claude Code local settings)
+.agents/
+.claude/
+skills-lock.json
