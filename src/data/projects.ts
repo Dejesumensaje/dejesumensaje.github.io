@@ -30,7 +30,7 @@ export const projects: Project[] = [
     title: 'Operationalizing a design system for humans and AI agents',
     href: '/converge-design-system.html',
     description:
-      'How I turned a design system that AI demos were bypassing into a code package — and a governance model — that humans and agents both build on.',
+      'How I turned a design system that AI demos were bypassing into a code package, and a governance model, that humans and agents both build on.',
     image: '/assets/converge-design-system.webp',
     imageAlt: 'Converge design system',
     imageWidth: 1600,

@@ -321,8 +321,10 @@ const isRow = variant === 'row';
 .feature-card {
   display: grid;
   gap: clamp(1.25rem, 2.5vw, 1.875rem);
-  /* Sits inside .work-roll like the row cards: own padding + rule */
-  padding: clamp(2.5rem, 5vw, 4rem) var(--gutter);
+  /* First item in .work-roll: the border-top is the list's opening
+     rule, so the top padding is tighter than the bottom (which sets
+     the gap to the row cards below). */
+  padding: clamp(1.5rem, 2.5vw, 2rem) var(--gutter) clamp(2.75rem, 5vw, 4rem);
   border-top: 2px solid var(--ink-faint);
 }
 
@@ -364,7 +366,7 @@ const isRow = variant === 'row';
 .feature-card__title {
   font-family: var(--font-display);
   font-size: clamp(1.875rem, 4.5vw, 3.5rem);
-  font-weight: 800;
+  font-weight: 900;
   line-height: 1.0;
   letter-spacing: var(--tracking-display);
   color: var(--ink);

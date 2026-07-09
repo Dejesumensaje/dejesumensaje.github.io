@@ -3,25 +3,17 @@
    =========================================== */
 
 /* ── FONTS (self-hosted, latin subset) ─────
-   Geist    → display: h1-h3, big card titles, metric values
-   Inter    → UI, labels, small text
-   PT Serif → editorial voice only: body prose, hero tagline,
-              pull-quotes, reflections. Never UI chrome.       */
-
-@font-face {
-    font-family: 'Geist';
-    font-style: normal;
-    font-weight: 400 800;
-    font-display: swap;
-    src: url('/fonts/geist-400-800.woff2') format('woff2');
-}
+   Inter    → all headings + UI (display via weight/tracking, not a
+              second family)
+   PT Serif → editorial voice: body prose, hero tagline, leads,
+              pull-quotes, reflections.                          */
 
 @font-face {
     font-family: 'Inter';
     font-style: normal;
-    font-weight: 400 700;
+    font-weight: 300 900;
     font-display: swap;
-    src: url('/fonts/inter-400-700.woff2') format('woff2');
+    src: url('/fonts/inter-300-900.woff2') format('woff2');
 }
 
 @font-face {
@@ -86,7 +78,7 @@
     --color-surface:    #f2f2f0;
 
     /* Fonts */
-    --font-display: "Geist", "Inter", sans-serif;
+    --font-display: "Inter", sans-serif;
     --font-sans:    "Inter", sans-serif;
     --font-serif:   "PT Serif", serif;
 
@@ -212,10 +204,7 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: 0.75rem;
 }
 
-/* Display voice: Geist for the three heading levels that carry
-   the page. Labels (h4+, .label, .eyebrow) stay Inter. */
 h1, h2, h3 {
-    font-family: var(--font-display);
     text-wrap: balance;
 }
 

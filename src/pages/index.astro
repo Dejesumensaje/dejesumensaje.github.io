@@ -166,11 +166,15 @@ import { projects } from '../data/projects';
 <style>
 
 /* ── WHAT I DO ─────────────────────────────────────
-   Asymmetric 2fr/3fr: heading column left, stacked
+   A distinct full-bleed surface band (grey, one tonal
+   step off the hero's canvas) so it reads as its own
+   block. Asymmetric 2fr/3fr: heading left, stacked
    items with hairlines right (no equal-card grid). */
 
 #expertise {
-  background: var(--canvas);
+  background: var(--surface);
+  border-top: 1px solid var(--ink-faint);
+  border-bottom: 1px solid var(--ink-faint);
   padding: var(--section-pad) var(--gutter);
 }
 
@@ -234,14 +238,14 @@ import { projects } from '../data/projects';
 
 #work {
   background: var(--white);
-  padding-top: var(--section-pad-lg);
+  padding-top: var(--section-pad);
   padding-bottom: 0;
 }
 
 .work-intro {
   max-width: var(--layout-width);
   margin: 0 auto;
-  padding: 0 var(--gutter) clamp(1.5rem, 3vw, 2.5rem);
+  padding: 0 var(--gutter) clamp(1.75rem, 3vw, 2.25rem);
 }
 
 .work-intro__copy {
