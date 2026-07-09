@@ -1380,8 +1380,33 @@ footer.site-footer {
     background: var(--white);
 }
 
-.details .eyebrow { margin-bottom: 0.4rem; }
-.details .eyebrow::after { content: url(./assets/line-detail.svg); display: block; }
+.details .eyebrow {
+    margin-bottom: 0.4rem;
+    position: relative;
+}
+.details .eyebrow::after {
+    content: url(./assets/line-detail.svg);
+    display: block;
+    margin-top: 0.5rem;
+}
+
+/* Multi-column meta row: reserve a uniform two-line label block so the
+   teal rules — and the values beneath them — stay aligned across columns
+   even when a label wraps (e.g. "Design system in Figma"). Single-column
+   (mobile) keeps the rule tucked right under the label. */
+@media (min-width: 560px) {
+    .details .eyebrow {
+        min-height: 2.4em;          /* two lines of the micro label */
+        padding-bottom: 0.85rem;    /* room for the absolutely-placed rule */
+        margin-bottom: 0.4rem;
+    }
+    .details .eyebrow::after {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        margin-top: 0;
+    }
+}
 
 .details p, .details a {
     font-size: var(--text-small);
