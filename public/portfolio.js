@@ -206,7 +206,7 @@
             const h = String(mde.getHours()).padStart(2, '0');
             const m = String(mde.getMinutes()).padStart(2, '0');
             const s = String(mde.getSeconds()).padStart(2, '0');
-            el.textContent = `${h}:${m}:${s} MDE`;
+            el.textContent = `${h}:${m}:${s}`;
         };
 
         let timer = null;

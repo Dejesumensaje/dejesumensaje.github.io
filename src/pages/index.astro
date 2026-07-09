@@ -61,7 +61,7 @@ import { projects } from '../data/projects';
           <h1 id="hero-heading">William <br>Montoya</h1>
           <p class="hero-tagline">
             I turn complex, high-stakes systems into products people actually
-            understand — from national education platforms to enterprise pricing
+            understand, from national education platforms to enterprise pricing
             tools. 8+ years across the public sector and enterprise.
           </p>
           <div class="hero-available" aria-label="Open to work">
@@ -70,12 +70,7 @@ import { projects } from '../data/projects';
           </div>
           <div class="hero-actions">
             <a href="#work" class="btn btn--primary">View work</a>
-            <a
-              href="mailto:william@dejesumensaje.com?subject=Hi, William!"
-              class="btn btn--ghost"
-            >
-              Email me
-            </a>
+            <a href="#contact" class="btn btn--ghost">Contact</a>
           </div>
         </div>
 
@@ -101,12 +96,14 @@ import { projects } from '../data/projects';
     <!-- ── WHAT I DO ───────────────────────────────── -->
     <section id="expertise" aria-labelledby="expertise-heading">
       <div class="expertise-inner">
-        <h2 id="expertise-heading" class="label">What I do</h2>
-        <div class="expertise-grid">
+        <div class="expertise-heading">
+          <h2 id="expertise-heading">What I do</h2>
+        </div>
+        <div class="expertise-list">
           <div class="expertise-item">
             <h3>Product &amp; UX design</h3>
             <p>
-              End-to-end design for complex products — research, flows,
+              End-to-end design for complex products: research, flows,
               prototyping, and usability testing. From national education
               platforms to enterprise pricing tools.
             </p>
@@ -122,7 +119,7 @@ import { projects } from '../data/projects';
           <div class="expertise-item">
             <h3>Design systems &amp; AI</h3>
             <p>
-              Design systems that humans and AI agents can both build on —
+              Design systems that humans and AI agents can both build on:
               token architecture, governance, and AI-assisted workflows that
               keep quality at scale.
             </p>
@@ -139,15 +136,20 @@ import { projects } from '../data/projects';
           <span class="label">Selected Work</span>
           <p class="work-lead">
             Selected case studies from national education platforms and enterprise
-            pricing tools — where research and information architecture do the
+            pricing tools, where research and information architecture do the
             heavy lifting.
           </p>
         </div>
       </div>
 
       <div class="work-roll">
-        {projects.map(project => (
-          <ProjectCard project={project} variant="row" />
+        {projects.map((project, i) => (
+          i === 0
+            /* Flagship case leads typographically.
+               TODO(William): showImage={true} once the sanitized
+               system visual replaces the flat placeholder. */
+            ? <ProjectCard project={project} variant="featured" showImage={false} />
+            : <ProjectCard project={project} variant="row" />
         ))}
       </div>
 
@@ -163,7 +165,9 @@ import { projects } from '../data/projects';
 ──────────────────────────────────────────────────── -->
 <style>
 
-/* ── WHAT I DO ─────────────────────────────────────── */
+/* ── WHAT I DO ─────────────────────────────────────
+   Asymmetric 2fr/3fr: heading column left, stacked
+   items with hairlines right (no equal-card grid). */
 
 #expertise {
   background: var(--canvas);
@@ -174,20 +178,31 @@ import { projects } from '../data/projects';
   max-width: var(--layout-width);
   margin: 0 auto;
   display: grid;
-  gap: clamp(1.25rem, 3vw, 2rem);
+  gap: clamp(1.5rem, 3vw, 2.5rem);
 }
 
-.expertise-grid {
+.expertise-heading h2 {
+  font-size: var(--text-h2);
+  margin: 0;
+}
+
+.expertise-list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: clamp(1.5rem, 4vw, 3rem);
+}
+
+.expertise-item {
+  padding: clamp(1.25rem, 2.5vw, 1.75rem) 0;
+  border-top: 1px solid var(--ink-faint);
+}
+
+.expertise-item:last-child {
+  border-bottom: 1px solid var(--ink-faint);
 }
 
 .expertise-item h3 {
-  font-family: var(--font-sans);
   font-size: var(--text-h3);
   font-weight: 700;
-  margin-bottom: 0.6rem;
+  margin-bottom: 0.5rem;
 }
 
 .expertise-item p {
@@ -196,13 +211,30 @@ import { projects } from '../data/projects';
   color: var(--ink-muted);
   line-height: var(--lh-lead);
   margin: 0;
+  max-width: 52ch;
+}
+
+@media (min-width: 900px) {
+  .expertise-inner {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+    gap: calc(var(--space-unit) * 3);
+    align-items: start;
+  }
+
+  .expertise-item {
+    display: grid;
+    grid-template-columns: 14rem 1fr;
+    gap: calc(var(--space-unit) * 1.5);
+  }
+
+  .expertise-item h3 { margin-bottom: 0; }
 }
 
 /* ── WORK SECTION ──────────────────────────────────── */
 
 #work {
   background: var(--white);
-  padding-top: var(--section-pad);
+  padding-top: var(--section-pad-lg);
   padding-bottom: 0;
 }
 

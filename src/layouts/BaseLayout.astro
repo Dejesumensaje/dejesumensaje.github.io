@@ -76,13 +76,10 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
       table{border-collapse:collapse;border-spacing:0}
     </style>
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap"
-      rel="stylesheet"
-    />
+    <!-- Fonts: self-hosted (see @font-face in estilos.css) -->
+    <link rel="preload" href="/fonts/geist-400-800.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/inter-400-700.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/pt-serif-400.woff2" as="font" type="font/woff2" crossorigin />
 
     <!-- Global design tokens + shared component styles -->
     <link rel="stylesheet" href="/estilos.css" />

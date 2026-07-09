@@ -4,9 +4,12 @@ import type { Project } from '../data/projects';
 interface Props {
   project: Project;
   variant: 'featured' | 'brief' | 'row';
+  /** Featured only: skip the image slot (typographic lead row).
+      Used while a case has no real visual yet. */
+  showImage?: boolean;
 }
 
-const { project, variant } = Astro.props;
+const { project, variant, showImage = true } = Astro.props;
 const isFeatured = variant === 'featured';
 const isRow = variant === 'row';
 ---
@@ -60,39 +63,40 @@ const isRow = variant === 'row';
 
     <div class="feature-card__header">
       <div class="feature-card__meta-top">
-        <span class="label">{project.tags.join(' · ')}</span>
+        <span class="feature-card__context">{project.context}</span>
         {project.confidential && (
           <span class="label label--confidential">Confidential</span>
         )}
       </div>
-      <span class="feature-card__context">{project.context}</span>
       <h2 class="feature-card__title">
         <a href={project.href}>{project.title}</a>
       </h2>
       <p class="feature-card__desc">{project.description}</p>
     </div>
 
-    <a
-      class:list={[
-        'feature-card__image',
-        project.confidential && 'feature-card__image--confidential',
-      ]}
-      href={project.href}
-      aria-label={`View ${project.title} case study`}
-      style={`--card-bg: ${project.accent}`}
-    >
-      <img
-        src={project.image}
-        alt={project.imageAlt}
-        width={project.imageWidth}
-        height={project.imageHeight}
-        loading="eager"
-        fetchpriority="high"
-      />
-      {project.confidential && (
-        <div class="confidential-badge" aria-hidden="true">Confidential · NDA</div>
-      )}
-    </a>
+    {showImage && (
+      <a
+        class:list={[
+          'feature-card__image',
+          project.confidential && 'feature-card__image--confidential',
+        ]}
+        href={project.href}
+        aria-label={`View ${project.title} case study`}
+        style={`--card-bg: ${project.accent}`}
+      >
+        <img
+          src={project.image}
+          alt={project.imageAlt}
+          width={project.imageWidth}
+          height={project.imageHeight}
+          loading="eager"
+          fetchpriority="high"
+        />
+        {project.confidential && (
+          <div class="confidential-badge" aria-hidden="true">Confidential · NDA</div>
+        )}
+      </a>
+    )}
 
     <div class="feature-card__snapshot">
       {project.snapshot.map(point => (
@@ -202,7 +206,7 @@ const isRow = variant === 'row';
 
 /* Title — editorial weight */
 .row-card__title {
-  font-family: var(--font-sans);
+  font-family: var(--font-display);
   font-size: clamp(1.625rem, 3vw, 2.5rem);
   font-weight: 800;
   line-height: 1.1;
@@ -317,6 +321,23 @@ const isRow = variant === 'row';
 .feature-card {
   display: grid;
   gap: clamp(1.25rem, 2.5vw, 1.875rem);
+  /* Sits inside .work-roll like the row cards: own padding + rule */
+  padding: clamp(2.5rem, 5vw, 4rem) var(--gutter);
+  border-top: 2px solid var(--ink-faint);
+}
+
+@media (min-width: 992px) {
+  .feature-card {
+    padding-left: calc(var(--space-unit) * 3);
+    padding-right: calc(var(--space-unit) * 3);
+  }
+}
+
+@media (min-width: 1440px) {
+  .feature-card {
+    padding-left: calc(var(--space-unit) * 5);
+    padding-right: calc(var(--space-unit) * 5);
+  }
 }
 
 .feature-card__meta-top {
@@ -324,7 +345,11 @@ const isRow = variant === 'row';
   flex-wrap: wrap;
   align-items: center;
   gap: 0.625rem;
+  margin-bottom: 0.75rem;
 }
+
+.feature-card__header { display: grid; gap: 0.75rem; }
+.feature-card__header .feature-card__meta-top { margin-bottom: 0; }
 
 .feature-card__context {
   display: block;
@@ -337,9 +362,9 @@ const isRow = variant === 'row';
 }
 
 .feature-card__title {
-  font-family: var(--font-sans);
+  font-family: var(--font-display);
   font-size: clamp(1.875rem, 4.5vw, 3.5rem);
-  font-weight: 900;
+  font-weight: 800;
   line-height: 1.0;
   letter-spacing: var(--tracking-display);
   color: var(--ink);

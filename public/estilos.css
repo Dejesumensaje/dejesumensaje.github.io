@@ -2,7 +2,65 @@
    WILLIAM MONTOYA — PORTFOLIO
    =========================================== */
 
-/* ── TOKENS ──────────────────────────────── */
+/* ── FONTS (self-hosted, latin subset) ─────
+   Geist    → display: h1-h3, big card titles, metric values
+   Inter    → UI, labels, small text
+   PT Serif → editorial voice only: body prose, hero tagline,
+              pull-quotes, reflections. Never UI chrome.       */
+
+@font-face {
+    font-family: 'Geist';
+    font-style: normal;
+    font-weight: 400 800;
+    font-display: swap;
+    src: url('/fonts/geist-400-800.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400 700;
+    font-display: swap;
+    src: url('/fonts/inter-400-700.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'PT Serif';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('/fonts/pt-serif-400.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'PT Serif';
+    font-style: italic;
+    font-weight: 400;
+    font-display: swap;
+    src: url('/fonts/pt-serif-400-italic.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'PT Serif';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('/fonts/pt-serif-700.woff2') format('woff2');
+}
+
+/* ── TOKENS ──────────────────────────────────
+   System rules (enforced, not just vibes):
+   · Accent: --ocean is THE interactive accent (links, active nav,
+     buttons, focus, progress). The green status dot is semantic
+     (real availability) and appears once per page, max.
+   · Pastels (--teal/--lime/--blush/--steel/--mint) are per-case
+     identity SURFACES only: case hero, thumb background, and at
+     most two tinted bands per case page. Never on interactive UI.
+   · Radius: 3 levels only — pill (2rem+) for interactive elements,
+     --radius (6px) for media/cards/surfaces, 1-2px for micro bars.
+   · Dark surfaces (.site-cta, .case-reflections, about hero) are
+     the single deliberate theme-block device; nothing else inverts.
+─────────────────────────────────────────────── */
 :root {
     --ink:          #0f0f0f;
     --ink-muted:    #595959;
@@ -28,8 +86,12 @@
     --color-surface:    #f2f2f0;
 
     /* Fonts */
-    --font-sans:  "Inter", sans-serif;
-    --font-serif: "PT Serif", serif;
+    --font-display: "Geist", "Inter", sans-serif;
+    --font-sans:    "Inter", sans-serif;
+    --font-serif:   "PT Serif", serif;
+
+    /* Motion */
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
 
     /* Type scale */
     --text-display: clamp(3.5rem, 8vw, 7rem);
@@ -53,9 +115,12 @@
     --tracking-display: -0.04em;
     --tracking-wide:     0.08em;
 
-    /* Spacing */
+    /* Spacing — two weights: prose sections vs "moment" sections
+       (hero, selected work, footer CTA). Bottom runs slightly
+       heavier than top where both are used (optical balance). */
     --space-unit:    1.25rem;
-    --section-pad:   5rem;
+    --section-pad:   clamp(5rem, 8vw, 6.5rem);
+    --section-pad-lg: clamp(7rem, 11vw, 9rem);
     --header-height: 4.5rem;
     --gutter:        calc(var(--space-unit) * 1.5);
 
@@ -145,6 +210,13 @@ h1, h2, h3, h4, h5, h6 {
     line-height: var(--lh-heading);
     color: var(--ink);
     margin-bottom: 0.75rem;
+}
+
+/* Display voice: Geist for the three heading levels that carry
+   the page. Labels (h4+, .label, .eyebrow) stay Inter. */
+h1, h2, h3 {
+    font-family: var(--font-display);
+    text-wrap: balance;
 }
 
 h1 { font-size: var(--text-h1); }
@@ -298,6 +370,15 @@ figcaption {
 }
 
 .btn:hover { transform: translateY(-1px); }
+
+/* Tactile press feedback across all button families */
+.btn:active,
+.button-cta:active,
+.button-secondary:active,
+.gate-btn:active {
+    transform: scale(0.98);
+    transition-duration: 0.1s;
+}
 
 .btn--primary {
     background: var(--ink);
@@ -1074,7 +1155,7 @@ nav ul li:last-child a:hover { background: var(--ocean); color: var(--white); }
 .home-bridge {
     background: var(--canvas);
     border-top: 1px solid var(--ink-faint);
-    padding: calc(var(--space-unit) * 6) var(--gutter);
+    padding: var(--section-pad) var(--gutter);
 }
 
 .home-bridge__inner {
@@ -1088,8 +1169,20 @@ nav ul li:last-child a:hover { background: var(--ocean); color: var(--white); }
     font-weight: 400;
     line-height: 1.45;
     color: var(--ink);
-    max-width: 30ch;
+    max-width: 36ch;
     margin-bottom: calc(var(--space-unit) * 2);
+}
+
+/* Desktop: text and link share one composed row on the grid */
+@media (min-width: 992px) {
+    .home-bridge__inner {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: calc(var(--space-unit) * 3);
+    }
+    .home-bridge__text { margin-bottom: 0; }
+    .home-bridge__link { flex-shrink: 0; padding-bottom: 0.35rem; }
 }
 
 .home-bridge__link {
@@ -1365,7 +1458,7 @@ footer.site-footer {
 .bg-mint  { background: var(--mint);  }
 
 .wrap { max-width: var(--content-width); margin: 0 auto; }
-.wrap p + h2 { margin-top: 2rem; }
+.wrap p + h2 { margin-top: clamp(2.5rem, 5vw, 3.5rem); }
 
 .insights {
     max-width: var(--layout-width);
@@ -1477,7 +1570,8 @@ figure img {
 
 .case-metric__value {
     display: block;
-    font-family: var(--font-sans);
+    font-family: var(--font-display);
+    font-variant-numeric: tabular-nums;
     font-size: clamp(2rem, 4vw, 3rem);
     font-weight: 800;
     line-height: 1;
