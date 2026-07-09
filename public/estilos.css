@@ -770,7 +770,6 @@ nav ul li:last-child a:hover { background: var(--ocean); color: var(--white); }
     line-height: var(--lh-lead);
     color: var(--ink);
     margin-bottom: calc(var(--space-unit) * 1.25);
-    max-width: 36ch;
 }
 
 .hero-subline {
