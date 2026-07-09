@@ -476,17 +476,18 @@ figcaption {
     text-transform: uppercase;
     letter-spacing: var(--tracking-wide);
     color: rgba(255, 255, 255, 0.6);
-    margin-bottom: calc(var(--space-unit) * 2);
+    margin-bottom: calc(var(--space-unit) * 0.75);
 }
 
 .site-cta__heading {
+    margin-top: 0; /* kill UA default so the overline stays attached */
     font-family: var(--font-sans);
     font-size: var(--text-display);
     font-weight: 800;
     line-height: var(--lh-display);
     letter-spacing: var(--tracking-display);
     color: #ffffff;
-    margin-bottom: calc(var(--space-unit) * 2.5);
+    margin-bottom: calc(var(--space-unit) * 1.5);
 }
 
 .site-cta__email {
@@ -738,7 +739,7 @@ nav ul li:last-child a:hover { background: var(--ocean); color: var(--white); }
     text-transform: uppercase;
     letter-spacing: var(--tracking-wide);
     color: var(--ink-muted);
-    margin: 0 0 calc(var(--space-unit) * 1.5);
+    margin: 0 0 calc(var(--space-unit) * 0.75);
     max-width: none;
 }
 
@@ -752,6 +753,7 @@ nav ul li:last-child a:hover { background: var(--ocean); color: var(--white); }
 }
 
 .hero-copy h1 {
+    margin-top: 0; /* kill UA default so the kicker stays attached */
     font-family: var(--font-sans);
     font-size: var(--text-display);
     font-weight: 800;
@@ -889,6 +891,41 @@ nav ul li:last-child a:hover { background: var(--ocean); color: var(--white); }
     max-width: none;
     margin: 0;
     line-height: 1.5;
+}
+
+/* Mobile hero: portrait leads, then the copy, everything compact
+   enough for portrait + name + tagline to share the first viewport. */
+@media (max-width: 767px) {
+    .hero-inner {
+        padding-top: calc(var(--space-unit) * 1.5);
+        gap: calc(var(--space-unit) * 1.75);
+    }
+
+    .hero-portrait { order: -1; }
+
+    .portrait-frame {
+        aspect-ratio: 16/10;
+        max-width: none;
+    }
+
+    .portrait-frame picture,
+    .portrait-img {
+        height: 100%;
+    }
+
+    .portrait-img {
+        object-fit: cover;
+        object-position: center 22%;
+    }
+
+    .hero-copy h1 { margin-bottom: var(--space-unit); }
+    .hero-tagline { margin-bottom: var(--space-unit); }
+    .hero-available { margin-bottom: calc(var(--space-unit) * 1.25); }
+
+    .hero-actions {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
 }
 
 /* ── WORK SECTION ────────────────────────── */
@@ -1290,7 +1327,7 @@ footer.site-footer {
     display: flex;
     align-items: center;
     gap: calc(var(--space-unit) * 1.5);
-    margin-bottom: calc(var(--space-unit) * 2);
+    margin-bottom: var(--space-unit);
 }
 
 .case-num {

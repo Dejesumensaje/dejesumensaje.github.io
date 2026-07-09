@@ -8,8 +8,6 @@
 
 .about-hero {
     background: var(--color-text);
-    min-height: 100vh;
-    min-height: 100svh;
     display: flex;
     flex-direction: column;
     padding-top: var(--header-height);
@@ -37,8 +35,8 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    padding: calc(var(--space-unit) * 3) calc(var(--space-unit) * 1.5) calc(var(--space-unit) * 4);
+    justify-content: flex-start;
+    padding: calc(var(--space-unit) * 2.5) calc(var(--space-unit) * 1.5) calc(var(--space-unit) * 3.5);
 }
 
 .about-eyebrow {
@@ -49,17 +47,18 @@
     text-transform: uppercase;
     letter-spacing: var(--tracking-wide);
     color: rgba(255, 255, 255, 0.4);
-    margin-bottom: calc(var(--space-unit) * 1.5);
+    margin-bottom: calc(var(--space-unit) * 0.75);
 }
 
 h1.about-name {
+    margin-top: 0; /* kill UA default so the eyebrow stays attached */
     font-family: var(--font-display);
     font-size: var(--text-display);
     font-weight: 800;
     line-height: var(--lh-display);
     letter-spacing: var(--tracking-display);
     color: #ffffff;
-    margin-bottom: calc(var(--space-unit) * 2);
+    margin-bottom: var(--space-unit);
 }
 
 .about-tagline {
@@ -75,6 +74,8 @@ h1.about-name {
 @media (min-width: 768px) {
     .about-hero {
         flex-direction: row;
+        min-height: 100vh;
+        min-height: 100svh;
     }
 
     .about-hero__photo {
@@ -170,7 +171,7 @@ h1.about-name {
     text-transform: uppercase;
     letter-spacing: var(--tracking-wide);
     color: var(--color-text-muted);
-    margin-bottom: calc(var(--space-unit) * 2);
+    margin-bottom: calc(var(--space-unit) * 1.25);
 }
 
 .xp-grid {

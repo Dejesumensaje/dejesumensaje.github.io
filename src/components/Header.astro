@@ -45,6 +45,16 @@ const isWork = !isAbout;
   .site-header .header-time { justify-self: center; }
   .site-header nav          { justify-self: end; }
 
+  /* Mobile: the time widget is hidden, so the middle grid column
+     collapses and the 1fr tracks stop pushing the nav to the edge.
+     Fall back to flex so it's logo left, links flush right. */
+  @media (max-width: 839px) {
+    .site-header .nav-wrap {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+
   /* Active page indicator */
   .site-header nav a[aria-current="page"] {
     color: var(--ink);
