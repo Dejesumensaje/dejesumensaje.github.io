@@ -171,15 +171,38 @@ const { sections } = Astro.props;
 
     update();
 
-    // ── Visibility: hide during hero, show after ──────
+    // ── Visibility: hide during hero and once the end-of-page
+    //    blocks (case nav / footer) scroll into view ──────
     const hero = document.getElementById('hero-case');
+    const blockers = [
+      document.querySelector<HTMLElement>('.case-nav'),
+      document.querySelector<HTMLElement>('footer'),
+    ].filter((el): el is HTMLElement => el !== null);
+
+    let heroVisible = hero !== null;
+    const endVisible = new Set<Element>();
+    const applyVisibility = () => {
+      toc.classList.toggle('is-visible', !heroVisible && endVisible.size === 0);
+    };
+
     if (hero) {
       new IntersectionObserver(
-        ([entry]) => toc.classList.toggle('is-visible', !entry.isIntersecting),
+        ([entry]) => { heroVisible = entry.isIntersecting; applyVisibility(); },
         { threshold: 0 }
       ).observe(hero);
-    } else {
-      toc.classList.add('is-visible');
     }
+
+    if (blockers.length > 0) {
+      const endObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach(e => e.isIntersecting ? endVisible.add(e.target) : endVisible.delete(e.target));
+          applyVisibility();
+        },
+        { threshold: 0 }
+      );
+      blockers.forEach(el => endObserver.observe(el));
+    }
+
+    applyVisibility();
   }
 </script>
