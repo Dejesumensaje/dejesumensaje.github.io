@@ -455,6 +455,16 @@ figcaption {
     color: #ffffff;
     border-color: rgba(255, 255, 255, 0.65);
 }
+/* Footer: online resume — lime outline marks it as the second path to the CV */
+.button-secondary--accent {
+    color: var(--lime);
+    border-color: var(--lime);
+}
+.button-secondary--accent:hover {
+    color: var(--ink);
+    background: var(--lime);
+    border-color: var(--lime);
+}
 
 /* ── SHARED CTA FOOTER ───────────────────── */
 

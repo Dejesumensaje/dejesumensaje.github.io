@@ -225,6 +225,30 @@ h1.about-name {
     max-width: 34rem;
 }
 
+/* Full resume: second step for readers already weighing the experience */
+.xp-resume {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem 1.5rem;
+    padding-top: calc(var(--space-unit) * 1.5);
+}
+
+.xp-resume__pdf {
+    font-family: var(--font-sans);
+    font-size: var(--text-small);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-thickness: 1px;
+}
+
+.xp-resume__updated {
+    font-family: var(--font-sans);
+    font-size: var(--text-micro);
+    color: var(--ink-muted);
+}
+
 /* xp-grid fills the column at all widths (no narrow left-hug) */
 
 @media (min-width: 992px) {

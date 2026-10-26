@@ -137,7 +137,7 @@ export const projects: Project[] = [
       },
       {
         label: 'Scale',
-        body: '81,000 resources, 70+ microsites, and a content ecosystem serving millions of users.',
+        body: '81,000 resources, 70+ microsites, and about 300,000 regular users, peaking at 2.8 million during the pandemic.',
       },
     ],
   },
