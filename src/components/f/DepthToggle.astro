@@ -1,0 +1,91 @@
+---
+// "Full story / TL;DR" segmented control. Several instances on a page stay
+// in sync; the choice is shared across case studies (per-viewer) and can be
+// linked with ?view=tldr.
+interface Props { full: string; tldr: string; floating?: boolean }
+const { full, tldr, floating = false } = Astro.props;
+import { getLang, t } from '../../i18n/ui';
+const lang = getLang(Astro.url);
+---
+
+<div
+  class:list={['depth', { 'depth--floating': floating }]}
+  role="radiogroup"
+  aria-label={t(lang, 'depth.label')}
+  data-depth-toggle
+  data-floating={floating ? '' : undefined}
+>
+  <span class="depth__thumb" aria-hidden="true"></span>
+  <button type="button" role="radio" aria-checked="true" data-value="full">
+    {t(lang, 'depth.full')} <span class="depth__time">{full}</span>
+  </button>
+  <button type="button" role="radio" aria-checked="false" data-value="tldr">
+    {t(lang, 'depth.tldr')} <span class="depth__time">{tldr}</span>
+  </button>
+</div>
+
+<style>
+  .depth {
+    position: relative;
+    display: inline-grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 4px;
+    border-radius: var(--radius-pill);
+    background: var(--surface);
+    isolation: isolate;
+  }
+  .depth button {
+    position: relative;
+    z-index: 1;
+    min-height: 40px;
+    padding: 8px 18px;
+    border-radius: var(--radius-pill);
+    font-size: var(--text-button);
+    font-weight: 600;
+    white-space: nowrap;
+    color: var(--muted);
+    transition: color 200ms ease, transform 160ms var(--ease-out);
+  }
+  .depth button:active { transform: scale(0.97); }
+  .depth button[aria-checked='true'] { color: var(--on-ink); }
+  .depth__time { font-weight: 500; opacity: 0.7; margin-left: 4px; }
+  /* The thumb slides between options: it shows where you are and where you went. */
+  .depth__thumb {
+    position: absolute;
+    z-index: 0;
+    top: 4px;
+    bottom: 4px;
+    left: 4px;
+    width: calc(50% - 4px);
+    border-radius: var(--radius-pill);
+    background: var(--ink);
+    transition: transform 240ms var(--ease-out);
+  }
+  .depth[data-mode='tldr'] .depth__thumb { transform: translateX(100%); }
+
+  /* Floating copy: appears once the header toggle has scrolled away. */
+  .depth--floating {
+    position: fixed;
+    left: 50%;
+    bottom: max(20px, env(safe-area-inset-bottom));
+    z-index: 40;
+    background: var(--glass);
+    backdrop-filter: blur(14px) saturate(1.4);
+    -webkit-backdrop-filter: blur(14px) saturate(1.4);
+    box-shadow: 0 0 0 1px var(--line), 0 12px 32px -12px rgba(23, 24, 26, 0.3);
+    transform: translate(-50%, calc(100% + 32px));
+    opacity: 0;
+    transition: transform 280ms var(--ease-out), opacity 200ms ease;
+  }
+  .depth--floating.is-shown { transform: translate(-50%, 0); opacity: 1; }
+  /* Never cover the footer's game */
+  .depth--floating.is-parked { transform: translate(-50%, calc(100% + 32px)); opacity: 0; }
+
+  @media (max-width: 759px) {
+    .depth button { padding-inline: 14px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .depth__thumb { transition: none; }
+    .depth--floating { transition: opacity 150ms ease; transform: translate(-50%, 0); }
+  }
+</style>

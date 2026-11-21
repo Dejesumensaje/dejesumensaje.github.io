@@ -1,0 +1,205 @@
+/* Case study template — from "F — Case study · Colombia Aprende". */
+
+/* ---------- Depth: full story vs TL;DR ---------- */
+html:not(.depth-tldr) [data-depth='tldr'],
+html.depth-tldr [data-depth='full'] { display: none !important; }
+
+.case-page { transition: opacity 120ms ease, transform 120ms ease; }
+.case-page.is-swapping { opacity: 0; }
+.case-page.is-arriving { opacity: 0; transform: translateY(8px); transition: none; }
+@media (prefers-reduced-motion: reduce) {
+  .case-page, .case-page.is-arriving { transform: none; }
+}
+
+/* ---------- Header ---------- */
+.case-head {
+  padding-top: var(--space-page-top);
+  padding-bottom: var(--space-chapter);
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+}
+.case-head__title { display: flex; flex-direction: column; gap: 24px; }
+.case-head__bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px 24px;
+}
+.case-head__share { color: var(--muted); }
+
+.facts { display: flex; flex-direction: column; gap: 24px; padding-top: 6px; max-width: 244px; }
+.fact { display: flex; flex-direction: column; gap: 4px; }
+.fact dt { font-size: var(--text-small); font-weight: 500; line-height: 1.4; color: var(--muted); }
+.fact dd { margin: 0; white-space: pre-line; }
+
+.brief { display: flex; flex-direction: column; gap: 64px; }
+.overview {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: var(--gutter);
+  row-gap: 40px;
+}
+.overview > div { display: flex; flex-direction: column; gap: 8px; }
+
+/* ---------- Chapters ---------- */
+.chapter { padding-bottom: var(--space-chapter); }
+.chapter--tight { padding-bottom: 64px; }
+.chapter--section { padding-bottom: var(--space-section); }
+.chapter .split__label { padding-top: 2px; }
+.chapter__stack { display: flex; flex-direction: column; gap: 52px; }
+
+.columns3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: var(--gutter);
+  row-gap: 32px;
+}
+.columns3 > div { display: flex; flex-direction: column; gap: 12px; }
+.insight { font-weight: 500; }
+
+.numbers .t-display { font-variant-numeric: tabular-nums; }
+
+.dash-list { display: flex; flex-direction: column; gap: 12px; }
+.dash-list li { display: flex; gap: 16px; }
+.dash-list li::before { content: '—'; color: var(--muted); }
+
+.pull { max-width: 856px; }
+
+/* ---------- Figures ---------- */
+.figure { padding-bottom: var(--space-chapter); display: flex; flex-direction: column; gap: 16px; }
+.figure--lead { padding-bottom: var(--space-section); }
+.figure figcaption { color: var(--muted); }
+.figure .stage > img.flat {
+  position: absolute;
+  border-radius: var(--radius-xs);
+  box-shadow: 0 0 0 1px rgba(23, 24, 26, 0.06), 0 12px 32px -12px rgba(23, 24, 26, 0.18);
+}
+
+/* Double Diamond built in HTML: two diamonds, three steps each */
+.diamonds {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: calc(24 / 1296 * 100cqw);
+  padding: calc(40 / 1296 * 100cqw) calc(76 / 1296 * 100cqw) 0;
+}
+.diamond { display: flex; flex-direction: column; align-items: center; gap: calc(24 / 1296 * 100cqw); }
+.diamond__shape {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 560 / 380;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.diamond__shape::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--bg);
+  clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+  z-index: -1;
+}
+.diamond__step {
+  width: calc(124 / 560 * 100%);
+  min-height: calc(64 / 1296 * 100cqw);
+  display: grid;
+  place-items: center;
+  padding: 6px 10px;
+  background: var(--surface);
+  border-radius: var(--radius-sm);
+  text-align: center;
+}
+.diamond__phase { position: absolute; top: 15%; }
+.diamond__phase--l { left: calc(36 / 560 * 100%); }
+.diamond__phase--r { right: calc(36 / 560 * 100%); }
+.diamond .t-h3 { font-weight: 400; }
+
+/* ---------- Next story ---------- */
+.next { padding-bottom: var(--space-before-footer); }
+.next a { display: inline-flex; flex-direction: column; gap: 12px; max-width: 746px; }
+.next a .t-h2 {
+  text-decoration-line: underline;
+  text-decoration-color: transparent;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 6px;
+  transition: text-decoration-color 160ms ease;
+}
+.next a:hover .t-h2, .next a:focus-visible .t-h2 { text-decoration-color: currentColor; }
+.next__arrow { display: inline-block; transition: transform 200ms var(--ease-out); }
+@media (hover: hover) and (pointer: fine) {
+  .next a:hover .next__arrow { transform: translateX(6px); }
+}
+
+/* ---------- TL;DR extras ---------- */
+.tldr-note {
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+  padding: 16px 20px;
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--muted);
+}
+
+@media (max-width: 759px) {
+  .case-head { gap: 40px; }
+  .brief { gap: 40px; }
+  /* Phone order: question and summary before the project sheet */
+  .case-head .split__body { order: -1; }
+  .facts { max-width: none; }
+  .overview, .columns3 { grid-template-columns: 1fr; }
+  .diamonds { grid-template-columns: 1fr; padding: 24px 16px; gap: 16px; }
+  .figure .stage.stage--auto { aspect-ratio: auto !important; }
+  .figure .stage.stage--auto .diamonds { position: relative; }
+  .diamond__step { width: 30%; min-height: 56px; font-size: 12px; }
+}
+
+/* Two columns of titled notes (decisions, entry points, problem/hypothesis) */
+.grid2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: var(--gutter);
+  row-gap: 40px;
+}
+.grid2 > div { display: flex; flex-direction: column; gap: 12px; }
+@media (max-width: 759px) { .grid2 { grid-template-columns: 1fr; } }
+
+/* Figma prototypes load on demand: a quiet stage until asked */
+.proto {
+  position: relative;
+  aspect-ratio: 1296 / 760;
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+}
+.proto__inner { display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 24px; text-align: center; }
+.proto iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+/* Flat images (diagrams, component sheets, personas) size the stage instead
+   of being cropped by it: the stage wraps the image with even padding. */
+.figure .stage:has(> img.flat) {
+  aspect-ratio: auto !important;
+  display: flex;
+  justify-content: center;
+  padding-block: clamp(24px, 4vw, 56px);
+}
+.figure .stage > img.flat {
+  position: static;
+  height: auto;
+  max-width: calc(100% - 32px);
+}
+@media (max-width: 759px) {
+  .figure .stage > img.flat { width: calc(100% - 32px) !important; }
+}
+
+@media (max-width: 759px) {
+  /* On a phone the embed needs height more than width to be usable */
+  .proto { aspect-ratio: 3 / 4; }
+}

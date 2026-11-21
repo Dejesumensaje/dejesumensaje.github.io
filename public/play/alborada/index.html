@@ -1,0 +1,3949 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#0b0c10" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>ALBORADA — by dejesumensaje</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100dvh;
+      width: 100vw;
+      overflow: hidden;
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background-color: #07080c;
+      background-image:
+        radial-gradient(circle at 50% 12%, rgba(126, 37, 83, 0.25), transparent 55%),
+        radial-gradient(circle at 85% 85%, rgba(29, 43, 83, 0.30), transparent 50%);
+      color: #f1f5f9;
+      user-select: none;
+      -webkit-user-select: none;
+      -webkit-touch-callout: none;
+      overscroll-behavior: none;
+      touch-action: manipulation;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 0.5rem;
+      position: relative;
+    }
+    @media (min-width: 640px) {
+      body { padding: 1rem; }
+    }
+    .utility-bar {
+      position: fixed;
+      top: 0.625rem;
+      right: 0.625rem;
+      z-index: 30;
+      display: flex;
+      align-items: center;
+      gap: 0.375rem;
+      opacity: 0.45;
+      transition: opacity 0.15s ease;
+    }
+    .utility-bar:hover { opacity: 1; }
+    body.is-mobile .utility-bar { opacity: 0.72; }
+    .util-btn {
+      width: 2rem;
+      height: 2rem;
+      border-radius: 9999px;
+      background: rgba(15, 23, 42, 0.82);
+      border: 1px solid #1e293b;
+      color: #f1f5f9;
+      font-size: 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .util-btn-desktop { display: none; }
+    @media (min-width: 640px) {
+      .util-btn-desktop { display: flex; }
+    }
+    .game-main {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+    }
+    .p8-screen-box {
+      position: relative;
+      width: min(94vw, 66dvh, 480px);
+      height: min(94vw, 66dvh, 480px);
+      background: #000;
+      border-radius: 0.75rem;
+      overflow: hidden;
+      border: 2px solid rgba(30, 41, 59, 0.82);
+      box-shadow: 0 0 50px rgba(0, 0, 0, 0.95);
+    }
+    body.is-desktop .p8-screen-box {
+      width: min(84dvh, 84vw, 640px);
+      height: min(84dvh, 84vw, 640px);
+    }
+    #p8-canvas {
+      image-rendering: -moz-crisp-edges;
+      image-rendering: -webkit-crisp-edges;
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
+      width: 100%;
+      height: 100%;
+      display: block;
+      touch-action: none;
+    }
+    .crt-overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.30) 50%),
+        linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+      background-size: 100% 4px, 6px 100%;
+      box-shadow: inset 0 0 28px rgba(0, 0, 0, 0.65);
+      pointer-events: none;
+    }
+    .hidden { display: none !important; }
+    #touch-lanes {
+      display: none;
+      width: 100%;
+      max-width: min(94vw, 66dvh, 480px);
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.625rem;
+      padding-top: 0.25rem;
+    }
+    body.is-mobile #touch-lanes { display: grid; }
+    body.is-mobile #desktop-hint { display: none; }
+    .arcade-btn {
+      height: 4rem;
+      border-radius: 0.75rem;
+      background: rgba(15, 23, 42, 0.78);
+      border: 1px solid rgba(30, 41, 59, 0.92);
+      color: #94a3b8;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 1.125rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+      transition: transform 0.03s ease, box-shadow 0.03s ease, border-color 0.06s ease;
+      touch-action: none;
+      -webkit-tap-highlight-color: transparent;
+      cursor: pointer;
+    }
+    .arcade-btn:active, .arcade-btn.active-key {
+      transform: translateY(3px);
+      box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.7);
+      border-color: #29adff;
+      color: #fff1e8;
+      filter: brightness(1.2);
+    }
+    #desktop-hint {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 11px;
+      color: #64748b;
+      letter-spacing: 0.025em;
+    }
+    #desktop-hint strong {
+      color: #94a3b8;
+      font-weight: 600;
+    }
+    #toast {
+      position: fixed;
+      bottom: 1rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 50;
+      padding: 0.5rem 1rem;
+      border-radius: 0.75rem;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid #00e436;
+      color: #fff1e8;
+      font-size: 0.75rem;
+      font-weight: 500;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+    #toast.show { opacity: 1; }
+  </style>
+
+  <!-- portfolio embed mode -->
+  <script>if (/[?&]embed=1/.test(location.search)) document.documentElement.classList.add('embed');</script>
+  <style>
+    html.embed, html.embed body { background: #000 !important; }
+    html.embed body { padding: 0 !important; }
+    html.embed .utility-bar, html.embed #desktop-hint, html.embed #touch-lanes,
+    html.embed #toast, html.embed #crt-layer { display: none !important; }
+    html.embed .game-main { gap: 0; }
+    html.embed .p8-screen-box, html.embed body.is-desktop .p8-screen-box {
+      width: 100vmin !important; height: 100vmin !important;
+      border: 0 !important; border-radius: 0 !important; box-shadow: none !important;
+    }
+  </style>
+</head>
+<body class="is-desktop">
+
+  <!-- Subtle Floating Utility Controls -->
+  <div class="utility-bar">
+    <button id="btn-audio" type="button" class="util-btn" title="Sonido" aria-label="Sonido">
+      <span id="audio-icon">🔊</span>
+    </button>
+    <button id="btn-crt" type="button" class="util-btn" title="Filtro CRT" aria-label="Filtro CRT">
+      <span>📺</span>
+    </button>
+    <button id="btn-share" type="button" class="util-btn" title="Compartir" aria-label="Compartir">
+      <span>📤</span>
+    </button>
+    <button id="btn-download" type="button" class="util-btn util-btn-desktop" title="Descargar cartucho .p8" aria-label="Descargar .p8">
+      <span>💾</span>
+    </button>
+  </div>
+
+  <!-- Pure Game Container -->
+  <main class="game-main">
+    <div class="p8-screen-box" id="screen-container">
+      <canvas id="p8-canvas" width="128" height="128"></canvas>
+      <div id="crt-layer" class="crt-overlay"></div>
+    </div>
+
+    <!-- Mobile-Only Lane Touch Controls -->
+    <div id="touch-lanes">
+      <button data-btn="0" type="button" aria-label="Carril Izquierdo" class="arcade-btn">◀</button>
+      <button data-btn="3" type="button" aria-label="Carril Central" class="arcade-btn">▼</button>
+      <button data-btn="1" type="button" aria-label="Carril Derecho" class="arcade-btn">▶</button>
+    </div>
+
+    <!-- Desktop Hint -->
+    <div id="desktop-hint">
+      <strong>← ↓ →</strong> silenciar · <strong>X</strong> empezar
+    </div>
+  </main>
+
+  <div id="toast" role="status" aria-live="polite">Listo</div>
+
+  <script>
+    /********************************************************************
+     * 1. EXACT PICO-8 PALETTE, SPRITESHEET, FONT & VIRTUAL HARDWARE
+     ********************************************************************/
+    const P8_PALETTE_RGB = [
+      [0, 0, 0],       // 0: black
+      [29, 43, 83],    // 1: dark-blue
+      [126, 37, 83],   // 2: dark-purple
+      [0, 135, 81],    // 3: dark-green
+      [171, 82, 54],   // 4: brown
+      [95, 87, 79],    // 5: dark-grey
+      [194, 195, 199], // 6: light-grey
+      [255, 241, 232], // 7: white
+      [255, 0, 77],    // 8: red
+      [255, 163, 0],   // 9: orange
+      [255, 236, 39],  // 10: yellow
+      [0, 228, 54],    // 11: green
+      [41, 173, 255],  // 12: blue
+      [131, 118, 156], // 13: indigo
+      [255, 119, 168], // 14: pink
+      [255, 204, 170]  // 15: peach
+    ];
+
+    const IS_LITTLE_ENDIAN = new Uint8Array(new Uint32Array([0x11223344]).buffer)[0] === 0x44;
+    const P8_PAL_U32 = new Uint32Array(16);
+    for (let i = 0; i < 16; i++) {
+      const [r, g, b] = P8_PALETTE_RGB[i];
+      P8_PAL_U32[i] = IS_LITTLE_ENDIAN
+        ? ((255 << 24) | (b << 16) | (g << 8) | r)
+        : ((r << 24) | (g << 16) | (b << 8) | 255);
+    }
+
+    // 3x5 Font + Spanish Accents & UI Symbols
+    const P8_FONT = {
+      ' ': [0,0,0,0,0], '!': [2,2,2,0,2], '¡': [2,0,2,2,2], '+': [0,2,7,2,0],
+      '-': [0,0,7,0,0], '.': [0,0,0,0,2], ':': [0,2,0,2,0], '(': [1,2,2,2,1],
+      ')': [4,2,2,2,4], '/': [1,1,2,4,4], '>': [4,2,1,2,4], '*': [2,7,2,5,0],
+      '·': [0,0,2,0,0],
+      '0': [7,5,5,5,7], '1': [2,6,2,2,7], '2': [7,1,7,4,7], '3': [7,1,3,1,7],
+      '4': [5,5,7,1,1], '5': [7,4,7,1,7], '6': [7,4,7,5,7], '7': [7,1,1,2,2],
+      '8': [7,5,7,5,7], '9': [7,5,7,1,7],
+      'a': [2,5,7,5,5], 'b': [6,5,6,5,6], 'c': [3,4,4,4,3], 'd': [6,5,5,5,6],
+      'e': [7,4,6,4,7], 'f': [7,4,6,4,4], 'g': [3,4,5,5,3], 'h': [5,5,7,5,5],
+      'i': [7,2,2,2,7], 'j': [1,1,1,5,2], 'k': [5,5,6,5,5], 'l': [4,4,4,4,7],
+      'm': [5,7,7,5,5], 'n': [6,5,5,5,5], 'o': [2,5,5,5,2], 'p': [6,5,6,4,4],
+      'q': [2,5,5,3,1], 'r': [6,5,6,5,5], 's': [3,4,2,1,6], 't': [7,2,2,2,2],
+      'u': [5,5,5,5,7], 'v': [5,5,5,5,2], 'w': [5,5,7,7,5], 'x': [5,5,2,5,5],
+      'y': [5,5,2,2,2], 'z': [7,1,2,4,7]
+    };
+
+    const ACCENT_MAP = {
+      'á': { base: 'a', type: 'acute' },
+      'é': { base: 'e', type: 'acute' },
+      'í': { base: 'i', type: 'acute' },
+      'ó': { base: 'o', type: 'acute' },
+      'ú': { base: 'u', type: 'acute' },
+      'ñ': { base: 'n', type: 'tilde' }
+    };
+
+    const canvas = document.getElementById('p8-canvas');
+    const ctx = canvas.getContext('2d', { alpha: false });
+    const imgData = ctx.createImageData(128, 128);
+    const imgU32 = new Uint32Array(imgData.data.buffer);
+    const vram = new Uint8Array(128 * 128);
+    const sprRam = new Uint8Array(128 * 128);
+    const palMap = new Uint8Array([0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]);
+    const paltMask = new Uint8Array(16);
+    paltMask[0] = 1;
+
+    let fillPattern = 0;
+    let fillTransparent = false;
+    let camX = 0, camY = 0;
+
+    // Input state: decoupled physical state, buffered tap latch, and per-frame edge flag
+    const keyDown = [false, false, false, false, false, false];
+    const keyPressLatch = [false, false, false, false, false, false];
+    const keyJustPressed = [false, false, false, false, false, false];
+
+    function btn(i) { return !!(keyDown[i] || keyJustPressed[i]); }
+    function btnp(i) { return !!keyJustPressed[i]; }
+
+    // Math & Table helpers matching PICO-8 Lua
+    const flr = Math.floor;
+    const abs = Math.abs;
+    const min = Math.min;
+    const max = Math.max;
+    function rnd(n = 1) { return Math.random() * n; }
+    function cos(a) { return Math.cos((a || 0) * Math.PI * 2); }
+    function sin(a) { return -Math.sin((a || 0) * Math.PI * 2); }
+    function tostr(n) { return String(n); }
+    function add(arr, val) { arr.push(val); return val; }
+    function swapPop(arr, idx) {
+      const last = arr.length - 1;
+      if (idx !== last) arr[idx] = arr[last];
+      arr.length = last;
+    }
+
+    // Safe Cartridge Persistence (localStorage + in-memory fallback)
+    const cartStorageKey = "wm_alborada_04_best";
+    const cartMem = [0, 0, 0, 0];
+    function dget(idx = 0) {
+      const key = idx === 0 ? cartStorageKey : `${cartStorageKey}_s${idx}`;
+      try {
+        const val = localStorage.getItem(key);
+        if (val !== null) {
+          const parsed = parseInt(val, 10) || 0;
+          cartMem[idx] = parsed;
+          return parsed;
+        }
+      } catch (err) {}
+      return cartMem[idx] || 0;
+    }
+    function dset(idx = 0, val = 0) {
+      cartMem[idx] = val;
+      const key = idx === 0 ? cartStorageKey : `${cartStorageKey}_s${idx}`;
+      try {
+        localStorage.setItem(key, String(val));
+      } catch (err) {}
+    }
+
+    // PICO-8 Graphics & Spritesheet API
+    function pal(c0, c1) {
+      if (c0 === undefined) {
+        for (let i = 0; i < 16; i++) palMap[i] = i;
+      } else if (c1 === undefined) {
+        const c = c0 & 15;
+        palMap[c] = c;
+      } else {
+        palMap[c0 & 15] = c1 & 15;
+      }
+    }
+
+    function palt(c, t) {
+      if (c === undefined) {
+        paltMask.fill(0);
+        paltMask[0] = 1;
+      } else if (t === undefined) {
+        const m = c >>> 0;
+        for (let i = 0; i < 16; i++) paltMask[i] = (m >>> (15 - i)) & 1;
+      } else {
+        paltMask[c & 15] = t ? 1 : 0;
+      }
+    }
+
+    function sget(x, y) {
+      const ix = flr(x), iy = flr(y);
+      if (ix < 0 || ix >= 128 || iy < 0 || iy >= 128) return 0;
+      return sprRam[(iy << 7) + ix];
+    }
+
+    function sset(x, y, c) {
+      const ix = flr(x), iy = flr(y);
+      if (ix < 0 || ix >= 128 || iy < 0 || iy >= 128) return;
+      sprRam[(iy << 7) + ix] = c & 15;
+    }
+
+    function fillp(pat = 0, transparent = false) {
+      fillPattern = pat >>> 0;
+      fillTransparent = !!transparent || (pat - Math.floor(pat) >= 0.45);
+    }
+
+    function camera(x = 0, y = 0) {
+      camX = flr(x);
+      camY = flr(y);
+    }
+
+    function cls(c = 0) {
+      vram.fill(c & 15);
+    }
+
+    function _putPixelRaw(sx, sy, c) {
+      if (sx < 0 || sx >= 128 || sy < 0 || sy >= 128) return;
+      if (fillPattern !== 0) {
+        const bitIndex = 15 - ((sy & 3) * 4 + (sx & 3));
+        const bit = (fillPattern >>> bitIndex) & 1;
+        if (bit && fillTransparent) return;
+        const chosen = bit ? ((c >> 4) & 15) : (c & 15);
+        vram[(sy << 7) + sx] = palMap[chosen];
+      } else {
+        vram[(sy << 7) + sx] = palMap[c & 15];
+      }
+    }
+
+    function pset(x, y, c) {
+      _putPixelRaw(flr(x) - camX, flr(y) - camY, c);
+    }
+
+    function psetSolid(x, y, c) {
+      const sx = flr(x) - camX;
+      const sy = flr(y) - camY;
+      if (sx >= 0 && sx < 128 && sy >= 0 && sy < 128) {
+        vram[(sy << 7) + sx] = palMap[c & 15];
+      }
+    }
+
+    function line(x0, y0, x1, y1, c) {
+      if (!Number.isFinite(x0) || !Number.isFinite(y0) || !Number.isFinite(x1) || !Number.isFinite(y1)) return;
+      let ix0 = flr(x0) - camX;
+      let iy0 = flr(y0) - camY;
+      const ix1 = flr(x1) - camX;
+      const iy1 = flr(y1) - camY;
+
+      if (fillPattern === 0 && iy0 === iy1) {
+        if (iy0 < 0 || iy0 >= 128) return;
+        const ax0 = max(0, min(ix0, ix1));
+        const ax1 = min(127, max(ix0, ix1));
+        if (ax0 <= ax1) vram.fill(palMap[c & 15], (iy0 << 7) + ax0, (iy0 << 7) + ax1 + 1);
+        return;
+      }
+      if (fillPattern === 0 && ix0 === ix1) {
+        if (ix0 < 0 || ix0 >= 128) return;
+        const ay0 = max(0, min(iy0, iy1));
+        const ay1 = min(127, max(iy0, iy1));
+        const col = palMap[c & 15];
+        for (let y = ay0; y <= ay1; y++) vram[(y << 7) + ix0] = col;
+        return;
+      }
+
+      const dx = Math.abs(ix1 - ix0), sx = ix0 < ix1 ? 1 : -1;
+      const dy = -Math.abs(iy1 - iy0), sy = iy0 < iy1 ? 1 : -1;
+      let err = dx + dy;
+      while (true) {
+        _putPixelRaw(ix0, iy0, c);
+        if (ix0 === ix1 && iy0 === iy1) break;
+        const e2 = 2 * err;
+        if (e2 >= dy) { err += dy; ix0 += sx; }
+        if (e2 <= dx) { err += dx; iy0 += sy; }
+      }
+    }
+
+    function rectfill(x0, y0, x1, y1, c) {
+      const ax0 = max(0, flr(min(x0, x1)) - camX);
+      const ay0 = max(0, flr(min(y0, y1)) - camY);
+      const ax1 = min(127, flr(max(x0, x1)) - camX);
+      const ay1 = min(127, flr(max(y0, y1)) - camY);
+      if (ax0 > ax1 || ay0 > ay1) return;
+
+      if (fillPattern === 0) {
+        const col = palMap[c & 15];
+        for (let y = ay0; y <= ay1; y++) {
+          vram.fill(col, (y << 7) + ax0, (y << 7) + ax1 + 1);
+        }
+      } else {
+        const c0 = palMap[c & 15];
+        const c1 = palMap[(c >> 4) & 15];
+        for (let y = ay0; y <= ay1; y++) {
+          const rowShift = 12 - ((y & 3) << 2);
+          const rowBase = y << 7;
+          for (let x = ax0; x <= ax1; x++) {
+            const bit = (fillPattern >>> (rowShift + (3 - (x & 3)))) & 1;
+            if (bit && fillTransparent) continue;
+            vram[rowBase + x] = bit ? c1 : c0;
+          }
+        }
+      }
+    }
+
+    function rect(x0, y0, x1, y1, c) {
+      line(x0, y0, x1, y0, c);
+      line(x1, y0, x1, y1, c);
+      line(x0, y1, x1, y1, c);
+      line(x0, y0, x0, y1, c);
+    }
+
+    function circfill(xm, ym, r, c) {
+      const cx = flr(xm), cy = flr(ym), ir = flr(r);
+      if (ir < 0) return;
+      const limit = ir * ir + ir * 0.6;
+      for (let dy = -ir; dy <= ir; dy++) {
+        const rem = limit - dy * dy;
+        if (rem < 0) continue;
+        const dx = flr(Math.sqrt(rem));
+        line(cx - dx, cy + dy, cx + dx, cy + dy, c);
+      }
+    }
+
+    function circ(xm, ym, r, c) {
+      if (!Number.isFinite(xm) || !Number.isFinite(ym) || !Number.isFinite(r)) return;
+      let ir = flr(r);
+      if (ir < 0) return;
+      let x = -ir, y = 0, err = 2 - 2 * ir;
+      const cx = flr(xm), cy = flr(ym);
+      do {
+        pset(cx - x, cy + y, c);
+        pset(cx - y, cy - x, c);
+        pset(cx + x, cy - y, c);
+        pset(cx + y, cy + x, c);
+        const rr = err;
+        if (rr <= y) err += ++y * 2 + 1;
+        if (rr > x || err > y) err += ++x * 2 + 1;
+      } while (x < 0);
+    }
+
+    function ovalfill(x0, y0, x1, y1, c) {
+      const ax0 = flr(min(x0, x1)), ay0 = flr(min(y0, y1));
+      const ax1 = flr(max(x0, x1)), ay1 = flr(max(y0, y1));
+      const cx = (ax0 + ax1) * 0.5, cy = (ay0 + ay1) * 0.5;
+      const rx = max(0.5, (ax1 - ax0) * 0.5), ry = max(0.5, (ay1 - ay0) * 0.5);
+      for (let y = ay0; y <= ay1; y++) {
+        const ny = (y - cy) / ry;
+        const rem = 1.05 - ny * ny;
+        if (rem < 0) continue;
+        const halfW = rx * Math.sqrt(rem);
+        line(Math.ceil(cx - halfW), y, flr(cx + halfW), y, c);
+      }
+    }
+
+    function trifill(x1, y1, x2, y2, x3, y3, c) {
+      if (y1 > y2) { [x1, y1, x2, y2] = [x2, y2, x1, y1]; }
+      if (y1 > y3) { [x1, y1, x3, y3] = [x3, y3, x1, y1]; }
+      if (y2 > y3) { [x2, y2, x3, y3] = [x3, y3, x2, y2]; }
+      const iy1 = flr(y1), iy3 = flr(y3);
+      for (let y = iy1; y <= iy3; y++) {
+        const xa = x1 + (x3 - x1) * (y - y1) / max(1, y3 - y1);
+        const xb = y < y2
+          ? x1 + (x2 - x1) * (y - y1) / max(1, y2 - y1)
+          : x2 + (x3 - x2) * (y - y2) / max(1, y3 - y2);
+        line(xa, y, xb, y, c);
+      }
+    }
+
+    function sspr(sx, sy, sw, sh, dx, dy, dw = sw, dh = sh, flipX = false, flipY = false) {
+      const ix = flr(dx) - camX, iy = flr(dy) - camY;
+      const idw = flr(dw), idh = flr(dh);
+      if (idw <= 0 || idh <= 0) return;
+      const x0 = max(0, ix), y0 = max(0, iy);
+      const x1 = min(127, ix + idw - 1), y1 = min(127, iy + idh - 1);
+      if (x0 > x1 || y0 > y1) return;
+
+      if (idw === sw && idh === sh && !flipX && !flipY) {
+        for (let y = y0; y <= y1; y++) {
+          const srcRow = ((sy + (y - iy)) & 127) << 7;
+          const dstRow = y << 7;
+          for (let x = x0; x <= x1; x++) {
+            const sc = sprRam[srcRow + ((sx + (x - ix)) & 127)];
+            if (!paltMask[sc]) vram[dstRow + x] = palMap[sc];
+          }
+        }
+        return;
+      }
+
+      const stepX = sw / idw, stepY = sh / idh;
+      for (let y = y0; y <= y1; y++) {
+        const ry = flipY ? (idh - 1 - (y - iy)) : (y - iy);
+        const srcRow = (flr(sy + ry * stepY) & 127) << 7;
+        const dstRow = y << 7;
+        for (let x = x0; x <= x1; x++) {
+          const rx = flipX ? (idw - 1 - (x - ix)) : (x - ix);
+          const sc = sprRam[srcRow + (flr(sx + rx * stepX) & 127)];
+          if (!paltMask[sc]) vram[dstRow + x] = palMap[sc];
+        }
+      }
+    }
+
+    function spr(n, x, y, w = 1, h = 1, flipX = false, flipY = false) {
+      sspr((n & 15) << 3, ((n >> 4) & 15) << 3, w * 8, h * 8, x, y, w * 8, h * 8, flipX, flipY);
+    }
+
+    function print(str, x, y, c = 7) {
+      let s = String(str);
+      let scaleX = 1, scaleY = 1;
+      if (s.includes('^w')) { scaleX = 2; s = s.replace(/\^w/g, ''); }
+      if (s.includes('^t')) { scaleY = 2; s = s.replace(/\^t/g, ''); }
+      s = s.toLowerCase();
+      let curX = flr(x);
+      const curY = flr(y);
+
+      for (let i = 0; i < s.length; i++) {
+        const rawCh = s[i];
+        const acc = ACCENT_MAP[rawCh];
+        const ch = acc ? acc.base : rawCh;
+        const glyph = P8_FONT[ch] || P8_FONT[' '];
+        for (let row = 0; row < 5; row++) {
+          const rowBits = glyph[row];
+          for (let col = 0; col < 3; col++) {
+            if ((rowBits >> (2 - col)) & 1) {
+              if (scaleX === 1 && scaleY === 1) {
+                psetSolid(curX + col, curY + row, c);
+              } else {
+                for (let sy = 0; sy < scaleY; sy++) {
+                  for (let sx = 0; sx < scaleX; sx++) {
+                    psetSolid(curX + col * scaleX + sx, curY + row * scaleY + sy, c);
+                  }
+                }
+              }
+            }
+          }
+        }
+        if (acc && scaleX === 1 && scaleY === 1) {
+          if (acc.type === 'acute') {
+            psetSolid(curX + (ch === 'i' ? 1 : 2), curY - 1, c);
+          } else if (acc.type === 'tilde') {
+            psetSolid(curX, curY - 1, c);
+            psetSolid(curX + 1, curY - 2, c);
+            psetSolid(curX + 2, curY - 1, c);
+          }
+        }
+        curX += 4 * scaleX;
+      }
+    }
+
+    function flushVRAMToCanvas() {
+      for (let i = 0; i < 16384; i++) {
+        imgU32[i] = P8_PAL_U32[vram[i] & 15];
+      }
+      ctx.putImageData(imgData, 0, 0);
+    }
+
+    // Shared 128x128 Spritesheet Data (ALBORADA Wordmark + Sill Cat + Potted Plant)
+    const LOGO_GLYPHS = {
+      A: ["....##....","...####...","..##..##..",".##....##.",".##....##.",".##....##.",".########.",".########.",".##....##.",".##....##.",".##....##.","###....###","###....###"],
+      L: ["###.....",".##.....",".##.....",".##.....",".##.....",".##.....",".##.....",".##.....",".##.....",".##....#",".##...##","########","########"],
+      B: ["#######...",".##...##..",".##....##.",".##....##.",".##...##..",".######...",".######...",".##...##..",".##....##.",".##....##.",".##....##.","########..","#######..."],
+      O: ["..######..",".########.","###....###","##......##","##......##","##......##","##......##","##......##","##......##","##......##","###....###",".########.","..######.."],
+      R: ["#######...",".##...##..",".##....##.",".##....##.",".##...##..",".######...",".#####....",".##..##...",".##...##..",".##....##.",".##....##.","###....###","###.....##"],
+      D: ["######....",".##..###..",".##....##.",".##....##.",".##....##.",".##....##.",".##....##.",".##....##.",".##....##.",".##....##.",".##...###.","#######...","######...."]
+    };
+    const LOGO_GRAD = [7,7,7,10,10,10,10,9,9,9,4,4,4];
+
+    const CAT_SILL = [
+      "..........11..........11..........",
+      ".........1f11........1f11.........",
+      "........1ff91.......1ffe1.........",
+      "........1f99111111111f991.........",
+      ".......1ff999449944999921.........",
+      "......1ff9999999999949921.........",
+      "......1f99994499999999221.........",
+      ".....1ff99999999994999221.........",
+      ".....1f999999999999999221.........",
+      "....1ff999999999999992221.........",
+      ".....1199999999999992221..........",
+      "......1f999999999992221...........",
+      ".......11f999449992221............",
+      "........1f9999999992211...........",
+      ".......1ff99944999992221..........",
+      "......1ff9999999944992221.........",
+      "......1f999449999999992221........",
+      ".....1ff9999999994499922221.......",
+      ".....1f99944999999999922221.......",
+      "....1ff999999999944999222221......",
+      "....1f9999449999999999922221......",
+      "....1f9999999999944999922221......",
+      "...1ff99944999999999999222221.....",
+      "...1f999999999994499999222221.....",
+      "...1f999999999999999999222221.....",
+      "...1f994499999999944999222221.....",
+      "...1f99999999999999999922221......",
+      "....1ff99999999999999922221.......",
+      "....11fff99999999999922221........",
+      ".....11111111111111111111........."
+    ];
+
+    const POTTED_PLANT = [
+      ".....b.....","...b.b.3...","..b33b33b..",".333bb3333.","..3333333..","..1111111..",".199999941.","..1444441..","..1444421..","..1444221..","...11111..."
+    ];
+
+    function buildSpriteSheet() {
+      sprRam.fill(0);
+      // 1. Custom outlined ALBORADA wordmark at (0, 0) size 94x15
+      const word = "ALBORADA";
+      let cx = 1;
+      for (let li = 0; li < word.length; li++) {
+        const g = LOGO_GLYPHS[word[li]];
+        for (let r = 0; r < 13; r++) {
+          const row = g[r];
+          for (let c = 0; c < row.length; c++) {
+            if (row[c] === '#') {
+              for (let dy = -1; dy <= 1; dy++) {
+                for (let dx = -1; dx <= 1; dx++) {
+                  if (dx !== 0 || dy !== 0) sset(cx + c + dx, 1 + r + dy, 1);
+                }
+              }
+            }
+          }
+        }
+        cx += g[0].length + 2;
+      }
+      cx = 1;
+      for (let li = 0; li < word.length; li++) {
+        const g = LOGO_GLYPHS[word[li]];
+        for (let r = 0; r < 13; r++) {
+          const row = g[r];
+          const col = LOGO_GRAD[r];
+          for (let c = 0; c < row.length; c++) {
+            if (row[c] === '#') sset(cx + c, 1 + r, col);
+          }
+        }
+        cx += g[0].length + 2;
+      }
+
+      // 2. Window-sill gazing cat at (0, 16) size 34x30
+      for (let r = 0; r < CAT_SILL.length; r++) {
+        const row = CAT_SILL[r];
+        for (let c = 0; c < row.length; c++) {
+          if (row[c] !== '.') sset(c, 16 + r, parseInt(row[c], 16));
+        }
+      }
+
+      // 3. Potted succulent at (40, 16) size 11x11
+      for (let r = 0; r < POTTED_PLANT.length; r++) {
+        const row = POTTED_PLANT[r];
+        for (let c = 0; c < row.length; c++) {
+          if (row[c] !== '.') sset(40 + c, 16 + r, parseInt(row[c], 16));
+        }
+      }
+    }
+
+    /********************************************************************
+     * 2. WEB AUDIO API CHIPTUNE SYNTH & ADAPTIVE MUSIC ENGINE
+     ********************************************************************/
+    let audioCtx = null;
+    let masterGain = null;
+    let musicGain = null;
+    let audioMuted = false;
+    let noiseBuffer = null;
+
+    function initAudio() {
+      try {
+        if (!audioCtx) {
+          const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+          if (!AudioContextClass) return;
+          audioCtx = new AudioContextClass();
+          masterGain = audioCtx.createGain();
+          masterGain.gain.setValueAtTime(audioMuted ? 0 : 1, audioCtx.currentTime);
+          masterGain.connect(audioCtx.destination);
+
+          musicGain = audioCtx.createGain();
+          musicGain.gain.setValueAtTime(1, audioCtx.currentTime);
+          musicGain.connect(masterGain);
+
+          const bufferSize = audioCtx.sampleRate;
+          noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+          const output = noiseBuffer.getChannelData(0);
+          for (let i = 0; i < bufferSize; i++) output[i] = Math.random() * 2 - 1;
+        }
+        if (audioCtx.state === 'suspended' || audioCtx.state === 'interrupted') {
+          audioCtx.resume().catch(() => {});
+        }
+      } catch (err) {}
+    }
+
+    function playTone(freq, type, duration, vol = 0.12, delay = 0, slideTo = null, isMusic = false) {
+      if (audioMuted || !audioCtx || !masterGain || audioCtx.state !== 'running') return;
+      const safeDur = max(0.015, duration);
+      const safeFreq = max(20, freq);
+      const safeVol = max(0.001, vol);
+      const now = audioCtx.currentTime + max(0, delay);
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = type;
+      osc.frequency.setValueAtTime(safeFreq, now);
+      if (slideTo !== null) {
+        osc.frequency.exponentialRampToValueAtTime(max(20, slideTo), now + safeDur);
+      }
+      gain.gain.setValueAtTime(0.0001, now);
+      gain.gain.linearRampToValueAtTime(safeVol, now + 0.005);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + safeDur);
+      osc.connect(gain);
+      gain.connect(isMusic && musicGain ? musicGain : masterGain);
+      osc.onended = () => { osc.disconnect(); gain.disconnect(); };
+      osc.start(now);
+      osc.stop(now + safeDur + 0.02);
+    }
+
+    function playNoise(duration, filterFreq = 1200, vol = 0.18, delay = 0) {
+      if (audioMuted || !audioCtx || !masterGain || !noiseBuffer || audioCtx.state !== 'running') return;
+      const safeDur = max(0.015, duration);
+      const safeFreq = max(120, filterFreq);
+      const safeVol = max(0.001, vol);
+      const now = audioCtx.currentTime + max(0, delay);
+      const src = audioCtx.createBufferSource();
+      src.buffer = noiseBuffer;
+      const filter = audioCtx.createBiquadFilter();
+      filter.type = 'bandpass';
+      filter.frequency.setValueAtTime(safeFreq, now);
+      filter.frequency.exponentialRampToValueAtTime(max(120, safeFreq * 0.25), now + safeDur);
+      const gain = audioCtx.createGain();
+      gain.gain.setValueAtTime(safeVol, now);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + safeDur);
+      src.connect(filter);
+      filter.connect(gain);
+      gain.connect(masterGain);
+      src.onended = () => { src.disconnect(); filter.disconnect(); gain.disconnect(); };
+      src.start(now);
+      src.stop(now + safeDur + 0.02);
+    }
+
+    function sfx(id) {
+      initAudio();
+      if (audioMuted || !audioCtx || audioCtx.state !== 'running') return;
+      switch (id) {
+        case 0: // Perfect silence
+          playTone(587.33, 'triangle', 0.07, 0.15, 0);
+          playTone(880.00, 'triangle', 0.09, 0.14, 0.03);
+          playTone(1174.66, 'sine', 0.24, 0.14, 0.06);
+          playTone(1760.00, 'sine', 0.18, 0.08, 0.08);
+          break;
+        case 1: // Good silence chime
+          playTone(440, 'triangle', 0.08, 0.12, 0);
+          playTone(523.25, 'triangle', 0.15, 0.11, 0.05);
+          break;
+        case 2: // Glass tap + ear twitch
+          playTone(190, 'sine', 0.06, 0.13, 0, 75);
+          playNoise(0.04, 2400, 0.07, 0);
+          break;
+        case 3: // Firework explosion
+          playNoise(0.52, 1600, 0.24, 0);
+          playTone(130, 'sawtooth', 0.36, 0.20, 0, 38);
+          playNoise(0.32, 3200, 0.11, 0.12);
+          break;
+        case 4: // Rocket launch whoosh
+          playNoise(0.14, 900, 0.045, 0);
+          playTone(220, 'sine', 0.12, 0.03, 0, 420);
+          break;
+        case 5: // Calm recovery (+calma)
+          playTone(523.25, 'sine', 0.10, 0.11, 0);
+          playTone(659.25, 'sine', 0.10, 0.11, 0.07);
+          playTone(783.99, 'sine', 0.10, 0.11, 0.14);
+          playTone(1046.50, 'sine', 0.25, 0.11, 0.21);
+          break;
+        case 6: // Start game jingle
+          playTone(261.63, 'square', 0.08, 0.09, 0);
+          playTone(392.00, 'square', 0.08, 0.09, 0.07);
+          playTone(523.25, 'square', 0.22, 0.09, 0.14);
+          break;
+        case 7: // Game Over (delayed slightly so it doesn't collide with sfx(3))
+          playTone(392.00, 'sawtooth', 0.14, 0.10, 0.30);
+          playTone(349.23, 'sawtooth', 0.14, 0.10, 0.42);
+          playTone(311.13, 'sawtooth', 0.14, 0.10, 0.54);
+          playTone(261.63, 'sawtooth', 0.35, 0.10, 0.66);
+          break;
+        case 8: // Dawn victory fanfare
+          playTone(523.25, 'triangle', 0.16, 0.12, 0);
+          playTone(659.25, 'triangle', 0.16, 0.12, 0.11);
+          playTone(783.99, 'triangle', 0.16, 0.12, 0.22);
+          playTone(987.77, 'triangle', 0.18, 0.12, 0.33);
+          playTone(1046.50, 'sine', 0.45, 0.13, 0.44);
+          break;
+        case 9: // Zen 3 deep room dim chord
+          playTone(220.0, 'sine', 0.5, 0.09, 0);
+          playTone(329.6, 'sine', 0.5, 0.07, 0.05);
+          break;
+        case 10: // Pre-ignition spark tick
+          playNoise(0.03, 3800, 0.032, 0);
+          break;
+        case 11: // Morning songbird chirp
+          playTone(2150, 'sine', 0.05, 0.025, 0, 2950);
+          playTone(2450, 'sine', 0.06, 0.025, 0.07, 3250);
+          break;
+        case 12: // Buscapies lane-switch zip
+          playTone(520, 'triangle', 0.07, 0.09, 0, 880);
+          playTone(880, 'sine', 0.06, 0.07, 0.05, 620);
+          break;
+        case 13: // Taco armor crack (Hit #1)
+          playNoise(0.06, 2200, 0.13, 0);
+          playTone(330, 'square', 0.06, 0.10, 0, 520);
+          playTone(660, 'triangle', 0.10, 0.10, 0.03);
+          break;
+        case 14: // Silbador turbo whistle
+          playTone(460, 'sine', 0.16, 0.08, 0, 1480);
+          playNoise(0.11, 2800, 0.05, 0.02);
+          break;
+      }
+    }
+
+    let musicMode = 0; // -1: off, 0: calm night, 2: restless, 4: urgent, 6: dawn lullaby + purr
+    let musicStep = 0;
+    let musicTick = 0;
+
+    const CALM_NOTES   = [261.63, 392.00, 523.25, 659.25, 293.66, 440.00, 587.33, 783.99, 220.00, 329.63, 440.00, 523.25, 196.00, 293.66, 392.00, 493.88];
+    const CALM_BASS    = [130.81, 0, 98.00, 0, 110.00, 0, 87.31, 0];
+    const STRESS1_ARP  = [261.63, 311.13, 392.00, 415.30, 261.63, 311.13, 392.00, 415.30, 293.66, 349.23, 440.00, 466.16, 293.66, 349.23, 440.00, 466.16];
+    const STRESS2_LEAD = [261.63, 392.00, 277.18, 415.30, 261.63, 392.00, 277.18, 415.30, 311.13, 466.16, 329.63, 493.88, 311.13, 466.16, 329.63, 493.88];
+    const DAWN_NOTES   = [523.25, 659.25, 783.99, 987.77, 1046.50, 783.99, 587.33, 739.99, 880.00, 659.25, 440.00, 587.33];
+
+    function music(pattern, fadeMs = 200) {
+      if (musicMode !== pattern) {
+        musicMode = pattern;
+        cur_mus = pattern;
+        musicStep = 0;
+        musicTick = 0;
+        if (musicGain && audioCtx && audioCtx.state === 'running') {
+          const now = audioCtx.currentTime;
+          const dur = max(0.05, fadeMs / 1000);
+          musicGain.gain.cancelScheduledValues(now);
+          musicGain.gain.setValueAtTime(pattern === -1 ? 0.001 : 0.15, now);
+          musicGain.gain.linearRampToValueAtTime(pattern === -1 ? 0.0001 : 1, now + dur);
+        }
+      }
+    }
+
+    function stepAdaptiveMusic() {
+      if (musicMode === -1 || audioMuted || !audioCtx || audioCtx.state !== 'running') return;
+      musicTick++;
+
+      if (musicMode === 0) {
+        if (musicTick % 11 === 0) {
+          const note = CALM_NOTES[musicStep % CALM_NOTES.length];
+          playTone(note, 'triangle', 0.34, 0.055, 0, null, true);
+          if (musicStep % 4 === 0) {
+            const bass = CALM_BASS[(musicStep >> 1) % CALM_BASS.length];
+            if (bass > 0) playTone(bass, 'sine', 0.55, 0.05, 0, null, true);
+          }
+          musicStep++;
+        }
+      } else if (musicMode === 2) {
+        if (musicTick % 7 === 0) {
+          const note = STRESS1_ARP[musicStep % STRESS1_ARP.length];
+          playTone(note, 'triangle', 0.18, 0.055, 0, null, true);
+          if (musicStep % 2 === 0) playTone(130.81, 'square', 0.12, 0.028, 0, null, true);
+          musicStep++;
+        }
+      } else if (musicMode === 4) {
+        if (musicTick % 4 === 0) {
+          const note = STRESS2_LEAD[musicStep % STRESS2_LEAD.length];
+          playTone(note, 'sawtooth', 0.11, 0.05, 0, null, true);
+          const bassFreq = (musicStep % 2 === 0) ? 130.81 : 138.59;
+          playTone(bassFreq, 'square', 0.09, 0.04, 0, null, true);
+          musicStep++;
+        }
+      } else if (musicMode === 6) {
+        // Dawn Victory: gentle Cmaj9 celesta lullaby + soft cat purr + occasional bird chirp
+        if (musicTick % 14 === 0) {
+          const note = DAWN_NOTES[musicStep % DAWN_NOTES.length];
+          playTone(note, 'sine', 0.42, 0.045, 0, null, true);
+          if (musicStep % 3 === 0) {
+            playTone(58, 'sine', 0.35, 0.028, 0, 52, true); // soft gentle cat purr
+          }
+          if (musicStep > 2 && musicStep % 16 === 6) {
+            sfx(11);
+          }
+          musicStep++;
+        }
+      }
+    }
+
+    /********************************************************************
+     * 3. ALBORADA GAME CORE (OPTIMIZED, BUG-FIXED, PICO-8 PARITY)
+     ********************************************************************/
+    const LANES = [25, 63, 102];
+    const ZONE_Y = 32;
+    const BOOM_Y = 17;
+    const LAUNCH_Y = 76;
+    const GAME_LEN = 2700; // 90s @ 30 fps
+    const PERFECT_PX = 3;
+    const GOOD_PX = 8;
+
+    const LVL_ALIVE = [2, 3, 3, 4, 5, 6, 7];
+    const LVL_SPEED = [0.56, 0.70, 0.84, 1.00, 1.18, 1.38, 1.56];
+    const LVL_GAP   = [60, 48, 39, 31, 23, 16, 12];
+    const LVL_PAT   = [0, 0.18, 0.32, 0.45, 0.58, 0.74, 0.85];
+    const ZEN_AT    = [8, 16, 25];
+    const K_SPD     = [1, 0.92, 1.22, 0.95, 0.78, 0.46];
+    const K_COL     = [8, 12, 14, 11, 10, 13];
+    const K_TRL     = [10, 12, 14, 11, 10, 6];
+
+    const STARS = [
+      [14,19,1],[30,27,8],[53,18,15],[70,24,22],[88,20,30],
+      [97,29,5],[114,17,11],[60,36,17],[19,40,3],[108,41,26],[74,38,12]
+    ];
+    const RIDGE_PTS = [[8,57],[22,50],[38,55],[56,45],[72,52],[90,47],[106,54],[119,50]];
+    const CITY_BLDG = [[8,68,20],[22,64,30],[32,70,44],[47,66,60],[62,71,72],[74,63,84],[86,69,98],[100,65,112],[113,70,119]];
+    const TITLE_FG_B = [[0,86,12],[10,76,25],[23,88,35],[33,71,50],[48,83,63],[61,74,77],[75,85,89],[87,77,104],[102,84,117],[115,79,127]];
+    const PAL_BOOM = [7, 10, 9, 8, 14, 12];
+    const RIDGE_Y = new Uint8Array(128);
+
+    // Pre-allocated zero-GC particle pool
+    const MAX_PARTS = 240;
+    const partPool = Array.from({ length: MAX_PARTS }, () => ({
+      x: 0, y: 0, px: 0, py: 0, dx: 0, dy: 0, life: 0, ml: 1, c: 7, g: 0, drag: 1, trail: false, spark: false
+    }));
+    let partCount = 0;
+
+    let best = 0;
+    let best_combo = 0;
+    let fr = 0;
+    let city = [];
+    let state = 0;
+    let elapsed = 0, lvl = 1, stress = 0, score = 0, combo = 0, max_combo = 0, zen = 0;
+    let rockets = [], queue = [], pre_spawns = [], rings = [], star_flashes = [], texts = [];
+    let spawn_t = 35, shake = 0, flash = 0, cat_shock = 0, freeze = 0, ear_twitch = 0;
+    let lane_hit = [0, 0, 0], lane_bad = [0, 0, 0], pane_shake = [0, 0, 0];
+    let end_t = 0, can_restart = false, new_best = false, cur_mus = -1;
+    let title_fw_flash = 0;
+    let last_lane = 0, lane_streak = 0, last_sp = 0;
+    let isMobileMode = false;
+
+    function _init() {
+      buildSpriteSheet();
+      best = dget(0);
+      best_combo = dget(1);
+      fr = 0;
+      make_city();
+      new_game();
+      state = 0;
+      music(0, 300);
+    }
+
+    function make_city() {
+      for (let x = 0; x < 128; x++) {
+        let ry = 50;
+        for (let i = 0; i < RIDGE_PTS.length - 1; i++) {
+          const a = RIDGE_PTS[i], b = RIDGE_PTS[i + 1];
+          if (x <= b[0]) {
+            ry = flr(a[1] + (b[1] - a[1]) * (x - a[0]) / (b[0] - a[0]));
+            break;
+          }
+        }
+        RIDGE_Y[x] = ry;
+      }
+
+      city = [];
+      let s = 7;
+      // 16.16 fixed-point overflow safe PRNG (max intermediate: 508 * 37 + 19 = 18,815 <= 32,767)
+      function r(n) {
+        s = (s * 37 + 19) % 509;
+        return s % n;
+      }
+      for (let i = 1; i <= 75; i++) {
+        const x = 8 + r(112);
+        const top = RIDGE_Y[x] + 3;
+        if (top < 74) {
+          const y = top + r(76 - top);
+          let c = 9;
+          if (r(3) === 0) c = 10;
+          if (r(5) === 0) c = 15;
+          add(city, [x, y, c, r(60)]);
+        }
+      }
+    }
+
+    function new_game() {
+      elapsed = 0; lvl = 1; stress = 0; score = 0;
+      combo = 0; max_combo = 0; zen = 0;
+      rockets.length = 0; queue.length = 0; pre_spawns.length = 0;
+      rings.length = 0; star_flashes.length = 0; texts.length = 0;
+      partCount = 0;
+      spawn_t = 35; shake = 0; flash = 0; cat_shock = 0;
+      freeze = 0; ear_twitch = 0; title_fw_flash = 0;
+      last_lane = 0; lane_streak = 0; last_sp = 0;
+      lane_hit[0] = lane_hit[1] = lane_hit[2] = 0;
+      lane_bad[0] = lane_bad[1] = lane_bad[2] = 0;
+      pane_shake[0] = pane_shake[1] = pane_shake[2] = 0;
+      end_t = 0; can_restart = false; new_best = false;
+    }
+
+    function sync_music() {
+      let target = 0;
+      if (state === 1) {
+        if (stress === 1) target = 2;
+        else if (stress >= 2) target = 4;
+      } else if (state === 2) {
+        target = 6; // Dawn victory lullaby
+      } else if (state === 3) {
+        target = -1;
+      }
+      if (target !== cur_mus) {
+        music(target, 200);
+      }
+    }
+
+    function start() {
+      new_game();
+      state = 1;
+      sfx(6);
+      sync_music();
+    }
+
+    function _update() {
+      fr = (fr + 1) % 7200; // Seamless LCM wrap preventing 16.16 overflow
+      if (freeze > 0) {
+        freeze -= 1;
+        return;
+      }
+      update_fx();
+      if (state === 0) {
+        if (fr % 50 === 0 && rnd() < 0.65) {
+          const tx = rnd() < 0.5 ? 24 + rnd(26) : 74 + rnd(30);
+          const ty = 36 + rnd(16);
+          const bc = PAL_BOOM[flr(rnd(PAL_BOOM.length))];
+          title_fw_flash = 10;
+          for (let i = 1; i <= 12; i++) {
+            const a = i / 12;
+            add_part(tx, ty, cos(a) * 0.55, sin(a) * 0.55, 18, bc, 0.02, 0.94, true, true);
+          }
+        }
+        if (btnp(4) || btnp(5)) start();
+      } else if (state === 1) {
+        update_play();
+      } else {
+        if (end_t < 120) end_t += 1;
+        if (!btn(4) && !btn(5)) can_restart = true;
+        if (end_t > 45 && can_restart && (btnp(4) || btnp(5))) {
+          start();
+        }
+      }
+    }
+
+    function triggerHaptic(pattern) {
+      try {
+        if (navigator && typeof navigator.vibrate === 'function') {
+          navigator.vibrate(pattern);
+        }
+      } catch (err) {}
+    }
+
+    function update_zen() {
+      let z = 0;
+      for (let i = 0; i < 3; i++) {
+        if (combo >= ZEN_AT[i]) z = i + 1;
+      }
+      if (z > zen && z === 3) sfx(9);
+      zen = z;
+    }
+
+    function update_play() {
+      elapsed += 1;
+      if (elapsed >= GAME_LEN) {
+        finish(true);
+        return;
+      }
+
+      let nl = 1;
+      if (elapsed < 2250) nl = min(5, 1 + flr(elapsed / 450));
+      else if (elapsed < 2475) nl = 6; // La Quema (75s - 82.5s)
+      else nl = 7; // Gran Final (82.5s - 90s)
+      if (nl > lvl) lvl = nl;
+      if (elapsed === 2250) spawn_t = min(spawn_t, 1);
+
+      if (btnp(0)) press(1);
+      if (btnp(2) || btnp(3)) press(2);
+      if (btnp(1)) press(3);
+
+      for (let i = queue.length - 1; i >= 0; i--) {
+        const q = queue[i];
+        q.t -= 1;
+        if (q.t <= 0) {
+          if (queue_pre_spawn(q.l, q.k, q)) {
+            swapPop(queue, i);
+          } else {
+            q.t = 2; // Short retry if active rocket hasn't cleared launch pad yet
+          }
+        }
+      }
+
+      for (let i = pre_spawns.length - 1; i >= 0; i--) {
+        const ps = pre_spawns[i];
+        ps.t -= 1;
+        if (ps.t % 3 === 0) {
+          const pc = ps.k > 3 ? (ps.t < 6 ? 7 : K_COL[ps.k - 1]) : (ps.t < 6 ? 10 : 6);
+          add_part(LANES[ps.l - 1] + rnd(2) - 1, LAUNCH_Y - 1, rnd(0.2) - 0.1, -0.35, 8, pc);
+        }
+        if (ps.t <= 0) {
+          spawn_rocket_now(ps.l, ps.k);
+          swapPop(pre_spawns, i);
+        }
+      }
+
+      // Dramatic breath before final rush (72s..75s) + clean final landing after 88.5s
+      const in_dramatic_breath = (elapsed >= 2160 && elapsed < 2250) || elapsed > 2655;
+
+      spawn_t -= 1;
+      if (spawn_t <= 0 && !in_dramatic_breath) {
+        const active_total = rockets.length + queue.length + pre_spawns.length;
+        const cap = LVL_ALIVE[lvl - 1];
+        const gap = LVL_GAP[lvl - 1];
+        if (active_total < cap) {
+          const r = rnd();
+          if (r < LVL_PAT[lvl - 1] && cap - active_total >= 2) {
+            const step = lvl >= 6 ? 8 : 11;
+            if (rnd() < 0.65 && cap - active_total >= 3 && lane_free(1) && lane_free(2) && lane_free(3)) {
+              const pRoll = rnd();
+              const l0 = rnd() < 0.5 ? 1 : 3;
+              if (lvl >= 5 && pRoll < 0.35) {
+                // Pinza / V-Salvo: sides converge to center
+                queue_pre_spawn(l0, 1);
+                add(queue, { l: 4 - l0, t: step, k: 1 });
+                add(queue, { l: 2, t: step * 2 + (lvl >= 7 ? 2 : 0), k: lvl >= 7 ? 3 : 2 });
+                spawn_t = gap + (lvl >= 6 ? 10 : 18);
+              } else if (lvl >= 6 && pRoll < 0.65) {
+                // Rebote / Ping-Pong: side -> center -> side
+                queue_pre_spawn(l0, 1);
+                add(queue, { l: 2, t: step, k: 2 });
+                add(queue, { l: l0, t: step * 2 + 2, k: lvl >= 7 ? 3 : 1 });
+                spawn_t = gap + 10;
+              } else {
+                // Escalera: 1 -> 2 -> 3 (or 3 -> 2 -> 1)
+                queue_pre_spawn(l0, 1);
+                add(queue, { l: 2, t: step, k: 1 });
+                add(queue, { l: 4 - l0, t: step * 2 + (lvl >= 7 ? 2 : 0), k: lvl >= 7 ? 3 : 2 });
+                spawn_t = gap + (lvl >= 6 ? 10 : 18);
+              }
+            } else {
+              const l1 = flr(rnd(3)) + 1;
+              const l2 = ((l1 + (rnd() < 0.5 ? 0 : 1)) % 3) + 1;
+              if (lane_free(l1) && lane_free(l2)) {
+                queue_pre_spawn(l1, lvl >= 3 ? 3 : 1);
+                add(queue, { l: l2, t: lvl >= 6 ? 8 : 9, k: lvl >= 6 ? 2 : 1 });
+                spawn_t = gap + (lvl >= 6 ? 6 : 12);
+              } else {
+                spawn_t = 5;
+              }
+            }
+          } else {
+            let k = 1;
+            if (lvl >= 2 && rnd() < 0.35) k = 2;
+            if (lvl >= 3 && rnd() < (lvl >= 6 ? 0.38 : 0.25)) k = 3;
+            const spChance = lvl >= 6 ? 0.25 : (lvl >= 3 ? 0.22 : 0.18);
+            if (lvl >= 2 && !has_special() && rnd() < spChance) {
+              k = last_sp >= 4 ? (4 + ((last_sp - 4 + (rnd() < 0.5 ? 1 : 2)) % 3)) : (4 + flr(rnd(3)));
+            }
+            if (try_spawn(k)) {
+              spawn_t = gap + flr(rnd(lvl >= 6 ? 5 : 10));
+            } else {
+              spawn_t = 5;
+            }
+          }
+        } else {
+          spawn_t = 6;
+        }
+      }
+
+      for (let i = rockets.length - 1; i >= 0; i--) {
+        const r = rockets[i];
+        r.y -= r.spd;
+        r.t += 1;
+
+        if (r.k === 4) {
+          // Buscapies: telegraph sideways sparks then switch cleanly to adjacent safe lane
+          if (r.sw === 0) {
+            r.x = LANES[r.l - 1];
+            if (r.y <= 64 && r.y > 57 && r.t % 2 === 0) {
+              const dir = r.tl > r.l ? 0.9 : -0.9;
+              add_part(r.x, r.y, dir, -0.15, 10, r.t % 4 < 2 ? 7 : 10, 0, 0.9, true);
+            }
+            if (r.y <= 57 && r.y >= 49) {
+              let safe = true;
+              for (const o of rockets) {
+                if (o !== r && o.l === r.tl && abs(o.y - r.y) < 16) { safe = false; break; }
+              }
+              if (safe) {
+                r.ox0 = LANES[r.l - 1];
+                r.l = r.tl;
+                r.sw = 1;
+                sfx(12);
+                const dir = LANES[r.l - 1] > r.ox0 ? 1 : -1;
+                for (let j = 0; j < 6; j++) {
+                  add_part(r.x, r.y, dir * (0.6 + rnd(0.8)), rnd(0.4) - 0.2, 10, j % 2 === 0 ? 7 : 11, 0, 0.9, true);
+                }
+              }
+            }
+          } else if (r.sw <= 10) {
+            const u = r.sw / 10;
+            const ease = u * u * (3 - 2 * u);
+            r.x = r.ox0 + (LANES[r.l - 1] - r.ox0) * ease;
+            r.sw += 1;
+          } else {
+            r.x = LANES[r.l - 1];
+          }
+        } else if (r.k === 6) {
+          // Silbador: slow deceptive climb, shivers briefly then ignites turbo boost
+          r.x = LANES[r.l - 1] + (!r.bst && r.y <= 58 ? (r.t % 2 === 0 ? -0.8 : 0.8) : 0);
+          if (!r.bst && r.y <= 54) {
+            r.bst = true;
+            let bs = min(LVL_SPEED[lvl - 1] * 1.45, 2.05);
+            for (const o of rockets) {
+              if (o !== r && o.l === r.l && o.y < r.y) bs = min(bs, o.spd * 0.98);
+            }
+            r.spd = bs;
+            sfx(14);
+            add(rings, { x: r.x, y: r.y, r: 2, mx: 8, c: 10, shrink: false });
+            for (let j = 0; j < 6; j++) {
+              add_part(r.x + rnd(2) - 1, r.y + 2, rnd(0.6) - 0.3, 0.5 + rnd(0.5), 11, j % 2 === 0 ? 7 : 10, 0, 0.92, true);
+            }
+          }
+        } else {
+          const ox = r.k === 2 ? sin(r.t * 0.12) * 3.5 : 0;
+          r.x = LANES[r.l - 1] + ox;
+        }
+
+        const tc = (r.k === 6 && r.bst) ? (r.t % 2 === 0 ? 7 : 10) : ((r.k === 5 && r.hp === 1) ? 9 : K_TRL[r.k - 1]);
+        add_part(r.x + rnd(1.4) - 0.7, r.y + 3, rnd(0.3) - 0.15, 0.35, 10 + rnd(6), tc, 0.02, 0.92, true);
+        if (r.k === 6 && r.bst) {
+          add_part(r.x, r.y + 4, rnd(0.2) - 0.1, 0.6, 8, 7, 0.02, 0.92, true);
+        } else if (r.t % 2 === 0) {
+          add_part(r.x, r.y + 4, rnd(0.2) - 0.1, 0.15, 14, 5, 0, 0.9);
+        }
+
+        if (r.y <= BOOM_Y) {
+          explode(i);
+          if (state !== 1) return;
+        }
+      }
+      update_zen();
+    }
+
+    function has_special() {
+      for (const r of rockets) {
+        if (r.k > 3) return true;
+      }
+      for (const ps of pre_spawns) {
+        if (ps.k > 3) return true;
+      }
+      return false;
+    }
+
+    function lane_free(l, ignoreQ) {
+      for (const r of rockets) {
+        if (r.l === l && r.y > LAUNCH_Y - 22) return false;
+      }
+      for (const ps of pre_spawns) {
+        if (ps.l === l) return false;
+      }
+      for (const q of queue) {
+        if (q !== ignoreQ && q.l === l) return false;
+      }
+      return true;
+    }
+
+    function queue_pre_spawn(l, k, ignoreQ) {
+      if (!lane_free(l, ignoreQ)) return false;
+      const rk = k || 1;
+      add(pre_spawns, { l: l, k: rk, t: lvl >= 6 ? 11 : 14 });
+      lane_streak = l === last_lane ? lane_streak + 1 : 1;
+      last_lane = l;
+      if (rk > 3) last_sp = rk;
+      sfx(10);
+      return true;
+    }
+
+    function spawn_rocket_now(l, k) {
+      k = k || 1;
+      const spread = lvl >= 6 ? (0.94 + rnd(0.12)) : (0.9 + rnd(0.2));
+      let s = LVL_SPEED[lvl - 1] * spread * ((k === 3 && lvl >= 7) ? 1.18 : K_SPD[k - 1]);
+      for (const r of rockets) {
+        if (r.l === l) s = min(s, r.spd * 0.95);
+      }
+      const tl = k === 4 ? (l === 2 ? (rnd() < 0.5 ? 1 : 3) : 2) : l;
+      add(rockets, {
+        l: l, x: LANES[l - 1], y: LAUNCH_Y, spd: s, t: 0, k: k,
+        hp: k === 5 ? 2 : 1, tl: tl, sw: 0, ox0: LANES[l - 1], bst: false
+      });
+      for (let i = 1; i <= 5; i++) {
+        add_part(LANES[l - 1] + rnd(4) - 2, LAUNCH_Y + 2, rnd(0.6) - 0.3, rnd(0.3), 10, k > 3 ? K_COL[k - 1] : 6);
+      }
+      sfx(4);
+      return true;
+    }
+
+    function try_spawn(k) {
+      const opts = [];
+      for (let l = 1; l <= 3; l++) {
+        if (lane_free(l) && (lane_streak < 2 || l !== last_lane)) opts.push(l);
+      }
+      if (opts.length === 0 && last_lane > 0 && lane_free(last_lane)) opts.push(last_lane);
+      if (opts.length === 0) return false;
+      return queue_pre_spawn(opts[flr(rnd(opts.length))], k);
+    }
+
+    function mult() {
+      return min(4, 1 + flr(combo / 10));
+    }
+
+    function press(l) {
+      lane_hit[l - 1] = 6;
+      // Prioritize highest in-range rocket (closest to exploding) in this lane
+      let trIdx = -1;
+      let topY = 999;
+      for (let i = 0; i < rockets.length; i++) {
+        const r = rockets[i];
+        if (r.l === l && abs(r.y - ZONE_Y) <= GOOD_PX && r.y < topY) {
+          trIdx = i;
+          topY = r.y;
+        }
+      }
+
+      if (trIdx !== -1) {
+        const tr = rockets[trIdx];
+        const td = abs(tr.y - ZONE_Y);
+        const perfect = td <= PERFECT_PX;
+        const old_m = mult();
+        combo += 1;
+        max_combo = max(max_combo, combo);
+        if (max_combo > best_combo) {
+          best_combo = max_combo;
+          dset(1, best_combo);
+        }
+        const new_m = mult();
+        if (tr.hp > 1) {
+          tr.hp -= 1;
+          tr.y = ZONE_Y + 11;
+          tr.spd = max(tr.spd * 1.15, 0.85);
+          for (const o of rockets) {
+            if (o !== tr && o.l === tr.l && o.y < tr.y) tr.spd = min(tr.spd, o.spd * 0.95);
+          }
+          score = min(32000, score + 5 * new_m);
+          sfx(13);
+          triggerHaptic(10);
+          add(rings, { x: tr.x, y: ZONE_Y, r: 2, mx: 12, c: 10, shrink: false });
+          for (let i = 1; i <= 10; i++) {
+            const a = i / 10;
+            add_part(tr.x, ZONE_Y, cos(a) * 1.35, sin(a) * 1.35, 11, i % 2 === 0 ? 7 : 10, 0.03, 0.9, true);
+          }
+        } else {
+          const basePts = tr.k > 3 ? (perfect ? 15 : 8) : (perfect ? 10 : 5);
+          score = min(32000, score + basePts * new_m);
+          silence(tr, perfect);
+          swapPop(rockets, trIdx);
+        }
+        if (new_m > old_m) {
+          add_text(64, 44, "x" + new_m + "!", 10);
+        }
+        if (combo % 15 === 0 && stress > 0) {
+          stress -= 1;
+          sfx(5);
+          sync_music();
+        }
+      } else {
+        combo = 0;
+        lane_bad[l - 1] = 10;
+        pane_shake[l - 1] = 8;
+        ear_twitch = 10;
+        triggerHaptic([8, 25, 12]);
+        sfx(2);
+      }
+      update_zen();
+    }
+
+    function silence(r, perfect) {
+      if (perfect) {
+        freeze = 1;
+        triggerHaptic(14);
+        add(star_flashes, { x: r.x, y: r.y, t: 7 });
+        add(rings, { x: r.x, y: r.y, r: 15, mx: 2, c: 7, shrink: true });
+        for (let i = 1; i <= 12; i++) {
+          const a = i / 12;
+          const rad = 14 + rnd(5);
+          const sx = r.x + cos(a) * rad;
+          const sy = r.y + sin(a) * rad;
+          add_part(sx, sy, (r.x - sx) * 0.22, (r.y - sy) * 0.22, 7, i % 2 === 0 ? 7 : 10, 0, 0.9, true);
+        }
+        sfx(0);
+      } else {
+        triggerHaptic(6);
+        add(rings, { x: r.x, y: r.y, r: 2, mx: 13, c: 12, shrink: false });
+        for (let i = 1; i <= 8; i++) {
+          const a = i / 8;
+          add_part(r.x, r.y, cos(a) * 1.1, sin(a) * 1.1, 9, 12, 0, 0.88, true);
+        }
+        sfx(1);
+      }
+    }
+
+    function explode(rIdx) {
+      const r = rockets[rIdx];
+      swapPop(rockets, rIdx);
+      stress += 1;
+      combo = 0;
+      shake = 16;
+      flash = 6;
+      cat_shock = 28;
+      triggerHaptic([45, 30, 85]);
+      sync_music();
+
+      add(rings, { x: r.x, y: r.y, r: 2, mx: 28, c: 7 });
+      add(rings, { x: r.x, y: r.y, r: 1, mx: 18, c: 10 });
+      const main_c = PAL_BOOM[flr(rnd(PAL_BOOM.length))];
+
+      for (let i = 1; i <= 28; i++) {
+        const a = i / 28 + rnd(0.02);
+        const spd = 1.3 + rnd(1.1);
+        add_part(r.x, r.y, cos(a) * spd, sin(a) * spd, 32 + rnd(18), main_c, 0.038, 0.95, true, true);
+      }
+      for (let i = 1; i <= 16; i++) {
+        const a = rnd();
+        const spd = 0.4 + rnd(0.9);
+        add_part(r.x, r.y, cos(a) * spd, sin(a) * spd, 20 + rnd(10), 7, 0.02, 0.92, true);
+      }
+
+      sfx(3);
+      update_zen();
+      if (stress >= 3) finish(false);
+    }
+
+    function finish(win) {
+      state = win ? 2 : 3;
+      end_t = 0;
+      can_restart = false;
+      zen = 0;
+      queue.length = 0;
+      pre_spawns.length = 0;
+      for (let i = 0; i < rockets.length; i++) {
+        const r = rockets[i];
+        add(rings, { x: r.x, y: r.y, r: 2, mx: 12, c: win ? 12 : 5 });
+      }
+      rockets.length = 0;
+      sync_music();
+      if (score > best) {
+        best = score;
+        dset(0, best);
+        new_best = true;
+      }
+      sfx(win ? 8 : 7);
+    }
+
+    function add_part(x, y, dx, dy, life, c, g = 0, drag = 1, trail = false, spark = false) {
+      if (partCount >= MAX_PARTS) return;
+      const p = partPool[partCount++];
+      p.x = p.px = x; p.y = p.py = y;
+      p.dx = dx; p.dy = dy;
+      p.life = p.ml = life;
+      p.c = c; p.g = g; p.drag = drag;
+      p.trail = trail; p.spark = spark;
+    }
+
+    function add_text(x, y, s, c) {
+      add(texts, { x: x, y: y, s: s, c: c, t: 28 });
+    }
+
+    function update_fx() {
+      for (let i = partCount - 1; i >= 0; i--) {
+        const p = partPool[i];
+        p.px = p.x; p.py = p.y;
+        p.x += p.dx; p.y += p.dy;
+        p.dx *= p.drag;
+        p.dy = p.dy * p.drag + p.g;
+        p.life -= 1;
+        if (p.life <= 0) {
+          partCount--;
+          const tmp = partPool[i];
+          partPool[i] = partPool[partCount];
+          partPool[partCount] = tmp;
+        }
+      }
+      for (let i = rings.length - 1; i >= 0; i--) {
+        const g = rings[i];
+        if (g.shrink) {
+          g.r -= 2.2;
+          if (g.r <= g.mx) swapPop(rings, i);
+        } else {
+          g.r += 1.6;
+          if (g.r > g.mx) swapPop(rings, i);
+        }
+      }
+      for (let i = star_flashes.length - 1; i >= 0; i--) {
+        const sf = star_flashes[i];
+        sf.t -= 1;
+        if (sf.t <= 0) swapPop(star_flashes, i);
+      }
+      for (let i = texts.length - 1; i >= 0; i--) {
+        const t = texts[i];
+        t.y -= 0.4;
+        t.t -= 1;
+        if (t.t <= 0) swapPop(texts, i);
+      }
+      for (let l = 0; l < 3; l++) {
+        lane_hit[l] = max(0, lane_hit[l] - 1);
+        lane_bad[l] = max(0, lane_bad[l] - 1);
+        pane_shake[l] = max(0, pane_shake[l] - 1);
+      }
+      if (shake > 0) shake -= 1;
+      if (flash > 0) flash -= 1;
+      if (cat_shock > 0) cat_shock -= 1;
+      if (ear_twitch > 0) ear_twitch -= 1;
+      if (title_fw_flash > 0) title_fw_flash -= 1;
+    }
+
+    function dim() {
+      if (zen >= 3) {
+        pal(2,1); pal(4,2); pal(9,4); pal(10,9);
+        pal(13,5); pal(6,13); pal(7,6); pal(8,2);
+        pal(14,2); pal(5,1); pal(15,4);
+      }
+    }
+
+    function oprint(s, x, y, c, outC = 0) {
+      for (let dx = -1; dx <= 1; dx++) {
+        for (let dy = -1; dy <= 1; dy++) {
+          if (dx !== 0 || dy !== 0) print(s, x + dx, y + dy, outC);
+        }
+      }
+      print(s, x, y, c);
+    }
+
+    function cprint(s, y, c, outC = null) {
+      const str = String(s);
+      const scaleX = str.includes('^w') ? 2 : 1;
+      const clean = str.replace(/\^[wt]/g, '');
+      const w = (clean.length * 4 - 1) * scaleX;
+      const x = 64 - flr(w / 2);
+      if (outC !== null) oprint(str, x, y, c, outC);
+      else print(str, x, y, c);
+    }
+
+    function pad(n, len) {
+      let s = tostr(n);
+      while (s.length < len) s = "0" + s;
+      return s;
+    }
+
+    function draw_fx_front() {
+      for (let i = 0; i < texts.length; i++) {
+        const t = texts[i];
+        oprint(t.s, t.x - flr((t.s.length * 4 - 1) / 2), t.y, t.c);
+      }
+    }
+
+    function _draw() {
+      pal();
+      fillp();
+      camera();
+      if (state === 0) {
+        cls(0);
+        draw_title_screen();
+        return;
+      }
+      if (shake > 0) {
+        cls(0);
+        camera(flr(rnd(5)) - 2, flr(rnd(5)) - 2);
+      }
+      dim();
+      draw_room();
+      draw_frame();
+      pal();
+      draw_sky();
+      draw_city();
+      draw_pre_spawns();
+      draw_fx_sky();
+      draw_sky_sunbeam();
+      dim();
+      draw_mullions();
+      draw_curtains();
+      draw_bed();
+      pal();
+      draw_lanes();
+      draw_rockets();
+      draw_cat_big();
+      draw_zzz();
+      draw_fx_front();
+      camera();
+      draw_hud();
+      if (state === 2) {
+        draw_victory_overlay();
+      } else if (state === 3 && end_t > 20) {
+        draw_gameover();
+      }
+    }
+
+    // Portada A: El Mirador del Gato
+    function draw_title_screen() {
+      fillp(0x5a5a); rectfill(0, 22, 127, 29, 0x10); fillp();
+      rectfill(0, 30, 127, 48, 1);
+      fillp(0x5a5a); rectfill(0, 45, 127, 52, 0x21); fillp();
+      rectfill(0, 53, 127, 68, 2);
+      fillp(0x7fdf, true); rectfill(0, 57, 127, 68, 9); fillp();
+
+      for (const s of STARS) {
+        pset(s[0], s[1] - 4, (fr + s[2] * 5) % 40 < 6 ? 7 : 6);
+      }
+      circfill(110, 13, 5, 15);
+      circfill(112, 11, 4, 0);
+
+      draw_fx_sky();
+
+      // Custom ALBORADA wordmark from shared spritesheet + sweeping diagonal shimmer
+      sspr(0, 0, 94, 15, 17, 8);
+      if (fr % 90 < 28) {
+        const shim = (fr % 90) * 4 - 8;
+        for (let r = 1; r <= 13; r++) {
+          const lx = flr(shim + r * 0.6);
+          for (let dx = -1; dx <= 1; dx++) {
+            const gx = lx + dx;
+            if (gx >= 0 && gx < 94 && sget(gx, r) > 1) psetSolid(17 + gx, 8 + r, 7);
+          }
+        }
+      }
+      oprint("by dejesumensaje", 33, 26, 15, 1);
+
+      // Medellín hillside ridges & twinkling barrio lights
+      for (let x = 0; x <= 127; x++) {
+        line(x, RIDGE_Y[x] + 10, x, 96, 1);
+        line(x, RIDGE_Y[x] + 22, x, 96, 2);
+      }
+      for (let i = 0; i < city.length; i++) {
+        const l = city[i];
+        if ((fr + l[3]) % 90 > 4) pset(l[0], min(94, l[1] + 15), l[2]);
+      }
+      for (let i = 0; i < TITLE_FG_B.length; i++) {
+        const e = TITLE_FG_B[i];
+        rectfill(e[0], e[1], e[2], 96, 0);
+        if (i % 2 === 0) {
+          line(e[0] + 3, e[1] - 4, e[0] + 3, e[1], 0);
+          if ((fr + i * 9) % 40 < 20) pset(e[0] + 3, e[1] - 5, 8);
+        }
+      }
+
+      // Cozy foreground curtains & wooden window sill
+      draw_curtains(0);
+      rectfill(0, 96, 127, 102, 4);
+      line(0, 96, 127, 96, 9);
+      rectfill(0, 103, 127, 127, 0);
+      fillp(0x8020); rectfill(0, 103, 127, 127, 0x10); fillp();
+
+      // Potted succulent on left sill
+      sspr(40, 16, 11, 11, 12, 85);
+
+      // Window-sill gazing cat with dynamic firework rim-light
+      const rimCol = title_fw_flash > 5 ? 7 : (title_fw_flash > 0 ? 10 : 15);
+      pal(15, rimCol);
+      sspr(0, 16, 34, 30, 82, 67);
+      pal();
+
+      // Gentle tail swaying below the sill
+      const wag = sin(fr * 0.03) * 3;
+      for (let i = 0; i <= 9; i++) {
+        circfill(107 + i * 0.8 + wag * (i / 9), 97 + i * 1.9, 1, i % 3 === 0 ? 4 : 9);
+      }
+
+      const prompt = isMobileMode ? "> toca para empezar" : "> pulsa x / toca";
+      oprint(prompt, 9, 112, fr % 36 < 24 ? 10 : 7, 0);
+    }
+
+    function draw_room() {
+      const isWin = state === 2;
+      const topWallY = isWin ? 0 : 10;
+      const wallCol = isWin ? 0x42 : 0x12;
+
+      // Avoid heavy overdraw behind the window sky (x=8..119, y=15..77)
+      fillp(0x8020);
+      rectfill(0, topWallY, 127, 13, wallCol);
+      rectfill(0, 14, 6, 80, wallCol);
+      rectfill(121, 14, 127, 80, wallCol);
+      rectfill(0, 81, 127, 119, wallCol);
+      fillp();
+
+      if (isWin) {
+        rectfill(0, 9, 127, 10, 4);
+        line(0, 9, 127, 9, 9);
+      }
+
+      rectfill(0, 120, 127, 127, isWin ? 4 : 1);
+      line(0, 120, 127, 120, isWin ? 9 : 5);
+
+      const lampOff = (zen >= 2 || state === 3 || (isWin && end_t >= 25));
+      if (!lampOff) {
+        fillp(0x5a5a);
+        circfill(117, 94, 15, 0x42);
+        fillp();
+      }
+
+      rectfill(110, 105, 126, 124, 4);
+      line(110, 105, 126, 105, 9);
+      pset(118, 111, 9);
+
+      rectfill(117, 98, 119, 104, 5);
+      const sc = lampOff ? (isWin ? 6 : 13) : 10;
+      rectfill(113, 89, 123, 97, sc);
+      line(114, 88, 122, 88, isWin && lampOff ? 5 : sc);
+    }
+
+    function draw_frame() {
+      if (state !== 2) line(0, 10, 127, 10, 5);
+      rectfill(3, 12, 124, 14, 4);
+      rectfill(3, 15, 7, 81, 4);
+      rectfill(120, 15, 124, 81, 4);
+      rectfill(3, 78, 124, 81, 4);
+      line(3, 12, 124, 12, 9);
+      line(3, 12, 3, 81, 9);
+      line(7, 14, 120, 14, 2);
+    }
+
+    function getDawnSunPos() {
+      let dawn_p = 0;
+      if (state === 2) dawn_p = 1;
+      else if (elapsed > 2100) dawn_p = min(1, (elapsed - 2100) / 600);
+      const rise = state === 2 ? min(1, end_t / 45) : 0;
+      const sunY = state === 2
+        ? flr(37 - rise * 2) // Settles smoothly at 35
+        : (dawn_p > 0.45 ? flr(55 - (dawn_p - 0.45) * 33) : 65);
+      return { dawn_p, rise, sunX: 98, sunY };
+    }
+
+    function draw_sky() {
+      const { dawn_p, rise, sunX, sunY } = getDawnSunPos();
+      let c_top = 0, c_mid = 0, c_bot = 1;
+
+      if (state === 2) {
+        if (rise < 0.25) { c_top = 2; c_mid = 14; c_bot = 9; }
+        else { c_top = 12; c_mid = 15; c_bot = 10; }
+      } else if (dawn_p > 0) {
+        if (dawn_p < 0.35) { c_top = 0; c_mid = 1; c_bot = 2; }
+        else if (dawn_p < 0.7) { c_top = 1; c_mid = 2; c_bot = 14; }
+        else { c_top = 2; c_mid = 14; c_bot = 9; }
+      }
+
+      if (flash > 3) { c_top = 7; c_mid = 10; c_bot = 10; }
+      else if (flash > 1) { c_top = 8; c_mid = 14; c_bot = 14; }
+      else if (flash > 0) { c_top = 2; c_mid = 8; c_bot = 8; }
+
+      rectfill(8, 15, 119, 36, c_top);
+      fillp(0x5a5a);
+      rectfill(8, 37, 119, 43, c_mid * 16 + c_top);
+      fillp();
+      rectfill(8, 44, 119, 55, c_mid);
+      fillp(0x5a5a);
+      rectfill(8, 56, 119, 62, c_bot * 16 + c_mid);
+      fillp();
+      rectfill(8, 63, 119, 77, c_bot);
+
+      if (dawn_p < 0.65 && flash === 0 && state !== 2) {
+        for (const s of STARS) {
+          const t = (fr + s[2] * 7) % 90;
+          if (t > 4) {
+            const c = (dawn_p > 0.3) ? 5 : (s[2] % 3 === 0 ? 7 : 6);
+            pset(s[0], s[1], c);
+          }
+        }
+      }
+
+      if (state !== 2) {
+        circfill(37, 21, 4, dawn_p > 0.6 ? 15 : 7);
+        circfill(39, 20, 3, c_top);
+      }
+
+      // Rising Sun (visible above mountains during late night & morning)
+      if (dawn_p > 0.45 || state === 2) {
+        if (state === 2 && rise > 0.25) {
+          fillp(0x7fdf, true); circfill(sunX, sunY, 13, 10);
+          fillp(0x5a5a, true); circfill(sunX, sunY, 9, 9);
+          fillp();
+        } else if (dawn_p > 0.75) {
+          circ(sunX, sunY, 9, 9);
+        }
+        circfill(sunX, sunY, 6, 10);
+        if (state === 2) circfill(sunX - 1, sunY - 1, 3, 7);
+      }
+    }
+
+    function draw_city() {
+      const isWin = state === 2;
+      const rise = isWin ? min(1, end_t / 45) : 0;
+      const m_col = (isWin || elapsed > 2400) ? 13 : 2;
+
+      for (let x = 8; x <= 119; x++) {
+        const ry = RIDGE_Y[x];
+        if (isWin && rise > 0.25) {
+          line(x, ry, x, min(77, ry + 6), 13);
+          if (ry + 7 <= 77) line(x, ry + 7, x, 77, 3);
+        } else {
+          line(x, ry, x, 77, m_col);
+        }
+      }
+
+      for (let i = 0; i < city.length; i++) {
+        const l = city[i];
+        if (isWin) {
+          if (l[3] / 60 > rise * 1.15) pset(l[0], l[1], l[2]);
+        } else if ((fr + l[3]) % 120 > 2) {
+          pset(l[0], l[1], l[2]);
+        }
+      }
+
+      const bCol = isWin ? 1 : 0;
+      for (let i = 0; i < CITY_BLDG.length; i++) {
+        const e = CITY_BLDG[i];
+        rectfill(e[0], e[1], e[2], 77, bCol);
+        if (!isWin) {
+          pset(e[0] + 2, e[1] + 3, 10);
+          if ((i + 1) % 2 === 0) pset(e[2] - 3, e[1] + 6, 9);
+        }
+      }
+
+      // Morning birds crossing the window on Victory
+      if (isWin) {
+        for (let b = 0; b < 2; b++) {
+          const bx = ((fr * 0.22 + b * 48) % 106) + 10;
+          const by = 21 + b * 10 + sin(fr * 0.06 + b) * 1.4;
+          const flap = flr(fr / 8 + b) % 2 === 0 ? -1 : 1;
+          pset(bx, by, 1);
+          pset(bx - 1, by + flap, 1);
+          pset(bx + 1, by + flap, 1);
+        }
+      }
+    }
+
+    function draw_pre_spawns() {
+      for (const ps of pre_spawns) {
+        const x = LANES[ps.l - 1];
+        const y = LAUNCH_Y - 1;
+        const c = (ps.t % 4 < 2) ? 7 : (ps.k === 3 ? 14 : (ps.k === 2 ? 12 : 10));
+        circfill(x, y, ps.t < 5 ? 2 : 1, c);
+        pset(x, y - 2, 9);
+      }
+    }
+
+    // Subtle single solar beam (Pass A in sky, before mullions)
+    function draw_sky_sunbeam() {
+      if (state !== 2) return;
+      const { rise, sunX, sunY } = getDawnSunPos();
+      if (rise <= 0.25) return;
+      fillp(0x7fff, true); // 6.25% subtle outer glow in sky
+      for (let y = sunY + 5; y <= 77; y++) {
+        const dy = y - sunY;
+        const lx = max(8, flr(sunX - 4 - dy * 0.80));
+        const rx = min(119, flr(sunX + 5 - dy * 0.28));
+        if (lx <= rx) line(lx, y, rx, y, 10);
+      }
+      fillp();
+    }
+
+    function draw_mullions() {
+      const s1 = pane_shake[0] > 0 ? ((fr % 2 === 0) ? 1 : -1) : 0;
+      const s2 = pane_shake[1] > 0 ? ((fr % 2 === 0) ? 1 : -1) : 0;
+      const s3 = pane_shake[2] > 0 ? ((fr % 2 === 0) ? 1 : -1) : 0;
+
+      if (pane_shake[0] > 0) line(14 + s1, 22, 20 + s1, 28, 13);
+      if (pane_shake[1] > 0) line(52 + s2, 22, 58 + s2, 28, 13);
+      if (pane_shake[2] > 0) line(92 + s3, 22, 98 + s3, 28, 13);
+
+      const m1 = s1 !== 0 ? s1 : s2;
+      const m2 = s2 !== 0 ? s2 : s3;
+      rectfill(43 + m1, 15, 45 + m1, 77, 4);
+      line(43 + m1, 15, 43 + m1, 77, 9);
+      rectfill(81 + m2, 15, 83 + m2, 77, 4);
+      line(81 + m2, 15, 81 + m2, 77, 9);
+      rectfill(0, 78, 127, 85, 4);
+      line(0, 78, 127, 78, 9);
+      line(0, 86, 127, 86, 1);
+
+      // Specular glint on sill where single sunbeam touches wood
+      if (state === 2) {
+        const { rise, sunX, sunY } = getDawnSunPos();
+        if (rise > 0.25) {
+          const dy = 78 - sunY;
+          const lx = max(8, flr(sunX - 4 - dy * 0.80));
+          const rx = min(119, flr(sunX + 5 - dy * 0.28));
+          if (lx <= rx) {
+            line(lx, 78, rx, 78, 10);
+            if (lx + 6 <= rx - 6) line(lx + 6, 78, rx - 6, 78, 7);
+          }
+        }
+      }
+    }
+
+    function draw_curtains(topY = 11) {
+      const isWin = state === 2;
+      for (let side = 0; side <= 1; side++) {
+        const x0 = side === 0 ? 0 : 118;
+        rectfill(x0, topY, x0 + 9, 96, 1);
+        for (let k = 1; k <= 7; k += 3) {
+          line(x0 + k, topY, x0 + k, 96, 0);
+        }
+        line(side === 0 ? x0 + 9 : x0, topY, side === 0 ? x0 + 9 : x0, 96, isWin ? 14 : 13);
+        rectfill(x0, 60, x0 + 9, 62, isWin ? 15 : 13);
+      }
+    }
+
+    function draw_bed() {
+      const isWin = state === 2;
+      rectfill(4, 90, 11, 125, 4);
+      line(4, 90, 11, 90, 9);
+      rectfill(10, 104, 110, 118, 7);
+      rectfill(12, 96, 34, 106, isWin ? 15 : 6);
+      line(13, 96, 33, 96, 7);
+      rectfill(28, 103, 110, 123, 13);
+      fillp(0xa5a5);
+      rectfill(28, 108, 110, 121, 0x1d);
+      fillp();
+      line(28, 103, 110, 103, isWin ? 15 : 6);
+      line(28, 123, 110, 123, 1);
+      rectfill(8, 119, 27, 124, 4);
+      rectfill(104, 123, 109, 127, 4);
+    }
+
+    function draw_cat_big() {
+      if (state === 3 || stress >= 3) return;
+      const isWin = state === 2;
+      let cx = 60;
+      let cy = 94;
+      const breath = (stress === 0 && flr(fr / (isWin ? 22 : 18)) % 2 === 1) ? 1 : 0;
+      let shk_x = 0;
+
+      if (cat_shock > 0) {
+        cy -= min(6, flr(cat_shock / 3));
+        shk_x = (fr % 2 === 0) ? 2 : -2;
+      }
+      cx += shk_x;
+
+      ovalfill(cx - 26, 113, cx + 32, 120, 1);
+
+      let rim = 4;
+      if (flash > 2) rim = 7;
+      else if (flash > 0) rim = 10;
+      else if (isWin) rim = (flr(fr / 18) % 2 === 0) ? 7 : 10;
+      else if (zen >= 3) rim = (flr(fr / 16) % 2 === 0) ? 15 : 7;
+      else if (zen < 2) rim = 15;
+
+      let fur = 9, stripe = 4, belly = 15;
+      if (flash > 3) {
+        fur = 10; stripe = 9; belly = 7;
+      } else if (zen >= 3) {
+        fur = 4; stripe = 2; belly = 9;
+      }
+
+      const wag = stress > 0 ? sin(fr * 0.14) * 8 : sin(fr * 0.025) * 3;
+      const tx = cx + 26, ty = cy + 10;
+      for (let i = 0; i <= 12; i++) {
+        const px = tx + i * 1.4 + sin(i * 0.25 + fr * 0.05) * (stress > 0 ? 2.2 : 0.9);
+        const py = ty - i * (cat_shock > 0 ? 1.5 : 0.7) + wag * (i / 12);
+        const r = cat_shock > 0 ? 4 : (i > 9 ? 3 : 2);
+        circfill(px, py, r, i % 3 === 0 ? stripe : fur);
+      }
+
+      let top_y = cy - 4 + breath;
+      if (cat_shock > 0) {
+        top_y -= 5;
+        for (let sx = cx - 16; sx <= cx + 20; sx += 4) {
+          line(sx, top_y + 3, sx + 1, top_y - 4, rim);
+          line(sx + 1, top_y + 3, sx + 2, top_y - 3, fur);
+        }
+      }
+
+      ovalfill(cx - 20, top_y - 1, cx + 26, cy + 18, 1);
+      ovalfill(cx - 19, top_y, cx + 25, cy + 16, rim);
+      ovalfill(cx - 19, top_y + 2, cx + 25, cy + 17, fur);
+
+      fillp(0x5a5a);
+      ovalfill(cx - 14, top_y + 3, cx + 21, cy + 12, stripe * 16 + fur);
+      fillp();
+      for (let s = -10; s <= 16; s += 6) {
+        ovalfill(cx + s, top_y + 2, cx + s + 3, cy + 9, stripe);
+      }
+
+      ovalfill(cx - 15, cy + 8, cx + 16, cy + 17, belly);
+      ovalfill(cx + 10, cy + 4, cx + 26, cy + 17, fur);
+      line(cx + 12, cy + 6, cx + 22, cy + 6, stripe);
+      ovalfill(cx + 18, cy + 14, cx + 28, cy + 19, belly);
+
+      // Victory Grooming Cycle (paw-lick + cheek-wash every 150 frames)
+      const gCycle = (isWin && end_t > 20) ? (fr % 150) : 0;
+      const grooming = gCycle >= 94;
+      const headTilt = grooming ? -1 : 0;
+
+      const hx = cx - 20;
+      const hy = cy + 3 + (cat_shock > 0 ? -3 : flr(breath / 2)) + headTilt;
+
+      const tw_dx = (ear_twitch > 0) ? ((ear_twitch % 2 === 0) ? -2 : 2) : 0;
+      const tw_dy = (ear_twitch > 0) ? -2 : 0;
+
+      // Symmetric ears
+      trifill(hx - 10, hy - 2, hx - 8 + tw_dx, hy - 12 + tw_dy, hx - 2, hy - 4, 1);
+      trifill(hx - 9, hy - 2, hx - 7 + tw_dx, hy - 10 + tw_dy, hx - 3, hy - 4, fur);
+      trifill(hx - 8, hy - 3, hx - 7 + tw_dx, hy - 8 + tw_dy, hx - 4, hy - 4, 14);
+
+      trifill(hx + 1, hy - 4, hx + 6 - tw_dx, hy - 12 + tw_dy, hx + 9, hy - 2, 1);
+      trifill(hx + 2, hy - 4, hx + 6 - tw_dx, hy - 10 + tw_dy, hx + 8, hy - 2, fur);
+      trifill(hx + 3, hy - 4, hx + 6 - tw_dx, hy - 8 + tw_dy, hx + 7, hy - 3, 14);
+
+      ovalfill(hx - 12, hy - 5, hx + 10, hy + 13, 1);
+      ovalfill(hx - 11, hy - 4, hx + 9, hy + 11, rim);
+      ovalfill(hx - 11, hy - 3, hx + 9, hy + 12, fur);
+
+      line(hx - 5, hy - 2, hx - 3, hy + 1, stripe);
+      line(hx - 1, hy - 3, hx - 1, hy + 1, stripe);
+      line(hx + 3, hy - 2, hx + 1, hy + 1, stripe);
+      ovalfill(hx - 10, hy + 4, hx + 8, hy + 12, belly);
+
+      // Right paw on bed
+      ovalfill(hx + 2, cy + 14, hx + 12, cy + 19, belly);
+      line(hx + 5, cy + 16, hx + 5, cy + 19, 4);
+      line(hx + 8, cy + 16, hx + 8, cy + 19, 4);
+
+      // Eyes & expression
+      if (cat_shock > 0) {
+        circfill(hx - 5, hy + 4, 3, 7);
+        circfill(hx + 3, hy + 4, 3, 7);
+        pset(hx - 5, hy + 4, 0);
+        pset(hx + 3, hy + 4, 0);
+      } else if (isWin) {
+        // Awake, warm grateful cat with affectionate slow happy-blinks (^ ^)
+        const happyBlink = (fr % 80 < 14) || (grooming && gCycle >= 114 && gCycle <= 136);
+        if (happyBlink) {
+          pset(hx - 7, hy + 5, 1); line(hx - 6, hy + 4, hx - 4, hy + 4, 1); pset(hx - 3, hy + 5, 1);
+          pset(hx + 1, hy + 5, 1); line(hx + 2, hy + 4, hx + 4, hy + 4, 1); pset(hx + 5, hy + 5, 1);
+        } else {
+          ovalfill(hx - 7, hy + 3, hx - 3, hy + 6, 10);
+          ovalfill(hx + 1, hy + 3, hx + 5, hy + 6, 10);
+          rectfill(hx - 6, hy + 4, hx - 5, hy + 6, 1);
+          rectfill(hx + 2, hy + 4, hx + 3, hy + 6, 1);
+          pset(hx - 6, hy + 3, 7);
+          pset(hx + 2, hy + 3, 7);
+        }
+      } else if (stress === 0) {
+        line(hx - 7, hy + 5, hx - 3, hy + 5, 1);
+        pset(hx - 5, hy + 6, 1);
+        line(hx + 1, hy + 5, hx + 5, hy + 5, 1);
+        pset(hx + 3, hy + 6, 1);
+      } else if (stress === 1) {
+        line(hx - 7, hy + 5, hx - 3, hy + 5, 1);
+        ovalfill(hx + 1, hy + 3, hx + 6, hy + 7, 10);
+        line(hx + 3, hy + 3, hx + 3, hy + 7, 0);
+      } else {
+        ovalfill(hx - 8, hy + 2, hx - 2, hy + 7, 10);
+        ovalfill(hx + 1, hy + 2, hx + 7, hy + 7, 10);
+        rectfill(hx - 6, hy + 3, hx - 4, hy + 6, 0);
+        rectfill(hx + 3, hy + 3, hx + 5, hy + 6, 0);
+        pset(hx - 6, hy + 3, 7);
+        pset(hx + 3, hy + 3, 7);
+      }
+
+      // Nose + pink tongue flick when licking paw
+      pset(hx - 1, hy + 7, 14);
+      pset(hx - 2, hy + 6, 14);
+      pset(hx, hy + 6, 14);
+      if (grooming && gCycle >= 103 && gCycle <= 113 && gCycle % 5 < 3) {
+        pset(hx - 2, hy + 9, 14);
+        pset(hx - 3, hy + 9, 14);
+      }
+
+      const wy = cat_shock > 0 ? -2 : (grooming && gCycle >= 114 && gCycle <= 136 ? 1 : 0);
+      line(hx - 11, hy + 6, hx - 16, hy + 5 + wy, 7);
+      line(hx - 11, hy + 8, hx - 15, hy + 9 - wy, 7);
+      line(hx + 9, hy + 6, hx + 14, hy + 5 + (cat_shock > 0 ? -2 : 0), 7);
+      line(hx + 9, hy + 8, hx + 13, hy + 9 - (cat_shock > 0 ? -2 : 0), 7);
+
+      // Left paw (either resting or animated up to lick & wash cheek!)
+      let pawX = hx - 9, pawY = cy + 15;
+      if (grooming) {
+        let lift = 1;
+        if (gCycle < 103) lift = (gCycle - 94) / 9;
+        else if (gCycle > 136) lift = 1 - (gCycle - 136) / 13;
+        let wx = 0, woy = 0;
+        if (gCycle >= 114 && gCycle <= 136) {
+          const ang = (gCycle - 114) * 0.13;
+          wx = cos(ang) * 2.5 - 2;
+          woy = sin(ang) * 3 - 3;
+        }
+        pawX = flr(pawX + lift * (4 + wx));
+        pawY = flr(pawY - lift * (11 - woy));
+      }
+      ovalfill(pawX - 5, pawY - 3, pawX + 5, pawY + 3, 1);
+      ovalfill(pawX - 4, pawY - 2, pawX + 4, pawY + 2, belly);
+      line(pawX - 1, pawY, pawX - 1, pawY + 2, 4);
+      line(pawX + 2, pawY, pawX + 2, pawY + 2, 4);
+
+      // Victory purr waves beside cheek on exhale
+      if (isWin && !grooming && fr % 44 < 20) {
+        const pc = flr(fr / 6) % 2 === 0 ? 15 : 14;
+        pset(hx - 15, hy + 2, pc); pset(hx - 16, hy + 3, pc); pset(hx - 15, hy + 4, pc);
+        if (fr % 44 < 12) {
+          pset(hx - 18, hy + 1, 13); pset(hx - 19, hy + 3, 13); pset(hx - 18, hy + 5, 13);
+        }
+      }
+    }
+
+    function draw_zzz() {
+      const isWin = state === 2;
+      if (isWin) {
+        // Awake grateful cat: floating swaying hearts instead of zzz
+        for (let i = 0; i <= 2; i++) {
+          const t = (fr + i * 16) % 48;
+          const hx2 = flr(33 + i * 9 + sin(t * 0.05 + i * 0.35) * 2.5);
+          const hy2 = flr(84 - t * 0.44);
+          if (t > 34) {
+            pset(hx2 - 1, hy2, 15); pset(hx2 + 1, hy2, 15); pset(hx2, hy2 + 1, 15);
+          } else {
+            const c = (t < 12 && i === 1) ? 8 : 14;
+            pset(hx2 - 1, hy2, c); pset(hx2 + 1, hy2, c);
+            line(hx2 - 2, hy2 + 1, hx2 + 2, hy2 + 1, c);
+            line(hx2 - 1, hy2 + 2, hx2 + 1, hy2 + 2, c);
+            pset(hx2, hy2 + 3, c);
+          }
+        }
+        return;
+      }
+      if (stress > 0 || state === 3 || cat_shock > 0) return;
+      for (let i = 0; i <= 2; i++) {
+        const t = (fr + i * 15) % 45;
+        print("z", 36 + t / 7, 82 - t / 5, t > 30 ? 13 : 6);
+      }
+    }
+
+    function in_pane(x) {
+      const s1 = pane_shake[0] > 0 ? ((fr % 2 === 0) ? 1 : -1) : 0;
+      const s2 = pane_shake[1] > 0 ? ((fr % 2 === 0) ? 1 : -1) : 0;
+      const s3 = pane_shake[2] > 0 ? ((fr % 2 === 0) ? 1 : -1) : 0;
+      const m1 = s1 !== 0 ? s1 : s2;
+      const m2 = s2 !== 0 ? s2 : s3;
+      return !((x >= 43 + m1 && x <= 45 + m1) || (x >= 81 + m2 && x <= 83 + m2));
+    }
+
+    function lane_dist(l) {
+      let bd = 99;
+      for (const r of rockets) {
+        if (r.l === l) bd = min(bd, abs(r.y - ZONE_Y));
+      }
+      return bd;
+    }
+
+    function draw_lanes() {
+      if (state !== 1) return;
+      if (zen < 1) {
+        for (let x = 10; x <= 117; x += 6) {
+          if (in_pane(x)) pset(x, BOOM_Y, 8);
+        }
+      }
+      if (zen < 2) {
+        for (let x = 9; x <= 118; x += 3) {
+          if (in_pane(x)) pset(x, ZONE_Y, 13);
+        }
+      }
+
+      for (let l = 1; l <= 3; l++) {
+        const shake_ox = pane_shake[l - 1] > 0 ? ((fr % 2 === 0) ? 1 : -1) : 0;
+        const x = LANES[l - 1] + shake_ox;
+        if (zen < 1) {
+          for (let y = ZONE_Y + 10; y <= LAUNCH_Y - 4; y += 4) pset(x, y, 5);
+        }
+
+        const d = lane_dist(l);
+        let c = 6;
+        if (zen >= 2) c = d <= 24 ? 13 : 1;
+        // Perfect/Good timing cues stay visible even right after a mistap
+        if (d <= PERFECT_PX) c = 11;
+        else if (d <= GOOD_PX) c = 10;
+        else if (lane_bad[l - 1] > 0) c = 8;
+
+        circ(x, ZONE_Y, 8, c);
+        if (c === 11) circ(x, ZONE_Y, 3, 11);
+        if (lane_hit[l - 1] > 0) {
+          circ(x, ZONE_Y, 14 - lane_hit[l - 1], 7);
+        }
+
+        if (zen >= 2) {
+          const ang = (fr * 0.025) + l * 0.33;
+          const sx = cos(ang) * 8, sy = sin(ang) * 8;
+          const sat_c = d <= GOOD_PX ? 10 : (zen >= 3 ? 15 : 13);
+          pset(x + sx, ZONE_Y + sy, sat_c);
+          pset(x - sx, ZONE_Y - sy, sat_c);
+        }
+
+        let ac = 7;
+        if (zen >= 2) ac = 2;
+        if (lane_hit[l - 1] > 0) ac = 10;
+        if (lane_bad[l - 1] > 0) ac = 8;
+        arrow(x, 82, l, ac);
+      }
+    }
+
+    function arrow(x, y, dir, c) {
+      if (dir === 1) {
+        line(x - 2, y, x + 2, y, c);
+        line(x - 2, y, x, y - 2, c);
+        line(x - 2, y, x, y + 2, c);
+      } else if (dir === 3) {
+        line(x - 2, y, x + 2, y, c);
+        line(x + 2, y, x, y - 2, c);
+        line(x + 2, y, x, y + 2, c);
+      } else {
+        line(x, y - 2, x, y + 2, c);
+        line(x, y + 2, x - 2, y, c);
+        line(x, y + 2, x + 2, y, c);
+      }
+    }
+
+    function draw_rockets() {
+      for (const r of rockets) {
+        const x = flr(r.x + 0.5);
+        const y = flr(r.y);
+        const blink = r.y < ZONE_Y - GOOD_PX && fr % 4 < 2;
+        if (r.k === 4) {
+          const c = blink ? 7 : 11;
+          rectfill(x - 1, y - 1, x + 1, y + 2, c);
+          pset(x, y - 2, 7);
+          pset(x - 2, y + 1, 10);
+          pset(x + 2, y + 1, 10);
+          if (r.sw === 0 && r.y <= 64) {
+            const dir = r.tl > r.l ? 1 : -1;
+            pset(x + dir * 4, y, fr % 4 < 2 ? 7 : 10);
+            pset(x + dir * 3, y - 1, 11);
+            pset(x + dir * 3, y + 1, 11);
+          }
+        } else if (r.k === 5) {
+          if (r.hp > 1) {
+            rectfill(x - 2, y - 1, x + 2, y + 2, blink ? 7 : 10);
+            line(x - 1, y - 2, x + 1, y - 2, 7);
+            line(x - 2, y + 1, x + 2, y + 1, 9);
+            pset(x - 2, y + 3, 9);
+            pset(x + 2, y + 3, 9);
+          } else {
+            rectfill(x - 1, y - 1, x + 1, y + 2, blink ? 7 : (fr % 4 < 2 ? 10 : 9));
+            pset(x, y - 2, 7);
+            pset(x - 2, y + 2, 9);
+            pset(x + 2, y + 2, 9);
+          }
+        } else if (r.k === 6) {
+          if (r.bst) {
+            rectfill(x - 1, y - 1, x + 1, y + 2, 7);
+            pset(x, y - 2, 10);
+            pset(x - 2, y + 2, 10);
+            pset(x + 2, y + 2, 10);
+            line(x, y + 3, x, y + 5, fr % 2 === 0 ? 10 : 9);
+          } else {
+            const c = blink ? 7 : (r.y <= 58 && fr % 4 < 2 ? 10 : 13);
+            rectfill(x - 1, y - 1, x + 1, y + 2, c);
+            pset(x, y - 2, 7);
+            pset(x - 2, y + 2, 6);
+            pset(x + 2, y + 2, 6);
+          }
+        } else {
+          const c = blink ? 7 : K_COL[r.k - 1];
+          rectfill(x - 1, y - 1, x + 1, y + 2, c);
+          pset(x, y - 2, 7);
+          pset(x - 2, y + 2, c);
+          pset(x + 2, y + 2, c);
+        }
+      }
+    }
+
+    function draw_fx_sky() {
+      for (let i = 0; i < partCount; i++) {
+        const p = partPool[i];
+        let col = p.c;
+        if (p.spark) {
+          const r = p.life / p.ml;
+          if (r < 0.25) col = 5;
+          else if (r < 0.5) col = 2;
+          else if (r < 0.75 && col === 7) col = 10;
+          if (p.life < 10 && fr % 2 === 0) col = 7;
+        }
+        if (p.trail) line(p.px, p.py, p.x, p.y, col);
+        else pset(p.x, p.y, col);
+      }
+      for (let i = 0; i < rings.length; i++) {
+        const g = rings[i];
+        circ(g.x, g.y, g.r, g.c);
+      }
+      for (let i = 0; i < star_flashes.length; i++) {
+        const sf = star_flashes[i];
+        const r = sf.t + 3;
+        const c = sf.t > 4 ? 7 : 10;
+        line(sf.x - r, sf.y, sf.x + r, sf.y, c);
+        line(sf.x, sf.y - r, sf.x, sf.y + r, c);
+        line(sf.x - 2, sf.y - 2, sf.x + 2, sf.y + 2, 7);
+        line(sf.x - 2, sf.y + 2, sf.x + 2, sf.y - 2, 7);
+      }
+    }
+
+    function draw_hud() {
+      if (state === 0 || state === 2) return;
+      rectfill(0, 0, 127, 9, 0);
+      if (zen < 3) {
+        const sc = zen >= 2 ? 5 : 7;
+        print(pad(score, 5) + "0", 2, 1, sc);
+        if (combo > 1 && zen < 2) {
+          print("combo " + combo, 44, 1, 10);
+          const m = mult();
+          if (m > 1) print("x" + m, 84, 1, 9);
+        }
+        for (let i = 1; i <= 3; i++) {
+          const c = (i <= 3 - stress) ? (zen >= 2 ? 13 : 12) : 5;
+          circfill(100 + i * 7, 3, 2, c);
+        }
+      }
+      const w = flr(127 * min(1, elapsed / GAME_LEN));
+      line(0, 8, 127, 8, 1);
+      if (w > 0) line(0, 8, w, 8, 9);
+    }
+
+    // Victoria V2: Subtle single solar ray + minimalist classic arcade placard
+    function draw_victory_overlay() {
+      const { rise, sunX, sunY } = getDawnSunPos();
+
+      if (rise > 0.25) {
+        for (let y = 79; y <= 115; y++) {
+          const dy = y - sunY;
+          const lx = max(10, flr(sunX - 4 - dy * 0.80));
+          const rx = min(117, flr(sunX + 5 - dy * 0.28));
+          if (lx <= rx) {
+            fillp(0x7fff, true); // 6.25% sparse outer whisper
+            line(lx, y, rx, y, 10);
+            if (rise > 0.55) {
+              const inset = flr((rx - lx) * 0.30);
+              if (lx + inset <= rx - inset) {
+                fillp(0x7fdf, true); // 12.5% gentle warm core
+                line(lx + inset, y, rx - inset, y, 15);
+              }
+            }
+          }
+        }
+        fillp();
+
+        // 6 gentle sunlit dust motes strictly inside the single solar ray
+        for (let i = 0; i < 6; i++) {
+          const my = 52 + ((i * 11 + flr(fr * 0.16)) % 60);
+          if (my > sunY + 6) {
+            const dy = my - sunY;
+            const lx = max(12, flr(sunX - 4 - dy * 0.80) + 2);
+            const rx = min(115, flr(sunX + 5 - dy * 0.28) - 2);
+            if (rx > lx) {
+              const mx = lx + ((i * 19 + flr(fr * 0.12)) % (rx - lx));
+              psetSolid(mx, my, i % 2 === 0 ? 7 : 15);
+            }
+          }
+        }
+      }
+
+      if (end_t > 24) {
+        rectfill(11, 18, 79, 60, 1);
+        rect(11, 18, 79, 60, 9);
+        pset(12, 19, 15); pset(78, 19, 15);
+        pset(12, 59, 15); pset(78, 59, 15);
+
+        print("amaneció", 30, 23, 0);
+        print("amaneció", 30, 22, 10);
+        line(17, 30, 73, 30, 4);
+
+        draw_stats(17, 73, 34, 2);
+      }
+
+      if (end_t > 45 && fr % 36 < 24) {
+        cprint("toca / x para jugar otra vez", 121, 15, 0);
+      }
+    }
+
+    function rprint(s, right, y, c) {
+      s = String(s);
+      print(s, right + 1 - s.length * 4, y, c);
+    }
+
+    // Shared results block: two captioned columns (puntos | récord) + combo máx line
+    function draw_stats(x, right, y, lineC) {
+      print("puntos", x, y, 13);
+      print(pad(score, 5) + "0", x, y + 7, 7);
+      if (new_best) {
+        const fc = fr % 24 < 14 ? 10 : 15;
+        rprint("nuevo!", right, y, fc);
+        rprint(pad(best, 5) + "0", right, y + 7, fc);
+      } else {
+        rprint("récord", right, y, 13);
+        rprint(pad(best, 5) + "0", right, y + 7, 15);
+      }
+      line(x, y + 14, right, y + 14, lineC);
+      const cs = "combo máx  " + max_combo;
+      print(cs, flr((x + right + 1) / 2) - flr((cs.length * 4 - 1) / 2), y + 18, 12);
+    }
+
+    function draw_gameover() {
+      rectfill(14, 22, 113, 84, 0);
+      rect(14, 22, 113, 84, 8);
+      oprint("^w^tgame over", 28, 29, 8);
+      draw_stats(28, 99, 48, 5);
+      if (end_t > 45 && fr % 36 < 24) {
+        cprint("toca / x para jugar otra vez", 121, 15, 0);
+      }
+    }
+
+    /********************************************************************
+     * 4. INPUT BINDINGS, 30 FPS LOOP & UI CONTROLS
+     ********************************************************************/
+    function setDeviceMode(isMobile) {
+      isMobileMode = isMobile;
+      document.body.classList.toggle('is-mobile', isMobile);
+      document.body.classList.toggle('is-desktop', !isMobile);
+    }
+
+    const initialMobile = (window.matchMedia && window.matchMedia('(pointer: coarse)').matches) ||
+                          ('ontouchstart' in window && window.innerWidth < 1024) ||
+                          /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+    setDeviceMode(initialMobile);
+
+    const KEY_MAP = {
+      ArrowLeft: 0, KeyA: 0,
+      ArrowRight: 1, KeyD: 1,
+      ArrowUp: 2, KeyW: 2,
+      ArrowDown: 3, KeyS: 3,
+      KeyZ: 4, KeyC: 4,
+      KeyX: 5, Space: 5, Enter: 5
+    };
+
+    const arcadeBtns = {};
+    document.querySelectorAll('[data-btn]').forEach((el) => {
+      arcadeBtns[parseInt(el.getAttribute('data-btn'), 10)] = el;
+    });
+    const highlightTimers = {};
+
+    function highlightArcadeButton(btnIdx, active) {
+      const mapIdx = (btnIdx === 2) ? 3 : (btnIdx === 4 ? 5 : btnIdx);
+      const btnEl = arcadeBtns[mapIdx];
+      if (btnEl) btnEl.classList.toggle('active-key', active);
+    }
+
+    function flashButtonVisual(btnIdx) {
+      const mapIdx = (btnIdx === 2) ? 3 : (btnIdx === 4 ? 5 : btnIdx);
+      highlightArcadeButton(mapIdx, true);
+      if (highlightTimers[mapIdx]) clearTimeout(highlightTimers[mapIdx]);
+      highlightTimers[mapIdx] = setTimeout(() => {
+        highlightArcadeButton(mapIdx, false);
+        delete highlightTimers[mapIdx];
+      }, 90);
+    }
+
+    function clearAllInputs() {
+      for (let i = 0; i < 6; i++) {
+        keyDown[i] = false;
+        keyPressLatch[i] = false;
+        keyJustPressed[i] = false;
+        highlightArcadeButton(i, false);
+      }
+    }
+
+    window.addEventListener('keydown', (e) => {
+      const btnIdx = KEY_MAP[e.code];
+      if (btnIdx !== undefined) {
+        e.preventDefault();
+        initAudio();
+        if (isMobileMode) setDeviceMode(false);
+        if (!e.repeat && !keyDown[btnIdx]) {
+          keyPressLatch[btnIdx] = true;
+        }
+        keyDown[btnIdx] = true;
+        highlightArcadeButton(btnIdx, true);
+      }
+    });
+
+    window.addEventListener('keyup', (e) => {
+      const btnIdx = KEY_MAP[e.code];
+      if (btnIdx !== undefined) {
+        e.preventDefault();
+        keyDown[btnIdx] = false;
+        highlightArcadeButton(btnIdx, false);
+      }
+    });
+
+    window.addEventListener('blur', clearAllInputs);
+
+    // Multi-touch pointerId-safe arcade buttons
+    const activePointersByBtn = {};
+    document.querySelectorAll('[data-btn]').forEach((button) => {
+      const b = parseInt(button.getAttribute('data-btn'), 10);
+      const ptrs = new Set();
+      activePointersByBtn[b] = ptrs;
+
+      const pressDown = (e) => {
+        if (e.pointerType === 'mouse' && e.button !== 0) return;
+        e.preventDefault();
+        initAudio();
+        if (e.pointerType === 'touch') setDeviceMode(true);
+        const wasEmpty = ptrs.size === 0;
+        ptrs.add(e.pointerId);
+        const targetBtn = (state !== 1) ? 5 : b;
+        if (wasEmpty) {
+          keyPressLatch[targetBtn] = true;
+          keyDown[targetBtn] = true;
+        }
+        button.classList.add('active-key');
+      };
+
+      const releaseUp = (e) => {
+        e.preventDefault();
+        if (!ptrs.has(e.pointerId)) return;
+        ptrs.delete(e.pointerId);
+        if (ptrs.size === 0) {
+          keyDown[b] = false;
+          keyDown[5] = false;
+          button.classList.remove('active-key');
+        }
+      };
+
+      button.addEventListener('pointerdown', pressDown);
+      button.addEventListener('pointerup', releaseUp);
+      button.addEventListener('pointerleave', releaseUp);
+      button.addEventListener('pointercancel', releaseUp);
+    });
+
+    // Multi-touch direct canvas interaction (cancellable visual highlight, never latches keyDown)
+    const screenContainer = document.getElementById('screen-container');
+    screenContainer.addEventListener('pointerdown', (e) => {
+      if (e.pointerType === 'mouse' && e.button !== 0) return;
+      e.preventDefault();
+      initAudio();
+      if (e.pointerType === 'touch') setDeviceMode(true);
+
+      if (state !== 1) {
+        keyPressLatch[5] = true;
+      } else {
+        const rect = canvas.getBoundingClientRect();
+        const relX = ((e.clientX - rect.left) / rect.width) * 128;
+        let b = 3;
+        if (relX < 44) b = 0;
+        else if (relX > 82) b = 1;
+        keyPressLatch[b] = true;
+        flashButtonVisual(b);
+      }
+    });
+
+    window.addEventListener('touchstart', () => {
+      initAudio();
+      setDeviceMode(true);
+    }, { passive: true, once: true });
+
+    let toastTimer = null;
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.classList.add('show');
+      if (toastTimer) clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        toast.classList.remove('show');
+        toastTimer = null;
+      }, 2400);
+    }
+
+    document.getElementById('btn-share').addEventListener('click', async () => {
+      initAudio();
+      const statusText = state === 2
+        ? `☀️ ¡Amaneció con ${pad(score, 5)}0 pts (Combo ${max_combo})!`
+        : `🐾 Récord: ${pad(best, 5)}0 pts (Mejor combo: ${best_combo})`;
+      const shareMessage = `🎆 Jugando ALBORADA (by dejesumensaje)\n${statusText}\n¿Puedes proteger el sueño del gato? ${window.location.href}`;
+
+      if (navigator.share) {
+        try {
+          await navigator.share({
+            title: 'ALBORADA — by dejesumensaje',
+            text: shareMessage,
+            url: window.location.href
+          });
+          return;
+        } catch (err) {
+          if (err && err.name === 'AbortError') return;
+        }
+      }
+
+      let copied = false;
+      if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
+        try {
+          await navigator.clipboard.writeText(shareMessage);
+          copied = true;
+        } catch (err) {}
+      }
+      if (!copied) {
+        try {
+          const textarea = document.createElement('textarea');
+          textarea.value = shareMessage;
+          textarea.setAttribute('readonly', '');
+          textarea.style.position = 'fixed';
+          textarea.style.opacity = '0';
+          document.body.appendChild(textarea);
+          textarea.select();
+          copied = document.execCommand('copy');
+          document.body.removeChild(textarea);
+        } catch (err) {}
+      }
+      showToast(copied ? '¡Enlace y récord copiados!' : 'Copia la URL desde tu navegador');
+    });
+
+    document.getElementById('btn-audio').addEventListener('click', () => {
+      initAudio();
+      audioMuted = !audioMuted;
+      document.getElementById('audio-icon').textContent = audioMuted ? '🔇' : '🔊';
+      if (masterGain && audioCtx) {
+        masterGain.gain.setValueAtTime(audioMuted ? 0 : 1, audioCtx.currentTime);
+      }
+    });
+
+    document.getElementById('btn-crt').addEventListener('click', () => {
+      document.getElementById('crt-layer').classList.toggle('hidden');
+    });
+
+    /********************************************************************
+     * 5. COMPLETE RUNNABLE PICO-8 .p8 CARTRIDGE EXPORT
+     ********************************************************************/
+    function encodeP8Sfx(spd, loopS, loopE, notes) {
+      const hex2 = (n) => (n & 255).toString(16).padStart(2, '0');
+      let out = '01' + hex2(spd) + hex2(loopS) + hex2(loopE);
+      for (let i = 0; i < 32; i++) {
+        const n = notes[i];
+        if (!n) {
+          out += '00000';
+        } else {
+          out += hex2(n[0]) + (n[1] & 7).toString(16) + (n[2] & 7).toString(16) + (n[3] & 7).toString(16);
+        }
+      }
+      return out;
+    }
+
+    function buildP8GfxSection() {
+      let rows = [];
+      for (let y = 0; y < 128; y++) {
+        let line = '';
+        const base = y << 7;
+        for (let x = 0; x < 128; x++) {
+          line += (sprRam[base + x] & 15).toString(16);
+        }
+        rows.push(line);
+      }
+      return rows.join('\n');
+    }
+
+    function buildP8SfxSection() {
+      const slots = [];
+      // 0: Perfect silence shimmer
+      slots[0] = encodeP8Sfx(4, 0, 0, [[38,0,6,0],[45,0,6,0],[50,0,5,5],[57,0,4,5]]);
+      // 1: Good silence chime
+      slots[1] = encodeP8Sfx(5, 0, 0, [[33,0,5,0],[36,0,5,5]]);
+      // 2: Glass tap thud
+      slots[2] = encodeP8Sfx(4, 0, 0, [[20,6,5,3],[15,0,4,3]]);
+      // 3: Firework explosion
+      slots[3] = encodeP8Sfx(6, 0, 0, [[16,6,7,3],[12,2,6,3],[10,6,5,5],[8,6,4,5],[6,6,3,5],[4,6,2,5]]);
+      // 4: Rocket launch whoosh
+      slots[4] = encodeP8Sfx(4, 0, 0, [[18,6,3,1],[24,0,2,1],[30,0,1,5]]);
+      // 5: Calm recovery (+calma)
+      slots[5] = encodeP8Sfx(6, 0, 0, [[36,0,5,0],[40,0,5,0],[43,0,5,0],[48,0,5,5]]);
+      // 6: Start game jingle
+      slots[6] = encodeP8Sfx(5, 0, 0, [[24,3,4,0],[31,3,4,0],[36,3,5,5]]);
+      // 7: Game Over descending
+      slots[7] = encodeP8Sfx(9, 0, 0, [[31,2,4,0],[29,2,4,0],[27,2,4,0],[24,2,5,5]]);
+      // 8: Dawn victory fanfare
+      slots[8] = encodeP8Sfx(8, 0, 0, [[36,0,5,0],[40,0,5,0],[43,0,5,0],[47,0,5,0],[48,0,6,5]]);
+      // 9: Zen 3 deep chord
+      slots[9] = encodeP8Sfx(14, 0, 0, [[21,0,4,4],[28,0,4,5]]);
+      // 10: Pre-ignition spark tick
+      slots[10] = encodeP8Sfx(2, 0, 0, [[34,6,3,5]]);
+      // 11: Morning bird chirp
+      slots[11] = encodeP8Sfx(3, 0, 0, [[52,0,3,1],[56,0,3,5],[0,0,0,0],[54,0,3,1],[58,0,3,5]]);
+      // 12: Buscapies lane-switch zip
+      slots[12] = encodeP8Sfx(3, 0, 0, [[34,0,5,1],[42,0,5,1],[38,0,4,5]]);
+      // 13: Taco armor crack
+      slots[13] = encodeP8Sfx(3, 0, 0, [[28,6,6,3],[36,3,5,0],[43,0,5,5]]);
+      // 14: Silbador turbo whistle
+      slots[14] = encodeP8Sfx(4, 0, 0, [[32,0,4,1],[40,0,5,1],[48,0,5,1],[54,0,4,5]]);
+
+      slots[15] = encodeP8Sfx(16, 0, 0, []);
+
+      // Music tracks 16..23
+      slots[16] = encodeP8Sfx(22, 0, 0, [
+        [24,0,3,5],[31,0,3,5],[36,0,3,5],[40,0,3,5],[26,0,3,5],[33,0,3,5],[38,0,3,5],[43,0,3,5],
+        [21,0,3,5],[28,0,3,5],[33,0,3,5],[36,0,3,5],[19,0,3,5],[26,0,3,5],[31,0,3,5],[35,0,3,5],
+        [24,0,3,5],[31,0,3,5],[36,0,3,5],[40,0,3,5],[26,0,3,5],[33,0,3,5],[38,0,3,5],[43,0,3,5],
+        [21,0,3,5],[28,0,3,5],[33,0,3,5],[36,0,3,5],[19,0,3,5],[26,0,3,5],[31,0,3,5],[35,0,3,5]
+      ]);
+      slots[17] = encodeP8Sfx(22, 0, 0, [
+        [12,5,3,5],[0,0,0,0],[0,0,0,0],[0,0,0,0],[7,5,3,5],[0,0,0,0],[0,0,0,0],[0,0,0,0],
+        [9,5,3,5],[0,0,0,0],[0,0,0,0],[0,0,0,0],[5,5,3,5],[0,0,0,0],[0,0,0,0],[0,0,0,0],
+        [12,5,3,5],[0,0,0,0],[0,0,0,0],[0,0,0,0],[7,5,3,5],[0,0,0,0],[0,0,0,0],[0,0,0,0],
+        [9,5,3,5],[0,0,0,0],[0,0,0,0],[0,0,0,0],[5,5,3,5],[0,0,0,0],[0,0,0,0],[0,0,0,0]
+      ]);
+      slots[18] = encodeP8Sfx(14, 0, 0, [
+        [24,0,3,0],[27,0,3,0],[31,0,3,0],[32,0,3,0],[24,0,3,0],[27,0,3,0],[31,0,3,0],[32,0,3,0],
+        [26,0,3,0],[29,0,3,0],[33,0,3,0],[34,0,3,0],[26,0,3,0],[29,0,3,0],[33,0,3,0],[34,0,3,0],
+        [24,0,3,0],[27,0,3,0],[31,0,3,0],[32,0,3,0],[24,0,3,0],[27,0,3,0],[31,0,3,0],[32,0,3,0],
+        [26,0,3,0],[29,0,3,0],[33,0,3,0],[34,0,3,0],[26,0,3,0],[29,0,3,0],[33,0,3,0],[34,0,3,0]
+      ]);
+      slots[19] = encodeP8Sfx(14, 0, 0, [
+        [12,3,2,5],[0,0,0,0],[12,3,2,5],[0,0,0,0],[14,3,2,5],[0,0,0,0],[14,3,2,5],[0,0,0,0],
+        [12,3,2,5],[0,0,0,0],[12,3,2,5],[0,0,0,0],[14,3,2,5],[0,0,0,0],[14,3,2,5],[0,0,0,0],
+        [12,3,2,5],[0,0,0,0],[12,3,2,5],[0,0,0,0],[14,3,2,5],[0,0,0,0],[14,3,2,5],[0,0,0,0],
+        [12,3,2,5],[0,0,0,0],[12,3,2,5],[0,0,0,0],[14,3,2,5],[0,0,0,0],[14,3,2,5],[0,0,0,0]
+      ]);
+      slots[20] = encodeP8Sfx(8, 0, 0, [
+        [24,2,3,0],[31,2,3,0],[25,2,3,0],[32,2,3,0],[24,2,3,0],[31,2,3,0],[25,2,3,0],[32,2,3,0],
+        [27,2,3,0],[34,2,3,0],[28,2,3,0],[35,2,3,0],[27,2,3,0],[34,2,3,0],[28,2,3,0],[35,2,3,0],
+        [24,2,3,0],[31,2,3,0],[25,2,3,0],[32,2,3,0],[24,2,3,0],[31,2,3,0],[25,2,3,0],[32,2,3,0],
+        [27,2,3,0],[34,2,3,0],[28,2,3,0],[35,2,3,0],[27,2,3,0],[34,2,3,0],[28,2,3,0],[35,2,3,0]
+      ]);
+      slots[21] = encodeP8Sfx(8, 0, 0, [
+        [12,3,2,0],[13,3,2,0],[12,3,2,0],[13,3,2,0],[12,3,2,0],[13,3,2,0],[12,3,2,0],[13,3,2,0],
+        [15,3,2,0],[16,3,2,0],[15,3,2,0],[16,3,2,0],[15,3,2,0],[16,3,2,0],[15,3,2,0],[16,3,2,0],
+        [12,3,2,0],[13,3,2,0],[12,3,2,0],[13,3,2,0],[12,3,2,0],[13,3,2,0],[12,3,2,0],[13,3,2,0],
+        [15,3,2,0],[16,3,2,0],[15,3,2,0],[16,3,2,0],[15,3,2,0],[16,3,2,0],[15,3,2,0],[16,3,2,0]
+      ]);
+      slots[22] = encodeP8Sfx(28, 0, 0, [
+        [36,0,3,5],[40,0,3,5],[43,0,3,5],[47,0,3,5],[48,0,3,5],[43,0,3,5],[38,0,3,5],[42,0,3,5],
+        [45,0,3,5],[40,0,3,5],[33,0,3,5],[38,0,3,5],[36,0,3,5],[40,0,3,5],[43,0,3,5],[47,0,3,5],
+        [48,0,3,5],[43,0,3,5],[38,0,3,5],[42,0,3,5],[45,0,3,5],[40,0,3,5],[33,0,3,5],[38,0,3,5],
+        [36,0,3,5],[40,0,3,5],[43,0,3,5],[47,0,3,5],[48,0,3,5],[43,0,3,5],[38,0,3,5],[42,0,3,5]
+      ]);
+      slots[23] = encodeP8Sfx(28, 0, 0, [
+        [0,5,2,5],[0,0,0,0],[0,0,0,0],[1,5,2,3],[0,0,0,0],[0,0,0,0],[0,5,2,5],[0,0,0,0],
+        [0,0,0,0],[1,5,2,3],[0,0,0,0],[0,0,0,0],[0,5,2,5],[0,0,0,0],[0,0,0,0],[1,5,2,3],
+        [0,0,0,0],[0,0,0,0],[0,5,2,5],[0,0,0,0],[0,0,0,0],[1,5,2,3],[0,0,0,0],[0,0,0,0],
+        [0,5,2,5],[0,0,0,0],[0,0,0,0],[1,5,2,3],[0,0,0,0],[0,0,0,0],[0,5,2,5],[0,0,0,0]
+      ]);
+      return slots.join('\n');
+    }
+
+    function getFullP8Cartridge() {
+      const lua = `-- alborada: edicion amanecer
+-- by dejesumensaje
+-- pico-8 / 128x128 / 30 fps
+
+zone_y=32
+boom_y=17
+launch_y=76
+game_len=2700
+perfect_px=3
+good_px=8
+
+function mk_t(s,n)
+ local a,t=split(s),{}
+ for i=1,#a,n do
+  local r={}
+  for j=0,n-1 do add(r,a[i+j]) end
+  add(t,r)
+ end
+ return t
+end
+
+function rf(s,c,ox,oy)
+ ox,oy=ox or 0,oy or 0
+ local a=split(s)
+ for i=1,#a,4 do rectfill(ox+a[i],oy+a[i+1],ox+a[i+2],oy+a[i+3],c) end
+end
+function dr(s)
+ local a=split(s)
+ for i=1,#a,5 do rectfill(a[i],a[i+1],a[i+2],a[i+3],a[i+4]) end
+end
+function b_rad(x,y,n,s,l,c1,c2,g,d,sp)
+ for i=1,n do
+  local a=i/n
+  add_part(x,y,cos(a)*s,sin(a)*s,l,i%2==0 and c1 or c2,g,d,true,sp)
+ end
+end
+function ar(x,y,r,mx,c,sh) add(rings,{x=x,y=y,r=r,mx=mx,c=c,shrink=sh}) end
+
+function _init()
+ cartdata("wm_alborada_04")
+ poke(0x5f5c,255)
+ lanes=split("25,63,102")
+ lvl_alive=split("2,3,3,4,5,6,7")
+ lvl_speed=split(".56,.7,.84,1,1.18,1.38,1.56")
+ lvl_gap=split("60,48,39,31,23,16,12")
+ lvl_pat=split("0,.18,.32,.45,.58,.74,.85")
+ zen_at=split("8,16,25")
+ k_spd=split("1,.92,1.22,.95,.78,.46")
+ k_col=split("8,12,14,11,10,13")
+ k_trl=split("10,12,14,11,10,6")
+ pal_s=split("0,0,1,0,1,2,1,2,14,2,14,9,2,8,8,8,14,14,7,10,10,12,15,10")
+ pal_boom=split("7,10,9,8,14,12")
+ stars=mk_t("14,19,1,30,27,8,53,18,15,70,24,22,88,20,30,97,29,5,114,17,11,60,36,17,19,40,3,108,41,26,74,38,12",3)
+ ridge_pts=mk_t("8,57,22,50,38,55,56,45,72,52,90,47,106,54,119,50",2)
+ city_bldg=mk_t("8,68,20,22,64,30,32,70,44,47,66,60,62,71,72,74,63,84,86,69,98,100,65,112,113,70,119",3)
+ title_fg_b=mk_t("0,86,12,10,76,25,23,88,35,33,71,50,48,83,63,61,74,77,75,85,89,87,77,104,102,84,117,115,79,127",3)
+ best=dget(0)
+ best_combo=dget(1)
+ fr=0
+ make_city()
+ new_game()
+ state=0
+ music(0,300)
+end
+
+function make_city()
+ ridge_y={}
+ for x=0,127 do
+  local ry=50
+  for i=1,#ridge_pts-1 do
+   local a,b=ridge_pts[i],ridge_pts[i+1]
+   if x<=b[1] then
+    ry=flr(a[2]+(b[2]-a[2])*(x-a[1])/(b[1]-a[1]))
+    break
+   end
+  end
+  ridge_y[x]=ry
+ end
+ city={}
+ local s=7
+ local function r(n) s=(s*37+19)%509 return s%n end
+ for i=1,75 do
+  local x=8+r(112)
+  local top=ridge_y[x]+3
+  if top<74 then
+   local y=top+r(76-top)
+   local c=9
+   if r(3)==0 then c=10 end
+   if r(5)==0 then c=15 end
+   add(city,{x,y,c,r(60)})
+  end
+ end
+end
+
+function new_game()
+ elapsed,lvl,stress,score,combo,max_combo,zen,spawn_t,shake,flash,cat_shock,freeze,ear_twitch,title_fw_flash,end_t,can_restart,new_best,cur_mus=0,1,0,0,0,0,0,35,0,0,0,0,0,0,0,false,false,-1
+ last_lane,lane_streak,last_sp=0,0,0
+ rockets,queue,pre_spawns,parts,rings,star_flashes,texts={},{},{},{},{},{},{}
+ lane_hit,lane_bad,pane_shake={0,0,0},{0,0,0},{0,0,0}
+end
+
+function sync_music()
+ local target=0
+ if state==1 then
+  if stress==1 then target=2
+  elseif stress>=2 then target=4 end
+ elseif state==2 then target=6
+ elseif state==3 then target=-1 end
+ if target!=cur_mus then
+  cur_mus=target
+  if target==-1 then music(-1,200) else music(target,200) end
+ end
+end
+
+function start()
+ new_game() state=1 sfx(6) sync_music()
+end
+
+function swap_pop(t,i)
+ local n=#t
+ if i!=n then t[i]=t[n] end
+ t[n]=nil
+end
+
+function _update()
+ fr=(fr+1)%7200
+ if freeze>0 then freeze-=1 return end
+ update_fx()
+ if state==0 then
+  if fr%50==0 and rnd()<.65 then
+   local tx=rnd()<.5 and 24+rnd(26) or 74+rnd(30)
+   local ty=36+rnd(16)
+   local bc=pal_boom[flr(rnd(#pal_boom))+1]
+   title_fw_flash=10
+   b_rad(tx,ty,12,.55,18,bc,bc,.02,.94,true)
+  end
+  if btnp(4) or btnp(5) then start() end
+ elseif state==1 then
+  update_play()
+ else
+  if end_t<120 then end_t+=1 end
+  if not btn(4) and not btn(5) then can_restart=true end
+  if end_t>45 and can_restart and (btnp(4) or btnp(5)) then start() end
+ end
+end
+
+function update_zen()
+ local z=0
+ for i=1,3 do if combo>=zen_at[i] then z=i end end
+ if z>zen and z==3 then sfx(9) end
+ zen=z
+end
+
+function update_play()
+ elapsed+=1
+ if elapsed>=game_len then finish(true) return end
+ local nl=elapsed<2250 and min(5,1+flr(elapsed/450)) or (elapsed<2475 and 6 or 7)
+ if nl>lvl then lvl=nl end
+ if elapsed==2250 then spawn_t=min(spawn_t,1) end
+
+ if btnp(0) then press(1) end
+ if btnp(2) or btnp(3) then press(2) end
+ if btnp(1) then press(3) end
+
+ for i=#queue,1,-1 do
+  local q=queue[i]
+  q.t-=1
+  if q.t<=0 then
+   if queue_pre_spawn(q.l,q.k,q) then swap_pop(queue,i) else q.t=2 end
+  end
+ end
+
+ for i=#pre_spawns,1,-1 do
+  local ps=pre_spawns[i]
+  ps.t-=1
+  if ps.t%3==0 then
+   local pc=ps.k>3 and (ps.t<6 and 7 or k_col[ps.k]) or (ps.t<6 and 10 or 6)
+   add_part(lanes[ps.l]+rnd(2)-1,launch_y-1,rnd(.2)-.1,-.35,8,pc)
+  end
+  if ps.t<=0 then spawn_rocket_now(ps.l,ps.k) swap_pop(pre_spawns,i) end
+ end
+
+ local in_breath,gap=(elapsed>=2160 and elapsed<2250) or elapsed>2655,lvl_gap[lvl]
+ spawn_t-=1
+ if spawn_t<=0 and not in_breath then
+  local active=#rockets+#queue+#pre_spawns
+  local cap=lvl_alive[lvl]
+  if active<cap then
+   local function aq(l,t,k) add(queue,{l=l,t=t,k=k}) end
+   if rnd()<lvl_pat[lvl] and cap-active>=2 then
+    local st=lvl>=6 and 8 or 11
+    if rnd()<.65 and cap-active>=3 and lane_free(1) and lane_free(2) and lane_free(3) then
+     local pr,l0=rnd(),rnd()<.5 and 1 or 3
+     local f3,s2=lvl>=7 and 3 or 2,st*2+(lvl>=7 and 2 or 0)
+     queue_pre_spawn(l0,1)
+     if lvl>=5 and pr<.35 then
+      aq(4-l0,st,1) aq(2,s2,f3)
+     elseif lvl>=6 and pr<.65 then
+      aq(2,st,2) aq(l0,st*2+2,lvl>=7 and 3 or 1)
+     else
+      aq(2,st,1) aq(4-l0,s2,f3)
+     end
+     spawn_t=gap+(lvl>=6 and 10 or 18)
+    else
+     local l1=flr(rnd(3))+1
+     local l2=((l1+(rnd()<.5 and 0 or 1))%3)+1
+     if lane_free(l1) and lane_free(l2) then
+      queue_pre_spawn(l1,lvl>=3 and 3 or 1)
+      aq(l2,lvl>=6 and 8 or 9,lvl>=6 and 2 or 1)
+      spawn_t=gap+(lvl>=6 and 6 or 12)
+     else spawn_t=5 end
+    end
+   else
+    local k=1
+    if lvl>=2 and rnd()<.35 then k=2 end
+    if lvl>=3 and rnd()<(lvl>=6 and .38 or .25) then k=3 end
+    local spc=lvl>=6 and .25 or (lvl>=3 and .22 or .18)
+    if lvl>=2 and not has_sp() and rnd()<spc then
+     k=last_sp>=4 and (4+(last_sp-4+(rnd()<.5 and 1 or 2))%3) or (4+flr(rnd(3)))
+    end
+    spawn_t=try_spawn(k) and gap+flr(rnd(lvl>=6 and 5 or 10)) or 5
+   end
+  else spawn_t=6 end
+ end
+
+ for i=#rockets,1,-1 do
+  local r=rockets[i]
+  local k,y,l=r.k,r.y-r.spd,r.l
+  r.y=y r.t+=1
+  local x,t=lanes[l],r.t
+  if k==4 then
+   if r.sw==0 then
+    if y<=64 and y>57 and t%2==0 then add_part(x,y,r.tl>l and .9 or -.9,-.15,10,t%4<2 and 7 or 10,0,.9,true) end
+    if y<=57 and y>=49 then
+     local ok=true
+     for o in all(rockets) do if o!=r and o.l==r.tl and abs(o.y-y)<16 then ok=false break end end
+     if ok then
+      r.ox0,r.l,l,r.sw=x,r.tl,r.tl,1 sfx(12)
+      local d=lanes[l]>x and 1 or -1
+      for j=1,6 do add_part(x,y,d*(.6+rnd(.8)),rnd(.4)-.2,10,j%2==0 and 7 or 11,0,.9,true) end
+     end
+    end
+   elseif r.sw<=10 then
+    local u=r.sw/10
+    x=r.ox0+(x-r.ox0)*(u*u*(3-2*u)) r.sw+=1
+   end
+  elseif k==6 then
+   if not r.bst then
+    if y<=58 then x+=t%2==0 and -.8 or .8 end
+    if y<=54 then
+     r.bst=true
+     local bs=min(lvl_speed[lvl]*1.45,2.05)
+     for o in all(rockets) do if o!=r and o.l==l and o.y<y then bs=min(bs,o.spd*.98) end end
+     r.spd=bs sfx(14) ar(x,y,2,8,10)
+     for j=1,6 do add_part(x+rnd(2)-1,y+2,rnd(.6)-.3,.5+rnd(.5),11,j%2==0 and 7 or 10,0,.92,true) end
+    end
+   end
+  elseif k==2 then x+=sin(t*.12)*3.5 end
+  r.x=x
+  local tc=(k==6 and r.bst) and (t%2==0 and 7 or 10) or ((k==5 and r.hp==1) and 9 or k_trl[k])
+  add_part(x+rnd(1.4)-.7,y+3,rnd(.3)-.15,.35,10+rnd(6),tc,.02,.92,true)
+  if k==6 and r.bst then add_part(x,y+4,rnd(.2)-.1,.6,8,7,.02,.92,true)
+  elseif t%2==0 then add_part(x,y+4,rnd(.2)-.1,.15,14,5,0,.9) end
+  if y<=boom_y then explode(i) if state!=1 then return end end
+ end
+ update_zen()
+end
+
+function has_sp()
+ for _,t in pairs({rockets,pre_spawns}) do
+  for e in all(t) do if e.k>3 then return true end end
+ end
+ return false
+end
+
+function lane_free(l,iq)
+ for _,t in pairs({rockets,pre_spawns,queue}) do
+  for e in all(t) do
+   if e!=iq and e.l==l and (t!=rockets or e.y>launch_y-22) then return false end
+  end
+ end
+ return true
+end
+
+function queue_pre_spawn(l,k,iq)
+ if not lane_free(l,iq) then return false end
+ local rk=k or 1
+ add(pre_spawns,{l=l,k=rk,t=lvl>=6 and 11 or 14})
+ lane_streak=l==last_lane and lane_streak+1 or 1
+ last_lane=l
+ if rk>3 then last_sp=rk end
+ sfx(10)
+ return true
+end
+
+function spawn_rocket_now(l,k)
+ k=k or 1
+ local sp=lvl>=6 and (.94+rnd(.12)) or (.9+rnd(.2))
+ local s=lvl_speed[lvl]*sp*((k==3 and lvl>=7) and 1.18 or k_spd[k])
+ for r in all(rockets) do if r.l==l then s=min(s,r.spd*.95) end end
+ local tl=k==4 and (l==2 and (rnd()<.5 and 1 or 3) or 2) or l
+ add(rockets,{l=l,x=lanes[l],y=launch_y,spd=s,t=0,k=k,hp=k==5 and 2 or 1,tl=tl,sw=0,ox0=lanes[l],bst=false})
+ for i=1,5 do
+  add_part(lanes[l]+rnd(4)-2,launch_y+2,rnd(.6)-.3,rnd(.3),10,k>3 and k_col[k] or 6)
+ end
+ sfx(4)
+end
+
+function try_spawn(k)
+ local opts={}
+ for l=1,3 do
+  if lane_free(l) and (lane_streak<2 or l!=last_lane) then add(opts,l) end
+ end
+ if #opts==0 and last_lane>0 and lane_free(last_lane) then add(opts,last_lane) end
+ if #opts==0 then return false end
+ return queue_pre_spawn(opts[flr(rnd(#opts))+1],k)
+end
+
+function mult() return min(4,1+flr(combo/10)) end
+
+function press(l)
+ lane_hit[l]=6
+ local tri,top_y=0,999
+ for i=1,#rockets do
+  local r=rockets[i]
+  if r.l==l and abs(r.y-zone_y)<=good_px and r.y<top_y then
+   tri=i top_y=r.y
+  end
+ end
+ if tri>0 then
+  local tr=rockets[tri]
+  local perfect=abs(tr.y-zone_y)<=perfect_px
+  local old_m=mult()
+  combo+=1 max_combo=max(max_combo,combo)
+  if max_combo>best_combo then best_combo=max_combo dset(1,best_combo) end
+  local new_m=mult()
+  if tr.hp>1 then
+   tr.hp-=1 tr.y=zone_y+11 tr.spd=max(tr.spd*1.15,.85)
+   for o in all(rockets) do if o!=tr and o.l==tr.l and o.y<tr.y then tr.spd=min(tr.spd,o.spd*.95) end end
+   score=min(32000,score+5*new_m)
+   sfx(13)
+   ar(tr.x,zone_y,2,12,10)
+   b_rad(tr.x,zone_y,10,1.35,11,7,10,.03,.9)
+  else
+   local bp=tr.k>3 and (perfect and 15 or 8) or (perfect and 10 or 5)
+   score=min(32000,score+bp*new_m)
+   silence(tr,perfect)
+   swap_pop(rockets,tri)
+  end
+  if new_m>old_m then add_text(64,44,"x"..new_m.."!",10) end
+  if combo%15==0 and stress>0 then
+   stress-=1 sfx(5) sync_music()
+  end
+ else
+  combo=0 lane_bad[l]=10 pane_shake[l]=8 ear_twitch=10 sfx(2)
+ end
+ update_zen()
+end
+
+function silence(r,perfect)
+ if perfect then
+  freeze=1
+  add(star_flashes,{x=r.x,y=r.y,t=7})
+  ar(r.x,r.y,15,2,7,true)
+  for i=1,12 do
+   local a=i/12
+   local rad=14+rnd(5)
+   local sx,sy=r.x+cos(a)*rad,r.y+sin(a)*rad
+   add_part(sx,sy,(r.x-sx)*.22,(r.y-sy)*.22,7,i%2==0 and 7 or 10,0,.9,true)
+  end
+  sfx(0)
+ else
+  ar(r.x,r.y,2,13,12)
+  b_rad(r.x,r.y,8,1.1,9,12,12,0,.88)
+  sfx(1)
+ end
+end
+
+function explode(ri)
+ local r=rockets[ri]
+ swap_pop(rockets,ri)
+ stress+=1 combo=0 shake=16 flash=6 cat_shock=28
+ sync_music()
+ ar(r.x,r.y,2,28,7) ar(r.x,r.y,1,18,10)
+ local mc=pal_boom[flr(rnd(#pal_boom))+1]
+ for i=1,44 do
+  local sp=i<=28
+  local a=sp and i/28+rnd(.02) or rnd()
+  local spd=(sp and 1.3 or .4)+rnd(sp and 1.1 or .9)
+  add_part(r.x,r.y,cos(a)*spd,sin(a)*spd,(sp and 32 or 20)+rnd(sp and 18 or 10),sp and mc or 7,sp and .038 or .02,sp and .95 or .92,true,sp)
+ end
+ sfx(3)
+ update_zen()
+ if stress>=3 then finish(false) end
+end
+
+function finish(win)
+ state=win and 2 or 3
+ end_t=0 can_restart=false zen=0
+ queue={} pre_spawns={}
+ for r in all(rockets) do
+  ar(r.x,r.y,2,12,win and 12 or 5)
+ end
+ rockets={}
+ sync_music()
+ if score>best then best=score dset(0,best) new_best=true end
+ sfx(win and 8 or 7)
+end
+
+function add_part(x,y,dx,dy,life,c,g,drag,trail,spark)
+ if #parts<180 then
+  add(parts,{x=x,y=y,px=x,py=y,dx=dx,dy=dy,life=life,ml=life,c=c,g=g or 0,drag=drag or 1,trail=trail,spark=spark})
+ end
+end
+
+function add_text(x,y,s,c) add(texts,{x=x,y=y,s=s,c=c,t=28}) end
+
+function update_fx()
+ for i=#parts,1,-1 do
+  local p=parts[i]
+  p.px=p.x p.py=p.y p.x+=p.dx p.y+=p.dy
+  p.dx*=p.drag p.dy=p.dy*p.drag+p.g
+  p.life-=1
+  if p.life<=0 then swap_pop(parts,i) end
+ end
+ for i=#rings,1,-1 do
+  local g=rings[i]
+  g.r+=g.shrink and -2.2 or 1.6
+  if (g.shrink and g.r<=g.mx) or (not g.shrink and g.r>g.mx) then swap_pop(rings,i) end
+ end
+ local function dec(t,dy)
+  for i=#t,1,-1 do
+   local e=t[i] e.t-=1
+   if dy then e.y-=dy end
+   if e.t<=0 then swap_pop(t,i) end
+  end
+ end
+ dec(star_flashes) dec(texts,.4)
+ for _,a in pairs({lane_hit,lane_bad,pane_shake}) do
+  for i=1,3 do a[i]=max(0,a[i]-1) end
+ end
+ shake=max(0,shake-1) flash=max(0,flash-1)
+ cat_shock=max(0,cat_shock-1) ear_twitch=max(0,ear_twitch-1)
+ title_fw_flash=max(0,title_fw_flash-1)
+end
+
+function dim()
+ if zen>=3 then
+  local a=split("2,1,4,2,9,4,10,9,13,5,6,13,7,6,8,2,14,2,5,1,15,4")
+  for i=1,#a,2 do pal(a[i],a[i+1]) end
+ end
+end
+
+function oprint(s,x,y,c,oc)
+ oc=oc or 0
+ for dx=-1,1 do
+  for dy=-1,1 do
+   if dx!=0 or dy!=0 then print(s,x+dx,y+dy,oc) end
+  end
+ end
+ print(s,x,y,c)
+end
+
+function cprint(s,y,c,oc)
+ local sc=#s
+ if sub(s,1,4)=="\\^w\\^t" then sc=(#s-4)*2 end
+ local x=64-flr((sc*4-1)/2)
+ if oc!=nil then oprint(s,x,y,c,oc) else print(s,x,y,c) end
+end
+
+function pad(n,len)
+ local s=tostr(n)
+ while #s<len do s="0"..s end
+ return s
+end
+
+function draw_fx_front()
+ for t in all(texts) do
+  oprint(t.s,t.x-flr((#t.s*4-1)/2),t.y,t.c)
+ end
+end
+
+function _draw()
+ pal() fillp() camera()
+ if state==0 then cls(0) draw_title_screen() return end
+ if shake>0 then cls(0) camera(flr(rnd(5))-2,flr(rnd(5))-2) end
+ dim() draw_room() draw_frame() pal()
+ draw_sky() draw_city() draw_pre_spawns() draw_fx_sky() draw_sky_sunbeam()
+ dim() draw_mullions() draw_curtains(11) draw_bed() pal()
+ draw_lanes() draw_rockets() draw_cat_big() draw_zzz() draw_fx_front()
+ camera() draw_hud()
+ if state==2 then draw_victory_overlay()
+ elseif state==3 and end_t>20 then draw_gameover() end
+ if state>=2 and end_t>45 and fr%36<24 then cprint("toca / x para jugar otra vez",121,15,0) end
+end
+
+function draw_title_screen()
+ for _,b in pairs(mk_t("22,29,16,23130,30,48,1,0,45,52,33,23130,53,68,2,0",4)) do
+  fillp(b[4]) rectfill(0,b[1],127,b[2],b[3])
+ end
+ fillp(0x7fdf.8) rectfill(0,57,127,68,9) fillp()
+
+ for s in all(stars) do pset(s[1],s[2]-4,(fr+s[3]*5)%40<6 and 7 or 6) end
+ circfill(110,13,5,15) circfill(112,11,4,0)
+ draw_fx_sky()
+
+ sspr(0,0,94,15,17,8)
+ if fr%90<28 then
+  local sh=(fr%90)*4-8
+  for r=1,13 do
+   local lx=flr(sh+r*.6)
+   for gx=lx-1,lx+1 do if gx>=0 and gx<94 and sget(gx,r)>1 then pset(17+gx,8+r,7) end end
+  end
+ end
+ oprint("by dejesumensaje",33,26,15,1)
+
+ for x=0,127 do
+  local ry=ridge_y[x]
+  line(x,ry+10,x,96,1) line(x,ry+22,x,96,2)
+ end
+ for l in all(city) do
+  if (fr+l[4])%90>4 then pset(l[1],min(94,l[2]+15),l[3]) end
+ end
+ for i=1,#title_fg_b do
+  local e=title_fg_b[i]
+  rectfill(e[1],e[2],e[3],96,0)
+  if i%2==1 then
+   line(e[1]+3,e[2]-4,e[1]+3,e[2],0)
+   if (fr+i*9)%40<20 then pset(e[1]+3,e[2]-5,8) end
+  end
+ end
+
+ draw_curtains(0)
+ dr("0,96,127,102,4,0,96,127,96,9,0,103,127,127,0")
+ fillp(0x8020) rectfill(0,103,127,127,0x10) fillp()
+
+ sspr(40,16,11,11,12,85)
+ pal(15,title_fw_flash>5 and 7 or (title_fw_flash>0 and 10 or 15))
+ sspr(0,16,34,30,82,67) pal()
+
+ local wag=sin(fr*.03)*3
+ for i=0,9 do circfill(107+i*.8+wag*(i/9),97+i*1.9,1,i%3==0 and 4 or 9) end
+ oprint("> pulsa x / toca",9,112,fr%36<24 and 10 or 7,0)
+end
+
+function draw_room()
+ local win=state==2
+ local tw,wc=win and 0 or 10,win and 0x42 or 0x12
+ fillp(0x8020)
+ rf("0,"..tw..",127,13,0,14,6,80,121,14,127,80,0,81,127,119",wc)
+ fillp()
+ if win then dr("0,9,127,10,4,0,9,127,9,9") end
+ rectfill(0,120,127,127,win and 4 or 1)
+ line(0,120,127,120,win and 9 or 5)
+
+ local loff=(zen>=2 or state==3 or (win and end_t>=25))
+ if not loff then fillp(0x5a5a) circfill(117,94,15,0x42) fillp() end
+ dr("110,105,126,124,4,110,105,126,105,9,118,111,118,111,9,117,98,119,104,5")
+ local sc=loff and (win and 6 or 13) or 10
+ rectfill(113,89,123,97,sc)
+ line(114,88,122,88,(win and loff) and 5 or sc)
+end
+
+function draw_frame()
+ if state!=2 then line(0,10,127,10,5) end
+ rf("3,12,124,14,3,15,7,81,120,15,124,81,3,78,124,81",4)
+ dr("3,12,124,12,9,3,12,3,81,9,7,14,120,14,2")
+end
+
+function get_sun()
+ local dp=state==2 and 1 or (elapsed>2100 and min(1,(elapsed-2100)/600) or 0)
+ local rise=state==2 and min(1,end_t/45) or 0
+ local sy=state==2 and flr(37-rise*2) or (dp>.45 and flr(55-(dp-.45)*33) or 65)
+ return dp,rise,98,sy
+end
+
+function draw_sky()
+ local dp,rise,sx,sy=get_sun()
+ local p=flash>3 and 7 or (flash>1 and 6 or (flash>0 and 5 or (state==2 and (rise<.25 and 4 or 8) or (dp>=.7 and 4 or (dp>=.35 and 3 or (dp>0 and 2 or 1))))))
+ local ct,cm,cb=pal_s[p*3-2],pal_s[p*3-1],pal_s[p*3]
+
+ local y,cs=split("15,36,44,55,63,77,37,43,56,62"),{ct,cm,cb,cm*16+ct,cb*16+cm}
+ for i=1,5 do
+  fillp(i>3 and 0x5a5a or 0) rectfill(8,y[i*2-1],119,y[i*2],cs[i])
+ end
+ fillp()
+
+ if dp<.65 and flash==0 and state!=2 then
+  for s in all(stars) do
+   if (fr+s[3]*7)%90>4 then pset(s[1],s[2],dp>.3 and 5 or (s[3]%3==0 and 7 or 6)) end
+  end
+ end
+ if state!=2 then circfill(37,21,4,dp>.6 and 15 or 7) circfill(39,20,3,ct) end
+ if dp>.45 or state==2 then
+  if state==2 and rise>.25 then
+   fillp(0x7fdf.8) circfill(sx,sy,13,10)
+   fillp(0x5a5a.8) circfill(sx,sy,9,9) fillp()
+  elseif dp>.75 then circ(sx,sy,9,9) end
+  circfill(sx,sy,6,10)
+  if state==2 then circfill(sx-1,sy-1,3,7) end
+ end
+end
+
+function draw_city()
+ local win=state==2
+ local rise,mc=win and min(1,end_t/45) or 0,(win or elapsed>2400) and 13 or 2
+ for x=8,119 do
+  local ry=ridge_y[x]
+  line(x,ry,x,77,mc)
+  if win and rise>.25 and ry+7<=77 then line(x,ry+7,x,77,3) end
+ end
+ for l in all(city) do
+  if (win and l[4]/60>rise*1.15) or (not win and (fr+l[4])%120>2) then pset(l[1],l[2],l[3]) end
+ end
+ local bc=win and 1 or 0
+ for i=1,#city_bldg do
+  local e=city_bldg[i]
+  rectfill(e[1],e[2],e[3],77,bc)
+  if not win then pset(e[1]+2,e[2]+3,10) if i%2==0 then pset(e[3]-3,e[2]+6,9) end end
+ end
+ if win then
+  for b=0,1 do
+   local bx,by,fl=((fr*.22+b*48)%106)+10,21+b*10+sin(fr*.06+b)*1.4,flr(fr/8+b)%2==0 and -1 or 1
+   pset(bx,by,1) pset(bx-1,by+fl,1) pset(bx+1,by+fl,1)
+  end
+ end
+end
+
+function draw_pre_spawns()
+ for ps in all(pre_spawns) do
+  local x,y=lanes[ps.l],launch_y-1
+  local c=ps.t%4<2 and 7 or (ps.k==1 and 10 or k_col[ps.k])
+  circfill(x,y,ps.t<5 and 2 or 1,c) pset(x,y-2,9)
+ end
+end
+
+function ray_x(sx,sy,y,m)
+ local dy=y-sy
+ return max(m,flr(sx-4-dy*.8)),min(127-m,flr(sx+5-dy*.28))
+end
+
+function draw_sky_sunbeam()
+ if state!=2 then return end
+ local _,rise,sx,sy=get_sun()
+ if rise<=.25 then return end
+ fillp(0x7fff.8)
+ for y=sy+5,77 do
+  local lx,rx=ray_x(sx,sy,y,8)
+  if lx<=rx then line(lx,y,rx,y,10) end
+ end
+ fillp()
+end
+
+function m_off()
+ local s,p={},fr%2==0 and 1 or -1
+ for i=1,3 do s[i]=pane_shake[i]>0 and p or 0 end
+ return s[1],s[2],s[3],s[1]!=0 and s[1] or s[2],s[2]!=0 and s[2] or s[3]
+end
+
+function draw_mullions()
+ local s1,s2,s3,m1,m2=m_off()
+ local sx,bx={s1,s2,s3},{14,52,92}
+ for i=1,3 do
+  if pane_shake[i]>0 then line(bx[i]+sx[i],22,bx[i]+6+sx[i],28,13) end
+ end
+ for _,mx in pairs({43+m1,81+m2}) do
+  rectfill(mx,15,mx+2,77,4) line(mx,15,mx,77,9)
+ end
+ dr("0,78,127,85,4,0,78,127,78,9,0,86,127,86,1")
+ if state==2 then
+  local _,rise,sx0,sy=get_sun()
+  if rise>.25 then
+   local lx,rx=ray_x(sx0,sy,78,8)
+   if lx<=rx then
+    line(lx,78,rx,78,10)
+    if lx+6<=rx-6 then line(lx+6,78,rx-6,78,7) end
+   end
+  end
+ end
+end
+
+function draw_curtains(ty)
+ local win=state==2
+ for side=0,1 do
+  local x0=side==0 and 0 or 118
+  rectfill(x0,ty,x0+9,96,1)
+  for k=1,7,3 do line(x0+k,ty,x0+k,96,0) end
+  line(side==0 and x0+9 or x0,ty,side==0 and x0+9 or x0,96,win and 14 or 13)
+  rectfill(x0,60,x0+9,62,win and 15 or 13)
+ end
+end
+
+function draw_bed()
+ local win=state==2
+ rf("4,90,11,125,8,119,27,124,104,123,109,127",4)
+ dr("4,90,11,90,9,10,104,110,118,7,28,103,110,123,13,28,123,110,123,1")
+ rectfill(12,96,34,106,win and 15 or 6) line(13,96,33,96,7)
+ fillp(0xa5a5) rectfill(28,108,110,121,0x1d) fillp()
+ line(28,103,110,103,win and 15 or 6)
+end
+
+function trifill(x1,y1,x2,y2,x3,y3,c)
+ for y=flr(y1),flr(y3) do
+  local xa=x1+(x3-x1)*(y-y1)/max(1,y3-y1)
+  local xb=y<y2 and x1+(x2-x1)*(y-y1)/max(1,y2-y1) or x2+(x3-x2)*(y-y2)/max(1,y3-y2)
+  line(xa,y,xb,y,c)
+ end
+end
+
+function hl(x,y,s,c)
+ local a=split(s)
+ for i=1,#a,4 do line(x+a[i],y+a[i+1],x+a[i+2],y+a[i+3],c) end
+end
+function hp(x,y,s,c)
+ local a=split(s)
+ for i=1,#a,2 do pset(x+a[i],y+a[i+1],c) end
+end
+
+function draw_cat_big()
+ if state==3 or stress>=3 then return end
+ local win,alert=state==2,cat_shock>0
+ local cx,cy=60,94
+ local breath=(stress==0 and flr(fr/(win and 22 or 18))%2==1) and 1 or 0
+ if alert then cy-=min(6,flr(cat_shock/3)) cx+=fr%2==0 and 2 or -2 end
+
+ ovalfill(cx-26,113,cx+32,120,1)
+ local rim=flash>2 and 7 or (flash>0 and 10 or (win and (flr(fr/18)%2==0 and 7 or 10) or (zen>=3 and (flr(fr/16)%2==0 and 15 or 7) or (zen<2 and 15 or 4))))
+ local fur,stripe,belly=9,4,15
+ if flash>3 then fur,stripe,belly=10,9,7 elseif zen>=3 then fur,stripe,belly=4,2,9 end
+ local cs={1,rim,fur,stripe,belly,7,14,10,0}
+
+ local wag=stress>0 and sin(fr*.14)*8 or sin(fr*.025)*3
+ for i=0,12 do
+  local px=cx+26+i*1.4+sin(i*.25+fr*.05)*(stress>0 and 2.2 or .9)
+  local py=cy+10-i*(alert and 1.5 or .7)+wag*(i/12)
+  circfill(px,py,alert and 4 or (i>9 and 3 or 2),i%3==0 and stripe or fur)
+ end
+
+ local top_y=cy-4+breath
+ if alert then
+  top_y-=5
+  for x=cx-16,cx+20,4 do line(x,top_y+3,x+1,top_y-4,rim) line(x+1,top_y+3,x+2,top_y-3,fur) end
+ end
+
+ local function ov(x,y0,y1,s)
+  local a=split(s)
+  for i=1,#a,5 do ovalfill(x+a[i],y0+a[i+1],x+a[i+2],y1+a[i+3],cs[a[i+4]]) end
+ end
+ ov(cx,top_y,cy,"-20,-1,26,18,1,-19,0,25,16,2,-19,2,25,17,3")
+ fillp(0x5a5a) ovalfill(cx-14,top_y+3,cx+21,cy+12,stripe*16+fur) fillp()
+ for s=-10,16,6 do ovalfill(cx+s,top_y+2,cx+s+3,cy+9,stripe) end
+ ov(cx,cy,cy,"-15,8,16,17,5,10,4,26,17,3,18,14,28,19,5,-18,14,-8,19,5")
+ line(cx+12,cy+6,cx+22,cy+6,stripe)
+
+ local gc=(win and end_t>20) and fr%150 or 0
+ local groom,gw=gc>=94,gc>=114 and gc<=136
+ local hx,hy=cx-20,cy+3+(alert and -3 or flr(breath/2))-(groom and 1 or 0)
+ local tdx=ear_twitch>0 and (ear_twitch%2==0 and -2 or 2) or 0
+ local tdy=ear_twitch>0 and -2 or 0
+
+ local function ear(mx,bx,tx,ty,sx,s)
+  trifill(hx+tx,hy+ty,hx+mx,hy-4,hx+bx,hy-2,1)
+  trifill(hx+tx+sx,hy+ty+2,hx+mx+s,hy-4,hx+bx-s,hy-2,fur)
+  trifill(hx+tx+sx,hy+ty+4,hx+mx+s*2,hy-4,hx+bx-s*2,hy-3,14)
+ end
+ ear(-2,-10,-8+tdx,-12+tdy,1,-1)
+ ear(1,9,6-tdx,-12+tdy,0,1)
+
+ ov(hx,hy,hy,"-12,-5,10,13,1,-11,-4,9,11,2,-11,-3,9,12,3,-10,4,8,12,5")
+ hl(hx,hy,"-5,-2,-3,1,-1,-3,-1,1,3,-2,1,1",stripe)
+ hl(hx,cy,"5,16,5,19,8,16,8,19",4)
+
+ if alert then
+  circfill(hx-5,hy+4,3,7) circfill(hx+3,hy+4,3,7) hp(hx,hy,"-5,4,3,4",0)
+ elseif win then
+  if fr%80<14 or gw then
+   hp(hx,hy,"-7,5,-3,5,1,5,5,5",1) hl(hx,hy,"-6,4,-4,4,2,4,4,4",1)
+  else
+   ov(hx,hy,hy,"-7,3,-3,6,8,1,3,5,6,8")
+   rf("-6,4,-5,6,2,4,3,6",1,hx,hy)
+   hp(hx,hy,"-6,3,2,3",7)
+  end
+ elseif stress==0 then
+  hl(hx,hy,"-7,5,-3,5,1,5,5,5",1) hp(hx,hy,"-5,6,3,6",1)
+ elseif stress==1 then
+  line(hx-7,hy+5,hx-3,hy+5,1) ovalfill(hx+1,hy+3,hx+6,hy+7,10) line(hx+3,hy+3,hx+3,hy+7,0)
+ else
+  ov(hx,hy,hy,"-8,2,-2,7,8,1,2,7,7,8")
+  rf("-6,3,-4,6,3,3,5,6",0,hx,hy)
+  hp(hx,hy,"-6,3,3,3",7)
+ end
+
+ hp(hx,hy,"-1,7,-2,6,0,6",14)
+ if groom and gc>=103 and gc<=113 and gc%5<3 then hp(hx,hy,"-2,9,-3,9",14) end
+ for s=-1,1,2 do
+  local w=alert and -2 or ((s<0 and gw) and 1 or 0)
+  line(hx-1+s*10,hy+6,hx-1+s*15,hy+5+w,7)
+  line(hx-1+s*10,hy+8,hx-1+s*14,hy+9-w,7)
+ end
+
+ local px,py=hx-9,cy+15
+ if groom then
+  local lift=gc<103 and (gc-94)/9 or (gc>136 and 1-(gc-136)/13 or 1)
+  local wx,woy=0,0
+  if gw then local a=(gc-114)*.13 wx=cos(a)*2.5-2 woy=sin(a)*3-3 end
+  px=flr(px+lift*(4+wx)) py=flr(py-lift*(11-woy))
+ end
+ ov(px,py,py,"-5,-3,5,3,1,-4,-2,4,2,5")
+ hl(px,py,"-1,0,-1,2,2,0,2,2",4)
+
+ if win and not groom and fr%44<20 then
+  hp(hx,hy,"-15,2,-16,3,-15,4",flr(fr/6)%2==0 and 15 or 14)
+  if fr%44<12 then hp(hx,hy,"-18,1,-19,3,-18,5",13) end
+ end
+end
+
+function draw_zzz()
+ if state==2 then
+  for i=0,2 do
+   local t=(fr+i*16)%48
+   local hx2,hy2=flr(33+i*9+sin(t*.05+i*.35)*2.5),flr(84-t*.44)
+   if t>34 then
+    hp(hx2,hy2,"-1,0,1,0,0,1",15)
+   else
+    local c=(t<12 and i==1) and 8 or 14
+    hp(hx2,hy2,"-1,0,1,0,0,3",c)
+    hl(hx2,hy2,"-2,1,2,1,-1,2,1,2",c)
+   end
+  end
+  return
+ end
+ if stress>0 or state==3 or cat_shock>0 then return end
+ for i=0,2 do
+  local t=(fr+i*15)%45
+  print("z",36+t/7,82-t/5,t>30 and 13 or 6)
+ end
+end
+
+function in_pane(x,m1,m2)
+ return not ((x>=43+m1 and x<=45+m1) or (x>=81+m2 and x<=83+m2))
+end
+
+function lane_dist(l)
+ local bd=99
+ for r in all(rockets) do if r.l==l then bd=min(bd,abs(r.y-zone_y)) end end
+ return bd
+end
+
+function draw_lanes()
+ if state!=1 then return end
+ local _,_,_,m1,m2=m_off()
+ if zen<1 then for x=10,117,6 do if in_pane(x,m1,m2) then pset(x,boom_y,8) end end end
+ if zen<2 then for x=9,118,3 do if in_pane(x,m1,m2) then pset(x,zone_y,13) end end end
+ for l=1,3 do
+  local x=lanes[l]+(pane_shake[l]>0 and (fr%2==0 and 1 or -1) or 0)
+  if zen<1 then for y=zone_y+10,launch_y-4,4 do pset(x,y,5) end end
+  local d,lb,lh=lane_dist(l),lane_bad[l]>0,lane_hit[l]>0
+  local c=zen>=2 and (d<=24 and 13 or 1) or 6
+  if d<=perfect_px then c=11 elseif d<=good_px then c=10 elseif lb then c=8 end
+  circ(x,zone_y,8,c)
+  if c==11 then circ(x,zone_y,3,11) end
+  if lh then circ(x,zone_y,14-lane_hit[l],7) end
+  if zen>=2 then
+   local a=fr*.025+l*.33
+   local ox,oy,sc=cos(a)*8,sin(a)*8,d<=good_px and 10 or (zen>=3 and 15 or 13)
+   pset(x+ox,zone_y+oy,sc) pset(x-ox,zone_y-oy,sc)
+  end
+  local ac=lb and 8 or (lh and 10 or (zen>=2 and 2 or 7))
+  arrow(x,82,l,ac)
+ end
+end
+
+function arrow(x,y,d,c)
+ hl(x,y,d==1 and "-2,0,2,0,-2,0,0,-2,-2,0,0,2" or (d==3 and "-2,0,2,0,2,0,0,-2,2,0,0,2" or "0,-2,0,2,0,2,-2,0,0,2,2,0"),c)
+end
+
+function draw_rockets()
+ local b4=fr%4<2
+ for r in all(rockets) do
+  local x,ry,k,b=flr(r.x+.5),r.y,r.k,r.bst
+  local y,blk=flr(ry),ry<zone_y-good_px and b4
+  if k==5 and r.hp>1 then
+   rectfill(x-2,y-1,x+2,y+2,blk and 7 or 10)
+   line(x-1,y-2,x+1,y-2,7) line(x-2,y+1,x+2,y+1,9) hp(x,y,"-2,3,2,3",9)
+  else
+   local c=k==6 and ((b or blk) and 7 or (ry<=58 and b4 and 10 or 13)) or (k==5 and (blk and 7 or (b4 and 10 or 9)) or (blk and 7 or k_col[k]))
+   local fc,fy=k==4 and 10 or (k==5 and 9 or (k==6 and (b and 10 or 6) or c)),k==4 and 1 or 2
+   rectfill(x-1,y-1,x+1,y+2,c) pset(x,y-2,b and 10 or 7) pset(x-2,y+fy,fc) pset(x+2,y+fy,fc)
+   if k==4 and r.sw==0 and ry<=64 then
+    local d=r.tl>r.l and 1 or -1
+    pset(x+d*4,y,b4 and 7 or 10) pset(x+d*3,y-1,11) pset(x+d*3,y+1,11)
+   elseif b then line(x,y+3,x,y+5,fr%2==0 and 10 or 9) end
+  end
+ end
+end
+
+function draw_fx_sky()
+ for p in all(parts) do
+  local col=p.c
+  if p.spark then
+   local r=p.life/p.ml
+   if r<.25 then col=5 elseif r<.5 then col=2 elseif r<.75 and col==7 then col=10 end
+   if p.life<10 and fr%2==0 then col=7 end
+  end
+  if p.trail then line(p.px,p.py,p.x,p.y,col) else pset(p.x,p.y,col) end
+ end
+ for g in all(rings) do circ(g.x,g.y,g.r,g.c) end
+ for sf in all(star_flashes) do
+  local x,y,r,c=sf.x,sf.y,sf.t+3,sf.t>4 and 7 or 10
+  line(x-r,y,x+r,y,c) line(x,y-r,x,y+r,c)
+  hl(x,y,"-2,-2,2,2,-2,2,2,-2",7)
+ end
+end
+
+function draw_hud()
+ if state==0 or state==2 then return end
+ rectfill(0,0,127,9,0)
+ if zen<3 then
+  print(pad(score,5).."0",2,1,zen>=2 and 5 or 7)
+  if combo>1 and zen<2 then
+   print("combo "..combo,44,1,10)
+   local m=mult()
+   if m>1 then print("x"..m,84,1,9) end
+  end
+  for i=1,3 do circfill(100+i*7,3,2,i<=3-stress and (zen>=2 and 13 or 12) or 5) end
+ end
+ local w=flr(127*min(1,elapsed/game_len))
+ line(0,8,127,8,1)
+ if w>0 then line(0,8,w,8,9) end
+end
+
+function draw_victory_overlay()
+ local _,rise,sx,sy=get_sun()
+ if rise>.25 then
+  for y=79,115 do
+   local lx,rx=ray_x(sx,sy,y,10)
+   if lx<=rx then
+    fillp(0x7fff.8) line(lx,y,rx,y,10)
+    if rise>.55 then
+     local ins=flr((rx-lx)*.3)
+     if lx+ins<=rx-ins then fillp(0x7fdf.8) line(lx+ins,y,rx-ins,y,15) end
+    end
+   end
+  end
+  fillp()
+  for i=0,5 do
+   local my=52+(i*11+flr(fr*.16))%60
+   if my>sy+6 then
+    local lx,rx=ray_x(sx,sy,my,10)
+    lx+=2 rx-=2
+    if rx>lx then pset(lx+(i*19+flr(fr*.12))%(rx-lx),my,i%2==0 and 7 or 15) end
+   end
+  end
+ end
+ if end_t>24 then
+  dr("11,18,79,60,1,17,30,73,30,4") rect(11,18,79,60,9)
+  hp(0,0,"12,19,78,19,12,59,78,59",15)
+  print("amanecio",30,23,0) print("amanecio",30,22,10)
+  draw_stats(17,73,34,2)
+ end
+end
+
+function draw_gameover()
+ rectfill(14,22,113,84,0) rect(14,22,113,84,8)
+ oprint("\\^w\\^tgame over",28,29,8)
+ draw_stats(28,99,48,5)
+end
+
+function rprint(s,r,y,c) s=tostr(s) print(s,r+1-#s*4,y,c) end
+
+function draw_stats(x,r,y,lc)
+ print("puntos",x,y,13) print(pad(score,5).."0",x,y+7,7)
+ if new_best then
+  local fc=fr%24<14 and 10 or 15
+  rprint("nuevo!",r,y,fc) rprint(pad(best,5).."0",r,y+7,fc)
+ else
+  rprint("record",r,y,13) rprint(pad(best,5).."0",r,y+7,15)
+ end
+ line(x,y+14,r,y+14,lc)
+ local cs="combo max  "..max_combo
+ print(cs,flr((x+r+1)/2)-flr((#cs*4-1)/2),y+18,12)
+end
+`;
+
+      const musicSection = [
+        '01 10114344',
+        '02 10114344',
+        '01 12134344',
+        '02 12134344',
+        '01 14154344',
+        '02 14154344',
+        '01 16174344',
+        '02 16174344'
+      ].join('\n');
+
+      return `pico-8 cartridge // http://www.pico-8.com
+version 41
+__lua__
+${lua}
+__gfx__
+${buildP8GfxSection()}
+__sfx__
+${buildP8SfxSection()}
+__music__
+${musicSection}
+`;
+    }
+
+    document.getElementById('btn-download').addEventListener('click', () => {
+      const blob = new Blob([getFullP8Cartridge()], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'alborada_edicion_amanecer.p8';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showToast('Cartucho .p8 completo descargado');
+    });
+
+    // 30 FPS Fixed Timestep Accumulator (immune to rAF jitter & refresh-rate phase-lock)
+    _init();
+    _draw();
+    flushVRAMToCanvas();
+
+    let lastRafTime = null;
+    let accumMs = 0;
+    const FRAME_DURATION = 1000 / 30;
+
+    function resetLoopClock() {
+      lastRafTime = null;
+      accumMs = 0;
+    }
+
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        clearAllInputs();
+        resetLoopClock();
+        if (audioCtx && audioCtx.state === 'running') {
+          audioCtx.suspend().catch(() => {});
+        }
+      } else {
+        resetLoopClock();
+        if (audioCtx && !audioMuted && (audioCtx.state === 'suspended' || audioCtx.state === 'interrupted')) {
+          audioCtx.resume().catch(() => {});
+        }
+      }
+    });
+
+    window.addEventListener('focus', resetLoopClock);
+
+    function mainLoop(now) {
+      requestAnimationFrame(mainLoop);
+      if (lastRafTime === null) {
+        lastRafTime = now;
+        return;
+      }
+      let dt = now - lastRafTime;
+      lastRafTime = now;
+      if (dt < 0) dt = 0;
+      else if (dt > 150) dt = FRAME_DURATION;
+      accumMs += dt;
+      if (accumMs > FRAME_DURATION * 2) accumMs = FRAME_DURATION * 2;
+
+      let stepped = false;
+      while (accumMs >= FRAME_DURATION - 0.25) {
+        accumMs -= FRAME_DURATION;
+        stepped = true;
+
+        if (freeze === 0) {
+          for (let i = 0; i < 6; i++) {
+            keyJustPressed[i] = keyPressLatch[i];
+            keyPressLatch[i] = false;
+          }
+        } else {
+          for (let i = 0; i < 6; i++) keyJustPressed[i] = false;
+        }
+
+        _update();
+        stepAdaptiveMusic();
+      }
+
+      if (stepped) {
+        _draw();
+        flushVRAMToCanvas();
+      }
+    }
+
+    requestAnimationFrame(mainLoop);
+  </script>
+
+  <script>
+    /* portfolio embed bridge */
+    if (document.documentElement.classList.contains('embed')) {
+      audioMuted = true;
+      var post = function (m) { if (window.parent !== window) window.parent.postMessage(m, location.origin); };
+      window.addEventListener('message', function (e) {
+        if (e.origin !== location.origin || !e.data) return;
+        var d = e.data;
+        if (d.type === 'alborada:press') { initAudio(); keyPressLatch[d.btn | 0] = true; }
+        if (d.type === 'alborada:start') {
+          // The title screen ignores input for its first frames: keep
+          // pressing X until the game leaves the title (max ~2s).
+          initAudio();
+          var tries = 0;
+          var poke = function () {
+            if (state !== 0 || tries++ > 60) return;
+            keyPressLatch[5] = true;
+            setTimeout(poke, 34);
+          };
+          poke();
+        }
+        if (d.type === 'alborada:mute') {
+          audioMuted = !!d.muted;
+          initAudio();
+          if (masterGain && audioCtx) masterGain.gain.setValueAtTime(audioMuted ? 0 : 1, audioCtx.currentTime);
+        }
+      });
+      window.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') { clearAllInputs(); post({ type: 'alborada:escape' }); }
+      });
+      post({ type: 'alborada:ready' });
+    }
+  </script>
+</body>
+</html>

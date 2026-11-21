@@ -1,0 +1,207 @@
+---
+import CaseLayout from '../../layouts/CaseLayout.astro';
+import CaseHeader from '../../components/f/CaseHeader.astro';
+import NextStory from '../../components/f/NextStory.astro';
+
+const pct = (v: number, of: number) => `${((v / of) * 100).toFixed(3)}%`;
+
+const facts = [
+  { k: 'Rol', v: 'UX, arquitectura de información' },
+  { k: 'Fecha', v: 'julio de 2021 – en curso' },
+  { k: 'Equipo', v: 'Camilo Beltrán, líder de desarrollo\nNatalia Torres, diseño visual' },
+  { k: 'Enlace', v: 'Aprender Digital', href: 'https://contenidos.colombiaaprende.edu.co' },
+];
+const overview = [
+  { k: 'Reto', v: 'Diseñar un producto para docentes rurales que trabajan sin conexión garantizada.' },
+  { k: 'Aporte', v: 'UX, arquitectura de información, propuesta de valor y prototipado en plazos cortos.' },
+  { k: 'Investigación', v: 'Investigación documental y entrevistas con 10 docentes y 5 líderes TIC de zonas con baja conectividad.' },
+  { k: 'Resultado', v: 'Paquetes de contenido listos para usar sin conexión, un flujo de publicación más simple y una propuesta de valor clara.' },
+];
+const numbers = [
+  { v: '7M+', k: 'colombianos en zonas rurales sin internet' },
+  { v: '47%', k: 'de las sedes educativas rurales sin red' },
+  { v: '3', k: 'meses entre la nueva propuesta y el MVP probado' },
+];
+const prototypes = [
+  {
+    label: 'Sitio web de Aprender Digital',
+    caption: 'El sitio web, una iteración sobre la versión anterior',
+    src: 'https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FSRpGGNHHdLTeOvaZIIjZVz%2FAprender-Digital%3Fpage-id%3D0%253A1%26node-id%3D42%253A2211%26viewport%3D241%252C48%252C0.04%26scaling%3Dmin-zoom%26starting-point-node-id%3D42%253A2211',
+    href: 'https://www.figma.com/proto/SRpGGNHHdLTeOvaZIIjZVz/Aprender-Digital?page-id=0%3A1&node-id=42%3A2211&scaling=min-zoom&starting-point-node-id=42%3A2211',
+  },
+  {
+    label: 'Paquete de contenido sin conexión',
+    caption: 'El paquete sin conexión: un solo archivo para llevar al aula, diseñado con Material Design',
+    src: 'https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2F2OZPNtWxdH1iKL6p4GrCO5%2FContenido-offline%3Fpage-id%3D0%253A1%26node-id%3D4%253A2%26viewport%3D241%252C48%252C0.12%26scaling%3Dmin-zoom%26starting-point-node-id%3D4%253A2',
+    href: 'https://www.figma.com/proto/2OZPNtWxdH1iKL6p4GrCO5/Contenido-offline?page-id=0%3A1&node-id=4%3A2&scaling=min-zoom&starting-point-node-id=4%3A2',
+  },
+];
+---
+
+<CaseLayout
+  title="Llevar el aprendizaje a las aulas rurales sin internet — William Montoya"
+  description="¿Cómo entregar recursos educativos a docentes rurales que no cuentan con internet?"
+  readFull="6 min"
+  readTldr="1 min"
+>
+  <CaseHeader
+    kicker="Caso de estudio · Ministerio de Educación Nacional, Colombia"
+    lead="Llevar el aprendizaje a las aulas rurales"
+    accent="sin internet."
+    question="¿Cómo entregar recursos educativos a docentes rurales que no cuentan con internet?"
+    facts={facts}
+    overview={overview}
+    readFull="6 min"
+    readTldr="1 min"
+  />
+
+  <figure class="figure figure--lead wrap" data-reveal>
+    <div class="stage" style="aspect-ratio:1296/640">
+      <div class="browser" style={`left:${pct(148, 1296)};top:${pct(56, 640)};width:${pct(1000, 1296)}`}>
+        <div class="browser__bar" aria-hidden="true"><i></i><i></i><i></i></div>
+        <img src="/assets/aprender-digital-version-ligera.webp" width="1400" height="700" alt="Aprender Digital, versión ligera: la página de inicio que explica cómo funciona la plataforma sin conexión." fetchpriority="high" />
+      </div>
+    </div>
+  </figure>
+
+  <section class="chapter chapter--section wrap" aria-labelledby="ch-numbers" data-reveal>
+    <div class="split">
+      <h2 id="ch-numbers" class="t-h3 split__label">En cifras</h2>
+      <div class="columns3 numbers split__body">
+        {numbers.map((n) => (
+          <div><p class="t-display">{n.v}</p><p class="t-muted">{n.k}</p></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="chapter wrap" aria-labelledby="ch-background" data-depth="full" data-reveal>
+    <div class="split">
+      <h2 id="ch-background" class="t-h3 split__label">Contexto</h2>
+      <div class="prose measure split__body">
+        <p>Aprender Digital nació como un proyecto paralelo a Colombia Aprende para apoyar a la comunidad educativa durante el confinamiento por COVID-19.</p>
+        <p>Era una salida temporal mientras terminábamos el nuevo <a class="link" href="https://www.colombiaaprende.edu.co" target="_blank" rel="noopener noreferrer">colombiaaprende.edu.co</a>. Cuando lanzamos la plataforma principal en octubre, Aprender Digital cumplió su ciclo.</p>
+        <p>Pero la marca ya tenía reconocimiento, así que el Ministerio nos propuso darle un nuevo propósito: resolver el acceso para quienes no tienen conexión a internet.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="chapter chapter--tight wrap" aria-labelledby="ch-process" data-reveal>
+    <div class="split">
+      <h2 id="ch-process" class="t-h3 split__label">Proceso</h2>
+      <div class="chapter__stack split__body">
+        <div class="prose measure" data-depth="full">
+          <p>A diferencia de Colombia Aprende, aquí teníamos solo tres meses para replantear la propuesta de valor, definir el alcance, construir un MVP y probarlo con docentes rurales.</p>
+          <p>Elegimos Lean UX para entregar valor rápido. En lugar de levantar requisitos extensos, partimos de una investigación documental para acotar el problema.</p>
+          <p>Más de 7 millones de colombianos en zonas rurales no tienen internet, y el 47% de las sedes educativas rurales carece de red. Un estudiante del campo recibe cerca de la mitad de la formación que recibe uno en Bogotá o Medellín.</p>
+        </div>
+        <div class="grid2">
+          <div><h3 class="t-small t-muted">Planteamiento del problema</h3><p class="insight">La falta de acceso a recursos educativos amplía la brecha entre lo urbano y lo rural, y frena el trabajo de los docentes.</p></div>
+          <div><h3 class="t-small t-muted">Hipótesis</h3><p class="insight">Si entregamos recursos y guías de forma constante, incluso sin internet, los docentes rurales podrán preparar mejor sus clases y elevar la calidad educativa.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <figure class="figure wrap" data-depth="full" data-reveal>
+    <div class="stage" style="aspect-ratio:1296/600">
+      <img class="flat" src="/assets/lean-ux-framework.webp" width="600" height="600" loading="lazy" alt="El ciclo de Lean UX: pensar, hacer, comprobar." style={`left:${pct(398, 1296)};top:${pct(50, 600)};width:${pct(500, 1296)}`} />
+    </div>
+    <figcaption class="t-small">Lean UX: acotar el problema desde la investigación, sin una fase larga de requisitos</figcaption>
+  </figure>
+
+  <section class="chapter chapter--tight wrap" aria-labelledby="ch-users" data-depth="full" data-reveal>
+    <div class="split">
+      <h2 id="ch-users" class="t-h3 split__label">Encontrar a los usuarios</h2>
+      <div class="prose measure split__body">
+        <p>Sumamos a las secretarías de educación regionales y creamos dos proto-personas: un docente rural y un líder TIC de secretaría.</p>
+        <p>Luego entrevistamos a 10 docentes y 5 líderes TIC para validar y ajustar esos perfiles con evidencia real.</p>
+      </div>
+    </div>
+  </section>
+
+  <figure class="figure wrap" data-depth="full" data-reveal>
+    <div class="stage" style="aspect-ratio:1296/760">
+      <img class="flat" src="/assets/user-persona.webp" width="1100" height="1080" loading="lazy" alt="Ficha de persona de Carmen Gómez, docente rural en Colombia: metas, frustraciones y contexto." style={`left:${pct(318, 1296)};top:${pct(48, 760)};width:${pct(680, 1296)}`} />
+    </div>
+    <figcaption class="t-small">Perfil de una docente rural</figcaption>
+  </figure>
+
+  <section class="chapter chapter--tight wrap" aria-labelledby="ch-value" data-reveal>
+    <div class="split">
+      <h2 id="ch-value" class="t-h3 split__label">Crear valor</h2>
+      <div class="chapter__stack split__body">
+        <p class="measure" data-depth="full">Para definir el MVP trabajamos la propuesta de valor con ambas personas. El taller dejó claro el problema central: las secretarías tardaban dos o tres semanas en recibir los contenidos solicitados, y los docentes necesitaban un solo paquete ordenado en lugar de descargar archivos sueltos.</p>
+        <p class="t-h2 pull">Un paquete de contenidos curados que los docentes llevan a clase en un solo archivo.</p>
+        <p class="measure">Convertimos Aprender Digital en un micrositio de paquetes curados. Las secretarías y los docentes descargan un paquete como interfaz HTML autónoma y llevan ese único archivo a los computadores de la escuela. De nuestro lado nadie arma paquetes a mano: publicamos los contenidos como siempre y el CMS genera el archivo.</p>
+      </div>
+    </div>
+  </section>
+
+  <figure class="figure wrap" data-depth="full" data-reveal>
+    <div class="stage" style="aspect-ratio:1296/520">
+      <img class="flat" src="/assets/value-proposition-canvas.webp" width="1200" height="363" loading="lazy" alt="Lienzo de propuesta de valor del taller, para las dos personas." style={`left:${pct(98, 1296)};top:${pct(96, 520)};width:${pct(1100, 1296)}`} />
+    </div>
+    <figcaption class="t-small">Lienzo de propuesta de valor trabajado con ambas personas</figcaption>
+  </figure>
+
+  <section class="chapter chapter--tight wrap" aria-labelledby="ch-testing" data-depth="full" data-reveal>
+    <div class="split">
+      <h2 id="ch-testing" class="t-h3 split__label">Prototipos y pruebas</h2>
+      <div class="chapter__stack split__body">
+        <p class="measure">Construimos dos interfaces: una para el sitio web, que iteraba sobre la versión anterior, y otra para los paquetes sin conexión, basada en Material Design.</p>
+      </div>
+    </div>
+  </section>
+
+  {prototypes.map((p) => (
+    <figure class="figure wrap" data-depth="full" data-reveal>
+      <div class="proto" data-proto={p.src} data-title={`Prototipo de ${p.label} (Figma)`}>
+        <div class="proto__inner">
+          <p class="t-small t-muted">{p.label}</p>
+          <button class="btn btn--primary" type="button">Cargar el prototipo</button>
+          <a class="link t-small" href={p.href} target="_blank" rel="noopener noreferrer">Abrir en Figma <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+      <figcaption class="t-small">{p.caption}</figcaption>
+    </figure>
+  ))}
+
+  <section class="chapter chapter--section wrap" aria-labelledby="ch-results" data-reveal>
+    <div class="split">
+      <h2 id="ch-results" class="t-h3 split__label">Resultados</h2>
+      <div class="prose measure split__body">
+        <p>Lanzamos el MVP en tres meses. El sitio sigue recibiendo unas 1.200 visitas al mes de su público objetivo: docentes y secretarías de educación.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="chapter chapter--section wrap" aria-labelledby="ch-lessons" data-reveal>
+    <div class="split">
+      <h2 id="ch-lessons" class="t-h3 split__label">Aprendizajes</h2>
+      <div class="split__body" style="display:flex;flex-direction:column;gap:40px">
+        <div class="prose measure">
+          <p>Lanzar rápido la primera versión fue un acierto. Sin embargo, el diseño de contenidos se quedó rezagado frente al producto y la UX, y ese desfase se notó en las primeras semanas. Una beta corta lo habría evitado.</p>
+        </div>
+        <p class="t-h2 pull">La estrategia de contenidos debe avanzar a la par del diseño desde el primer sprint.</p>
+        <p class="tldr-note t-small" data-depth="tldr">Esta es la versión corta. La historia completa recorre la investigación, los perfiles de usuario, el taller de propuesta de valor y los dos prototipos.</p>
+      </div>
+    </div>
+  </section>
+
+  <NextStory current="/aprender-digital.html" />
+</CaseLayout>
+
+<script>
+  // Figma embeds load only when asked: keeps the page light.
+  document.querySelectorAll<HTMLElement>('[data-proto]').forEach((box) => {
+    box.querySelector('button')?.addEventListener('click', () => {
+      const f = document.createElement('iframe');
+      f.src = box.dataset.proto ?? '';
+      f.title = box.dataset.title ?? 'Prototipo de Figma';
+      f.allowFullscreen = true;
+      box.querySelector('.proto__inner')?.remove();
+      box.appendChild(f);
+    });
+  });
+</script>

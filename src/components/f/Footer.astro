@@ -1,0 +1,432 @@
+---
+// Dark footer: contact on the left, a CRT that plays Alborada on the right.
+// The CRT overhangs the top edge of the footer on desktop (see --crt-lift).
+import { getLang, t } from '../../i18n/ui';
+const lang = getLang(Astro.url);
+const email = 'william@dejesumensaje.com';
+const subject = encodeURIComponent(t(lang, 'hola.subject'));
+---
+
+<footer class="footer" id="contact" aria-labelledby="footer-title">
+  <div class="footer__row wrap">
+    <div class="footer__contact">
+      <div class="footer__invite">
+        <p class="t-small footer__muted">{t(lang, 'footer.contact')}</p>
+        <h2 id="footer-title" class="t-display">{t(lang, 'footer.title')}</h2>
+        <a class="footer__email link" href={`mailto:${email}?subject=${subject}`}>{email}</a>
+      </div>
+      <ul class="footer__links list-reset" role="list">
+        <li>
+          <span class="t-small footer__muted">{t(lang, 'footer.resume')}</span>
+          <a class="link" href={t(lang, 'cv.pdf')} download>{t(lang, 'footer.download')} <span aria-hidden="true">↓</span></a>
+        </li>
+        <li>
+          <span class="t-small footer__muted">LinkedIn</span>
+          <a class="link" href="https://www.linkedin.com/in/dejesumensaje/" target="_blank" rel="noopener noreferrer">in/dejesumensaje <span aria-hidden="true">↗</span></a>
+        </li>
+        <li>
+          <span class="t-small footer__muted">{t(lang, 'footer.writing')}</span>
+          <a class="link" href="https://medium.com/@dejesumensaje" target="_blank" rel="noopener noreferrer">Medium <span aria-hidden="true">↗</span></a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="footer__game">
+      <div class="crt" data-crt data-state="off" data-playing={t(lang, 'footer.playing')} data-started={t(lang, 'footer.started')} data-left={t(lang, 'footer.left')} data-frame-title={t(lang, 'footer.frame')}>
+        <div class="crt__tube">
+          <div class="crt__screen">
+            <div class="crt__game" data-crt-game>
+              <img src="/assets/f/alborada-title.png" width="128" height="128" alt="" />
+            </div>
+            <span class="crt__dot" aria-hidden="true"></span>
+            <div class="crt__glass" aria-hidden="true"></div>
+          </div>
+          <button class="crt__start" type="button" data-crt-start>
+            <span class="sr-only">{t(lang, 'footer.play')}</span>
+          </button>
+        </div>
+        <div class="crt__chin">
+          <span class="crt__model" data-crt-label>ALBORADA</span>
+          <div class="crt__controls">
+            <span class="crt__power" aria-hidden="true"></span>
+            <button class="crt__knob" type="button" aria-pressed="false" data-crt-sound>
+              <span class="sr-only">{t(lang, 'footer.sound')}</span>
+            </button>
+            <span class="crt__knob crt__knob--static" aria-hidden="true"></span>
+          </div>
+        </div>
+      </div>
+      <div class="footer__caption">
+        <p class="t-small footer__muted">{t(lang, 'footer.game')}</p>
+        <div class="legend t-small footer__muted" aria-hidden="true">
+          <span class="legend__group"><kbd>←</kbd><kbd>↓</kbd><kbd>→</kbd><span>{t(lang, 'footer.silence')}</span></span>
+          <span class="legend__group"><kbd>X</kbd><span>{t(lang, 'footer.start')}</span></span>
+        </div>
+        <p class="t-small legend-touch">{t(lang, 'footer.tap')}</p>
+      </div>
+      <p class="sr-only" aria-live="polite" data-crt-status></p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    --crt-lift: 72px;
+    background: var(--night);
+    color: var(--on-night);
+    padding: var(--space-page-top) 0 56px;
+    margin-top: var(--crt-lift);
+  }
+  .footer__muted { color: var(--on-night-muted); }
+  .footer__row {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: var(--gutter);
+    align-items: end;
+  }
+  .footer__contact {
+    grid-column: 1 / span 6;
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+  }
+  .footer__invite { display: flex; flex-direction: column; gap: 16px; }
+  .footer__email {
+    font-size: var(--text-h3);
+    font-weight: 500;
+    align-self: flex-start;
+    overflow-wrap: anywhere;
+  }
+  .footer__links { display: flex; gap: var(--gutter); flex-wrap: wrap; }
+  .footer__links li {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: min(196px, 100%);
+  }
+  .footer__links a { align-self: flex-start; padding-block: 2px; }
+
+  .footer__game {
+    grid-column: 7 / -1;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    /* Pull the CRT up so it sits on the page above the footer. */
+    margin-top: calc(-1 * (var(--space-page-top) + var(--crt-lift)));
+  }
+  .footer__caption {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .legend { display: flex; gap: 24px; align-items: center; }
+  .legend__group { display: flex; gap: 8px; align-items: center; }
+  .legend__group span { margin-left: 2px; }
+  kbd {
+    display: inline-grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    background: var(--night-raised);
+    border: 1px solid var(--night-line);
+    border-radius: var(--radius-xs);
+    font: 500 12px/1 var(--font-body);
+    color: var(--on-night);
+  }
+  .legend-touch { display: none; color: var(--on-night); }
+  @media (hover: none) and (pointer: coarse) {
+    .legend { display: none; }
+    .legend-touch { display: block; }
+  }
+
+  /* ---------- CRT ---------- */
+  .crt {
+    padding: 20px 20px 0;
+    border-radius: 28px;
+    background: linear-gradient(180deg, #3a3c42, #1d1e22);
+    box-shadow:
+      inset 0 0 0 1px rgba(255, 255, 255, 0.1),
+      0 40px 80px -30px rgba(0, 0, 0, 0.6);
+  }
+  .crt__tube {
+    position: relative;
+    aspect-ratio: 596 / 447;
+    border-radius: 22px;
+    background: #050506;
+    overflow: hidden;
+  }
+  .crt__screen {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+  }
+  .crt__game {
+    position: relative;
+    height: 100%;
+    aspect-ratio: 1;
+    background: #000;
+  }
+  /* Off: collapsed to nothing until the footer is in view (JS only). */
+  :global(.js) .crt[data-state='off'] .crt__game {
+    transform: scale(0.02, 0.006);
+    opacity: 0;
+  }
+  .crt__game img,
+  .crt__game :global(iframe) {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    image-rendering: pixelated;
+  }
+  .crt__game :global(iframe) {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 150ms ease;
+  }
+  .crt__game :global(iframe.is-ready) { opacity: 1; }
+  .crt__game:has(:global(iframe.is-ready)) img { visibility: hidden; }
+
+  /* Power-on, like an old TV (seen once):
+     1. a bright dot appears in the middle of the tube,
+     2. it stretches into a horizontal line,
+     3. the line opens vertically into the picture, still glowing white,
+     4. the white fades and the picture settles. */
+  .crt__game::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: #f4f7ff;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .crt__dot {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 10px;
+    height: 10px;
+    margin: -5px 0 0 -5px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 0 12px 4px rgba(200, 220, 255, 0.9), 0 0 40px 12px rgba(120, 160, 255, 0.35);
+    opacity: 0;
+    pointer-events: none;
+  }
+  .crt[data-state='on'] .crt__game,
+  .crt[data-state='loading'] .crt__game,
+  .crt[data-state='playing'] .crt__game,
+  .crt[data-state='paused'] .crt__game { animation: tv-open 760ms both; }
+  .crt[data-state='on'] .crt__game::after,
+  .crt[data-state='loading'] .crt__game::after,
+  .crt[data-state='playing'] .crt__game::after,
+  .crt[data-state='paused'] .crt__game::after { animation: tv-white 760ms both; }
+  .crt[data-state='on'] .crt__dot,
+  .crt[data-state='loading'] .crt__dot,
+  .crt[data-state='playing'] .crt__dot,
+  .crt[data-state='paused'] .crt__dot { animation: tv-dot 760ms both; }
+
+  @keyframes tv-dot {
+    0%   { opacity: 0; transform: scale(0.2); animation-timing-function: var(--ease-out); }
+    12%  { opacity: 1; transform: scale(1); }
+    26%  { opacity: 1; transform: scale(1); animation-timing-function: var(--ease-in-out); }
+    40%  { opacity: 0; transform: scale(3, 0.5); }
+    100% { opacity: 0; transform: scale(3, 0.5); }
+  }
+  @keyframes tv-open {
+    0%, 26% { opacity: 0; transform: scale(0.02, 0.006); animation-timing-function: var(--ease-in-out); }
+    27%  { opacity: 1; transform: scale(0.02, 0.006); animation-timing-function: var(--ease-in-out); }
+    50%  { opacity: 1; transform: scale(1, 0.006); animation-timing-function: var(--ease-out); }
+    78%  { transform: scale(1, 1); }
+    100% { opacity: 1; transform: scale(1, 1); }
+  }
+  @keyframes tv-white {
+    0%, 60% { opacity: 1; }
+    100% { opacity: 0; }
+  }
+
+  /* Glass: scanlines, vignette, curvature shading and a soft glare.
+     Mirrors crt.glsl (u_scan .35, u_lines 180, u_vignette .45) in CSS. */
+  .crt__glass {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    border-radius: 22px;
+    background:
+      radial-gradient(120% 90% at 22% 18%, rgba(255, 255, 255, 0.06), transparent 40%),
+      radial-gradient(ellipse at center, transparent 55%, rgba(0, 0, 0, 0.55) 100%),
+      repeating-linear-gradient(180deg, rgba(0, 0, 0, 0) 0 1.5px, rgba(0, 0, 0, 0.22) 1.5px 2.5px);
+    box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.8);
+  }
+
+  .crt__start {
+    position: absolute;
+    inset: 0;
+    border-radius: 22px;
+    cursor: pointer;
+  }
+  .crt__start:focus-visible { outline: 2px solid var(--signal); outline-offset: -4px; }
+  .crt[data-state='playing'] .crt__start,
+  .crt[data-state='loading'] .crt__start { display: none; }
+
+  .crt__chin {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 48px;
+    padding: 0 8px;
+  }
+  .crt__model {
+    font: 400 11px/1 var(--font-pixel);
+    letter-spacing: 1px;
+    color: var(--on-night-muted);
+    text-transform: uppercase;
+  }
+  .crt__controls { display: flex; align-items: center; gap: 12px; }
+  .crt__power {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #3a3020;
+    transition: background-color 150ms ease, box-shadow 150ms ease;
+  }
+  .crt:not([data-state='off']) .crt__power {
+    background: var(--signal);
+    box-shadow: 0 0 8px rgba(255, 200, 61, 0.7);
+  }
+  .crt__knob {
+    position: relative;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #121315;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.14);
+    transition: transform 200ms var(--ease-out);
+  }
+  /* Sound knob: the notch shows the state; turns a quarter when on. */
+  .crt__knob::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 2px;
+    width: 1.5px;
+    height: 5px;
+    translate: -50% 0;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 1px;
+  }
+  .crt__knob--static::before { display: none; }
+  .crt__knob[aria-pressed='true'] { transform: rotate(90deg); }
+  .crt__knob[aria-pressed='true']::before { background: var(--signal); }
+  button.crt__knob::after { content: ''; position: absolute; inset: -14px; }
+
+  @media (max-width: 759px) {
+    .footer { margin-top: 0; padding: var(--space-chapter) 0 var(--space-page-top); }
+    .footer__row { display: flex; flex-direction: column; align-items: stretch; gap: 56px; }
+    .footer__contact { gap: 24px; }
+    .footer__email { font-size: var(--text-lead); }
+    .footer__links { flex-direction: column; gap: 24px; }
+    .footer__game { margin-top: 0; gap: 16px; }
+    .crt { padding: 14px 14px 0; border-radius: 22px; }
+    .crt__tube, .crt__glass, .crt__start { border-radius: 16px; }
+    .crt__tube { aspect-ratio: 334 / 242; }
+    .crt__chin { height: 40px; padding: 0 6px; }
+    .crt__model { font-size: 10px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    :global(.js) .crt[data-state='off'] .crt__game { transform: none; }
+    .crt__game { transition: opacity 150ms ease; }
+    .crt:not([data-state='off']) .crt__game { animation: none; opacity: 1; }
+    .crt__game::after, .crt__dot { display: none; }
+  }
+</style>
+
+<script>
+  const crt = document.querySelector<HTMLElement>('[data-crt]');
+  if (crt) {
+    const gameBox = crt.querySelector<HTMLElement>('[data-crt-game]')!;
+    const startBtn = crt.querySelector<HTMLButtonElement>('[data-crt-start]')!;
+    const soundBtn = crt.querySelector<HTMLButtonElement>('[data-crt-sound]')!;
+    const label = crt.querySelector<HTMLElement>('[data-crt-label]')!;
+    const status = document.querySelector<HTMLElement>('[data-crt-status]')!;
+    let frame: HTMLIFrameElement | null = null;
+    let muted = true;
+
+    const setState = (s: 'off' | 'on' | 'loading' | 'playing' | 'paused') => {
+      crt.dataset.state = s;
+      label.textContent = s === 'playing' ? (crt.dataset.playing ?? 'PLAYING · ESC') : 'ALBORADA';
+    };
+    const send = (msg: object) => frame?.contentWindow?.postMessage(msg, location.origin);
+
+    // Power on once, when 40% of the footer is on screen.
+    const io = new IntersectionObserver((entries) => {
+      if (entries.some((e) => e.isIntersecting) && crt.dataset.state === 'off') {
+        setState('on');
+        io.disconnect();
+      }
+    }, { threshold: 0.4 });
+    io.observe(crt.closest('footer') ?? crt);
+
+    // The game loads only on the first click (or X); nothing is fetched before.
+    const start = () => {
+      // Already loaded: just hand the keyboard back to the game.
+      if (frame) { frame.focus(); setState('playing'); return; }
+      setState('loading');
+      frame = document.createElement('iframe');
+      frame.src = '/play/alborada/?embed=1';
+      frame.title = crt.dataset.frameTitle ?? 'Alborada';
+      frame.setAttribute('allow', 'autoplay');
+      gameBox.appendChild(frame);
+    };
+
+    window.addEventListener('message', (e) => {
+      if (e.origin !== location.origin || !frame || e.source !== frame.contentWindow) return;
+      const type = (e.data as { type?: string })?.type;
+      if (type === 'alborada:ready') {
+        frame.classList.add('is-ready');
+        send({ type: 'alborada:mute', muted });
+        frame.focus();
+        send({ type: 'alborada:start' });
+        setState('playing');
+        status.textContent = crt.dataset.started ?? '';
+      } else if (type === 'alborada:escape') {
+        // Show the overlay button first: a hidden element can't take focus.
+        setState('paused');
+        startBtn.focus();
+        status.textContent = crt.dataset.left ?? '';
+      }
+    });
+
+    // Keyboard lives in the iframe only while it has focus.
+    window.addEventListener('blur', () => {
+      if (frame && document.activeElement === frame) setState('playing');
+    });
+    window.addEventListener('focus', () => {
+      if (frame && crt.dataset.state === 'playing') setState('paused');
+    });
+    startBtn.addEventListener('focus', () => { if (frame) setState('paused'); });
+    startBtn.addEventListener('click', start);
+
+    // X starts the game while the footer is in view and nothing else wants the key.
+    let footerVisible = false;
+    new IntersectionObserver(([e]) => { footerVisible = e.isIntersecting; }, { threshold: 0.4 })
+      .observe(crt);
+    document.addEventListener('keydown', (e) => {
+      if (e.key.toLowerCase() !== 'x' || !footerVisible || e.metaKey || e.ctrlKey || e.altKey) return;
+      const t = e.target as HTMLElement;
+      if (t.closest('input, textarea, select, [contenteditable="true"]')) return;
+      e.preventDefault();
+      start();
+    });
+
+    soundBtn.addEventListener('click', () => {
+      muted = !muted;
+      soundBtn.setAttribute('aria-pressed', String(!muted));
+      send({ type: 'alborada:mute', muted });
+    });
+  }
+</script>

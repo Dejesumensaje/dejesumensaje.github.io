@@ -1,0 +1,124 @@
+---
+// Case study shell: Layout + depth toggle behavior + shared case styles.
+// Mark blocks with data-depth="full" (hidden in TL;DR) or data-depth="tldr"
+// (shown only in TL;DR). Everything else is in both.
+import Layout from './Layout.astro';
+import DepthToggle from '../components/f/DepthToggle.astro';
+import '../styles/case.css';
+
+interface Props {
+  title: string;
+  description: string;
+  ogImage?: string;
+  ogImageAlt?: string;
+  noindex?: boolean;
+  readFull: string; // e.g. "8 min"
+  readTldr: string; // e.g. "1 min"
+}
+const { readFull, readTldr, ...meta } = Astro.props;
+---
+
+<Layout {...meta} ogType="article">
+  <Fragment slot="head">
+    <script is:inline>
+      // Decide the reading depth before first paint (no flash of the wrong view).
+      (function () {
+        var q = new URLSearchParams(location.search).get('view'), m = 'full';
+        if (q === 'tldr' || q === 'full') m = q;
+        else { try { if (localStorage.getItem('case-depth') === 'tldr') m = 'tldr'; } catch (e) {} }
+        if (m === 'tldr') document.documentElement.classList.add('depth-tldr');
+      })();
+    </script>
+    <slot name="head" />
+  </Fragment>
+  <article class="case-page" data-case data-mode="full">
+    <slot />
+  </article>
+  <DepthToggle full={readFull} tldr={readTldr} floating />
+</Layout>
+
+<script>
+  type Mode = 'full' | 'tldr';
+  const KEY = 'case-depth';
+  const page = document.querySelector<HTMLElement>('[data-case]');
+  const toggles = Array.from(document.querySelectorAll<HTMLElement>('[data-depth-toggle]'));
+  const inline = toggles.find((t) => !t.hasAttribute('data-floating'));
+  const floating = toggles.find((t) => t.hasAttribute('data-floating'));
+  const still = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  const read = (): Mode => {
+    const q = new URLSearchParams(location.search).get('view');
+    if (q === 'tldr' || q === 'full') return q;
+    try { return localStorage.getItem(KEY) === 'tldr' ? 'tldr' : 'full'; } catch { return 'full'; }
+  };
+
+  const paint = (mode: Mode) => {
+    if (!page) return;
+    page.dataset.mode = mode;
+    document.documentElement.classList.toggle('depth-tldr', mode === 'tldr');
+    for (const t of toggles) {
+      t.dataset.mode = mode;
+      t.querySelectorAll<HTMLButtonElement>('[role="radio"]').forEach((b) => {
+        const on = b.dataset.value === mode;
+        b.setAttribute('aria-checked', String(on));
+        b.tabIndex = on ? 0 : -1;
+      });
+    }
+  };
+
+  // Swap without losing your place: keep the control you pressed at the
+  // same spot on screen, crossfade the article, then let it settle.
+  const set = (mode: Mode, from?: HTMLElement) => {
+    if (!page || page.dataset.mode === mode) return;
+    try { localStorage.setItem(KEY, mode); } catch {}
+    const url = new URL(location.href);
+    url.searchParams.set('view', mode);
+    history.replaceState(null, '', url);
+
+    const anchor = from && !from.hasAttribute('data-floating') ? from : null;
+    const before = anchor?.getBoundingClientRect().top ?? 0;
+    const apply = () => {
+      paint(mode);
+      if (anchor) window.scrollBy(0, anchor.getBoundingClientRect().top - before);
+      else window.scrollTo({ top: Math.min(window.scrollY, inline ? inline.offsetTop - 120 : 0) });
+    };
+    if (still.matches) { apply(); return; }
+    page.classList.add('is-swapping');
+    setTimeout(() => {
+      apply();
+      page.classList.remove('is-swapping');
+      page.classList.add('is-arriving');
+      requestAnimationFrame(() => requestAnimationFrame(() => page.classList.remove('is-arriving')));
+    }, 120);
+  };
+
+  for (const t of toggles) {
+    t.addEventListener('click', (e) => {
+      const b = (e.target as HTMLElement).closest<HTMLButtonElement>('[role="radio"]');
+      if (b) set(b.dataset.value as Mode, t);
+    });
+    // Radio-group arrow keys
+    t.addEventListener('keydown', (e) => {
+      if (!['ArrowLeft', 'ArrowRight'].includes(e.key)) return;
+      e.preventDefault();
+      const next: Mode = page?.dataset.mode === 'full' ? 'tldr' : 'full';
+      set(next, t);
+      t.querySelector<HTMLButtonElement>(`[data-value="${next}"]`)?.focus();
+    });
+  }
+
+  paint(read());
+
+  // Floating copy shows once the inline toggle is gone, hides over the footer.
+  if (inline && floating) {
+    let inlineVisible = true, footerVisible = false;
+    const sync = () => {
+      floating.classList.toggle('is-shown', !inlineVisible && !footerVisible);
+      floating.toggleAttribute('inert', inlineVisible || footerVisible);
+    };
+    new IntersectionObserver(([e]) => { inlineVisible = e.isIntersecting || e.boundingClientRect.top > 0; sync(); }).observe(inline);
+    const footer = document.querySelector('footer');
+    if (footer) new IntersectionObserver(([e]) => { footerVisible = e.isIntersecting; sync(); }).observe(footer);
+    sync();
+  }
+</script>

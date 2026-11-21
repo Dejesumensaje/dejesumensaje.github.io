@@ -1,0 +1,35 @@
+---
+// Speech-bubble globe with two eyes. The eyes blink on hover of the brand link.
+interface Props { size?: number }
+const { size = 32 } = Astro.props;
+---
+<svg class="logo" width={size} height={size} viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+  <path
+    transform="translate(1.6 3.733)"
+    fill="var(--accent)"
+    d="M13.378 .039c.854-.103 2.649 .019 3.504 .134 3.818 .53 7.587 2.329 9.925 5.413 3.593 4.738 2.096 10.746-2.633 14.081-3.711 2.617-8.065 3.427-12.534 2.791-.89-.139-1.681-.34-2.553-.562-.313 .122-.572 .331-.85 .513-1.629 1.071-3.553 1.69-5.502 1.849-.309 .025-.553 .007-.798-.2-.202-.169-.326-.412-.343-.673-.027-.406 .196-.679 .51-1.014 .853-.908 1.449-2.507 1.137-3.73-.219-.399-.601-.737-.903-1.092-3.201-3.77-3.107-9.006 .234-12.668 2.814-3.085 6.661-4.58 10.806-4.842z"
+  />
+  <g class="logo__eyes" fill="#fff">
+    <circle cx="11.6" cy="14.27" r="1.73" />
+    <circle cx="20.4" cy="14.27" r="1.73" />
+  </g>
+</svg>
+
+<style>
+  .logo { flex: none; overflow: visible; }
+  .logo__eyes { transform-box: fill-box; transform-origin: center; }
+  /* A blink: quick close, quick open. Plays once per hover. */
+  @media (hover: hover) and (pointer: fine) {
+    :global(a:hover) > .logo .logo__eyes,
+    :global(a:focus-visible) > .logo .logo__eyes {
+      animation: blink 320ms var(--ease-in-out) 1;
+    }
+  }
+  @keyframes blink {
+    0%, 100% { transform: scaleY(1); }
+    35%, 55% { transform: scaleY(0.1); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .logo__eyes { animation: none !important; }
+  }
+</style>

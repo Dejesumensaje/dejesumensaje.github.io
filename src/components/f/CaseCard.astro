@@ -1,0 +1,115 @@
+---
+// The whole card is one link. Hover: the capture rises 4px, the title underlines.
+import Device from './Device.astro';
+import type { CaseCard } from '../../data/work';
+import { getLang, t } from '../../i18n/ui';
+
+interface Props { card: CaseCard; featured?: boolean; eager?: boolean }
+const { card, featured = false, eager = false } = Astro.props;
+const Tag = card.href ? 'a' : 'div';
+const lang = getLang(Astro.url);
+---
+
+<article class:list={['case', `case--${card.span}`, { 'case--featured': featured }]} data-reveal>
+  <Tag class="case__link" href={card.href}>
+    <div class="stage case__stage" style={`aspect-ratio:${card.stage.w} / ${card.stage.h}`} data-tilt-zone={featured ? '' : undefined}>
+      <div class="case__art">
+        <Device box={card.stage} browser={card.browser} phone={card.phone} eager={eager} veil={card.confidential} />
+      </div>
+      {card.confidential && <span class="case__veil-note t-small">{t(lang, 'work.blurred')}</span>}
+    </div>
+    <div class="case__caption">
+      {featured ? (
+        <>
+          <h3 class="t-h2 case__title">{card.title}</h3>
+          <div class="case__summary">
+            <p class="t-muted">{card.summary}</p>
+            <p class="t-small t-muted">{card.meta}</p>
+          </div>
+        </>
+      ) : (
+        <>
+          <h3 class="t-h3 case__title">{card.title}</h3>
+          <p class="t-muted">{card.summary}</p>
+          <p class="t-small t-muted case__meta">
+            {card.meta}
+          </p>
+        </>
+      )}
+    </div>
+  </Tag>
+</article>
+
+<style>
+  .case { min-width: 0; }
+  .case--12 { grid-column: 1 / -1; }
+  .case--7 { grid-column: span 7; }
+  .case--5 { grid-column: span 5; }
+  @media (max-width: 899px) {
+    .case--7, .case--5 { grid-column: 1 / -1; }
+  }
+
+  .case__link { display: flex; flex-direction: column; gap: 24px; }
+  .case__art {
+    position: absolute;
+    inset: 0;
+    transition: transform 300ms var(--ease-out);
+  }
+  .case__caption { display: flex; flex-direction: column; gap: 8px; max-width: 526px; }
+  .case__meta { margin-top: 4px; }
+  .case__veil-note {
+    position: absolute;
+    left: 16px;
+    bottom: 14px;
+    z-index: 2;
+    padding: 4px 10px;
+    border-radius: var(--radius-pill);
+    background: var(--glass);
+    color: var(--muted);
+    box-shadow: 0 0 0 1px var(--line);
+  }
+  .case__title {
+    text-decoration-line: underline;
+    text-decoration-color: transparent;
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 5px;
+    transition: text-decoration-color 160ms ease;
+  }
+  a.case__link:focus-visible { outline: none; }
+  a.case__link:focus-visible .case__stage { outline: 2px solid var(--accent); outline-offset: 3px; }
+  a.case__link:focus-visible .case__title { text-decoration-color: currentColor; }
+  @media (hover: hover) and (pointer: fine) {
+    a.case__link:hover .case__art { transform: translateY(-4px); }
+    a.case__link:hover .case__title { text-decoration-color: currentColor; }
+  }
+
+  /* Featured: title (6 cols) + summary (4 cols) side by side */
+  .case--featured .case__caption {
+    max-width: none;
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: var(--gutter);
+  }
+  .case--featured .case__title { grid-column: 1 / span 6; }
+  .case--featured .case__summary {
+    grid-column: 7 / span 4;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-top: 8px;
+  }
+  @media (max-width: 899px) {
+    .case--featured .case__title,
+    .case--featured .case__summary { grid-column: 1 / -1; }
+    .case--featured .case__summary { padding-top: 12px; }
+  }
+  /* Phones crop the featured stage too tightly: keep the comp ratio but
+     give small screens a taller window onto it. */
+  @media (max-width: 759px) {
+    .case--featured .case__stage { aspect-ratio: 4 / 3 !important; }
+    .case--featured .case__art { width: 180%; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .case__art { transition: none; }
+  }
+</style>

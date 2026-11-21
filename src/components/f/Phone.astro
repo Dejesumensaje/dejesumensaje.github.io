@@ -1,0 +1,41 @@
+---
+// A phone in CSS 3D. Its thickness is real: a stack of thin layers behind
+// the body (like u_depth in device3d.glsl), so the side shows when it turns.
+import type { PhoneShot } from '../../data/work';
+
+interface Props {
+  phone: PhoneShot;
+  box: { w: number; h: number };
+  eager?: boolean;
+  veil?: boolean;
+}
+const { phone, box, eager = false, veil = false } = Astro.props;
+const pct = (v: number, of: number) => `${((v / of) * 100).toFixed(3)}%`;
+const cq = (v: number) => `${((v / box.w) * 100).toFixed(3)}cqw`;
+const LAYERS = 9;
+---
+
+<div
+  class:list={['phone', { 'is-veiled': veil }]}
+  data-tilt={phone.tilt ? '' : undefined}
+  style={[
+    `left:${pct(phone.x, box.w)}`,
+    `top:${pct(phone.y, box.h)}`,
+    `width:${pct(phone.width, box.w)}`,
+    `--phone-r:${cq(phone.radius)}`,
+    `--phone-pad:${cq(7 * phone.width / 236)}`,
+    `--island-h:${cq(19 * phone.width / 240)}`,
+    `--depth:${cq(phone.depth ?? 11 * phone.width / 236)}`,
+    `--ry:${phone.rot?.[0] ?? 0}deg`,
+    `--rx:${phone.rot?.[1] ?? 0}deg`,
+    `--rz:${phone.rot?.[2] ?? 0}deg`,
+  ].join(';')}
+>
+  <span class="phone__edge" aria-hidden="true">
+    {Array.from({ length: LAYERS }, (_, i) => <i style={`--t:${((i + 1) / LAYERS).toFixed(3)}`}></i>)}
+  </span>
+  <div class="phone__screen" style={`aspect-ratio:${phone.width - 14} / ${phone.screenH}`}>
+    {phone.island && <span class="phone__island" aria-hidden="true"></span>}
+    <img src={phone.src} alt={phone.alt} width="390" height="844" loading={eager ? 'eager' : 'lazy'} decoding="async" />
+  </div>
+</div>

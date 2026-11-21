@@ -1,0 +1,182 @@
+---
+import CaseLayout from '../layouts/CaseLayout.astro';
+import CaseHeader from '../components/f/CaseHeader.astro';
+import NextStory from '../components/f/NextStory.astro';
+import Device from '../components/f/Device.astro';
+import Phone from '../components/f/Phone.astro';
+import { featured } from '../data/work';
+
+// Story sourced from the project's own records (DECISIONS, usability test plan, UX audit,
+// multi-store plan). The client stays anonymous: no name, logo or brand colors.
+const pct = (v: number, of: number) => `${((v / of) * 100).toFixed(3)}%`;
+
+const facts = [
+  { k: 'Role', v: 'Product design, AI prototyping, usability testing' },
+  { k: 'Status', v: 'In progress' },
+  { k: 'Client', v: 'A US grocery retailer, via Deloitte Converge' },
+  { k: 'Users', v: 'Store directors, each running several stores' },
+];
+const overview = [
+  { k: 'Challenge', v: 'HQ sends a store director up to a hundred price recommendations at a time. Each one has to be decided, scheduled and printed on a shelf tag.' },
+  { k: 'Contribution', v: 'Product design and a working prototype built with AI, tested with store directors and documented decision by decision.' },
+  { k: 'Constraints', v: 'Prices reach SAP only through scheduled batches, a store can’t print every tag at once, and the client stays anonymous: captures use a neutral skin and sample data.' },
+  { k: 'Outcome', v: 'In progress: a prototype that speaks the shelf’s language, with every design decision and its reason on record.' },
+];
+const numbers = [
+  { v: '~100', k: 'HQ recommendations a director can receive at once' },
+  { v: '5', k: 'stores per director, on average' },
+  { v: '46', k: 'design decisions recorded, each with its reason' },
+];
+const FLOOR = { w: 1296, h: 720 };
+const floorPhones = [
+  { src: '/assets/f/store-pricing-phone-home.webp', alt: 'The phone app home: Store Walk to edit prices now and send later, or Item Maintenance to send changes instantly.', x: 368, y: 44, width: 270, screenH: 551, radius: 46, island: true, rot: [14, 4, -3] as [number, number, number], depth: 14 },
+  { src: '/assets/f/store-pricing-phone-scan.webp', alt: 'Store Walk waiting for a barcode, scanned with the handheld’s side trigger.', x: 668, y: 72, width: 250, screenH: 510, radius: 43, island: true, rot: [-14, 4, 3] as [number, number, number], depth: 13 },
+];
+---
+
+<CaseLayout
+  title="Prototyping store pricing with AI — William Montoya"
+  description="A working prototype, built with AI and tested with store directors, for deciding a hundred price changes without losing track of what reaches the shelf."
+  readFull="6 min"
+  readTldr="1 min"
+>
+  <CaseHeader
+    kicker="Case study · Deloitte · US grocery retail · In progress"
+    lead="Prototyping store pricing"
+    accent="with AI."
+    question="How do you help a store director decide a hundred price changes without losing track of what reaches the shelf?"
+    facts={facts}
+    overview={overview}
+    readFull="6 min"
+    readTldr="1 min"
+  />
+
+  <figure class="figure figure--lead wrap" data-reveal>
+    <div class="stage" style={`aspect-ratio:${featured.stage.w}/${featured.stage.h}`}>
+      <div style="position:absolute;inset:0">
+        <Device box={featured.stage} browser={featured.browser} phone={featured.phone} eager />
+      </div>
+    </div>
+  </figure>
+
+  <section class="chapter chapter--section wrap" aria-labelledby="ch-numbers" data-reveal>
+    <div class="split">
+      <h2 id="ch-numbers" class="t-h3 split__label">In numbers</h2>
+      <div class="columns3 numbers split__body">
+        {numbers.map((n) => (
+          <div><p class="t-display">{n.v}</p><p class="t-muted">{n.k}</p></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="chapter wrap" aria-labelledby="ch-problem" data-depth="full" data-reveal>
+    <div class="split">
+      <h2 id="ch-problem" class="t-h3 split__label">Three prices, not one</h2>
+      <div class="chapter__stack split__body">
+        <div class="prose measure">
+          <p>The first versions of the price grid felt disjointed, and the reason wasn’t visual. The prototype treated HQ’s recommendations as if they were already live, so the current price and the recommended price were the same number and couldn’t be told apart.</p>
+          <p>Reframing the recommendation as a proposal fixed the model. Every item now carries three separate things: the price live in SAP, HQ’s proposal, and the director’s own decision. On a proposal the director can accept it, set a different price or keep the current one, and accepting never sends anything by itself.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="chapter chapter--tight wrap" aria-labelledby="ch-shelf" data-reveal>
+    <div class="split">
+      <h2 id="ch-shelf" class="t-h3 split__label">Speak the shelf</h2>
+      <div class="chapter__stack split__body">
+        <p class="t-h2 pull">Don’t build a standard table. Show prices the way they look in the store.</p>
+        <div class="prose measure">
+          <p>In a grocery store a change type isn’t metadata, it’s a physical object. A regular price lives on the white tag. A temporary promotion is a yellow tag with an end date. A new item gets a fresh tag, a discontinued one a clearance tag.</p>
+          <p>So the prototype speaks that language. The item panel previews the tag the shopper will actually see, updating as the director edits, and every change keeps its reason and dates so the next person doesn’t have to guess why a price moved.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <figure class="figure wrap" data-reveal>
+    <div class="stage" style="aspect-ratio:1296/720">
+      <div class="browser" style={`left:${pct(148, 1296)};top:${pct(48, 720)};width:${pct(1000, 1296)}`}>
+        <div class="browser__bar" aria-hidden="true"><i></i><i></i><i></i></div>
+        <img src="/assets/f/store-pricing-item.webp" width="1440" height="810" loading="lazy" alt="An item’s panel: a preview of the yellow sale tag and the crossed-out white tag, then the base and retail prices, each with its reason, dates and the HQ recommendation." />
+      </div>
+    </div>
+    <figcaption class="t-small">The item panel opens on the tag the shopper will see, then the decisions behind it</figcaption>
+  </figure>
+
+  <section class="chapter chapter--tight wrap" aria-labelledby="ch-testing" data-reveal>
+    <div class="split">
+      <h2 id="ch-testing" class="t-h3 split__label">What testing changed</h2>
+      <div class="chapter__stack split__body">
+        <div class="prose measure">
+          <p>Moderated sessions with store directors measured how long each task took and where people got stuck. Two findings reshaped the flow.</p>
+        </div>
+        <div class="grid2">
+          <div>
+            <h3 class="t-h3">Edits must not disappear.</h3>
+            <p class="t-muted">Sending lived on a separate batch screen. A participant circled the app looking for it, and kept trying to reach it from the item panel. Moving to another screen made the changes feel lost, so sending moved into the same context as the edits.</p>
+          </div>
+          <div>
+            <h3 class="t-h3">Batches are the real control.</h3>
+            <p class="t-muted">A store runs several batches at once, each scheduled on its own, because sending everything to SAP together would overload tag printing. Every decision now lands in a scheduled batch: the director picks the price, then which batch and when.</p>
+          </div>
+        </div>
+        <p class="measure" data-depth="full">People also loved the feeling of clearing the pile. An empty review queue read as “mission accomplished”, so the queue drains visibly as decisions are made.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="chapter wrap" aria-labelledby="ch-worklist" data-depth="full" data-reveal>
+    <div class="split">
+      <h2 id="ch-worklist" class="t-h3 split__label">A worklist, not a wizard</h2>
+      <div class="prose measure split__body">
+        <p>Reviewing HQ’s proposals one at a time felt focused, but with up to a hundred of them it was exhausting, and it hid the context a director decides with: neighboring items, patterns, what can be accepted together.</p>
+        <p>Review became a scannable list instead. Items that need attention come first, routine ones can be accepted in bulk, and any row opens the full panel when it deserves a closer look. Decided items leave the list for good, even after their batch is sent.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="chapter chapter--tight wrap" aria-labelledby="ch-floor" data-depth="full" data-reveal>
+    <div class="split">
+      <h2 id="ch-floor" class="t-h3 split__label">On the store floor</h2>
+      <div class="prose measure split__body">
+        <p>Directors don’t only price from an office. On the phone there are two ways to work: Store Walk, to scan shelf tags with the handheld’s side trigger, edit along the aisle and send later; and Item Maintenance, to change one price and send it right away.</p>
+      </div>
+    </div>
+  </section>
+
+  <figure class="figure wrap" data-depth="full" data-reveal>
+    <div class="stage" style={`aspect-ratio:${FLOOR.w}/${FLOOR.h}`}>
+      {floorPhones.map((ph) => <Phone phone={ph} box={FLOOR} />)}
+    </div>
+    <figcaption class="t-small">On the floor: pick a way of working, then scan</figcaption>
+  </figure>
+
+  <section class="chapter wrap" aria-labelledby="ch-ai" data-depth="full" data-reveal>
+    <div class="split">
+      <h2 id="ch-ai" class="t-h3 split__label">How the prototype gets made</h2>
+      <div class="chapter__stack split__body">
+        <div class="prose measure">
+          <p>The prototype is a working app built with AI, not a set of screens, so directors test real behavior: batches that schedule, queues that drain, line prices that move together.</p>
+          <p>Speed made one habit essential. Every decision is written down with its context, what we chose and what we gave up, so the reason survives the next iteration. Audits run by AI agents review flows, copy and accessibility, and their findings become decisions too.</p>
+        </div>
+        <p class="t-h2 pull">When building is fast, the scarce thing is knowing why each choice was made.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="chapter chapter--section wrap" aria-labelledby="ch-next" data-reveal>
+    <div class="split">
+      <h2 id="ch-next" class="t-h3 split__label">What’s next</h2>
+      <div class="split__body" style="display:flex;flex-direction:column;gap:40px">
+        <div class="prose measure">
+          <p>The project is in progress. Next is multi-store work: a director should be able to take a price decision from one store and send it, through a single batch, to the other stores they run.</p>
+        </div>
+        <p class="tldr-note t-small" data-depth="tldr">This is the short version. The full story covers the three-price model, the move from a wizard to a worklist, the phone flows and how the decisions are recorded.</p>
+      </div>
+    </div>
+  </section>
+
+  <NextStory current="/store-pricing-ai.html" />
+</CaseLayout>

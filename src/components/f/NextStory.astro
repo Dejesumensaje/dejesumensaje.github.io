@@ -1,0 +1,24 @@
+---
+// Closes every case and links the next one, in the home's order.
+import { getWork } from '../../data/work';
+import { getLang, localize, t } from '../../i18n/ui';
+
+interface Props { current: string }
+const { current } = Astro.props;
+const lang = getLang(Astro.url);
+const { caseOrder } = getWork(lang);
+const i = caseOrder.findIndex((c) => c.href === localize(lang, current));
+const next = caseOrder[(i + 1) % caseOrder.length];
+---
+
+<nav class="next wrap" aria-label={t(lang, 'next.label')}>
+  <div class="split">
+    <h2 class="t-h3 split__label">{t(lang, 'next.title')}</h2>
+    <div class="split__body">
+      <a href={next.href}>
+        <span class="t-h2">{next.title} <span class="next__arrow" aria-hidden="true">→</span></span>
+        <span class="t-small t-muted">{next.meta}</span>
+      </a>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,183 @@
+---
+import CaseLayout from '../../layouts/CaseLayout.astro';
+import CaseHeader from '../../components/f/CaseHeader.astro';
+import NextStory from '../../components/f/NextStory.astro';
+import Device from '../../components/f/Device.astro';
+import Phone from '../../components/f/Phone.astro';
+import { getWork } from '../../data/work';
+
+// Story sourced from the project's own records (DECISIONS, usability test plan, UX audit,
+// multi-store plan). The client stays anonymous: no name, logo or brand colors.
+const { featured } = getWork('es');
+const pct = (v: number, of: number) => `${((v / of) * 100).toFixed(3)}%`;
+
+const facts = [
+  { k: 'Rol', v: 'Diseño de producto, prototipado con IA, pruebas de usabilidad' },
+  { k: 'Estado', v: 'En curso' },
+  { k: 'Cliente', v: 'Una cadena de supermercados de EE. UU., a través de Deloitte Converge' },
+  { k: 'Usuarios', v: 'Directores de tienda, cada uno a cargo de varias sucursales' },
+];
+const overview = [
+  { k: 'Reto', v: 'La sede central envía al director de tienda hasta cien recomendaciones de precio a la vez. Él debe revisar, programar e imprimir cada una en una etiqueta física.' },
+  { k: 'Aporte', v: 'Diseño de producto y un prototipo funcional hecho con IA, probado con directores de tienda y documentado decisión por decisión.' },
+  { k: 'Restricciones', v: 'Los precios llegan a SAP solo en lotes programados, una tienda no puede imprimir todas las etiquetas de golpe y el cliente es confidencial: las capturas usan una interfaz neutra y datos de muestra.' },
+  { k: 'Resultado', v: 'En curso: un prototipo que habla el idioma del estante, con cada decisión de diseño y su justificación documentadas.' },
+];
+const numbers = [
+  { v: '~100', k: 'recomendaciones de la sede central que un director recibe de golpe' },
+  { v: '5', k: 'tiendas por director, en promedio' },
+  { v: '46', k: 'decisiones de diseño documentadas, cada una con su justificación' },
+];
+const FLOOR = { w: 1296, h: 720 };
+const floorPhones = [
+  { src: '/assets/f/store-pricing-phone-home.webp', alt: 'La pantalla de inicio de la app en el teléfono: Store Walk para editar precios ahora y enviarlos después, o Item Maintenance para enviar los cambios al instante.', x: 368, y: 44, width: 270, screenH: 551, radius: 46, island: true, rot: [14, 4, -3] as [number, number, number], depth: 14 },
+  { src: '/assets/f/store-pricing-phone-scan.webp', alt: 'Store Walk a la espera de un código de barras, que se escanea con el gatillo lateral del lector de mano.', x: 668, y: 72, width: 250, screenH: 510, radius: 43, island: true, rot: [-14, 4, 3] as [number, number, number], depth: 13 },
+];
+---
+
+<CaseLayout
+  title="Prototipar los precios de una tienda con IA — William Montoya"
+  description="Un prototipo funcional, construido con IA y probado con directores de tienda, para decidir cien cambios de precio sin perder de vista lo que llega al estante."
+  readFull="6 min"
+  readTldr="1 min"
+>
+  <CaseHeader
+    kicker="Caso de estudio · Deloitte · Supermercados en EE. UU. · En curso"
+    lead="Prototipar los precios de una tienda"
+    accent="con IA."
+    question="¿Cómo ayudar a un director de tienda a decidir cien cambios de precio sin perder de vista lo que llega al estante?"
+    facts={facts}
+    overview={overview}
+    readFull="6 min"
+    readTldr="1 min"
+  />
+
+  <figure class="figure figure--lead wrap" data-reveal>
+    <div class="stage" style={`aspect-ratio:${featured.stage.w}/${featured.stage.h}`}>
+      <div style="position:absolute;inset:0">
+        <Device box={featured.stage} browser={featured.browser} phone={featured.phone} eager />
+      </div>
+    </div>
+  </figure>
+
+  <section class="chapter chapter--section wrap" aria-labelledby="ch-numbers" data-reveal>
+    <div class="split">
+      <h2 id="ch-numbers" class="t-h3 split__label">En cifras</h2>
+      <div class="columns3 numbers split__body">
+        {numbers.map((n) => (
+          <div><p class="t-display">{n.v}</p><p class="t-muted">{n.k}</p></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="chapter wrap" aria-labelledby="ch-problem" data-depth="full" data-reveal>
+    <div class="split">
+      <h2 id="ch-problem" class="t-h3 split__label">Tres precios, no uno</h2>
+      <div class="chapter__stack split__body">
+        <div class="prose measure">
+          <p>Las primeras versiones de la tabla eran confusas, y el problema no era visual. El prototipo trataba las recomendaciones de la sede central como si ya estuvieran vigentes; así, el precio actual y el recomendado mostraban el mismo número y nadie podía distinguirlos.</p>
+          <p>Convertir la recomendación en una propuesta resolvió el modelo. Ahora cada producto muestra tres datos separados: el precio vigente en SAP, la propuesta de la sede central y la decisión del director. Ante una propuesta, el director puede aceptarla, fijar otro precio o mantener el actual, y aceptar nunca envía nada a producción por sí solo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="chapter chapter--tight wrap" aria-labelledby="ch-shelf" data-reveal>
+    <div class="split">
+      <h2 id="ch-shelf" class="t-h3 split__label">Hablar el idioma del estante</h2>
+      <div class="chapter__stack split__body">
+        <p class="t-h2 pull">Nada de tablas genéricas: mostramos los precios tal como aparecen en la tienda.</p>
+        <div class="prose measure">
+          <p>En un supermercado, el tipo de cambio es un objeto físico, no un metadato. El precio regular va en la etiqueta blanca; una promoción temporal, en la amarilla con fecha de fin; un producto nuevo recibe su etiqueta de lanzamiento y uno descontinuado, la de liquidación.</p>
+          <p>El prototipo replica esa lógica. El panel del producto abre con una vista previa de la etiqueta que verá el comprador —que cambia en tiempo real mientras el director edita— y guarda el motivo y las fechas de cada ajuste para que el siguiente turno no tenga que adivinar por qué cambió un precio.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <figure class="figure wrap" data-reveal>
+    <div class="stage" style="aspect-ratio:1296/720">
+      <div class="browser" style={`left:${pct(148, 1296)};top:${pct(48, 720)};width:${pct(1000, 1296)}`}>
+        <div class="browser__bar" aria-hidden="true"><i></i><i></i><i></i></div>
+        <img src="/assets/f/store-pricing-item.webp" width="1440" height="810" loading="lazy" alt="El panel de un producto: una vista previa de la etiqueta amarilla de oferta y la etiqueta blanca tachada, y debajo el precio base y el precio de venta, cada uno con su razón, sus fechas y la recomendación de la sede central." />
+      </div>
+    </div>
+    <figcaption class="t-small">El panel del producto abre con la etiqueta que verá el comprador y muestra debajo las decisiones que la respaldan</figcaption>
+  </figure>
+
+  <section class="chapter chapter--tight wrap" aria-labelledby="ch-testing" data-reveal>
+    <div class="split">
+      <h2 id="ch-testing" class="t-h3 split__label">Lo que cambió con las pruebas</h2>
+      <div class="chapter__stack split__body">
+        <div class="prose measure">
+          <p>En sesiones moderadas con directores de tienda medimos el tiempo de cada tarea y los puntos de fricción. Dos hallazgos cambiaron el flujo por completo.</p>
+        </div>
+        <div class="grid2">
+          <div>
+            <h3 class="t-h3">Las ediciones no pueden desaparecer.</h3>
+            <p class="t-muted">Antes, el envío estaba en una pantalla aparte de lotes. Un participante recorrió toda la app buscándolo porque insistía en enviar desde el mismo panel del producto. Cambiar de pantalla daba la sensación de haber perdido los cambios, así que movimos el envío al mismo contexto de la edición.</p>
+          </div>
+          <div>
+            <h3 class="t-h3">Los lotes son el verdadero control.</h3>
+            <p class="t-muted">Cada tienda maneja varios lotes programados al mismo tiempo, porque enviar todo junto a SAP saturaría las impresoras de etiquetas. Ahora cada decisión entra directo a un lote: el director elige el precio, asigna el lote y define la fecha.</p>
+          </div>
+        </div>
+        <p class="measure" data-depth="full">Los participantes también disfrutaban vaciar la pila de pendientes. Ver la cola en cero significaba «misión cumplida», así que la lista se limpia a la vista conforme avanzan las decisiones.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="chapter wrap" aria-labelledby="ch-worklist" data-depth="full" data-reveal>
+    <div class="split">
+      <h2 id="ch-worklist" class="t-h3 split__label">Una lista de trabajo, no un asistente paso a paso</h2>
+      <div class="prose measure split__body">
+        <p>Revisar las propuestas una por una ayudaba a enfocarse, pero con cien artículos resultaba agotador. Además, ocultaba el contexto que necesita un director para decidir: los productos vecinos, los patrones y los artículos que puede aprobar en bloque.</p>
+        <p>Convertimos la revisión en una lista escaneable. Los productos que exigen atención aparecen primero, los de rutina se aprueban en bloque y cualquier fila abre el panel completo si requiere detalle. Lo que el director resuelve sale de la lista para siempre, incluso después de enviar su lote.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="chapter chapter--tight wrap" aria-labelledby="ch-floor" data-depth="full" data-reveal>
+    <div class="split">
+      <h2 id="ch-floor" class="t-h3 split__label">En los pasillos</h2>
+      <div class="prose measure split__body">
+        <p>Los directores no fijan precios solo desde la oficina. En el celular tienen dos modos: Store Walk, para escanear etiquetas del estante con el gatillo lateral del lector, editar por el pasillo y enviar después; e Item Maintenance, para cambiar un precio y enviarlo al instante.</p>
+      </div>
+    </div>
+  </section>
+
+  <figure class="figure wrap" data-depth="full" data-reveal>
+    <div class="stage" style={`aspect-ratio:${FLOOR.w}/${FLOOR.h}`}>
+      {floorPhones.map((ph) => <Phone phone={ph} box={FLOOR} />)}
+    </div>
+    <figcaption class="t-small">En los pasillos: eliges el modo de trabajo y escaneas</figcaption>
+  </figure>
+
+  <section class="chapter wrap" aria-labelledby="ch-ai" data-depth="full" data-reveal>
+    <div class="split">
+      <h2 id="ch-ai" class="t-h3 split__label">Cómo construimos el prototipo</h2>
+      <div class="chapter__stack split__body">
+        <div class="prose measure">
+          <p>El prototipo es una aplicación funcional hecha con IA, no una maqueta estática. Por eso los directores prueban comportamientos reales: lotes que se programan, colas que se vacían y precios de una misma línea que cambian juntos.</p>
+          <p>Construir rápido nos exigió disciplina: documentamos cada decisión con su contexto, lo que elegimos y lo que descartamos, para no perder el hilo en la siguiente iteración. Además, agentes de IA auditan flujos, textos y accesibilidad, y sus hallazgos alimentan nuevas decisiones.</p>
+        </div>
+        <p class="t-h2 pull">Cuando construir toma minutos, lo difícil es recordar por qué tomaste cada decisión.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="chapter chapter--section wrap" aria-labelledby="ch-next" data-reveal>
+    <div class="split">
+      <h2 id="ch-next" class="t-h3 split__label">Lo que sigue</h2>
+      <div class="split__body" style="display:flex;flex-direction:column;gap:40px">
+        <div class="prose measure">
+          <p>El proyecto sigue activo. El próximo paso es el flujo multitienda: que un director tome una decisión de precio en una sucursal y la envíe, en un solo lote, a las demás tiendas a su cargo.</p>
+        </div>
+        <p class="tldr-note t-small" data-depth="tldr">Esta es la versión corta. La historia completa explica el modelo de tres precios, el paso de un asistente guiado a una lista de trabajo, los flujos móviles y cómo documentamos las decisiones.</p>
+      </div>
+    </div>
+  </section>
+
+  <NextStory current="/store-pricing-ai.html" />
+</CaseLayout>

@@ -1,0 +1,53 @@
+---
+// Case study header: kicker, title (accent phrase last), reading-depth toggle,
+// project sheet on the left, the question and a four-part overview on the right.
+import RiseTitle from './RiseTitle.astro';
+import DepthToggle from './DepthToggle.astro';
+
+interface Fact { k: string; v: string; href?: string }
+interface Props {
+  kicker: string;
+  lead: string;
+  accent: string;
+  question: string;
+  facts: Fact[];
+  overview: { k: string; v: string }[];
+  readFull: string;
+  readTldr: string;
+}
+const { kicker, lead, accent, question, facts, overview, readFull, readTldr } = Astro.props;
+---
+
+<header class="case-head wrap">
+  <div class="case-head__title">
+    <p class="t-small t-muted">{kicker}</p>
+    <RiseTitle lead={lead} accent={accent} />
+  </div>
+
+  <div class="case-head__bar">
+    <DepthToggle full={readFull} tldr={readTldr} />
+  </div>
+
+  <div class="split">
+    <dl class="facts split__label">
+      {facts.map((f) => (
+        <div class="fact">
+          <dt>{f.k}</dt>
+          <dd>
+            {f.href ? (
+              <a class="link" href={f.href} target="_blank" rel="noopener noreferrer">{f.v} <span aria-hidden="true">↗</span></a>
+            ) : f.v}
+          </dd>
+        </div>
+      ))}
+    </dl>
+    <div class="brief split__body">
+      <p class="t-h2 measure-wide">{question}</p>
+      <div class="overview">
+        {overview.map((o) => (
+          <div><h2 class="t-small t-muted">{o.k}</h2><p>{o.v}</p></div>
+        ))}
+      </div>
+    </div>
+  </div>
+</header>

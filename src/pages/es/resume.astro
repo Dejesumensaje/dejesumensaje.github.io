@@ -1,0 +1,278 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import RiseTitle from '../../components/f/RiseTitle.astro';
+
+// Keep in sync with the PDF in public/assets (generated from this same content).
+const pdf = '/assets/cv-william-montoya-2026-es.pdf';
+
+const experience = [
+  {
+    role: 'Senior Product Designer',
+    org: 'Deloitte · Converge, a través de Globant',
+    when: 'feb. 2024 – hoy',
+    points: [
+      'Lidero el diseño de las plataformas para Pizza Hut y supermercados en EE. UU., los dos productos de Converge que generan ingresos en Deloitte, con iteraciones rápidas a partir de pruebas con clientes y usuarios finales.',
+      'Definí el flujo de trabajo del equipo: primero la interacción y luego la complejidad; prototipos en código para destrabar decisiones de producto; entrega a desarrollo con artefactos construidos con Claude.',
+      'Construí el sistema de diseño Converge como un paquete de React con design tokens y reglas de gobierno para agentes de IA que escriben código.',
+      'Diseñé Key Metrics Over Time para los franquiciados de KFC: un reporte de autoservicio que reemplazó un proceso manual en Excel.',
+    ],
+  },
+  {
+    role: 'Diseñador UX',
+    org: 'CashPak · a través de Globant',
+    when: 'jul. 2023 – ene. 2024',
+    text: 'Diseñé Pako, una billetera digital para Centroamérica. Hice pruebas de usabilidad en Nicaragua y El Salvador y ajusté la interfaz a las particularidades de cada país.',
+  },
+  {
+    role: 'Diseñador de producto',
+    org: 'Blackboard · a través de Globant',
+    when: 'feb. 2022 – jun. 2023',
+    text: 'Rediseñé la comunicación entre estudiantes y docentes (bandeja del curso, anuncios y mensajería) mediante investigación con usuarios y talleres, al tiempo que reducíamos deuda técnica.',
+  },
+  {
+    role: 'Líder UX, Colombia Aprende',
+    org: 'Ministerio de Educación Nacional de Colombia',
+    when: 'mar. 2019 – dic. 2021',
+    points: [
+      'Lideré un equipo de 18 personas entre diseñadores, desarrolladores, diseñadores instruccionales, gestores de contenidos, comunicadores y administradores de plataforma.',
+      'Rediseñé Colombia Aprende junto a docentes y estudiantes hasta consolidar un ecosistema de 81.000 recursos y más de 70 micrositios para unos 300.000 usuarios habituales, con un pico de 2,8 millones en pandemia. Las descargas crecieron un 81% en un año.',
+      'Diseñé Aprender Digital, una propuesta pensada para funcionar sin conexión en escuelas rurales: paquetes curados que los docentes llevan a clase en un solo archivo. Lancé el MVP en tres meses; el sitio mantiene unas 1.200 visitas mensuales de su público específico.',
+    ],
+  },
+];
+
+const skills = [
+  { k: 'Diseño de producto', v: 'Investigación con usuarios · Arquitectura de información · Diseño de interacción · Pruebas de usabilidad · UX writing · Accesibilidad · Facilitación de talleres' },
+  { k: 'Ingeniería de diseño', v: 'Sistemas de diseño · Design tokens · Librerías de componentes en React · Prototipos en código · HTML, CSS y Astro' },
+  { k: 'IA', v: 'Claude · Claude Code · OpenCode · Kimi · Gemini · ChatGPT · Figma Make · Gobierno de agentes de IA que escriben código' },
+  { k: 'Herramientas', v: 'Figma · Notion · Miro' },
+  { k: 'Idiomas', v: 'Español (nativo) · Inglés (B2)' },
+];
+---
+
+<Layout
+  title="Hoja de vida — William Montoya"
+  description="Hoja de vida de William Montoya, Senior Product Designer: sistemas de diseño, prototipado con IA e ingeniería de diseño en Deloitte, y antes líder UX de Colombia Aprende."
+>
+  <header class="cv-head wrap">
+    <div class="cv-head__title">
+      <p class="t-small t-muted">Hoja de vida · Actualizada en octubre de 2026</p>
+      <RiseTitle lead="William Montoya," accent="Senior Product Designer." accentBreak />
+    </div>
+    <div class="split">
+      <ul class="cv-contact list-reset split__label t-small" role="list">
+        <li>Medellín, Colombia · Remoto</li>
+        <li><a class="link" href="mailto:william@dejesumensaje.com">william@dejesumensaje.com</a></li>
+        <li><a class="link" href="https://www.linkedin.com/in/dejesumensaje/" target="_blank" rel="noopener noreferrer">linkedin.com/in/dejesumensaje <span aria-hidden="true">↗</span></a></li>
+      </ul>
+      <div class="split__body cv-lede">
+        <p class="t-lead measure">Sistemas de diseño, prototipado con IA e ingeniería de diseño. Vengo del periodismo y del diseño social de la tecnología.</p>
+        <div class="cv-actions">
+          <a class="btn btn--primary" href={pdf} download>Descargar PDF <span aria-hidden="true">↓</span></a>
+          <a class="btn btn--outline" href="https://www.linkedin.com/in/dejesumensaje/" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="cv-section wrap" aria-labelledby="cv-profile" data-reveal>
+    <div class="split">
+      <h2 id="cv-profile" class="t-h3 split__label">Perfil</h2>
+      <p class="split__body measure">Diseñador de producto con formación en periodismo y en diseño social de la tecnología. En Deloitte lidero el diseño de las dos plataformas de Converge que hoy facturan —para Pizza Hut y para una gran cadena de supermercados de EE. UU.— y trabajo a diario con producto, ingeniería y datos en equipos de 10 a 20 personas. Empiezo por el flujo de interacción antes de sumar complejidad. Construyo prototipos funcionales para destrabar decisiones con los PM y entrego a desarrollo artefactos en código en lugar de especificaciones estáticas. Antes de Deloitte, lideré al equipo de 18 personas que rediseñó Colombia Aprende, el portal educativo nacional del Ministerio de Educación.</p>
+    </div>
+  </section>
+
+  <section class="cv-section wrap" aria-labelledby="cv-exp" data-reveal>
+    <div class="split">
+      <h2 id="cv-exp" class="t-h3 split__label">Experiencia</h2>
+      <ol class="list-reset cv-items split__body" role="list">
+        {experience.map((e) => (
+          <li class="cv-item">
+            <div class="cv-item__head">
+              <div>
+                <h3 class="t-h3">{e.role}</h3>
+                <p class="t-muted">{e.org}</p>
+              </div>
+              <p class="t-small t-muted cv-when">{e.when}</p>
+            </div>
+            {e.text && <p class="measure">{e.text}</p>}
+            {e.points && (
+              <ul class="list-reset cv-points measure" role="list">
+                {e.points.map((p) => <li>{p}</li>)}
+              </ul>
+            )}
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="cv-section wrap" aria-labelledby="cv-teach" data-reveal>
+    <div class="split">
+      <h2 id="cv-teach" class="t-h3 split__label">Docencia</h2>
+      <ol class="list-reset cv-items split__body" role="list">
+        <li class="cv-item">
+          <div class="cv-item__head">
+            <div>
+              <h3 class="t-h3">Docente de cátedra</h3>
+              <p class="t-muted">Universidad de Antioquia · Facultad de Comunicaciones</p>
+            </div>
+            <p class="t-small t-muted cv-when">2025 – hoy</p>
+          </div>
+          <p class="measure">Pensamiento Sensorial; Laboratorio de Narrativa Interactiva. <a class="link" href="https://catedra.dejesumensaje.com" target="_blank" rel="noopener noreferrer">catedra.dejesumensaje.com <span aria-hidden="true">↗</span></a></p>
+        </li>
+        <li class="cv-item">
+          <div class="cv-item__head">
+            <div>
+              <h3 class="t-h3">Docente de extensión</h3>
+              <p class="t-muted">Universidad Nacional de Colombia</p>
+            </div>
+            <p class="t-small t-muted cv-when">2020 – hoy</p>
+          </div>
+          <p class="measure">Programas de marketing digital y habilidades digitales para entidades públicas.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="cv-section wrap" aria-labelledby="cv-skills" data-reveal>
+    <div class="split">
+      <h2 id="cv-skills" class="t-h3 split__label">Habilidades</h2>
+      <dl class="cv-skills split__body">
+        {skills.map((s) => (
+          <div><dt class="t-small t-muted">{s.k}</dt><dd>{s.v}</dd></div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <section class="cv-section cv-section--last wrap" aria-labelledby="cv-edu" data-reveal>
+    <div class="split">
+      <h2 id="cv-edu" class="t-h3 split__label">Formación</h2>
+      <ol class="list-reset cv-items split__body" role="list">
+        <li class="cv-item">
+          <div class="cv-item__head">
+            <div>
+              <h3 class="t-h3">Especialización en Diseño y Gestión Social de la Tecnología</h3>
+              <p class="t-muted">Universidad de los Andes</p>
+            </div>
+            <p class="t-small t-muted cv-when">2016</p>
+          </div>
+        </li>
+        <li class="cv-item">
+          <div class="cv-item__head">
+            <div>
+              <h3 class="t-h3">Pregrado en Periodismo</h3>
+              <p class="t-muted">Universidad de Antioquia</p>
+            </div>
+            <p class="t-small t-muted cv-when">2009</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .cv-head {
+    padding-top: var(--space-page-top);
+    padding-bottom: var(--space-section);
+    display: flex;
+    flex-direction: column;
+    gap: 64px;
+  }
+  .cv-head__title { display: flex; flex-direction: column; gap: 24px; }
+  .cv-contact { display: flex; flex-direction: column; gap: 8px; padding-top: 6px; }
+  .cv-contact a { overflow-wrap: anywhere; }
+  .cv-lede { display: flex; flex-direction: column; gap: 32px; }
+  .cv-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+  .cv-section { padding-bottom: var(--space-chapter); }
+  .cv-section--last { padding-bottom: var(--space-before-footer); }
+
+  .cv-items { display: flex; flex-direction: column; gap: 48px; }
+  .cv-item { display: flex; flex-direction: column; gap: 16px; }
+  .cv-item__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px 24px;
+    flex-wrap: wrap;
+  }
+  .cv-item__head > div { display: flex; flex-direction: column; gap: 4px; max-width: 746px; }
+  .cv-when { white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .cv-points { display: flex; flex-direction: column; gap: 12px; }
+  .cv-points li { display: flex; gap: 16px; }
+  .cv-points li::before { content: '—'; color: var(--muted); flex: none; }
+
+  .cv-skills { display: flex; flex-direction: column; gap: 24px; margin: 0; }
+  .cv-skills div {
+    display: grid;
+    grid-template-columns: 2fr 7fr;
+    column-gap: var(--gutter);
+    align-items: baseline;
+  }
+  .cv-skills dd { margin: 0; }
+
+  @media (max-width: 759px) {
+    .cv-head { gap: 40px; }
+    .cv-head .split__body { order: -1; }
+    .cv-skills div { grid-template-columns: 1fr; row-gap: 4px; }
+    .cv-item__head { flex-direction: column; align-items: flex-start; gap: 4px; }
+    .cv-when { order: -1; }
+  }
+
+  /* ---------- Print / PDF (Letter) ----------
+     Same system, scaled for paper: two columns kept, display title smaller,
+     nothing interactive. The PDF in /assets is generated from this. */
+  @page { size: Letter; margin: 0.55in 0.6in; }
+  @media print {
+    :global(:root) {
+      --text-display: 34px;
+      --text-h3: 15px;
+      --text-lead: 14px;
+      --text-body: 12.5px;
+      --text-small: 10.5px;
+      --tracking-display: -0.8px;
+      --tracking-h3: -0.1px;
+      --gutter: 16px;
+      --grid-margin: 0px;
+    }
+    :global(html), :global(body) { background: #fff !important; }
+    :global(.nav), :global(.footer), :global(.skip-link), :global(.menu), .cv-actions { display: none !important; }
+    :global(.js [data-reveal]), :global(.rise [data-w]) { opacity: 1 !important; transform: none !important; animation: none !important; }
+    :global(.wrap) { max-width: none; padding-inline: 0; }
+    /* Blocks instead of grid: Chrome splits blocks across pages cleanly,
+       a grid row it would push whole to the next page. */
+    :global(.split) { display: block !important; }
+    :global(.split)::after { content: ''; display: block; clear: both; }
+    :global(.split > .split__label) { float: left; width: 21%; }
+    :global(.split > .split__body) { margin-left: 24%; }
+    :global(.measure) { max-width: none; }
+    body { font-size: var(--text-body); line-height: 1.45; }
+
+    .cv-head { padding: 0 0 14px; gap: 12px; }
+    .cv-head__title { gap: 6px; }
+    .cv-head .split__body { order: 0; }
+    .cv-head .cv-contact { float: left; width: 23%; }
+    .cv-contact a { overflow-wrap: normal; white-space: nowrap; }
+    /* Arrows are for screens: on paper a link is just its text. */
+    :global(main [aria-hidden='true']) { display: none; }
+    .cv-item__head > div { flex: 1 1 0; min-width: 0; }
+    .cv-lede { gap: 0; }
+    .cv-contact { gap: 2px; padding-top: 2px; }
+    .cv-contact :global(.link), .cv-points, .cv-item p { text-decoration: none; }
+
+    .cv-section, .cv-section--last { padding: 11px 0 0; margin-top: 11px; border-top: 0.75px solid #dddfe3; }
+    .cv-items { gap: 11px; }
+    .cv-item { gap: 4px; break-inside: avoid; }
+    .cv-item__head { flex-direction: row; align-items: baseline; }
+    .cv-item__head > div { gap: 1px; }
+    .cv-when { order: 0; }
+    .cv-points { gap: 3px; }
+    .cv-points li { gap: 8px; }
+    .cv-skills { gap: 5px; }
+    .cv-skills div { grid-template-columns: 1.3fr 4fr; column-gap: 12px; }
+    h2, h3 { break-after: avoid; }
+  }
+</style>

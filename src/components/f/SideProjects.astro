@@ -1,0 +1,220 @@
+---
+import Phone from './Phone.astro';
+import { getWork } from '../../data/work';
+import { getLang, t } from '../../i18n/ui';
+const lang = getLang(Astro.url);
+const { sideProjects } = getWork(lang);
+const BOX = { w: 416, h: 580 };
+const pct = (v: number, of: number) => `${((v / of) * 100).toFixed(3)}%`;
+---
+
+<section class="side" aria-labelledby="side-title" data-carousel>
+  <div class="wrap side__head" data-reveal>
+    <h2 id="side-title" class="t-h3 side__label">{t(lang, 'side.title')}</h2>
+    <p class="t-muted side__intro">{t(lang, 'side.intro')}</p>
+    <div class="side__controls">
+      <button class="icon-btn" type="button" data-prev disabled>
+        <span class="sr-only">{t(lang, 'side.prev')}</span>
+        <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M14 9H4m4-4L4 9l4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <button class="icon-btn" type="button" data-next>
+        <span class="sr-only">{t(lang, 'side.next')}</span>
+        <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M4 9h10m-4-4 4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <ul class="side__track list-reset" role="list" data-track>
+    {sideProjects.map((p) => (
+      <li class="side__item">
+        <a
+          class:list={['project', { 'project--dark': p.dark }]}
+          href={p.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          style={`--card:${p.color}`}
+        >
+          <div class="project__art" data-parallax>
+            {p.browser && (
+              <div
+                class="browser project__browser"
+                style={[
+                  `left:${pct(p.browser.x, BOX.w)}`,
+                  `top:${pct(p.browser.y, BOX.h)}`,
+                  `width:${pct(p.browser.width, BOX.w)}`,
+                  `--ry:${p.browser.rot?.[0] ?? 0}deg`,
+                  `--rx:${p.browser.rot?.[1] ?? 0}deg`,
+                  `--rz:${p.browser.rot?.[2] ?? 0}deg`,
+                ].join(';')}
+              >
+                <div class="browser__bar" aria-hidden="true"><i></i><i></i><i></i></div>
+                <img src={p.browser.src} alt={p.browser.alt} width={p.browser.w} height={p.browser.h} loading="lazy" decoding="async" />
+              </div>
+            )}
+            {p.phones.map((ph) => <Phone phone={ph} box={BOX} />)}
+          </div>
+          <div class="project__caption">
+            <h3 class="t-h3">{p.title}</h3>
+            <div class="project__meta">
+              <p class="t-small project__summary">{p.summary}</p>
+              <span class="project__open" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 16 16"><path d="M5 11 11 5M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+            </div>
+          </div>
+          <span class="sr-only">{t(lang, 'side.newTab')}</span>
+        </a>
+      </li>
+    ))}
+  </ul>
+</section>
+
+<style>
+  .side { display: flex; flex-direction: column; gap: 48px; }
+  .side__head {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: var(--gutter);
+    align-items: center;
+  }
+  .side__label { grid-column: 1 / span 3; }
+  .side__intro { grid-column: 4 / span 6; padding-top: 4px; max-width: 636px; }
+  .side__controls { grid-column: 10 / -1; display: flex; gap: 12px; justify-content: flex-end; }
+
+  /* Full-bleed track that starts on the grid and runs off the right edge. */
+  .side__track {
+    --inset: max(var(--grid-margin), calc((100vw - var(--max)) / 2));
+    display: flex;
+    gap: var(--gutter);
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--inset);
+    padding-inline: var(--inset);
+    padding-block: 4px;
+    scrollbar-width: none;
+  }
+  .side__track::-webkit-scrollbar { display: none; }
+  .side__item {
+    flex: 0 0 min(416px, 78vw);
+    scroll-snap-align: start;
+  }
+
+  .project {
+    position: relative;
+    display: block;
+    aspect-ratio: 416 / 580;
+    border-radius: var(--radius-card);
+    background: var(--card);
+    color: #17181a; /* light cards keep dark text in both themes */
+    overflow: hidden;
+    isolation: isolate;
+    container-type: inline-size;
+    transition: transform 160ms var(--ease-out);
+  }
+  .project:active { transform: scale(0.985); }
+  .project--dark { color: var(--on-night); }
+  .project__art { position: absolute; inset: 0; transition: translate 400ms var(--ease-out); }
+  .project__art :global(.phone),
+  .project__browser { transition: transform 400ms var(--ease-out); }
+  /* Desktop windows turn away from the caption, like a screen on a desk. */
+  .project__browser {
+    transform-origin: left center;
+    transform: perspective(1400px) rotateY(var(--ry)) rotateX(var(--rx)) rotateZ(var(--rz));
+    box-shadow: 0 30px 60px -24px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.06);
+  }
+
+  /* Caption sits on a fade of the card's own color */
+  .project__caption {
+    position: absolute;
+    inset: auto 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 96px 28px 28px;
+    background: linear-gradient(180deg, color-mix(in srgb, var(--card) 0%, transparent), var(--card) 62%);
+    z-index: 1;
+  }
+  .project__meta { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; }
+  .project__summary { max-width: 250px; color: #5b5e63; }
+  .project--dark .project__summary { color: var(--on-color-muted); }
+  .project__open {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    box-shadow: inset 0 0 0 1.5px #5b5e63;
+    transition: background-color 160ms ease, color 160ms ease;
+  }
+  .project--dark .project__open { box-shadow: inset 0 0 0 1.5px var(--on-color-muted); }
+  .project:focus-visible { outline-offset: 4px; }
+  @media (hover: hover) and (pointer: fine) {
+    /* Hover: phones lift a little toward you, the arrow fills. */
+    .project:hover .project__art :global(.phone) { transform: perspective(1200px) rotateY(calc(var(--ry) * 0.8)) rotateX(calc(var(--rx) * 0.8)) rotateZ(var(--rz)) translateY(-6px); }
+    .project:hover .project__browser { transform: perspective(1400px) rotateY(calc(var(--ry) * 0.7)) rotateX(var(--rx)) rotateZ(var(--rz)) translateY(-6px); }
+    .project:hover .project__open { background: #17181a; color: #fff; box-shadow: none; }
+    .project--dark:hover .project__open { background: var(--on-night); color: var(--ink); }
+  }
+
+  @media (max-width: 759px) {
+    .side { gap: 32px; }
+    .side__head { row-gap: 8px; }
+    .side__label, .side__intro { grid-column: 1 / -1; }
+    .side__controls { display: none; }
+    .project__caption { padding: 72px 20px 20px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .project__art, .project__art :global(.phone), .project__browser { transition: none; }
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-carousel]').forEach((root) => {
+    const track = root.querySelector<HTMLElement>('[data-track]')!;
+    const prev = root.querySelector<HTMLButtonElement>('[data-prev]')!;
+    const next = root.querySelector<HTMLButtonElement>('[data-next]')!;
+    const items = Array.from(track.children) as HTMLElement[];
+    const arts = Array.from(track.querySelectorAll<HTMLElement>('[data-parallax]'));
+    const still = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    const step = () => {
+      const a = items[0].getBoundingClientRect();
+      const b = items[1]?.getBoundingClientRect();
+      return b ? b.left - a.left : a.width;
+    };
+
+    // Arrows disable at the ends; the next card always peeks.
+    const update = () => {
+      const max = track.scrollWidth - track.clientWidth;
+      prev.disabled = track.scrollLeft <= 2;
+      next.disabled = track.scrollLeft >= max - 2;
+    };
+
+    // Parallax: art drifts up to 12px against the scroll, so the phones
+    // feel like they sit behind the card's surface.
+    let raf = 0;
+    const parallax = () => {
+      raf = 0;
+      if (still.matches) return;
+      const vw = window.innerWidth;
+      for (const art of arts) {
+        const r = art.getBoundingClientRect();
+        const d = (r.left + r.width / 2 - vw / 2) / vw; // -1..1-ish
+        art.style.translate = `${(-d * 12).toFixed(2)}px 0`;
+      }
+    };
+    const onScroll = () => {
+      update();
+      if (!raf) raf = requestAnimationFrame(parallax);
+    };
+
+    prev.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: still.matches ? 'auto' : 'smooth' }));
+    next.addEventListener('click', () => track.scrollBy({ left: step(), behavior: still.matches ? 'auto' : 'smooth' }));
+    track.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    update();
+    parallax();
+  });
+</script>

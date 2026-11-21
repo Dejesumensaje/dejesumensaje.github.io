@@ -1,0 +1,341 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CaseTOC from '../components/CaseTOC.astro';
+import CaseNav from '../components/CaseNav.astro';
+---
+
+<BaseLayout
+  title="Aprender Digital | William Montoya"
+  description="How do you get educational resources to rural teachers when internet access can't be assumed?"
+  ogImage="https://dejesumensaje.com/assets/aprender-digital-hero.png"
+  ogImageAlt="Aprender Digital platform interface"
+  ogImageWidth={1026}
+  ogImageHeight={823}
+  ogType="article"
+  themeColor="#F2EFAA"
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline>{JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Bringing learning to rural classrooms without internet",
+      "alternativeHeadline": "Aprender Digital Case Study",
+      "image": "https://dejesumensaje.com/assets/aprender-digital-hero.png",
+      "author": { "@type": "Person", "name": "William Montoya", "url": "https://dejesumensaje.com" },
+      "publisher": { "@type": "Person", "name": "William Montoya" },
+      "datePublished": "2026-04-21",
+      "dateModified": "2026-06-18",
+      "mainEntityOfPage": "https://dejesumensaje.com/aprender-digital.html",
+      "description": "How do you get educational resources to rural teachers when internet access can't be assumed?"
+    })}</script>
+    <script type="application/ld+json" is:inline>{JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://dejesumensaje.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Work", "item": "https://dejesumensaje.com/#work" },
+        { "@type": "ListItem", "position": 3, "name": "Aprender Digital" }
+      ]
+    })}</script>
+  </Fragment>
+
+  <main id="main-content">
+
+    <section id="hero-case" aria-labelledby="case-heading" style="background: var(--lime);">
+
+      <div class="case-breadcrumb">
+        <a href="/#work">← Work</a>
+      </div>
+
+      <div class="case-title-wrap">
+        <div class="case-num-row">
+          <span class="case-num">05</span>
+          <span class="work-category">UX · Product Design · Education</span>
+        </div>
+        <h1 id="case-heading">Bringing learning to rural classrooms without internet</h1>
+        <div class="case-metrics">
+          <div class="case-metric">
+            <span class="case-metric__value">7M+</span>
+            <span class="case-metric__label">Rural users targeted</span>
+          </div>
+          <div class="case-metric">
+            <span class="case-metric__value">15</span>
+            <span class="case-metric__label">Interviews conducted</span>
+          </div>
+          <div class="case-metric">
+            <span class="case-metric__value">3 mo.</span>
+            <span class="case-metric__label">MVP timeline</span>
+          </div>
+        </div>
+      </div>
+
+      <section class="project-summary project-summary--hero" aria-label="Project summary">
+        <div class="summary-item">
+          <span class="summary-label">Challenge</span>
+          <p>Create a product model for rural teachers who cannot rely on internet access as a default.</p>
+        </div>
+        <div class="summary-item">
+          <span class="summary-label">Scope</span>
+          <p>UX, information architecture, value-proposition work, and prototyping across a short timeline.</p>
+        </div>
+        <div class="summary-item">
+          <span class="summary-label">Research</span>
+          <p>Desk research plus interviews with 10 teachers and 5 ICT leaders serving low-connectivity schools.</p>
+        </div>
+        <div class="summary-item">
+          <span class="summary-label">Outcome</span>
+          <p>An offline-ready content package model supported by a simpler publishing workflow and clearer value proposition.</p>
+        </div>
+      </section>
+
+      <div class="case-full-image">
+        <img src="/assets/aprender-digital-hero.png" width="1026" height="823" alt="Aprender Digital platform interface" loading="eager" />
+      </div>
+
+      <div class="details">
+        <div class="detail">
+          <p class="eyebrow">Role</p>
+          <p>UX, Information Architecture</p>
+        </div>
+        <div class="detail">
+          <p class="eyebrow">Date</p>
+          <p>July 2021 - ongoing</p>
+        </div>
+        <div class="detail">
+          <p class="eyebrow">Team</p>
+          <p>Camilo Beltrán - development lead</p>
+          <p>Natalia Torres - visual designer</p>
+        </div>
+        <div class="detail">
+          <p class="eyebrow">Link</p>
+          <p><a href="https://contenidos.colombiaaprende.edu.co" target="_blank" rel="noopener noreferrer">Aprender Digital</a></p>
+        </div>
+        <div class="detail">
+          <p class="eyebrow">Sector</p>
+          <p>Education</p>
+        </div>
+      </div>
+
+    </section>
+
+    <CaseTOC sections={[
+      { id: 'case-challenge',  label: 'Challenge'   },
+      { id: 'case-background', label: 'Background'  },
+      { id: 'case-process',    label: 'Process'     },
+      { id: 'case-users',      label: 'Users'       },
+      { id: 'case-value',      label: 'Value'       },
+      { id: 'case-testing',    label: 'Testing'     },
+      { id: 'case-lessons',    label: 'Lessons'     },
+    ]} />
+
+    <section class="challenge case-section" id="case-challenge">
+      <p class="eyebrow">Challenge</p>
+      <h2>How do you get educational resources to rural teachers when internet access can't be assumed?</h2>
+    </section>
+
+    <section class="overview case-section" id="case-background">
+      <div class="wrap">
+        <h2>Background</h2>
+        <p>Aprender Digital was a spin-off of Colombia Aprende. It was created to assist the educational community with content and guidelines during the lockdown caused by the COVID-19 pandemic.</p>
+        <p>It was a temporary solution while we finished the evolution of <a target="_blank" href="http://www.colombiaaprende.edu.co" rel="noopener noreferrer">www.colombiaaprende.edu.co</a>. In fact, when we launched the new version of Colombia Aprende in October, Aprender Digital became redundant.</p>
+        <p>It had gained real recognition, though, so the Ministry gave us the chance to rethink it around a new value proposition. The goal was singular: create a solution that worked for people without an internet connection.</p>
+      </div>
+    </section>
+
+    <section class="overview bg-lime case-section" id="case-process">
+      <div class="wrap">
+        <h2>Process</h2>
+        <p>Unlike Colombia Aprende, this project ran on a short timeline: three months to propose a new value proposition, define the scope of the product, build an MVP, and test it with rural teachers.</p>
+        <p>Working with agile in mind, we chose Lean UX to create value fast. Instead of defining requirements meticulously, we started from desk research to frame the problem.</p>
+      </div>
+
+      <figure>
+        <img src="/assets/lean-ux-framework.webp" width="600" height="600" loading="lazy" alt="Lean UX Framework diagram" />
+      </figure>
+
+      <div class="wrap">
+        <p>We found that more than 7 million rural Colombians lack internet access, and 47% of rural schools have no network infrastructure at all. The gap between cities and rural areas runs so deep that a rural child receives only about half the education of a peer in a city like Bogotá or Medellín.</p>
+      </div>
+
+      <div class="insights">
+        <div class="wrap-flex-problem">
+          <div class="problem">
+            <p class="insight-title">Problem statement</p>
+            <p>The lack of access to educational resources is increasing the gap between rich and poor, and it's also damaging the performance of the rural teachers.</p>
+          </div>
+          <div class="hypothesis">
+            <p class="insight-title">Hypothesis</p>
+            <p>If we can deliver educational resources and guidelines consistently — even without internet — we can improve rural teachers' performance and, with it, the quality of education.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="overview case-section" id="case-users">
+      <div class="wrap">
+        <h2>Finding the users</h2>
+        <p>We brought the regional Education Secretariats into the process and built two proto-personas: a rural teacher and an ICT leader within the Secretariat.</p>
+        <p>We then interviewed 10 teachers and 5 ICT leaders to gather insights and turn those proto-personas into deeper, evidence-based user personas.</p>
+      </div>
+
+      <figure>
+        <img src="/assets/user-persona.webp" width="1100" height="1080" loading="lazy" alt="User persona profile card for Carmen Gómez, a rural teacher in Colombia" />
+        <figcaption>The user persona of a rural teacher in Colombia. Artifact in Spanish; the research was conducted in Spanish with rural teachers.</figcaption>
+      </figure>
+    </section>
+
+    <section class="overview case-section" id="case-value">
+      <div class="wrap">
+        <h2>Creating value</h2>
+        <p>To define the MVP, we first established our new value proposition, running the exercise for both user personas.</p>
+      </div>
+
+      <figure>
+        <img src="/assets/value-proposition-canvas.webp" width="1200" height="363" loading="lazy" alt="Value Proposition Canvas workshop artifact, in Spanish" />
+        <figcaption>We used the Value Proposition Canvas for this exercise (artifact in Spanish).</figcaption>
+      </figure>
+
+      <div class="wrap">
+        <p>The workshop produced a key insight. On one side, we had to speed up how we managed content packages, so the Secretariats could make specific requests and get the resources they needed within two or three weeks. On the teachers' side, we had to make sure resources weren't downloaded one by one, but packaged in a clear, simple way.</p>
+      </div>
+
+      <figure>
+        <img src="/assets/value-proposition-final.webp" width="1200" height="423" loading="lazy" alt="Refined value proposition statement, in Spanish" />
+        <figcaption>Our new value proposition (in Spanish): curated, offline-ready content packages that Secretariats can request and teachers can carry to schools as a single file.</figcaption>
+      </figure>
+
+      <div class="wrap">
+        <p>Aprender Digital became a microsite of curated content packages. Secretariats and teachers download a package as a self-contained HTML interface and carry that single compressed file to the computers in rural schools. On our side, no one assembles packages by hand: we publish content the way we always have, and the CMS does the rest.</p>
+      </div>
+    </section>
+
+    <section class="overview case-section" id="case-testing">
+      <div class="wrap">
+        <h2>Prototyping and testing</h2>
+        <p>We built two interfaces: one for the website, one for the offline packages. The first was an iteration of the previous site; the second was built on the Material Design guidelines.</p>
+      </div>
+
+      <div class="full-wrap">
+        <div
+          class="figma-facade"
+          data-figma-title="Aprender Digital website prototype (Figma)"
+          data-figma-src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FSRpGGNHHdLTeOvaZIIjZVz%2FAprender-Digital%3Fpage-id%3D0%253A1%26node-id%3D42%253A2211%26viewport%3D241%252C48%252C0.04%26scaling%3Dmin-zoom%26starting-point-node-id%3D42%253A2211"
+        >
+          <p class="figma-facade__label">Aprender Digital — website prototype</p>
+          <button type="button" class="figma-facade__load">Load interactive prototype</button>
+          <a
+            class="figma-facade__link"
+            href="https://www.figma.com/proto/SRpGGNHHdLTeOvaZIIjZVz/Aprender-Digital?page-id=0%3A1&node-id=42%3A2211&scaling=min-zoom&starting-point-node-id=42%3A2211"
+            target="_blank"
+            rel="noopener noreferrer"
+          >Open in Figma ↗</a>
+        </div>
+      </div>
+
+      <div class="full-wrap">
+        <div
+          class="figma-facade"
+          data-figma-title="Offline content package prototype (Figma)"
+          data-figma-src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2F2OZPNtWxdH1iKL6p4GrCO5%2FContenido-offline%3Fpage-id%3D0%253A1%26node-id%3D4%253A2%26viewport%3D241%252C48%252C0.12%26scaling%3Dmin-zoom%26starting-point-node-id%3D4%253A2"
+        >
+          <p class="figma-facade__label">Offline content package — prototype</p>
+          <button type="button" class="figma-facade__load">Load interactive prototype</button>
+          <a
+            class="figma-facade__link"
+            href="https://www.figma.com/proto/2OZPNtWxdH1iKL6p4GrCO5/Contenido-offline?page-id=0%3A1&node-id=4%3A2&scaling=min-zoom&starting-point-node-id=4%3A2"
+            target="_blank"
+            rel="noopener noreferrer"
+          >Open in Figma ↗</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="overview bg-lime case-section" id="case-lessons">
+      <div class="wrap">
+        <h2>Lessons learned</h2>
+        <p>This project taught me how to build and iterate fast enough to deliver value early — and where speed has a cost.</p>
+        <p>We shipped the first version quickly, which was the right call under the circumstances. But content design lagged behind product and UX, and that gap showed in the first weeks. A short beta or early-access period would have let us close it sooner.</p>
+        <p>Within two weeks the experience was already in much better shape, and the lesson stuck: content strategy has to run in parallel with design from the first sprint, not after it.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <section class="case-reflections" aria-label="Senior reflection">
+    <div class="case-reflections__inner">
+      <span class="case-reflections__label">Reflection</span>
+      <p class="case-reflections__text">We launched fast and got something real into teachers' hands, which was right. But speed created a debt: content design lagged behind UX design, and that gap showed in the first weeks. The lesson I carried forward is that content strategy and product design can't be sequenced — they need to run in parallel from the first sprint.</p>
+    </div>
+  </section>
+
+  <CaseNav slug="aprender-digital" />
+
+</BaseLayout>
+
+<style>
+  /* Click-to-load facade for Figma embeds: keeps the page light and avoids
+     the blank frame the embed shows while (or if) it loads. */
+  .figma-facade {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: var(--radius);
+    background: repeating-linear-gradient(
+      -45deg,
+      rgba(0, 0, 0, 0.025),
+      rgba(0, 0, 0, 0.025) 12px,
+      transparent 12px,
+      transparent 24px
+    );
+  }
+
+  .figma-facade__label {
+    font-family: var(--font-sans);
+    font-size: var(--text-micro);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+    color: var(--ink-muted);
+    margin: 0;
+    padding: 0 1rem;
+    text-align: center;
+  }
+
+  .figma-facade__load {
+    font-family: var(--font-sans);
+    font-size: var(--text-small);
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 99px;
+    background: var(--ink, #0f0f0f);
+    color: #fff;
+    cursor: pointer;
+  }
+
+  .figma-facade__load:hover { opacity: 0.85; }
+
+  .figma-facade__link {
+    font-family: var(--font-sans);
+    font-size: var(--text-small);
+    color: var(--ink-muted);
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.figma-facade').forEach((facade) => {
+    facade.querySelector('.figma-facade__load')?.addEventListener('click', () => {
+      const iframe = document.createElement('iframe');
+      iframe.src = facade.dataset.figmaSrc ?? '';
+      iframe.title = facade.dataset.figmaTitle ?? 'Figma prototype';
+      iframe.allowFullscreen = true;
+      iframe.style.border = '1px solid rgba(0, 0, 0, 0.1)';
+      facade.replaceWith(iframe);
+    });
+  });
+</script>

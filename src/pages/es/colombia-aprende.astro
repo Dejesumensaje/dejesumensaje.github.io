@@ -1,0 +1,226 @@
+---
+import CaseLayout from '../../layouts/CaseLayout.astro';
+import CaseHeader from '../../components/f/CaseHeader.astro';
+import NextStory from '../../components/f/NextStory.astro';
+
+const facts = [
+  { k: 'Rol', v: 'Investigación con usuarios, arquitectura de información, prototipado, pruebas, gestión del proyecto' },
+  { k: 'Fecha', v: 'marzo de 2020 – en curso' },
+  { k: 'Equipo', v: 'Camilo Beltrán, líder de desarrollo\nCatalina Mendoza, diseño visual y de interacción\nNatalia Torres, diseño visual' },
+];
+const overview = [
+  { k: 'Reto', v: 'Convertir una plataforma educativa nacional envejecida en una experiencia clara y equitativa.' },
+  { k: 'Aporte', v: 'Investigación con usuarios, arquitectura de información, prototipado, pruebas y dirección de producto con equipos multidisciplinarios.' },
+  { k: 'Restricciones', v: '81.000 recursos, más de 70 micrositios, múltiples públicos y una fuerte resistencia interna al cambio.' },
+  { k: 'Resultado', v: 'Mayor conversión, contenidos fáciles de encontrar y respaldo directivo para seguir iterando.' },
+];
+const numbers = [
+  { v: '81.000', k: 'recursos educativos' },
+  { v: '70+', k: 'micrositios' },
+  { v: '17', k: 'años de historia de la plataforma' },
+];
+const insights = [
+  'Varios de los espacios más visibles estaban abandonados y desactualizados. El contenido útil quedaba enterrado bajo demasiados clics.',
+  'La mayoría de los usuarios descargaba el recurso para preparar su clase y no volvía sino meses o años después.',
+  'Solo una línea de contenidos tenía uso real: Contenidos para Aprender, una colección para enseñar competencias básicas.',
+];
+const lessons = [
+  { t: 'Los usuarios están en todas partes.', b: 'No bastaba con atender al usuario final. Lograr un cambio duradero exigía sumar al equipo de Colombia Aprende y a las demás áreas del Ministerio.' },
+  { t: 'Todo empieza con una visión.', b: 'Recoger hallazgos y analizar datos mejora los flujos, pero también ayuda a construir una meta común que movilice al equipo.' },
+  { t: 'Mantenlo simple.', b: 'En un portal tan grande y antiguo como Colombia Aprende, hay que atreverse a recortar y enfocar.' },
+];
+const pct = (v: number, of: number) => `${((v / of) * 100).toFixed(3)}%`;
+---
+
+<CaseLayout
+  title="Simplificar Colombia Aprende — William Montoya"
+  description="¿Cómo transformar una plataforma nacional de 17 años, con millones de usuarios, para mejorar el hallazgo de contenidos, la retención y la conversión?"
+  ogImage="https://dejesumensaje.com/assets/colombia-aprende-mockup.png"
+  ogImageAlt="Rediseño de la plataforma Colombia Aprende"
+  readFull="8 min"
+  readTldr="1 min"
+>
+  <CaseHeader
+    kicker="Caso de estudio · Ministerio de Educación Nacional, Colombia"
+    lead="Simplificar Colombia Aprende para"
+    accent="la inclusión y la equidad."
+    question="¿Cómo transformar una plataforma nacional de 17 años, con millones de usuarios, para mejorar el hallazgo de contenidos, la retención y la conversión?"
+    facts={[...facts, { k: 'Enlace', v: 'colombiaaprende.edu.co', href: 'https://colombiaaprende.edu.co' }]}
+    overview={overview}
+    readFull="8 min"
+    readTldr="1 min"
+  />
+
+  <!-- Lead figure -->
+  <figure class="figure figure--lead wrap" data-reveal>
+    <div class="stage" style="aspect-ratio:1296/640">
+      <div class="browser" style={`left:${pct(148, 1296)};top:${pct(56, 640)};width:${pct(1000, 1296)}`}>
+        <div class="browser__bar" aria-hidden="true"><i></i><i></i><i></i></div>
+        <img src="/assets/colombia-aprende-imagen.webp" width="1400" height="700" alt="La nueva página de inicio de Colombia Aprende: buscador, contenidos destacados y noticias para docentes." fetchpriority="high" />
+      </div>
+    </div>
+  </figure>
+
+  <!-- In numbers -->
+  <section class="chapter chapter--section wrap" aria-labelledby="ch-numbers" data-reveal>
+    <div class="split">
+      <h2 id="ch-numbers" class="t-h3 split__label">En cifras</h2>
+      <div class="columns3 numbers split__body">
+        {numbers.map((n) => (
+          <div><p class="t-display">{n.v}</p><p class="t-muted">{n.k}</p></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Background -->
+  <section class="chapter wrap" aria-labelledby="ch-background" data-depth="full" data-reveal>
+    <div class="split">
+      <h2 id="ch-background" class="t-h3 split__label">Contexto</h2>
+      <div class="prose measure split__body">
+        <p>Colombia Aprende era un portal desbordado y complejo. Lucía anticuado y funcionaba mal.</p>
+        <p>Con 81.000 recursos educativos, más de 70 micrositios, cinco secciones y cinco subsitios —uno por cada público de la comunidad educativa—, la experiencia carecía de orden y de un propósito claro.</p>
+        <p>Cuando llegué, el equipo no tenía contacto con sus usuarios. El portal guardaba material valioso, pero encontrarlo y usarlo era una odisea.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process -->
+  <section class="chapter chapter--tight wrap" aria-labelledby="ch-process" data-depth="full" data-reveal>
+    <div class="split">
+      <h2 id="ch-process" class="t-h3 split__label">Proceso</h2>
+      <div class="chapter__stack split__body">
+        <div class="prose measure">
+          <p>Al principio, las áreas directivas dudaban de rediseñar Colombia Aprende. Empezamos con una evaluación heurística para documentar sus fallas de usabilidad.</p>
+          <p>Después recogimos la opinión de 20 docentes y directivos de distintas regiones del país, y validamos los hallazgos con un panel externo de expertos de la Universidad EAFIT.</p>
+        </div>
+        <div class="columns3">
+          {insights.map((t, i) => (
+            <div><p class="t-small t-muted">Hallazgo 0{i + 1}</p><p class="insight">{t}</p></div>
+          ))}
+        </div>
+        <div class="prose measure">
+          <p>Estaba claro que había que rehacer la experiencia entera. No bastaba con hacerla usable: Colombia Aprende tenía que ser útil, clara y equitativa.</p>
+          <p>Para lograrlo, combinamos el modelo Double Diamond (Doble Diamante) con Lean UX.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <figure class="figure wrap" data-depth="full" data-reveal>
+    <div class="stage stage--auto" style="aspect-ratio:1296/520">
+      <div class="diamonds">
+        {[
+          { phase: 'Investigar', l: 'Descubrir', r: 'Definir', steps: ['Investigación con usuarios', 'Planteamiento del problema', 'Historias de usuario'] },
+          { phase: 'Crear', l: 'Idear', r: 'Implementar', steps: ['Lean UX y colecciones de contenido', 'Prototipos y pruebas', 'Desarrollo'] },
+        ].map((d) => (
+          <div class="diamond">
+            <div class="diamond__shape">
+              <span class="t-small t-muted diamond__phase diamond__phase--l">{d.l}</span>
+              <span class="t-small t-muted diamond__phase diamond__phase--r">{d.r}</span>
+              {d.steps.map((s) => <span class="t-small diamond__step">{s}</span>)}
+            </div>
+            <p class="t-h3">{d.phase}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+    <figcaption class="t-small">El proceso: Double Diamond con Lean UX</figcaption>
+  </figure>
+
+  <!-- Understanding the challenge -->
+  <section class="chapter wrap" aria-labelledby="ch-understanding" data-depth="full" data-reveal>
+    <div class="split">
+      <h2 id="ch-understanding" class="t-h3 split__label">Entender el reto</h2>
+      <div class="chapter__stack split__body" style="gap:36px">
+        <div class="prose measure">
+          <p>El principal obstáculo para transformar Colombia Aprende era interno. El equipo y los actores clave del Ministerio se resistían a cambiar una plataforma que llevaba más de 17 años operando.</p>
+          <p>Mientras entrevistábamos a nuestro público principal —docentes del sector oficial—, hicimos talleres, mapas de empatía y lienzos de propuesta de valor con casi todas las áreas del Ministerio.</p>
+        </div>
+        <div class="measure" style="display:flex;flex-direction:column;gap:12px">
+          <p class="t-small t-muted">Nuestra investigación incluyó</p>
+          <ul class="dash-list list-reset" role="list">
+            <li>Entender las metas y necesidades de los usuarios.</li>
+            <li>Identificar los puntos de dolor de usuarios finales e internos.</li>
+            <li>Mapear los objetivos de funcionarios, docentes y rectores.</li>
+            <li>Auditar contenidos y analizar plataformas educativas de otros países.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Setting the road -->
+  <section class="chapter chapter--tight wrap" aria-labelledby="ch-road" data-depth="full" data-reveal>
+    <div class="split">
+      <h2 id="ch-road" class="t-h3 split__label">Trazar el camino</h2>
+      <div class="chapter__stack split__body">
+        <p class="measure">Al filtrar los datos, definimos un eje central: las colecciones de contenido, un servicio nuevo que ordena el recorrido del usuario agrupando recursos por tema, público y formato.</p>
+        <p class="t-h2 pull">En una colección, el usuario no navega archivos sueltos, sino un kit armado para cumplir un objetivo concreto.</p>
+        <div class="prose measure">
+          <p>Con talleres de ideación y card sorting, armamos un nuevo mapa del sitio donde la sección de contenidos ocupó el lugar principal y quedó visible en toda la navegación.</p>
+          <p>Planteamos la transformación desde una mirada sociotécnica para trazar una hoja de ruta sostenible y escalable, dos temas que preocupaban a las directivas.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <figure class="figure wrap" data-depth="full" data-reveal>
+    <div class="stage" style="aspect-ratio:1296/680">
+      <img class="flat" src="/assets/userflow-colombiaaprende.webp" width="1400" height="779" loading="lazy" alt="Flujo de usuario del nuevo Colombia Aprende, desde la página de inicio hasta un recurso, pasando por las colecciones de contenido." style={`left:${pct(148, 1296)};top:${pct(62, 680)};width:${pct(1000, 1296)}`} />
+    </div>
+    <figcaption class="t-small">Primera versión del nuevo flujo de usuario</figcaption>
+  </figure>
+
+  <!-- Prototyping and testing -->
+  <section class="chapter chapter--tight wrap" aria-labelledby="ch-proto" data-depth="full" data-reveal>
+    <div class="split">
+      <h2 id="ch-proto" class="t-h3 split__label">Prototipos y pruebas</h2>
+      <div class="prose measure split__body">
+        <p>Con la nueva identidad visual lista, armamos los primeros mockups en Figma y los publicamos en InVision para recoger comentarios y validar el flujo.</p>
+        <p>Así detectamos fallas tempranas en las colecciones: por ejemplo, la interfaz no permitía ordenar ni filtrar los recursos.</p>
+        <p>Junto al equipo de contenidos creamos categorías nuevas a partir de lo que pedían los docentes, y corrimos pruebas A/B para definir qué opciones llegaban a producción.</p>
+      </div>
+    </div>
+  </section>
+
+  <figure class="figure wrap" data-reveal>
+    <div class="stage" style="aspect-ratio:1296/680">
+      <div class="browser" style={`left:${pct(268, 1296)};top:${pct(38, 680)};width:${pct(760, 1296)}`}>
+        <div class="browser__bar" aria-hidden="true"><i></i><i></i><i></i></div>
+        <img src="/assets/mockup-aprender-digital.webp" width="1400" height="1061" loading="lazy" alt="La interfaz final: una página de colección de contenido con filtros y recursos." />
+      </div>
+    </div>
+    <figcaption class="t-small">La interfaz final, ajustada con pruebas A/B</figcaption>
+  </figure>
+
+  <!-- Results -->
+  <section class="chapter chapter--section wrap" aria-labelledby="ch-results" data-reveal>
+    <div class="split">
+      <h2 id="ch-results" class="t-h3 split__label">Resultados</h2>
+      <div class="prose measure split__body">
+        <p>Desde el lanzamiento en octubre de 2020, la conversión subió y los usuarios encuentran los contenidos con mucha mayor facilidad. Las colecciones también dieron visibilidad a recursos que antes quedaban ocultos tras Contenidos para Aprender.</p>
+        <p>Igual de importante: las entregas ágiles y el enfoque centrado en el usuario nos permitieron seguir iterando después del lanzamiento, ya sin oposición interna.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lessons -->
+  <section class="chapter chapter--section wrap" aria-labelledby="ch-lessons" data-reveal>
+    <div class="split">
+      <h2 id="ch-lessons" class="t-h3 split__label">Aprendizajes</h2>
+      <div class="split__body" style="display:flex;flex-direction:column;gap:40px">
+        <div class="columns3">
+          {lessons.map((l) => (
+            <div><h3 class="t-h3">{l.t}</h3><p class="t-muted">{l.b}</p></div>
+          ))}
+        </div>
+        <p class="tldr-note t-small" data-depth="tldr">
+          Esta es la versión corta. La historia completa recorre la investigación, el proceso Double Diamond, el nuevo flujo de usuario y las pruebas A/B detrás de la interfaz final.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <NextStory current="/colombia-aprende.html" />
+</CaseLayout>

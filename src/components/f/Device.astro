@@ -1,0 +1,29 @@
+---
+// Browser window or phone, absolutely placed inside a stage/card of size
+// `box` (comp px). All positions become percentages so art direction scales.
+import Phone from './Phone.astro';
+import type { BrowserShot, PhoneShot } from '../../data/work';
+
+interface Props {
+  box: { w: number; h: number };
+  browser?: BrowserShot;
+  phone?: PhoneShot;
+  eager?: boolean;
+  veil?: boolean;
+}
+const { box, browser, phone, eager = false, veil = false } = Astro.props;
+const pct = (v: number, of: number) => `${((v / of) * 100).toFixed(3)}%`;
+const loading = eager ? 'eager' : 'lazy';
+---
+
+{browser && (
+  <div
+    class:list={['browser', { 'is-veiled': veil }]}
+    style={`left:${pct(browser.x, box.w)};top:${pct(browser.y, box.h)};width:${pct(browser.width, box.w)}`}
+  >
+    <div class="browser__bar" aria-hidden="true"><i></i><i></i><i></i></div>
+    <img src={browser.src} alt={browser.alt} width={browser.w} height={browser.h} loading={loading} decoding="async" />
+  </div>
+)}
+
+{phone && <Phone phone={phone} box={box} eager={eager} veil={veil} />}

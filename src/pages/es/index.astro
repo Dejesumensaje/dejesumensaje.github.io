@@ -1,0 +1,253 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import CaseCard from '../../components/f/CaseCard.astro';
+import SideProjects from '../../components/f/SideProjects.astro';
+import LogoStrip from '../../components/f/LogoStrip.astro';
+import { getWork } from '../../data/work';
+const { featured, cases, principles } = getWork('es');
+
+// Headline split into words at build time so the entrance can rise by line.
+const lead = 'diseña productos digitales y convierte sistemas complejos'.split(' ');
+const accent = 'en herramientas claras.'.split(' ');
+---
+
+<Layout
+  title="William Montoya — Senior Product Designer · Medellín"
+  description="Diseñador de producto que le da a los sistemas complejos una forma que la gente de verdad entiende. Ocho años entre plataformas educativas nacionales y herramientas empresariales de precios."
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" is:inline set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'Person',
+      name: 'William Montoya',
+      jobTitle: 'Senior Product Designer',
+      url: 'https://dejesumensaje.com',
+      image: 'https://dejesumensaje.com/assets/william-montoya.jpg',
+      email: 'mailto:william@dejesumensaje.com',
+      worksFor: { '@type': 'Organization', name: 'Globant' },
+      knowsLanguage: ['es', 'en'],
+      address: { '@type': 'PostalAddress', addressLocality: 'Medellín', addressCountry: 'CO' },
+      sameAs: ['https://www.linkedin.com/in/dejesumensaje/', 'https://medium.com/@dejesumensaje'],
+    })} />
+  </Fragment>
+
+  <section class="hero wrap" data-hero>
+    <h1 class="t-display hero__title">
+      <span class="w" data-w>William</span> <span class="w" data-w>Montoya</span><img
+        class="hero__portrait w"
+        data-w
+        src="/assets/f/portrait.webp"
+        width="64"
+        height="64"
+        alt=""
+        fetchpriority="high"
+      />
+      {lead.map((word) => <><span class="w" data-w>{word}</span>{' '}</>)}
+      <span class="accent hero__accent">{accent.map((word, i) => <><span class="w" data-w data-accent>{word}</span>{i < accent.length - 1 && ' '}</>)}</span>
+    </h1>
+
+    <div class="hero__intro" data-hero-support>
+      <p class="t-small hero__status">
+        <span class="hero__dot" aria-hidden="true"></span>Disponible para roles senior y staff<br />
+        <span class="t-muted">Remoto · Español e inglés</span>
+      </p>
+      <p class="t-lead hero__lede">
+        Periodista, profesor y cinéfilo en Medellín. Ocho años entre plataformas educativas nacionales y herramientas empresariales de precios.
+      </p>
+    </div>
+  </section>
+
+  <LogoStrip />
+
+  <section id="work" class="work wrap" aria-labelledby="work-title">
+    <h2 id="work-title" class="t-h3 work__label" data-reveal>Trabajo seleccionado</h2>
+    <div class="work__grid">
+      <CaseCard card={featured} featured eager />
+      {cases.map((c) => <CaseCard card={c} />)}
+    </div>
+  </section>
+
+  <SideProjects />
+
+  <section class="think wrap" aria-labelledby="think-title">
+    <div class="split" data-reveal>
+      <h2 id="think-title" class="t-h3 split__label">Cómo pienso</h2>
+      <ol class="think__list list-reset split__body" role="list">
+        {principles.map((p) => (
+          <li>
+            <span class="t-small t-muted">{p.n}</span>
+            <h3 class="t-h3">{p.title}</h3>
+            <p class="t-muted">{p.body}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  /* ---------- Hero ---------- */
+  .hero {
+    padding-top: var(--space-page-top);
+    padding-bottom: var(--space-page-top);
+    display: flex;
+    flex-direction: column;
+    gap: 64px;
+  }
+  /* Spanish runs longer: balance the lines so no word is left alone. */
+  .hero__title { max-width: 1060px; text-wrap: balance; }
+  /* The accent phrase always lands on its own line, as in the comp. */
+  .hero__accent { display: block; }
+  .w { display: inline-block; }
+  .hero__portrait {
+    width: 0.89em;
+    height: 0.89em;
+    border-radius: 50%;
+    object-fit: cover;
+    vertical-align: -0.08em;
+    margin-inline: 0.22em 0;
+    background: var(--surface);
+  }
+  .hero__intro {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: var(--gutter);
+    row-gap: 24px;
+  }
+  .hero__status { grid-column: 1 / span 3; padding-top: 5px; position: relative; }
+  .hero__lede { grid-column: 4 / span 6; max-width: 636px; text-wrap: pretty; }
+  /* Availability dot: a slow breath, the only idle motion on the page. */
+  .hero__dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin-right: 8px;
+    border-radius: 50%;
+    background: #0f8f5a;
+    vertical-align: 1px;
+    box-shadow: 0 0 0 0 rgba(15, 143, 90, 0.35);
+    animation: breathe 2.8s ease-in-out infinite;
+  }
+  @keyframes breathe {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(15, 143, 90, 0.35); }
+    50% { box-shadow: 0 0 0 5px rgba(15, 143, 90, 0); }
+  }
+
+  /* Entrance, seen once per visit (choreography):
+     lead = headline lines, rising 12px with shrinking gaps;
+     the accent phrase arrives last and travels a little further;
+     portrait = decoration, fades with its line;
+     support = availability + lede, 6px, overlapping the last line. */
+  :global(.js) .hero.is-pending [data-w],
+  :global(.js) .hero.is-pending [data-hero-support] { opacity: 0; }
+  .hero.is-playing [data-w] {
+    animation: rise 640ms var(--ease-out) both;
+    animation-delay: var(--d, 0ms);
+  }
+  .hero.is-playing [data-accent] { animation-name: rise-far; animation-duration: 760ms; }
+  .hero.is-playing .hero__portrait { animation-name: settle; }
+  .hero.is-playing [data-hero-support] {
+    animation: rise-small 560ms var(--ease-out) both;
+    animation-delay: var(--d-support, 300ms);
+  }
+  @keyframes rise { from { opacity: 0; transform: translateY(12px); } }
+  @keyframes rise-far { from { opacity: 0; transform: translateY(18px); } }
+  @keyframes rise-small { from { opacity: 0; transform: translateY(6px); } }
+  @keyframes settle { from { opacity: 0; transform: scale(0.94); } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero.is-playing [data-w],
+    .hero.is-playing [data-hero-support] { animation: fade 150ms ease both; animation-delay: 0ms; }
+    .hero__dot { animation: none; }
+  }
+  @keyframes fade { from { opacity: 0; } }
+
+  /* ---------- Work ---------- */
+  .work { padding-top: 0; padding-bottom: var(--space-section); }
+  .work__label { margin-bottom: 48px; }
+  .work__grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: var(--gutter);
+    row-gap: 80px;
+  }
+
+  /* ---------- How I think ---------- */
+  .think { padding-top: var(--space-section); padding-bottom: var(--space-before-footer); }
+  .think__list {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    column-gap: var(--gutter);
+    row-gap: 40px;
+  }
+  .think__list li { display: flex; flex-direction: column; gap: 12px; }
+
+  @media (max-width: 759px) {
+    .hero { gap: 40px; }
+    .hero__status, .hero__lede { grid-column: 1 / -1; }
+    /* Phone order follows importance: the paragraph before availability */
+    .hero__lede { order: -1; }
+    .hero__portrait { width: 1em; height: 1em; }
+    .work__label { margin-bottom: 32px; }
+    .work__grid { row-gap: 56px; }
+    .think__list { grid-template-columns: 1fr; }
+  }
+</style>
+
+<script>
+  // Group headline words into rendered lines (after fonts load, so the
+  // wrap is final), then give each line a delay with shrinking gaps.
+  const hero = document.querySelector<HTMLElement>('[data-hero]');
+  if (hero) {
+    hero.classList.add('is-pending');
+    const play = () => {
+      const words = Array.from(hero.querySelectorAll<HTMLElement>('[data-w]'));
+      const tops: number[] = [];
+      for (const w of words) {
+        const top = Math.round(w.offsetTop);
+        let line = tops.findIndex((t) => Math.abs(t - top) < 12);
+        if (line === -1) { tops.push(top); line = tops.length - 1; }
+        w.dataset.line = String(line);
+      }
+      const gaps = [0, 80, 150, 205, 250, 285, 310]; // ease on the delays
+      const lineDelay = (i: number) => gaps[Math.min(i, gaps.length - 1)] + Math.max(0, i - 6) * 20;
+      let last = 0;
+      for (const w of words) {
+        let d = lineDelay(Number(w.dataset.line));
+        if (w.hasAttribute('data-accent')) d += 90; // the accent lands last
+        w.style.setProperty('--d', `${d}ms`);
+        last = Math.max(last, d);
+      }
+      hero.style.setProperty('--d-support', `${Math.max(240, last - 60)}ms`);
+      hero.classList.remove('is-pending');
+      hero.classList.add('is-playing');
+    };
+    const timeout = new Promise((r) => setTimeout(r, 700));
+    Promise.race([document.fonts?.ready ?? Promise.resolve(), timeout]).then(() => requestAnimationFrame(play));
+  }
+
+  // Featured phone follows the cursor up to ±3°, eased toward the target so
+  // it trails the hand slightly instead of snapping (decorative only).
+  const zone = document.querySelector<HTMLElement>('[data-tilt-zone]');
+  const phone = zone?.querySelector<HTMLElement>('[data-tilt]');
+  const fine = window.matchMedia('(hover: hover) and (pointer: fine)');
+  const still = window.matchMedia('(prefers-reduced-motion: reduce)');
+  if (zone && phone && fine.matches && !still.matches) {
+    let tx = 0, ty = 0, cx = 0, cy = 0, raf = 0;
+    const tick = () => {
+      cx += (tx - cx) * 0.12;
+      cy += (ty - cy) * 0.12;
+      phone.style.setProperty('--tilt-y', `${cx.toFixed(3)}deg`);
+      phone.style.setProperty('--tilt-x', `${cy.toFixed(3)}deg`);
+      raf = Math.abs(tx - cx) + Math.abs(ty - cy) > 0.01 ? requestAnimationFrame(tick) : 0;
+    };
+    const kick = () => { if (!raf) raf = requestAnimationFrame(tick); };
+    zone.addEventListener('pointermove', (e) => {
+      const r = zone.getBoundingClientRect();
+      tx = ((e.clientX - r.left) / r.width - 0.5) * 6;
+      ty = -((e.clientY - r.top) / r.height - 0.5) * 6;
+      kick();
+    });
+    zone.addEventListener('pointerleave', () => { tx = 0; ty = 0; kick(); });
+  }
+</script>

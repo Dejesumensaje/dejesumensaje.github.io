@@ -1,0 +1,54 @@
+---
+// Page title that enters once, line by line: lines rise 12px with shrinking
+// gaps and the accent phrase lands last (same choreography as the home hero).
+// Lines are measured after fonts load, so the wrap is the real one.
+interface Props { lead: string; accent?: string; accentBreak?: boolean; class?: string; as?: 'h1' | 'h2' | 'p' }
+const { lead, accent, accentBreak = false, class: cls, as: Tag = 'h1' } = Astro.props;
+const words = lead.split(' ');
+const accentWords = accent ? accent.split(' ') : [];
+---
+
+<Tag class:list={['t-display', 'rise', cls]} data-rise>
+  {words.map((w) => <><span class="rise__w" data-w>{w}</span>{' '}</>)}
+  {accent && (
+    <span class:list={['accent', { 'rise__break': accentBreak }]}>{accentWords.map((w, i) => <><span class="rise__w" data-w data-accent>{w}</span>{i < accentWords.length - 1 && ' '}</>)}</span>
+  )}
+</Tag>
+
+<style>
+  .rise { text-wrap: initial; }
+  .rise__w { display: inline-block; }
+  .rise__break { display: block; }
+  :global(.js) .rise.is-pending [data-w] { opacity: 0; }
+  .rise.is-playing [data-w] { animation: rise-in 640ms var(--ease-out) both; animation-delay: var(--d, 0ms); }
+  .rise.is-playing [data-accent] { animation-name: rise-in-far; animation-duration: 760ms; }
+  @keyframes rise-in { from { opacity: 0; transform: translateY(12px); } }
+  @keyframes rise-in-far { from { opacity: 0; transform: translateY(18px); } }
+  @media (prefers-reduced-motion: reduce) {
+    .rise.is-playing [data-w] { animation: rise-fade 150ms ease both; animation-delay: 0ms; }
+  }
+  @keyframes rise-fade { from { opacity: 0; } }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-rise]').forEach((title) => {
+    title.classList.add('is-pending');
+    const play = () => {
+      const words = Array.from(title.querySelectorAll<HTMLElement>('[data-w]'));
+      const tops: number[] = [];
+      const gaps = [0, 80, 150, 205, 250, 285, 310];
+      for (const w of words) {
+        const top = Math.round(w.offsetTop);
+        let line = tops.findIndex((t) => Math.abs(t - top) < 12);
+        if (line === -1) { tops.push(top); line = tops.length - 1; }
+        let d = gaps[Math.min(line, gaps.length - 1)];
+        if (w.hasAttribute('data-accent')) d += 90;
+        w.style.setProperty('--d', `${d}ms`);
+      }
+      title.classList.remove('is-pending');
+      title.classList.add('is-playing');
+    };
+    const timeout = new Promise((r) => setTimeout(r, 700));
+    Promise.race([document.fonts?.ready ?? Promise.resolve(), timeout]).then(() => requestAnimationFrame(play));
+  });
+</script>

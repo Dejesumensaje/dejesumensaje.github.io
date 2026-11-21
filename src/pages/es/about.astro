@@ -1,0 +1,367 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import RiseTitle from '../../components/f/RiseTitle.astro';
+
+const pct = (v: number, of: number) => `${((v / of) * 100).toFixed(3)}%`;
+
+const now = [
+  { k: 'Hoy', v: 'Trabajo con Deloitte a través de Globant, entre producto, UX y arquitectura de información.' },
+  { k: 'Enfoque', v: 'Flujos de servicio complejos, ecosistemas cargados de contenido e interfaces que necesitan orden.' },
+  { k: 'Fortalezas', v: 'Convertir la investigación, el pensamiento sistémico y la dirección de diseño en decisiones que los equipos pueden construir.' },
+];
+const beliefs = [
+  { t: 'Debe respetar a las personas.', b: 'Su inteligencia, su tiempo y su contexto.' },
+  { t: 'Debe llegar a quienes nadie mira.', b: 'Las personas que casi siempre quedan fuera del brief.' },
+  { t: 'Debe valer en todas partes.', b: 'En educación o en software empresarial, aplico los mismos principios.' },
+];
+const jobs = [
+  { org: 'Globant / Deloitte', role: 'Senior Product Designer', what: 'Sistemas de diseño, herramientas de precios y gobierno de IA para Converge for Restaurants (KFC, Pizza Hut).', when: '2024 – hoy' },
+  { org: 'Globant / CashPak', role: 'Diseñador UX', what: 'Diseñé Pako, una billetera digital para Centroamérica, con pruebas de usabilidad en Nicaragua y El Salvador.', when: '2023 – 2024' },
+  { org: 'Globant / Blackboard', role: 'Diseñador de producto', what: 'Rediseñé la comunicación entre estudiantes y docentes: bandeja del curso, anuncios y mensajería.', when: '2022 – 2023' },
+  { org: 'Ministerio de Educación', role: 'Líder UX', what: 'Lideré a un equipo de 18 personas en el rediseño de Colombia Aprende y Aprender Digital, plataformas nacionales que alcanzaron 2,8 millones de usuarios en el pico de la pandemia.', when: '2019 – 2021' },
+];
+const tools = [
+  { t: 'Claude', b: 'Lo uso durante todo el proceso para sintetizar investigación, estructurar textos y mapear casos límite. Amplía mi criterio, pero no decide por mí.' },
+  { t: 'Figma + Figma Make', b: 'En Figma diseño; en Figma Make prototipo rápido, con todos los estados, antes de la primera revisión con el equipo de producto. La IA ejecuta las iteraciones; yo tomo las decisiones de diseño.' },
+  { t: 'Notion', b: 'Documentación, síntesis de investigación y seguimiento de proyectos. Escribo para ordenar ideas: antes de las reuniones, después de investigar y cada vez que una decisión necesita argumentos sólidos.' },
+];
+const skills = [
+  { k: 'Base de UX', items: ['Investigación con usuarios', 'Arquitectura de información', 'Pruebas de usabilidad', 'UX writing', 'Wireframes', 'Prototipado', 'Estrategia de diseño'] },
+  { k: 'Fortalezas', items: ['Accesibilidad', 'Sistemas de diseño', 'Facilitación de talleres', 'Flujos de trabajo con IA'] },
+  { k: 'Herramientas', items: ['Figma', 'Notion', 'Miro'] },
+];
+const games = [
+  { title: 'Consume Me', date: '25 sep', img: 'coajxj' },
+  { title: 'Tears of the Kingdom', date: '08 jul', img: 'co5vmg' },
+  { title: '007 First Light', date: '30 jun', img: 'coaoiz' },
+  { title: 'Mixtape', date: '18 may', img: 'coc2wi' },
+  { title: 'Pragmata', date: '13 may', img: 'cobxnx' },
+];
+---
+
+<Layout
+  title="Sobre mí — William Montoya"
+  description="Periodista convertido en diseñador de producto. Diseño en el cruce entre los sistemas, la educación y el potencial humano."
+>
+  <!-- Header -->
+  <header class="about-head wrap">
+    <div class="about-head__title">
+      <p class="t-small t-muted">Sobre mí</p>
+      <RiseTitle lead="Diseño en el cruce entre los sistemas, la educación y" accent="el potencial humano." accentBreak />
+    </div>
+
+    <div class="about-intro">
+      <img
+        class="about-intro__portrait"
+        src="/assets/f/about-portrait.webp"
+        width="720"
+        height="540"
+        alt="William Montoya, sonriente, con chaqueta de jean."
+        fetchpriority="high"
+      />
+      <div class="about-intro__text">
+        <p class="t-h2 measure-wide">Empecé como periodista, intentando entender cómo la información moldea a las personas. Ese interés me llevó al diseño de producto.</p>
+        <dl class="cols3">
+          {now.map((n) => (
+            <div><dt class="t-small t-muted">{n.k}</dt><dd>{n.v}</dd></div>
+          ))}
+        </dl>
+      </div>
+    </div>
+  </header>
+
+  <!-- My story -->
+  <section class="chapter wrap" aria-labelledby="a-story" data-reveal>
+    <div class="split">
+      <h2 id="a-story" class="t-h3 split__label">Mi historia</h2>
+      <div class="stack split__body">
+        <div class="prose measure">
+          <p>Ese camino me llevó al Ministerio de Educación de Colombia, donde ayudé a rediseñar plataformas nacionales para docentes, estudiantes y familias de todo el país.</p>
+          <p>Trabajar en lo público cambió mi forma de entender el diseño. Más allá de la usabilidad, se trata de abrir acceso, fortalecer instituciones y crear herramientas útiles para la gente. Ese propósito guía mi trabajo desde entonces.</p>
+        </div>
+        <p class="t-h2 measure-wide">Para mí, la arquitectura de información es el oficio de dar orden y sentido.</p>
+        <p class="measure">Busco simplificar lo complejo sin vaciar lo importante. Diseño desde el sistema hacia la superficie, no al revés. Escribir es la base de mi proceso porque me obliga a ser claro; investigar desmonta lo que asumo; iterar pone a prueba cada idea.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- What I believe -->
+  <section class="chapter wrap" aria-labelledby="a-believe" data-reveal>
+    <div class="split">
+      <h2 id="a-believe" class="t-h3 split__label">En qué creo</h2>
+      <div class="stack split__body">
+        <p class="t-h2 measure-wide">El diseño debe generar comprensión.</p>
+        <div class="cols3">
+          {beliefs.map((b) => (
+            <div><h3 class="t-h3">{b.t}</h3><p class="t-muted">{b.b}</p></div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience -->
+  <section class="chapter wrap" aria-labelledby="a-exp" data-reveal>
+    <div class="split">
+      <h2 id="a-exp" class="t-h3 split__label">Experiencia</h2>
+      <div class="split__body exp">
+        <ol class="list-reset exp__list" role="list">
+          {jobs.map((j) => (
+            <li class="exp__row">
+              <div class="exp__who">
+                <h3 class="t-h3">{j.org}</h3>
+                <p class="t-muted">{j.role}</p>
+              </div>
+              <p class="exp__what">{j.what}</p>
+              <p class="t-small t-muted exp__when">{j.when}</p>
+            </li>
+          ))}
+        </ol>
+        <p class="exp__links">
+          <a class="link" href="/es/resume.html">Hoja de vida completa <span aria-hidden="true">→</span></a>
+          <a class="link" href="/assets/cv-william-montoya-2026-es.pdf" download>Descargar PDF <span aria-hidden="true">↓</span></a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How I work today -->
+  <section class="chapter wrap" aria-labelledby="a-work" data-reveal>
+    <div class="split">
+      <h2 id="a-work" class="t-h3 split__label">Cómo trabajo hoy</h2>
+      <div class="stack split__body" style="gap:64px">
+        <div class="cols3">
+          {tools.map((t) => (
+            <div><h3 class="t-h3">{t.t}</h3><p class="t-muted">{t.b}</p></div>
+          ))}
+        </div>
+        <div class="cols3">
+          {skills.map((s) => (
+            <div>
+              <h3 class="t-small t-muted">{s.k}</h3>
+              <ul class="list-reset skills" role="list">{s.items.map((i) => <li>{i}</li>)}</ul>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Beyond design -->
+  <section class="chapter chapter--last wrap" aria-labelledby="a-beyond">
+    <div class="split">
+      <h2 id="a-beyond" class="t-h3 split__label" data-reveal>Más allá del diseño</h2>
+      <div class="split__body beyond">
+        <article class="beyond__row" data-reveal>
+          <div class="beyond__text">
+            <h3 class="t-h3">Docencia</h3>
+            <p class="t-muted">Enseño pensamiento sensorial en la Universidad de Antioquia: cómo la percepción, la emoción y la atención moldean la relación de las personas con los sistemas digitales.</p>
+            <a class="link" href="https://catedra.dejesumensaje.com/" target="_blank" rel="noopener noreferrer">Cátedra, el archivo de mis cursos <span aria-hidden="true">↗</span></a>
+            <div class="beyond__feature">
+              <p class="t-small t-muted">Guía destacada</p>
+              <a class="link" href="https://catedra.dejesumensaje.com/diseno-visual/" target="_blank" rel="noopener noreferrer">Anatomía del diseño visual <span aria-hidden="true">↗</span></a>
+              <p class="t-small t-muted">Una enciclopedia interactiva de diseño visual: cambia una variable y observa cómo cambia tu percepción.</p>
+            </div>
+          </div>
+          <a class="stage beyond__stage" href="https://catedra.dejesumensaje.com/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
+            <div class="browser" style={`left:${pct(48, 636)};top:${pct(34, 400)};width:${pct(540, 636)}`}>
+              <div class="browser__bar"><i></i><i></i><i></i></div>
+              <img src="/assets/f/catedra.webp" width="1200" height="675" alt="" loading="lazy" />
+            </div>
+          </a>
+        </article>
+
+        <article class="beyond__row" data-reveal>
+          <div class="beyond__text">
+            <h3 class="t-h3">Alucine</h3>
+            <p class="t-muted">Un proyecto sobre cine y cultura donde exploro historias, símbolos y cómo la narrativa transforma nuestra forma de ver el mundo.</p>
+            <a class="link" href="https://alucine.co/" target="_blank" rel="noopener noreferrer">alucine.co <span aria-hidden="true">↗</span></a>
+          </div>
+          <a class="stage beyond__stage" href="https://alucine.co/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
+            <div class="browser" style={`left:${pct(48, 636)};top:${pct(34, 400)};width:${pct(540, 636)}`}>
+              <div class="browser__bar"><i></i><i></i><i></i></div>
+              <img src="/assets/f/alucine.webp" width="1200" height="675" alt="" loading="lazy" />
+            </div>
+          </a>
+        </article>
+
+        <article class="beyond__row" data-reveal>
+          <div class="beyond__text">
+            <h3 class="t-h3">Videojuegos</h3>
+            <p class="t-muted">Los videojuegos me enseñaron sobre sistemas, decisiones y ciclos de retroalimentación mucho antes de que la IA entrara a mi flujo de trabajo.</p>
+            <a class="link" href="https://backloggd.com/u/dejesumensaje/" target="_blank" rel="noopener noreferrer">backloggd <span aria-hidden="true">↗</span></a>
+          </div>
+          <div class="stage beyond__stage games" data-games>
+            <div class="games__head">
+              <p class="t-small t-muted">Jugados hace poco</p>
+              <div class="games__controls">
+                <button class="icon-btn icon-btn--sm" type="button" data-prev disabled>
+                  <span class="sr-only">Juegos anteriores</span>
+                  <svg width="16" height="16" viewBox="0 0 18 18" aria-hidden="true"><path d="M14 9H4m4-4L4 9l4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+                <button class="icon-btn icon-btn--sm" type="button" data-next>
+                  <span class="sr-only">Más juegos</span>
+                  <svg width="16" height="16" viewBox="0 0 18 18" aria-hidden="true"><path d="M4 9h10m-4-4 4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+              </div>
+            </div>
+            <ul class="list-reset games__track" role="list" data-track>
+              {games.map((g) => (
+                <li class="game">
+                  <img src={`/assets/f/game-${g.img}.webp`} width="300" height="400" alt={`Portada de ${g.title}`} loading="lazy" />
+                  <p class="t-small game__title">{g.title}</p>
+                  <p class="t-small t-muted">{g.date}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .about-head {
+    padding-top: var(--space-page-top);
+    padding-bottom: var(--space-section);
+    display: flex;
+    flex-direction: column;
+    gap: 64px;
+  }
+  .about-head__title { display: flex; flex-direction: column; gap: 24px; }
+  .about-head__title :global(.rise) { max-width: 13em; }
+
+  .about-intro {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: var(--gutter);
+    row-gap: 32px;
+  }
+  .about-intro__portrait {
+    grid-column: 1 / span 3;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 306 / 400;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
+    background: var(--surface);
+  }
+  .about-intro__text {
+    grid-column: 4 / -1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 40px;
+  }
+
+  .cols3 {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    column-gap: var(--gutter);
+    row-gap: 32px;
+    margin: 0;
+  }
+  .cols3 > div { display: flex; flex-direction: column; gap: 12px; }
+  .cols3 dd { margin: 0; }
+
+  .chapter { padding-bottom: var(--space-section); }
+  .chapter--last { padding-bottom: var(--space-before-footer); }
+  .stack { display: flex; flex-direction: column; gap: 52px; }
+
+  /* Experience: who (3 cols) · what (4 cols) · when (2 cols, right) */
+  .exp { display: flex; flex-direction: column; gap: 40px; }
+  .exp__list { display: flex; flex-direction: column; gap: 40px; }
+  .exp__row {
+    display: grid;
+    grid-template-columns: 3fr 4fr 2fr;
+    column-gap: var(--gutter);
+    row-gap: 8px;
+  }
+  .exp__who { display: flex; flex-direction: column; gap: 4px; }
+  .exp__what { padding-top: 3px; max-width: 416px; }
+  .exp__when { padding-top: 8px; text-align: right; font-variant-numeric: tabular-nums; }
+  .exp__links { display: flex; gap: 32px; flex-wrap: wrap; padding-top: 8px; }
+  .skills { display: flex; flex-direction: column; gap: 8px; padding-top: 2px; }
+
+  /* Beyond design: text (3 cols) beside a stage (6 cols) */
+  .beyond { display: flex; flex-direction: column; gap: 64px; }
+  .beyond__row {
+    display: grid;
+    grid-template-columns: 3fr 6fr;
+    column-gap: var(--gutter);
+    row-gap: 24px;
+    align-items: start;
+  }
+  .beyond__text { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; }
+  .beyond__feature { display: flex; flex-direction: column; gap: 4px; padding-top: 18px; }
+  .beyond__stage { aspect-ratio: 636 / 400; display: block; }
+  .beyond__stage .browser { transition: transform 300ms var(--ease-out); }
+  @media (hover: hover) and (pointer: fine) {
+    a.beyond__stage:hover .browser { transform: translateY(-4px); }
+  }
+
+  /* Recently played: a small shelf inside the stage */
+  .games { display: flex; flex-direction: column; gap: 20px; padding: 28px 0 0; }
+  .games__head { display: flex; justify-content: space-between; align-items: center; padding-inline: 32px; }
+  .games__controls { display: flex; gap: 8px; }
+  .icon-btn--sm { width: 36px; height: 36px; }
+  .games__track {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 32px;
+    padding: 0 32px 28px;
+    scrollbar-width: none;
+    overscroll-behavior-x: contain;
+  }
+  .games__track::-webkit-scrollbar { display: none; }
+  .game { flex: 0 0 150px; scroll-snap-align: start; display: flex; flex-direction: column; gap: 2px; }
+  .game img {
+    width: 150px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: var(--radius-xs);
+    margin-bottom: 10px;
+    box-shadow: 0 10px 24px -12px rgba(23, 24, 26, 0.35);
+  }
+  .game__title { color: var(--ink); }
+
+  @media (max-width: 899px) {
+    .about-intro__portrait { grid-column: 1 / span 5; }
+    .about-intro__text { grid-column: 6 / -1; }
+    .beyond__row { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 759px) {
+    .about-head { gap: 40px; }
+    .about-intro__portrait { grid-column: 1 / -1; aspect-ratio: 4 / 3; }
+    .about-intro__text { grid-column: 1 / -1; }
+    .cols3 { grid-template-columns: 1fr; }
+    .exp__row { grid-template-columns: 1fr; }
+    .exp__when { text-align: left; padding-top: 0; order: -1; }
+    .games__head { padding-inline: 20px; }
+    .games__track { padding-inline: 20px; scroll-padding-inline: 20px; }
+    .games__controls { display: none; }
+    .beyond__stage.games { aspect-ratio: auto; }
+  }
+</style>
+
+<script>
+  // Recently played: arrows move one cover; disabled at the ends.
+  document.querySelectorAll<HTMLElement>('[data-games]').forEach((root) => {
+    const track = root.querySelector<HTMLElement>('[data-track]')!;
+    const prev = root.querySelector<HTMLButtonElement>('[data-prev]')!;
+    const next = root.querySelector<HTMLButtonElement>('[data-next]')!;
+    const still = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const step = () => (track.firstElementChild as HTMLElement).offsetWidth + 16;
+    const update = () => {
+      prev.disabled = track.scrollLeft <= 2;
+      next.disabled = track.scrollLeft >= track.scrollWidth - track.clientWidth - 2;
+    };
+    prev.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: still.matches ? 'auto' : 'smooth' }));
+    next.addEventListener('click', () => track.scrollBy({ left: step(), behavior: still.matches ? 'auto' : 'smooth' }));
+    track.addEventListener('scroll', update, { passive: true });
+    update();
+  });
+</script>

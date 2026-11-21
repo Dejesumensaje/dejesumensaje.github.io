@@ -1,0 +1,281 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout
+  title="Perdido en la conversación — William Montoya"
+  description="Este enlace estaba diciendo algo y de pronto se calló. Vuelve al trabajo."
+  noindex
+>
+  <section class="lost" data-lost aria-labelledby="lost-title">
+    <div class="lost__air" data-air aria-hidden="true"></div>
+    <div class="lost__copy wrap">
+      <div class="lost__text" data-copy>
+        <p class="t-small t-muted">Error 404 · Página no encontrada</p>
+        <h1 id="lost-title" class="lost__title">Perdido en la <span class="accent">conversación</span></h1>
+        <p class="t-lead lost__lede">Este enlace estaba diciendo algo y de pronto se calló</p>
+        <div class="lost__actions">
+          <a class="btn btn--primary" href="/es.html#work">Volver al trabajo</a>
+          <a class="btn btn--outline" href="/es/about.html">Sobre mí</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  /* The first screen under the nav is the toy: the logo's speech bubbles float
+     across it, eyes on the pointer. Drag one and it swallows the ones it
+     touches until it bursts; after a pause, new ones come back. No UI. */
+  .lost {
+    position: relative;
+    min-height: calc(100svh - 92px);
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    margin-bottom: var(--space-before-footer);
+  }
+  .lost__air { position: absolute; inset: 0; z-index: 0; touch-action: none; }
+  .lost__copy { position: relative; z-index: 1; pointer-events: none; padding-block: 48px 96px; }
+  .lost__copy a { pointer-events: auto; }
+  .lost__text { display: flex; flex-direction: column; gap: 24px; max-width: 640px; }
+  .lost__title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(44px, 6.4vw, 96px);
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+  .lost__title .accent { display: block; }
+  .lost__lede { max-width: 36ch; text-wrap: pretty; }
+  .lost__actions { display: flex; gap: 12px; flex-wrap: wrap; padding-top: 8px; }
+
+  .lost :global(.bubble) {
+    position: absolute; left: 0; top: 0;
+    width: 100px; height: 100px; margin: -50px 0 0 -50px;
+    cursor: grab; touch-action: none; user-select: none; -webkit-user-select: none;
+    will-change: transform;
+  }
+  .lost :global(.bubble.grabbed) { cursor: grabbing; z-index: 3; }
+  .lost :global(.bubble svg) { width: 100%; height: 100%; display: block; overflow: visible; }
+  .lost :global(.bubble .body) { fill: var(--accent); }
+  .lost :global(.bubble.soft .body) { fill: #6e95f2; }
+  .lost :global(.bubble .eye) { fill: #fff; }
+  .lost :global(.bubble.blink .eyes) { animation: lost-blink 260ms ease-in-out; transform-box: fill-box; transform-origin: center; }
+  @keyframes lost-blink { 40%, 60% { transform: scaleY(0.1); } }
+  .lost :global(.shard) { position: absolute; left: 0; top: 0; border-radius: 50%; pointer-events: none; }
+  .lost :global(.said) {
+    position: absolute; left: 0; top: 0; z-index: 2;
+    font: 400 clamp(20px, 2.2vw, 28px)/1.2 var(--font-display); letter-spacing: -0.01em;
+    color: var(--ink); white-space: nowrap; pointer-events: none;
+  }
+  @media (max-width: 759px) {
+    .lost { min-height: calc(100svh - 76px); margin-bottom: 0; }
+  }
+</style>
+
+<script>
+  type Bubble = {
+    el: HTMLDivElement; eyes: SVGGElement; x: number; y: number; r: number; dr: number;
+    vx: number; vy: number; phase: number; scale: number; born: number; gone?: boolean;
+  };
+
+  const root = document.querySelector<HTMLElement>('[data-lost]');
+  const air = root?.querySelector<HTMLElement>('[data-air]');
+  const copy = root?.querySelector<HTMLElement>('[data-copy]');
+
+  if (root && air && copy) {
+    const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const PATH = 'M13.378 .039c.854-.103 2.649 .019 3.504 .134 3.818 .53 7.587 2.329 9.925 5.413 3.593 4.738 2.096 10.746-2.633 14.081-3.711 2.617-8.065 3.427-12.534 2.791-.89-.139-1.681-.34-2.553-.562-.313 .122-.572 .331-.85 .513-1.629 1.071-3.553 1.69-5.502 1.849-.309 .025-.553 .007-.798-.2-.202-.169-.326-.412-.343-.673-.027-.406 .196-.679 .51-1.014 .853-.908 1.449-2.507 1.137-3.73-.219-.399-.601-.737-.903-1.092-3.201-3.77-3.107-9.006 .234-12.668 2.814-3.085 6.661-4.58 10.806-4.842z';
+    // What a bubble says when it bursts: the conversation the page lost.
+    const SAID = ['Uf, eso fue mucho para decir', 'Bueno, ¿en qué íbamos?', 'Eso se salió de las manos', 'Listo, respira profundo'];
+    let saidIdx = 0;
+
+    let W = 0, H = 0, popR = 100, started = false;
+    let bubbles: Bubble[] = [];
+    let pointer: { x: number; y: number } | null = null;
+    let drag: { b: Bubble; id: number; ox: number; oy: number } | null = null;
+
+    // More bubbles on bigger screens, a little smaller, never crowded.
+    const count = () => (W < 760 ? 12 : Math.min(22, Math.round((W * H) / 52000)));
+    const baseR = () => Math.max(14, Math.min(W, H) * 0.029);
+    const local = (e: PointerEvent) => { const r = air.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; };
+
+    function makeBubble(x: number, y: number, r: number, soft: boolean, delay: number): Bubble {
+      const el = document.createElement('div');
+      el.className = 'bubble' + (soft ? ' soft' : '');
+      el.innerHTML = `<svg viewBox="0 0 32 32"><path class="body" transform="translate(1.6 3.733)" d="${PATH}"/><g class="eyes"><circle class="eye" cx="11.6" cy="14.27" r="1.73"/><circle class="eye" cx="20.4" cy="14.27" r="1.73"/></g></svg>`;
+      el.style.opacity = '0';
+      air!.appendChild(el);
+      const b: Bubble = {
+        el, eyes: el.querySelector('.eyes') as SVGGElement, x, y, r, dr: r,
+        vx: (Math.random() - 0.5) * 0.3, vy: (Math.random() - 0.5) * 0.3,
+        phase: Math.random() * 6.28, scale: still ? 1 : 0.5, born: performance.now() + delay,
+      };
+      el.addEventListener('pointerdown', (e) => grab(e, b));
+      return b;
+    }
+
+    // Keep the words readable: no bubble is born on top of the text.
+    function blocked(x: number, y: number, r: number) {
+      const a = air!.getBoundingClientRect(), c = copy!.getBoundingClientRect();
+      const L = c.left - a.left, T = c.top - a.top;
+      return x + r > L - 16 && x - r < L + c.width + 16 && y + r > T - 16 && y - r < T + c.height + 16;
+    }
+
+    function spawn() {
+      const n = count(), base = baseR();
+      for (let i = 0; i < n; i++) {
+        const r = base * (0.8 + Math.random() * 0.6);
+        let x = 0, y = 0, tries = 0;
+        do { x = r + Math.random() * (W - 2 * r); y = r + Math.random() * (H - 2 * r); tries++; }
+        while (tries < 80 && (blocked(x, y, r) || bubbles.some((o) => Math.hypot(o.x - x, o.y - y) < o.r + r + 16)));
+        bubbles.push(makeBubble(x, y, r, i % 3 === 1, still ? 0 : i * 60));
+      }
+      // Bursts once one bubble holds about a third of all the air (7 or 8 swallows).
+      popR = Math.sqrt(bubbles.reduce((s, b) => s + b.r * b.r, 0) * 0.36);
+    }
+
+    function grab(e: PointerEvent, b: Bubble) {
+      if (drag) return;
+      e.preventDefault();
+      const p = local(e);
+      drag = { b, id: e.pointerId, ox: p.x - b.x, oy: p.y - b.y };
+      b.el.setPointerCapture(e.pointerId);
+      b.el.classList.add('grabbed');
+      b.vx = b.vy = 0;
+    }
+
+    root.addEventListener('pointermove', (e) => {
+      pointer = local(e);
+      if (drag && e.pointerId === drag.id) {
+        const b = drag.b;
+        b.x = Math.max(b.dr, Math.min(W - b.dr, pointer.x - drag.ox));
+        b.y = Math.max(b.dr, Math.min(H - b.dr, pointer.y - drag.oy));
+        const t = touching(b); // absorb on contact: no need to aim or let go
+        if (t) absorb(b, t);
+      }
+    });
+    const release = (e: PointerEvent) => {
+      if (!drag || e.pointerId !== drag.id) return;
+      drag.b.el.classList.remove('grabbed');
+      drag = null;
+    };
+    root.addEventListener('pointerup', release);
+    root.addEventListener('pointercancel', release);
+    root.addEventListener('pointerleave', () => { if (!drag) pointer = null; });
+
+    function touching(b: Bubble) {
+      const now = performance.now();
+      for (const o of bubbles) if (o !== b && !o.gone && now > o.born && Math.hypot(o.x - b.x, o.y - b.y) < (o.dr + b.dr) * 0.7) return o;
+      return null;
+    }
+
+    // The one you hold eats the one it touches; area adds up.
+    function absorb(b: Bubble, o: Bubble) {
+      o.gone = true;
+      b.r = Math.sqrt(b.r * b.r + o.r * o.r);
+      b.scale = still ? 1 : 1.1;
+      o.el.animate(
+        [{ transform: o.el.style.transform, opacity: 1 }, { transform: `translate(${b.x}px, ${b.y}px) scale(0.2)`, opacity: 0 }],
+        { duration: still ? 1 : 180, easing: 'cubic-bezier(0.23, 1, 0.32, 1)', fill: 'forwards' },
+      ).onfinish = () => o.el.remove();
+      bubbles = bubbles.filter((x) => x !== o);
+      b.el.classList.remove('blink'); void b.el.offsetWidth; b.el.classList.add('blink');
+      if (b.r >= popR) burst(b);
+    }
+
+    function burst(b: Bubble) {
+      if (drag && drag.b === b) drag = null;
+      const color = getComputedStyle(b.el.querySelector('.body')!).fill;
+      b.el.remove();
+      bubbles = bubbles.filter((x) => x !== b);
+      if (!still) {
+        for (let i = 0; i < 24; i++) {
+          const s = document.createElement('span');
+          s.className = 'shard';
+          const sz = 4 + Math.random() * 12;
+          s.style.width = s.style.height = sz + 'px';
+          s.style.background = color;
+          air!.appendChild(s);
+          const a = (i / 24) * Math.PI * 2 + Math.random() * 0.3, dist = b.dr * (1.2 + Math.random() * 1.4);
+          s.animate([
+            { transform: `translate(${b.x - sz / 2}px, ${b.y - sz / 2}px)`, opacity: 1 },
+            { transform: `translate(${b.x + Math.cos(a) * dist - sz / 2}px, ${b.y + Math.sin(a) * dist - sz / 2}px) scale(.3)`, opacity: 0 },
+          ], { duration: 520 + Math.random() * 260, easing: 'cubic-bezier(0.23, 1, 0.32, 1)', fill: 'forwards' }).onfinish = () => s.remove();
+        }
+      }
+      // What it said, where it was. Then it fades.
+      const t = document.createElement('div');
+      t.className = 'said';
+      t.textContent = SAID[saidIdx++ % SAID.length];
+      air!.appendChild(t);
+      const w = t.offsetWidth;
+      const x = Math.max(16, Math.min(W - w - 16, b.x - w / 2)), y = Math.max(16, Math.min(H - 60, b.y - 18));
+      t.animate([
+        { transform: `translate(${x}px, ${y + 8}px)`, opacity: 0 },
+        { transform: `translate(${x}px, ${y}px)`, opacity: 1, offset: 0.15 },
+        { transform: `translate(${x}px, ${y}px)`, opacity: 1, offset: 0.75 },
+        { transform: `translate(${x}px, ${y - 6}px)`, opacity: 0 },
+      ], { duration: 2600, easing: 'ease-out', fill: 'forwards' }).onfinish = () => t.remove();
+      // The rest fade out; after a pause, new bubbles come back on their own.
+      bubbles.forEach((o, i) => {
+        o.gone = true;
+        o.el.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 400, delay: i * 30, fill: 'forwards' }).onfinish = () => o.el.remove();
+      });
+      bubbles = [];
+      setTimeout(spawn, 3600);
+    }
+
+    let t0 = performance.now();
+    function frame(now: number) {
+      const dt = Math.min(32, now - t0) / 16.67; t0 = now;
+      for (const b of bubbles) {
+        if (now < b.born) continue;
+        if (b.el.style.opacity === '0') b.el.style.opacity = '1';
+        b.dr += (b.r - b.dr) * (still ? 1 : 0.2);
+        b.scale += (1 - b.scale) * (still ? 1 : 0.14);
+        if (!drag || drag.b !== b) {
+          if (!still) {
+            b.phase += 0.01 * dt;
+            b.x += (b.vx + Math.cos(b.phase) * 0.12) * dt;
+            b.y += (b.vy + Math.sin(b.phase * 1.3) * 0.1) * dt;
+          }
+          if (b.x < b.dr) { b.x = b.dr; b.vx = Math.abs(b.vx); }
+          if (b.x > W - b.dr) { b.x = W - b.dr; b.vx = -Math.abs(b.vx); }
+          if (b.y < b.dr) { b.y = b.dr; b.vy = Math.abs(b.vy); }
+          if (b.y > H - b.dr) { b.y = H - b.dr; b.vy = -Math.abs(b.vy); }
+        }
+        const s = ((b.dr * 2) / 90) * b.scale;
+        b.el.style.transform = `translate(${b.x}px, ${b.y}px) scale(${s.toFixed(4)})`;
+        const look = drag && drag.b !== b ? drag.b : pointer;
+        if (look) {
+          const a = Math.atan2(look.y - b.y, look.x - b.x);
+          b.eyes.style.transform = `translate(${(Math.cos(a) * 0.9).toFixed(2)}px, ${(Math.sin(a) * 0.7).toFixed(2)}px)`;
+        }
+      }
+      requestAnimationFrame(frame);
+    }
+
+    // Wait for a real size before spawning (a 0×0 start puts every bubble,
+    // tiny, in the corner). On resize, carry bubbles to the same relative spot.
+    const measure = () => { const r = air.getBoundingClientRect(); return { w: Math.round(r.width), h: Math.round(r.height) }; };
+    function start() {
+      const m = measure();
+      if (m.w < 240 || m.h < 240) { requestAnimationFrame(start); return; }
+      W = m.w; H = m.h; started = true;
+      spawn();
+      requestAnimationFrame(frame);
+    }
+    function onResize() {
+      const m = measure();
+      if (!started || m.w < 240 || m.h < 240) return;
+      const sx = m.w / W, sy = m.h / H;
+      for (const b of bubbles) { b.x *= sx; b.y *= sy; }
+      W = m.w; H = m.h;
+    }
+    new ResizeObserver(onResize).observe(air);
+    const fontsReady = (document.fonts?.ready ?? Promise.resolve()) as Promise<unknown>;
+    Promise.race([fontsReady, new Promise((r) => setTimeout(r, 700))]).then(() => requestAnimationFrame(start));
+  }
+</script>
