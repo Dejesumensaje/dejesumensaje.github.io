@@ -5,30 +5,30 @@ import RiseTitle from '../../components/f/RiseTitle.astro';
 const pct = (v: number, of: number) => `${((v / of) * 100).toFixed(3)}%`;
 
 const now = [
-  { k: 'Hoy', v: 'Trabajo con Deloitte a través de Globant, entre producto, UX y arquitectura de información.' },
-  { k: 'Enfoque', v: 'Flujos de servicio complejos, ecosistemas cargados de contenido e interfaces que necesitan orden.' },
-  { k: 'Fortalezas', v: 'Convertir la investigación, el pensamiento sistémico y la dirección de diseño en decisiones que los equipos pueden construir.' },
+  { k: 'Actualmente', v: 'Senior Product Designer en Globant, trabajando con Deloitte.' },
+  { k: 'Enfoque', v: 'Productos y experiencias digitales que tengan algo que decir, que resolver o que cuestionar.' },
+  { k: 'Fortalezas', v: 'Conectar ideas, encontrar soluciones inesperadas y pensar en quien está al otro lado de la pantalla.' },
 ];
 const beliefs = [
-  { t: 'Debe respetar a las personas.', b: 'Su inteligencia, su tiempo y su contexto.' },
-  { t: 'Debe llegar a quienes nadie mira.', b: 'Las personas que casi siempre quedan fuera del brief.' },
-  { t: 'Debe valer en todas partes.', b: 'En educación o en software empresarial, aplico los mismos principios.' },
+  { t: 'Entender a las personas', b: 'Diseñar desde sus realidades, no desde nuestros supuestos.' },
+  { t: 'Aprender de lo inesperado', b: 'Reconocer que las personas transforman y reinterpretan lo que diseñamos.' },
+  { t: 'Comprender el sistema', b: 'Conectar las experiencias con las necesidades y realidades que las hacen posibles.' },
 ];
 const jobs = [
-  { org: 'Globant / Deloitte', role: 'Senior Product Designer', what: 'Sistemas de diseño, herramientas de precios y gobierno de IA para Converge for Restaurants (KFC, Pizza Hut).', when: '2024 – hoy' },
-  { org: 'Globant / CashPak', role: 'Diseñador UX', what: 'Diseñé Pako, una billetera digital para Centroamérica, con pruebas de usabilidad en Nicaragua y El Salvador.', when: '2023 – 2024' },
-  { org: 'Globant / Blackboard', role: 'Diseñador de producto', what: 'Rediseñé la comunicación entre estudiantes y docentes: bandeja del curso, anuncios y mensajería.', when: '2022 – 2023' },
-  { org: 'Ministerio de Educación', role: 'Líder UX', what: 'Lideré a un equipo de 18 personas en el rediseño de Colombia Aprende y Aprender Digital, plataformas nacionales que alcanzaron 2,8 millones de usuarios en el pico de la pandemia.', when: '2019 – 2021' },
+  { org: 'Globant / Deloitte', role: 'Senior Product Designer', what: 'Sistemas de diseño, herramientas de precios y gobernanza de IA para Converge for Restaurants (KFC, Pizza Hut).', when: '2024–actualidad' },
+  { org: 'Globant / CashPak', role: 'UX Designer', what: 'Diseñé Pako, una billetera digital para Centroamérica, e hice pruebas de usabilidad en Nicaragua y El Salvador.', when: '2023–2024' },
+  { org: 'Globant / Blackboard', role: 'Product Designer', what: 'Rediseñé la comunicación entre estudiantes e instructores: bandeja de entrada de los cursos, anuncios y mensajes.', when: '2022–2023' },
+  { org: 'Ministerio de Educación de Colombia', role: 'UX Lead', what: 'Lideré el rediseño de Colombia Aprende y Aprender Digital, plataformas nacionales que llegaron a 2,8 millones de usuarios en el punto más alto de la pandemia, con un equipo de 18 personas.', when: '2019–2021' },
 ];
 const tools = [
-  { t: 'Claude', b: 'Lo uso durante todo el proceso para sintetizar investigación, estructurar textos y mapear casos límite. Amplía mi criterio, pero no decide por mí.' },
-  { t: 'Figma + Figma Make', b: 'En Figma diseño; en Figma Make prototipo rápido, con todos los estados, antes de la primera revisión con el equipo de producto. La IA ejecuta las iteraciones; yo tomo las decisiones de diseño.' },
-  { t: 'Notion', b: 'Documentación, síntesis de investigación y seguimiento de proyectos. Escribo para ordenar ideas: antes de las reuniones, después de investigar y cada vez que una decisión necesita argumentos sólidos.' },
+  { t: 'IA para pensar y explorar', b: 'Uso Claude, ChatGPT y Kimi para investigar, explorar alternativas, desarrollar ideas y probar posibles caminos. Hacer buenas preguntas es solo una parte del trabajo. También necesito evaluar qué funciona, qué no y cuándo conviene cambiar de dirección.' },
+  { t: 'Hacer tangibles las ideas', b: 'Cuando necesito llevar más lejos un artefacto de diseño, uso Claude Design como punto de partida y luego lo refino manualmente. Trabajo sobre el contraste, la jerarquía visual y los detalles de interacción para expresar mejor la idea y dirigir la atención hacia lo importante.' },
+  { t: 'Llevar las decisiones a desarrollo', b: 'Figma es donde refino y documento el diseño y preparo su entrega a desarrollo. Con integraciones MCP puedo crear documentación detallada que ayuda a conservar las decisiones visuales durante la implementación y mantener la intención de la experiencia.' },
 ];
 const skills = [
-  { k: 'Base de UX', items: ['Investigación con usuarios', 'Arquitectura de información', 'Pruebas de usabilidad', 'UX writing', 'Wireframes', 'Prototipado', 'Estrategia de diseño'] },
-  { k: 'Fortalezas', items: ['Accesibilidad', 'Sistemas de diseño', 'Facilitación de talleres', 'Flujos de trabajo con IA'] },
-  { k: 'Herramientas', items: ['Figma', 'Notion', 'Miro'] },
+  { k: 'Núcleo UX', items: ['Investigación con usuarios', 'Arquitectura de información', 'Pruebas de usabilidad', 'Escritura UX', 'Wireframes', 'Prototipado', 'Estrategia de diseño'] },
+  { k: 'Fortalezas', items: ['Pensamiento sistémico', 'Dirección de diseño', 'Accesibilidad', 'Sistemas de diseño', 'Facilitación de talleres', 'Flujos de trabajo con IA'] },
+  { k: 'Herramientas de mi proceso actual', items: ['Claude', 'ChatGPT', 'Kimi', 'Claude Design', 'Figma', 'Integraciones MCP'] },
 ];
 const games = [
   { title: 'Consume Me', date: '25 sep', img: 'coajxj' },
@@ -41,13 +41,13 @@ const games = [
 
 <Layout
   title="Sobre mí — William Montoya"
-  description="Periodista convertido en diseñador de producto. Diseño en el cruce entre los sistemas, la educación y el potencial humano."
+  description="Diseñador UX, periodista y docente. Construyo puentes claros entre las personas y la tecnología."
 >
   <!-- Header -->
   <header class="about-head wrap">
     <div class="about-head__title">
       <p class="t-small t-muted">Sobre mí</p>
-      <RiseTitle lead="Diseño en el cruce entre los sistemas, la educación y" accent="el potencial humano." accentBreak />
+      <RiseTitle lead="Construyo puentes claros entre" accent="las personas y la tecnología." accentBreak />
     </div>
 
     <div class="about-intro">
@@ -60,7 +60,7 @@ const games = [
         fetchpriority="high"
       />
       <div class="about-intro__text">
-        <p class="t-h2 measure-wide">Empecé como periodista, intentando entender cómo la información moldea a las personas. Ese interés me llevó al diseño de producto.</p>
+        <p class="about-lede measure-wide">Soy diseñador UX, periodista y docente de diseño de interacción y pensamiento sensorial. Me interesa entender cómo las personas se relacionan con la tecnología y aprender de esas experiencias para crear productos y dinámicas de uso significativas.</p>
         <dl class="cols3">
           {now.map((n) => (
             <div><dt class="t-small t-muted">{n.k}</dt><dd>{n.v}</dd></div>
@@ -74,13 +74,18 @@ const games = [
   <section class="chapter wrap" aria-labelledby="a-story" data-reveal>
     <div class="split">
       <h2 id="a-story" class="t-h3 split__label">Mi historia</h2>
-      <div class="stack split__body">
+      <div class="split__body">
         <div class="prose measure">
-          <p>Ese camino me llevó al Ministerio de Educación de Colombia, donde ayudé a rediseñar plataformas nacionales para docentes, estudiantes y familias de todo el país.</p>
-          <p>Trabajar en lo público cambió mi forma de entender el diseño. Más allá de la usabilidad, se trata de abrir acceso, fortalecer instituciones y crear herramientas útiles para la gente. Ese propósito guía mi trabajo desde entonces.</p>
+          <p>Soy periodista egresado de la Universidad de Antioquia. Comencé mi carrera en el periodismo digital, trabajando en especiales multimedia. <strong>Me interesaba conectar la forma y el contenido para contar historias no solo a través de palabras y sonidos, sino también a través de lo que las personas percibían y hacían.</strong></p>
+          <p>Mi paso por el Ministerio TIC amplió mi mirada sobre la tecnología y su dimensión humana. <strong>Una herramienta no resuelve nunca un problema por sí sola: su valor depende de cómo la gente la entiende y la incorpora a su contexto social y cultural.</strong></p>
+          <p>Durante mi especialización en la Universidad de los Andes, el enfoque de capacidades y la perspectiva sociotécnica me permitieron profundizar en estas ideas.</p>
+          <p>En el Ministerio de Educación tuve la fortuna de ver cómo las decisiones de diseño influían en lo que una comunidad educativa podía hacer, pero también entendí que <strong>ningún proceso de diseño determina por completo la forma cómo se usa o se entiende una tecnología</strong>.</p>
+          <p><strong>Hay algo hermoso en el azar y en la subjetividad humanas.</strong></p>
+          <p>Las personas se adaptan, encuentran atajos y resuelven problemas de formas imprevistas.</p>
+          <p>Personalmente creo que soltar la necesidad de control nos permite entender mucho mejor a quienes usan lo que diseñamos y, ante todo, es una forma de recordar que <strong>diseñamos para personas reales, no para nosotros mismos</strong>.</p>
+          <p>Hoy en día, abordo el diseño de adentro hacia afuera, conectando los objetivos del negocio, las realidades técnicas y las necesidades de los usuarios.</p>
+          <p>Investigo para cuestionar supuestos, escribo para aclarar y dar forma a las decisiones e <strong>itero, itero muchísimo, para poder realmente aprender de quienes usan el producto.</strong></p>
         </div>
-        <p class="t-h2 measure-wide">Para mí, la arquitectura de información es el oficio de dar orden y sentido.</p>
-        <p class="measure">Busco simplificar lo complejo sin vaciar lo importante. Diseño desde el sistema hacia la superficie, no al revés. Escribir es la base de mi proceso porque me obliga a ser claro; investigar desmonta lo que asumo; iterar pone a prueba cada idea.</p>
       </div>
     </div>
   </section>
@@ -88,9 +93,9 @@ const games = [
   <!-- What I believe -->
   <section class="chapter wrap" aria-labelledby="a-believe" data-reveal>
     <div class="split">
-      <h2 id="a-believe" class="t-h3 split__label">En qué creo</h2>
+      <h2 id="a-believe" class="t-h3 split__label">Lo que creo</h2>
       <div class="stack split__body">
-        <p class="t-h2 measure-wide">El diseño debe generar comprensión.</p>
+        <p class="t-h2 measure-wide">El diseño debe crear entendimiento</p>
         <div class="cols3">
           {beliefs.map((b) => (
             <div><h3 class="t-h3">{b.t}</h3><p class="t-muted">{b.b}</p></div>
@@ -118,7 +123,7 @@ const games = [
           ))}
         </ol>
         <p class="exp__links">
-          <a class="link" href="/es/resume.html">Hoja de vida completa <span aria-hidden="true">→</span></a>
+          <a class="link" href="/es/resume">Hoja de vida completa <span aria-hidden="true">→</span></a>
           <a class="link" href="/assets/cv-william-montoya-2026-es.pdf" download>Descargar PDF <span aria-hidden="true">↓</span></a>
         </p>
       </div>
@@ -130,9 +135,10 @@ const games = [
     <div class="split">
       <h2 id="a-work" class="t-h3 split__label">Cómo trabajo hoy</h2>
       <div class="stack split__body" style="gap:64px">
+        <p class="about-lede measure-wide">Mi proceso combina investigación, experimentación, criterio y construcción. La IA forma parte activa de ese proceso: me ayuda a explorar posibilidades, mientras mantengo la responsabilidad sobre el brief, las decisiones y la calidad del resultado.</p>
         <div class="cols3">
           {tools.map((t) => (
-            <div><h3 class="t-h3">{t.t}</h3><p class="t-muted">{t.b}</p></div>
+            <div><h3 class="t-h3 tools__title">{t.t}</h3><p class="t-muted">{t.b}</p></div>
           ))}
         </div>
         <div class="cols3">
@@ -155,12 +161,11 @@ const games = [
         <article class="beyond__row" data-reveal>
           <div class="beyond__text">
             <h3 class="t-h3">Docencia</h3>
-            <p class="t-muted">Enseño pensamiento sensorial en la Universidad de Antioquia: cómo la percepción, la emoción y la atención moldean la relación de las personas con los sistemas digitales.</p>
-            <a class="link" href="https://catedra.dejesumensaje.com/" target="_blank" rel="noopener noreferrer">Cátedra, el archivo de mis cursos <span aria-hidden="true">↗</span></a>
+            <p class="t-muted">Enseño pensamiento sensorial en la Universidad de Antioquia: cómo la percepción, la emoción y la atención influyen en la forma en que las personas experimentan los sistemas digitales. En mis clases exploro el diseño como lenguaje de expresión: cómo la forma puede comunicar, conmovernos y abrir nuevas interpretaciones.</p>
+            <a class="link" href="https://catedra.dejesumensaje.com/" target="_blank" rel="noopener noreferrer">Cátedra, archivo de mis cursos <span aria-hidden="true">↗</span></a>
             <div class="beyond__feature">
               <p class="t-small t-muted">Guía destacada</p>
               <a class="link" href="https://catedra.dejesumensaje.com/diseno-visual/" target="_blank" rel="noopener noreferrer">Anatomía del diseño visual <span aria-hidden="true">↗</span></a>
-              <p class="t-small t-muted">Una enciclopedia interactiva de diseño visual: cambia una variable y observa cómo cambia tu percepción.</p>
             </div>
           </div>
           <a class="stage beyond__stage" href="https://catedra.dejesumensaje.com/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
@@ -174,7 +179,7 @@ const games = [
         <article class="beyond__row" data-reveal>
           <div class="beyond__text">
             <h3 class="t-h3">Alucine</h3>
-            <p class="t-muted">Un proyecto sobre cine y cultura donde exploro historias, símbolos y cómo la narrativa transforma nuestra forma de ver el mundo.</p>
+            <p class="t-muted">Un proyecto sobre cine y cultura en el que exploro historias, símbolos y las maneras en que la narrativa puede cambiar nuestra comprensión del mundo.</p>
             <a class="link" href="https://alucine.co/" target="_blank" rel="noopener noreferrer">alucine.co <span aria-hidden="true">↗</span></a>
           </div>
           <a class="stage beyond__stage" href="https://alucine.co/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
@@ -188,7 +193,7 @@ const games = [
         <article class="beyond__row" data-reveal>
           <div class="beyond__text">
             <h3 class="t-h3">Videojuegos</h3>
-            <p class="t-muted">Los videojuegos me enseñaron sobre sistemas, decisiones y ciclos de retroalimentación mucho antes de que la IA entrara a mi flujo de trabajo.</p>
+            <p class="t-muted">Me interesan los mundos que construyen los videojuegos, sus reglas, sus posibilidades y las formas inesperadas en que las personas los habitan.</p>
             <a class="link" href="https://backloggd.com/u/dejesumensaje/" target="_blank" rel="noopener noreferrer">backloggd <span aria-hidden="true">↗</span></a>
           </div>
           <div class="stage beyond__stage games" data-games>
@@ -265,6 +270,18 @@ const games = [
   .cols3 > div { display: flex; flex-direction: column; gap: 12px; }
   .cols3 dd { margin: 0; }
 
+  /* Intro and "How I work" lede: between body and t-h2 */
+  .about-lede {
+    font-family: var(--font-display);
+    font-size: 28px;
+    letter-spacing: -0.6px;
+    line-height: 1.3;
+    text-wrap: pretty;
+  }
+  .prose strong { font-weight: 600; }
+  /* Tool titles reserve two lines so the three paragraphs start level */
+  .tools__title { min-height: 2.4em; }
+
   .chapter { padding-bottom: var(--space-section); }
   .chapter--last { padding-bottom: var(--space-before-footer); }
   .stack { display: flex; flex-direction: column; gap: 52px; }
@@ -338,6 +355,8 @@ const games = [
     .about-intro__portrait { grid-column: 1 / -1; aspect-ratio: 4 / 3; }
     .about-intro__text { grid-column: 1 / -1; }
     .cols3 { grid-template-columns: 1fr; }
+    .about-lede { font-size: 22px; }
+    .tools__title { min-height: 0; }
     .exp__row { grid-template-columns: 1fr; }
     .exp__when { text-align: left; padding-top: 0; order: -1; }
     .games__head { padding-inline: 20px; }
