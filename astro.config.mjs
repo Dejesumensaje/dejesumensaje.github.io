@@ -20,12 +20,10 @@ export default defineConfig({
             page === `https://dejesumensaje.com/${slug}/`
         ),
       serialize(item) {
-        // build.format 'file' serves /page.html — keep sitemap URLs canonical.
+        // build.format 'file' emits page.html; GitHub Pages serves it at the
+        // extensionless URL, which is the canonical form.
         const url = item.url.replace(/\/$/, '');
-        item.url =
-          url === 'https://dejesumensaje.com'
-            ? 'https://dejesumensaje.com/'
-            : `${url}.html`;
+        item.url = url === 'https://dejesumensaje.com' ? 'https://dejesumensaje.com/' : url;
         return item;
       },
     }),

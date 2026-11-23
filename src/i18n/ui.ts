@@ -1,6 +1,7 @@
 // Two languages: English at the root, Spanish under /es/.
-// Pages keep the same slug in both (/about.html ↔ /es/about.html);
-// the home is / ↔ /es.html (Astro's file format).
+// Pages keep the same slug in both (/about ↔ /es/about); the home is / ↔ /es.
+// Astro builds page.html (build.format 'file'); GitHub Pages serves it at the
+// clean URL, so every link, canonical and hreflang uses the extensionless form.
 
 export type Lang = 'en' | 'es';
 
@@ -9,22 +10,28 @@ export function getLang(url: URL): Lang {
   return p === '/es' || p === '/es.html' || p.startsWith('/es/') ? 'es' : 'en';
 }
 
-/** Path of the same page in a language. Accepts '/', '/about.html', '/#work', '/es/about.html'… */
+/** Clean URL for a built path: '/about.html' → '/about', '/index.html' → '/'. */
+export function cleanPath(pathname: string): string {
+  const p = pathname.replace(/(\/index)?\.html$/, '').replace(/(.)\/$/, '$1');
+  return p || '/';
+}
+
+/** Path of the same page in a language. Accepts '/', '/about', '/#work', '/es/about' (and .html forms). */
 export function localize(lang: Lang, href: string): string {
   if (/^(https?:|mailto:|tel:)/.test(href)) return href;
   const [pathPart, hash = ''] = href.split('#');
-  let path = pathPart || '/';
+  let path = cleanPath(pathPart || '/');
   // strip any existing language prefix
   if (path === '/es.html' || path === '/es' || path === '/es/') path = '/';
   else if (path.startsWith('/es/')) path = path.slice(3);
   const h = hash ? `#${hash}` : '';
   if (lang === 'en') return `${path}${h}`;
-  return path === '/' ? `/es.html${h}` : `/es${path}${h}`;
+  return path === '/' ? `/es${h}` : `/es${path}${h}`;
 }
 
 /** The current page in the other language (for the switcher and hreflang). */
 export function alternate(url: URL, to: Lang): string {
-  return localize(to, url.pathname === '/index.html' ? '/' : url.pathname);
+  return localize(to, url.pathname);
 }
 
 const ui = {

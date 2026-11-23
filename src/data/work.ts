@@ -48,7 +48,7 @@ export const featured: CaseCard = {
   summary:
     'Working prototypes, built with AI, to test experience directions in days instead of weeks: desktop for the office, mobile for the store floor.',
   meta: 'Deloitte · US grocery retail · In progress',
-  href: '/store-pricing-ai.html',
+  href: '/store-pricing-ai',
   span: 12,
   stage: { w: 1296, h: 560 },
   browser: {
@@ -68,7 +68,7 @@ export const cases: CaseCard[] = [
     title: 'A design system for humans and AI agents',
     summary: 'From a Figma library that AI demos were bypassing to a code package and governance agents can follow.',
     meta: 'Deloitte · Design systems · 2024–now',
-    href: '/converge-design-system.html',
+    href: '/converge-design-system',
     span: 7,
     stage: { w: 746, h: 480 },
     browser: {
@@ -81,7 +81,7 @@ export const cases: CaseCard[] = [
     title: 'Bringing learning to rural classrooms without internet',
     summary: 'An offline-first product for teachers where connectivity is a barrier, not an assumption.',
     meta: 'Ministry of Education · 2019–2021',
-    href: '/aprender-digital.html',
+    href: '/aprender-digital',
     span: 5,
     stage: { w: 526, h: 480 },
     browser: {
@@ -94,7 +94,7 @@ export const cases: CaseCard[] = [
     title: 'Simplifying Colombia Aprende for inclusion and equity',
     summary: 'A 17-year-old national platform, rebuilt so teachers and students could actually find what they need.',
     meta: 'Ministry of Education · 2019–2021',
-    href: '/colombia-aprende.html',
+    href: '/colombia-aprende',
     span: 12,
     stage: { w: 1296, h: 560 },
     browser: {

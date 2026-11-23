@@ -28,7 +28,7 @@ export const projects: Project[] = [
     confidential: false,
     context: 'Deloitte · Converge for Restaurants · Design Systems',
     title: 'Operationalizing a design system for humans and AI agents',
-    href: '/converge-design-system.html',
+    href: '/converge-design-system',
     description:
       'How I turned a design system that AI demos were bypassing into a code package, and a governance model, that humans and agents both build on.',
     image: '/assets/converge-design-system.webp',
@@ -58,7 +58,7 @@ export const projects: Project[] = [
     confidential: true,
     context: 'Deloitte · Converge for Restaurants · KFC',
     title: 'Turning pricing data into a self-service experience',
-    href: '/key-metrics-over-time.html',
+    href: '/key-metrics-over-time',
     description:
       'Replacing a manual Excel reporting process with an interactive feature that puts KFC franchisees in control of their own performance data.',
     image: '/assets/key-metrics-over-time.webp',
@@ -88,7 +88,7 @@ export const projects: Project[] = [
     confidential: true,
     context: 'Deloitte · Converge for Restaurants · Pizza Hut',
     title: 'Designing pricing clarity for franchise operators',
-    href: '/crust-upcharge-configurator.html',
+    href: '/crust-upcharge-configurator',
     description:
       'How to give Pizza Hut franchisees granular control over complex pricing recommendations without eroding their trust in the data.',
     image: '/assets/crust-upcharge-configurator.webp',
@@ -118,7 +118,7 @@ export const projects: Project[] = [
     confidential: false,
     context: 'Ministry of Education · Public Sector · Colombia',
     title: 'Simplifying Colombia Aprende for inclusion and equity',
-    href: '/colombia-aprende.html',
+    href: '/colombia-aprende',
     description:
       'How to transform a 17-year-old national platform with millions of users so teachers and students could actually find what they need.',
     image: '/assets/colombia-aprende-imagen.webp',
@@ -148,7 +148,7 @@ export const projects: Project[] = [
     confidential: false,
     context: 'Ministry of Education · Rural Education · Colombia',
     title: 'Bringing learning to rural classrooms without internet',
-    href: '/aprender-digital.html',
+    href: '/aprender-digital',
     description:
       'Designing an offline-first product so rural teachers in Colombia can keep teaching where connectivity is a barrier, not an assumption.',
     image: '/assets/aprender-digital-version-ligera.webp',

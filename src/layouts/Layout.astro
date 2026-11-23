@@ -2,7 +2,7 @@
 import '../styles/f.css';
 import Header from '../components/f/Header.astro';
 import Footer from '../components/f/Footer.astro';
-import { getLang, alternate, t } from '../i18n/ui';
+import { getLang, alternate, cleanPath, t } from '../i18n/ui';
 
 interface Props {
   title: string;
@@ -22,7 +22,7 @@ const {
   noindex = false,
 } = Astro.props;
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
+const canonicalURL = new URL(cleanPath(Astro.url.pathname), Astro.site).href;
 const lang = getLang(Astro.url);
 const enURL = new URL(alternate(Astro.url, 'en'), Astro.site).href;
 const esURL = new URL(alternate(Astro.url, 'es'), Astro.site).href;

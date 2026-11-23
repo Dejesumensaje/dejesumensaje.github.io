@@ -12,8 +12,8 @@ const current =
 
 const links = [
   { id: 'work', label: t(lang, 'nav.work'), href: localize(lang, '/#work') },
-  { id: 'about', label: t(lang, 'nav.about'), href: localize(lang, '/about.html') },
-  { id: 'resume', label: t(lang, 'nav.resume'), href: localize(lang, '/resume.html') },
+  { id: 'about', label: t(lang, 'nav.about'), href: localize(lang, '/about') },
+  { id: 'resume', label: t(lang, 'nav.resume'), href: localize(lang, '/resume') },
 ];
 const other = lang === 'es' ? 'en' : 'es';
 const switchHref = alternate(Astro.url, other);
