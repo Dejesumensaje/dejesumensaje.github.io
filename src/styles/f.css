@@ -4,18 +4,34 @@
    desktop / phone; the switch happens below 760px.
    ========================================================================== */
 
+/* Allo (OFL), roundness fixed at 20, Latin subset. Weight and optical size stay variable. */
 @font-face {
-  font-family: 'Fraunces';
-  src: url('/fonts/fraunces-var.woff2') format('woff2');
+  font-family: 'Allo';
+  src: url('/fonts/allo-var.woff2') format('woff2');
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
 }
+/* PT Serif: reading text only (.prose) and pull quotes. */
 @font-face {
-  font-family: 'Instrument Sans';
-  src: url('/fonts/instrument-sans-var.woff2') format('woff2');
-  font-weight: 400 700;
+  font-family: 'PT Serif';
+  src: url('/fonts/pt-serif-400.woff2') format('woff2');
+  font-weight: 400;
   font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'PT Serif';
+  src: url('/fonts/pt-serif-700.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'PT Serif';
+  src: url('/fonts/pt-serif-400-italic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
   font-display: swap;
 }
 @font-face {
@@ -61,8 +77,12 @@
   --device-body: #0e0f11;
 
   /* Type */
-  --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
-  --font-body: 'Instrument Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'Allo', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-body: 'Allo', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-serif: 'PT Serif', Georgia, 'Times New Roman', serif;
+
+  --weight-display: 540;
+  --weight-h3: 600;
   --font-mono: 'Geist Mono', ui-monospace, Menlo, monospace;
   --font-pixel: 'Silkscreen', var(--font-mono);
 
@@ -71,12 +91,13 @@
   --text-h3: 24px;
   --text-lead: 20px;
   --text-body: 17px;
+  --text-read: 19px;
   --text-small: 13px;
   --text-button: 15px;
 
-  --tracking-display: -2.2px;
-  --tracking-h2: -1.2px;
-  --tracking-h3: -0.4px;
+  --tracking-display: -1.4px;
+  --tracking-h2: -0.8px;
+  --tracking-h3: -0.2px;
 
   /* Grid & space */
   --max: 1296px;
@@ -196,8 +217,9 @@
     --text-h3: 21px;
     --text-lead: 18px;
     --text-body: 16px;
-    --tracking-display: -1.2px;
-    --tracking-h2: -0.7px;
+    --text-read: 18px;
+    --tracking-display: -0.8px;
+    --tracking-h2: -0.5px;
     --grid-margin: var(--space-5);
     --gutter: var(--space-4);
     --space-section: var(--space-17);
@@ -282,7 +304,7 @@ body {
 /* ---------- Type styles ---------- */
 .t-display {
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: var(--weight-display);
   font-size: var(--text-display);
   letter-spacing: var(--tracking-display);
   line-height: 1.1;
@@ -290,7 +312,7 @@ body {
 }
 .t-h2 {
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: var(--weight-display);
   font-size: var(--text-h2);
   letter-spacing: var(--tracking-h2);
   line-height: 1.15;
@@ -298,7 +320,7 @@ body {
 }
 .t-h3 {
   font-family: var(--font-display);
-  font-weight: 500;
+  font-weight: var(--weight-h3);
   font-size: var(--text-h3);
   letter-spacing: var(--tracking-h3);
   line-height: 1.2;
@@ -311,6 +333,21 @@ body {
 .accent { color: var(--accent); }
 .prose > * + * { margin-top: var(--space-6); }
 .prose p { text-wrap: pretty; }
+/* Serif marks reading text; headings and interface stay in Allo. */
+.prose {
+  font-family: var(--font-serif);
+  font-size: var(--text-read);
+  line-height: 1.65;
+}
+.prose strong, .prose b { font-weight: 700; }
+/* Pull quotes: the whole line in PT Serif italic, never mixed with roman. */
+.pull {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.3;
+}
 
 /* ---------- Layout ---------- */
 .wrap {

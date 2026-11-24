@@ -72,6 +72,14 @@ Decorative 1px lines use `--hairline`.
 
 ## Typography and headings
 
+- Allo (`--font-display`, `--font-body`) sets headings, navigation, buttons,
+  card text and figures. The file in `public/fonts/allo-var.woff2` is an
+  instance with roundness fixed at 20 and a Latin subset; weight and optical
+  size stay variable. Headings use `--weight-display` (540) and `--weight-h3`
+  (600).
+- PT Serif (`--font-serif`) is for reading only: `.prose` at `--text-read`
+  (19px, 18px on phones) and pull quotes, which are set entirely in italic.
+  It has 400, 700 and 400 italic; do not use it for interface text.
 - Each page has exactly one `h1`; heading levels never skip.
 - Section headings use `h2`; cards and subsections use `h3`.
 - Pull quotes are emphasis paragraphs (`p.t-h2.pull`), never headings.
