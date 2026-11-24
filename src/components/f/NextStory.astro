@@ -15,10 +15,29 @@ const next = caseOrder[(i + 1) % caseOrder.length];
   <div class="split">
     <h2 class="t-h3 split__label">{t(lang, 'next.title')}</h2>
     <div class="split__body">
-      <a href={next.href}>
+      <a href={next.href} data-next-story>
         <span class="t-h2">{next.title} <span class="next__arrow" aria-hidden="true">→</span></span>
         <span class="t-small t-muted">{next.meta}</span>
       </a>
     </div>
   </div>
 </nav>
+
+<script>
+  // Keep the reader's depth when moving to the next case study. The target
+  // page also persists ?view, so this is belt and braces for copied links and
+  // for browsers without the storage write.
+  for (const link of document.querySelectorAll<HTMLAnchorElement>('[data-next-story]')) {
+    const sync = () => {
+      const url = new URL(link.href, location.href);
+      const view = new URLSearchParams(location.search).get('view');
+      if (view === 'tldr' || view === 'full') url.searchParams.set('view', view);
+      else if (url.searchParams.has('view')) url.searchParams.delete('view');
+      link.href = url.href;
+    };
+    link.addEventListener('pointerdown', sync);
+    link.addEventListener('focus', sync);
+    link.addEventListener('click', sync);
+    sync();
+  }
+</script>

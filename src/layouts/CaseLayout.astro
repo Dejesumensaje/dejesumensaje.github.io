@@ -48,7 +48,11 @@ const { readFull, readTldr, ...meta } = Astro.props;
 
   const read = (): Mode => {
     const q = new URLSearchParams(location.search).get('view');
-    if (q === 'tldr' || q === 'full') return q;
+    if (q === 'tldr' || q === 'full') {
+      // A deep link is a choice too: carry it into the next case study.
+      try { localStorage.setItem(KEY, q); } catch {}
+      return q;
+    }
     try { return localStorage.getItem(KEY) === 'tldr' ? 'tldr' : 'full'; } catch { return 'full'; }
   };
 
@@ -75,12 +79,21 @@ const { readFull, readTldr, ...meta } = Astro.props;
     url.searchParams.set('view', mode);
     history.replaceState(null, '', url);
 
-    const anchor = from && !from.hasAttribute('data-floating') ? from : null;
+    const floating = from?.hasAttribute('data-floating') ?? false;
+    let anchor: HTMLElement | null = null;
+    if (from && !floating) anchor = from;
+    else if (floating) {
+      // The floating control does not move with the page, so anchor to the
+      // last always-visible section above the reading line instead.
+      const stable = Array.from(page.querySelectorAll<HTMLElement>('section:not([data-depth])'))
+        .filter((el) => el.getBoundingClientRect().top <= 160);
+      anchor = stable.at(-1) ?? null;
+    }
     const before = anchor?.getBoundingClientRect().top ?? 0;
     const apply = () => {
       paint(mode);
       if (anchor) window.scrollBy(0, anchor.getBoundingClientRect().top - before);
-      else window.scrollTo({ top: Math.min(window.scrollY, inline ? inline.offsetTop - 120 : 0) });
+      else if (!floating) window.scrollTo({ top: Math.min(window.scrollY, inline ? inline.offsetTop - 120 : 0) });
     };
     if (still.matches) { apply(); return; }
     page.classList.add('is-swapping');

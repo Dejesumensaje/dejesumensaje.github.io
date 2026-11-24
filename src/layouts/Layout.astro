@@ -13,17 +13,21 @@ interface Props {
   noindex?: boolean;
 }
 
+const lang = getLang(Astro.url);
+const defaultOgImageAlt = lang === 'es'
+  ? 'William Montoya, diseñador de producto senior radicado en Medellín, Colombia'
+  : 'William Montoya, Senior Product Designer based in Medellín, Colombia';
+
 const {
   title,
   description,
   ogImage = 'https://dejesumensaje.com/assets/william-montoya.jpg',
-  ogImageAlt = 'William Montoya, Senior Product Designer based in Medellín, Colombia',
+  ogImageAlt = defaultOgImageAlt,
   ogType = 'website',
   noindex = false,
 } = Astro.props;
 
 const canonicalURL = new URL(cleanPath(Astro.url.pathname), Astro.site).href;
-const lang = getLang(Astro.url);
 const enURL = new URL(alternate(Astro.url, 'en'), Astro.site).href;
 const esURL = new URL(alternate(Astro.url, 'es'), Astro.site).href;
 ---
@@ -46,6 +50,7 @@ const esURL = new URL(alternate(Astro.url, 'es'), Astro.site).href;
     <meta property="og:type" content={ogType} />
     <meta property="og:site_name" content="William Montoya" />
     <meta property="og:locale" content={lang === 'es' ? 'es_CO' : 'en_US'} />
+    <meta property="og:locale:alternate" content={lang === 'es' ? 'en_US' : 'es_CO'} />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />

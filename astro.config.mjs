@@ -13,6 +13,11 @@ export default defineConfig({
   },
   integrations: [
     sitemap({
+      // Adds xhtml:link alternates to every entry.
+      i18n: {
+        defaultLocale: 'en',
+        locales: { en: 'en', es: 'es' },
+      },
       filter: (page) =>
         !NOINDEX_SLUGS.some(
           (slug) =>

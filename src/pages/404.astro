@@ -10,7 +10,8 @@ import Layout from '../layouts/Layout.astro';
   <Fragment slot="head">
     <!-- GitHub Pages only serves the root 404: send lost Spanish URLs to the Spanish one. -->
     <script is:inline>
-      if (location.pathname.startsWith('/es/') && location.pathname !== '/es/404.html') location.replace('/es/404.html');
+      var p = location.pathname.replace(/\.html$/, '');
+      if (p.startsWith('/es/') && p !== '/es/404') location.replace('/es/404.html');
     </script>
   </Fragment>
   <section class="lost" data-lost aria-labelledby="lost-title">

@@ -2,13 +2,25 @@
   "name": "william-montoya-portfolio",
   "version": "2.0.0",
   "type": "module",
+  "engines": {
+    "node": ">=22.23.4"
+  },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview"
+    "build": "astro build && node scripts/clean-urls.mjs",
+    "preview": "astro preview",
+    "check": "astro check",
+    "test": "npm run build && node --test --test-concurrency=1 tests/*.test.mjs",
+    "test:static": "node --test tests/static.test.mjs",
+    "test:e2e": "node --test tests/e2e.test.mjs"
   },
   "dependencies": {
-    "@astrojs/sitemap": "^3.2.1",
-    "astro": "^4.16.0"
+    "@astrojs/sitemap": "^3.7.6",
+    "astro": "^7.4.13"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.12",
+    "playwright": "^1.65.1",
+    "typescript": "^6.0.3"
   }
 }
