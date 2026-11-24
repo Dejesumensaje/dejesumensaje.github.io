@@ -70,10 +70,10 @@ const subject = encodeURIComponent(t(lang, 'hola.subject'));
 
 <style>
   .footer {
-    --crt-lift: 72px;
+    --crt-lift: var(--space-15);
     background: var(--night);
     color: var(--on-night);
-    padding: var(--space-page-top) 0 56px;
+    padding: var(--space-page-top) 0 var(--space-13);
     margin-top: var(--crt-lift);
   }
   .footer__muted { color: var(--on-night-muted); }
@@ -87,9 +87,9 @@ const subject = encodeURIComponent(t(lang, 'hola.subject'));
     grid-column: 1 / span 6;
     display: flex;
     flex-direction: column;
-    gap: 56px;
+    gap: var(--space-13);
   }
-  .footer__invite { display: flex; flex-direction: column; gap: 16px; }
+  .footer__invite { display: flex; flex-direction: column; gap: var(--space-4); }
   .footer__email {
     font-size: var(--text-h3);
     font-weight: 500;
@@ -100,16 +100,16 @@ const subject = encodeURIComponent(t(lang, 'hola.subject'));
   .footer__links li {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: var(--space-2);
     min-width: min(196px, 100%);
   }
-  .footer__links a { align-self: flex-start; padding-block: 4px; }
+  .footer__links a { align-self: flex-start; padding-block: var(--space-1); }
 
   .footer__game {
     grid-column: 7 / -1;
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: var(--space-6);
     /* Pull the CRT up so it sits on the page above the footer. */
     margin-top: calc(-1 * (var(--space-page-top) + var(--crt-lift)));
   }
@@ -117,12 +117,12 @@ const subject = encodeURIComponent(t(lang, 'hola.subject'));
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 16px;
+    gap: var(--space-4);
     flex-wrap: wrap;
   }
-  .legend { display: flex; gap: 24px; align-items: center; }
-  .legend__group { display: flex; gap: 8px; align-items: center; }
-  .legend__group span { margin-left: 4px; }
+  .legend { display: flex; gap: var(--space-6); align-items: center; }
+  .legend__group { display: flex; gap: var(--space-2); align-items: center; }
+  .legend__group span { margin-left: var(--space-1); }
   kbd {
     display: inline-grid;
     place-items: center;
@@ -142,7 +142,7 @@ const subject = encodeURIComponent(t(lang, 'hola.subject'));
 
   /* ---------- CRT ---------- */
   .crt {
-    padding: 20px 20px 0;
+    padding: var(--space-5) var(--space-5) 0;
     border-radius: 28px;
     background: linear-gradient(180deg, #3a3c42, #1d1e22);
     box-shadow:
@@ -276,7 +276,7 @@ const subject = encodeURIComponent(t(lang, 'hola.subject'));
     justify-content: space-between;
     align-items: center;
     height: 48px;
-    padding: 0 8px;
+    padding: 0 var(--space-2);
   }
   .crt__model {
     font: 400 11px/1 var(--font-pixel);
@@ -284,7 +284,7 @@ const subject = encodeURIComponent(t(lang, 'hola.subject'));
     color: var(--on-night-muted);
     text-transform: uppercase;
   }
-  .crt__controls { display: flex; align-items: center; gap: 12px; }
+  .crt__controls { display: flex; align-items: center; gap: var(--space-3); }
   .crt__power {
     width: 6px;
     height: 6px;
@@ -320,19 +320,19 @@ const subject = encodeURIComponent(t(lang, 'hola.subject'));
   .crt__knob--static::before { display: none; }
   .crt__knob[aria-pressed='true'] { transform: rotate(90deg); }
   .crt__knob[aria-pressed='true']::before { background: var(--signal); }
-  button.crt__knob::after { content: ''; position: absolute; inset: -16px; }
+  button.crt__knob::after { content: ''; position: absolute; inset: calc(var(--space-4) * -1); }
 
   @media (max-width: 759px) {
     .footer { margin-top: 0; padding: var(--space-chapter) 0 var(--space-page-top); }
-    .footer__row { display: flex; flex-direction: column; align-items: stretch; gap: 56px; }
-    .footer__contact { gap: 24px; }
+    .footer__row { display: flex; flex-direction: column; align-items: stretch; gap: var(--space-13); }
+    .footer__contact { gap: var(--space-6); }
     .footer__email { font-size: var(--text-lead); }
-    .footer__links { flex-direction: column; gap: 24px; }
-    .footer__game { margin-top: 0; gap: 16px; }
-    .crt { padding: 16px 16px 0; border-radius: 22px; }
+    .footer__links { flex-direction: column; gap: var(--space-6); }
+    .footer__game { margin-top: 0; gap: var(--space-4); }
+    .crt { padding: var(--space-4) var(--space-4) 0; border-radius: 22px; }
     .crt__tube, .crt__glass, .crt__start { border-radius: 16px; }
     .crt__tube { aspect-ratio: 334 / 242; }
-    .crt__chin { height: 40px; padding: 0 8px; }
+    .crt__chin { height: 40px; padding: 0 var(--space-2); }
     .crt__model { font-size: 10px; }
   }
 

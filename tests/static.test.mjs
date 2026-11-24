@@ -356,7 +356,7 @@ test('case kickers are gone and the home no longer renders How I think', () => {
   }
 });
 
-test('layout spacing uses a 4px base', async () => {
+test('layout spacing is fully tokenized on a 4px base', async () => {
   const ignored = new Set([
     'src/components/Header.astro',
     'src/components/Footer.astro',
@@ -382,21 +382,23 @@ test('layout spacing uses a 4px base', async () => {
     return !ignored.has(rel);
   });
 
-  const declaration = /\b(padding(?:-(?:block|inline|top|right|bottom|left))?|margin(?:-(?:block|inline|top|right|bottom|left))?|gap|row-gap|column-gap)\s*:\s*([^;{}]+)/g;
+  const declaration = /\b(padding(?:-(?:block|inline|top|right|bottom|left))?|margin(?:-(?:block|inline|top|right|bottom|left))?|gap|row-gap|column-gap|scroll-padding(?:-(?:block|inline))?|scroll-margin(?:-(?:block|inline))?)\s*:\s*([^;{}]+)/g;
 
   for (const file of files) {
     const source = await readFile(file, 'utf8');
     for (const match of source.matchAll(declaration)) {
-      for (const raw of match[2].split(/[\s,]+/)) {
-        const value = raw.trim();
-        const px = value.match(/^(-?\d+(?:\.\d+)?)px$/);
-        if (!px) continue;
-        const n = Math.abs(Number(px[1]));
-        if (n === 0 || n === 1) continue; // 0 and 1px hairlines / clipping
-        assert.equal(n % 4, 0, `off-scale spacing in ${file}: ${match[0].trim()}`);
-      }
+      assert.ok(
+        !/-?\d+(?:\.\d+)?(?:px|em|rem)\b/.test(match[2]),
+        `hardcoded spacing in ${file}: ${match[0].trim()}`
+      );
     }
   }
+
+  const tokens = [...(await readFile(join(process.cwd(), 'src/styles/f.css'), 'utf8'))
+    .matchAll(/--space-(\d+):\s*(\d+)px/g)]
+    .map((m) => Number(m[2]));
+  assert.ok(tokens.length >= 15, 'expected a full spacing scale');
+  for (const value of tokens) assert.equal(value % 4, 0, `spacing token off the 4px base: ${value}`);
 });
 
 test('no stale clean-URL regressions in generated HTML', () => {

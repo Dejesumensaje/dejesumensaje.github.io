@@ -49,20 +49,20 @@ const lang = getLang(Astro.url);
     .case--7, .case--5 { grid-column: 1 / -1; }
   }
 
-  .case__link { display: flex; flex-direction: column; gap: 24px; }
+  .case__link { display: flex; flex-direction: column; gap: var(--space-6); }
   .case__art {
     position: absolute;
     inset: 0;
     transition: transform 300ms var(--ease-out);
   }
-  .case__caption { display: flex; flex-direction: column; gap: 8px; max-width: 526px; }
-  .case__meta { margin-top: 4px; }
+  .case__caption { display: flex; flex-direction: column; gap: var(--space-2); max-width: 526px; }
+  .case__meta { margin-top: var(--space-1); }
   .case__veil-note {
     position: absolute;
-    left: 16px;
-    bottom: 14px;
+    left: var(--space-4);
+    bottom: var(--space-4);
     z-index: 2;
-    padding: 4px 12px;
+    padding: var(--space-1) var(--space-3);
     border-radius: var(--radius-pill);
     background: var(--glass);
     color: var(--muted);
@@ -95,13 +95,13 @@ const lang = getLang(Astro.url);
     grid-column: 7 / span 4;
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    padding-top: 8px;
+    gap: var(--space-3);
+    padding-top: var(--space-2);
   }
   @media (max-width: 899px) {
     .case--featured .case__title,
     .case--featured .case__summary { grid-column: 1 / -1; }
-    .case--featured .case__summary { padding-top: 12px; }
+    .case--featured .case__summary { padding-top: var(--space-3); }
   }
   /* Phones crop the featured stage too tightly: keep the comp ratio but
      give small screens a taller window onto it. */

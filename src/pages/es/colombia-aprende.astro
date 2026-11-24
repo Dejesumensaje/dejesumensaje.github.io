@@ -131,12 +131,12 @@ const pct = (v: number, of: number) => `${((v / of) * 100).toFixed(3)}%`;
   <section class="chapter wrap" aria-labelledby="ch-understanding" data-depth="full" data-reveal>
     <div class="split">
       <h2 id="ch-understanding" class="t-h3 split__label">Entender el reto</h2>
-      <div class="chapter__stack split__body" style="gap:36px">
+      <div class="chapter__stack split__body" style="gap:var(--space-9)">
         <div class="prose measure">
           <p>El principal obstáculo para transformar Colombia Aprende era interno. El equipo y los actores clave del Ministerio se resistían a cambiar una plataforma que llevaba más de 17 años operando.</p>
           <p>Mientras entrevistábamos a nuestro público principal —docentes del sector oficial—, hicimos talleres, mapas de empatía y lienzos de propuesta de valor con casi todas las áreas del Ministerio.</p>
         </div>
-        <div class="measure" style="display:flex;flex-direction:column;gap:12px">
+        <div class="measure" style="display:flex;flex-direction:column;gap:var(--space-3)">
           <p class="t-small t-muted">Nuestra investigación incluyó</p>
           <ul class="dash-list list-reset" role="list">
             <li>Entender las metas y necesidades de los usuarios.</li>
@@ -208,7 +208,7 @@ const pct = (v: number, of: number) => `${((v / of) * 100).toFixed(3)}%`;
   <section class="chapter chapter--section wrap" aria-labelledby="ch-lessons" data-reveal>
     <div class="split">
       <h2 id="ch-lessons" class="t-h3 split__label">Aprendizajes</h2>
-      <div class="split__body" style="display:flex;flex-direction:column;gap:40px">
+      <div class="split__body" style="display:flex;flex-direction:column;gap:var(--space-10)">
         <div class="columns3">
           {lessons.map((l) => (
             <div><h3 class="t-h3">{l.t}</h3><p class="t-muted">{l.b}</p></div>

@@ -78,7 +78,7 @@ const accent = 'actually understand'.split(' ');
     padding-bottom: var(--space-page-top);
     display: flex;
     flex-direction: column;
-    gap: 64px;
+    gap: var(--space-14);
   }
   .hero__title { max-width: 1060px; text-wrap: balance; }
   /* The accent phrase always lands on its own line, as in the comp. */
@@ -97,23 +97,23 @@ const accent = 'actually understand'.split(' ');
     border-radius: 50%;
     object-fit: cover;
     vertical-align: -0.08em;
-    margin-inline: 0.22em;
+    margin-inline: var(--space-avatar);
     background: var(--surface);
   }
   .hero__intro {
     display: grid;
     grid-template-columns: repeat(12, minmax(0, 1fr));
     column-gap: var(--gutter);
-    row-gap: 24px;
+    row-gap: var(--space-6);
   }
-  .hero__status { grid-column: 1 / span 3; padding-top: 8px; position: relative; }
+  .hero__status { grid-column: 1 / span 3; padding-top: var(--space-2); position: relative; }
   .hero__lede { grid-column: 4 / span 6; max-width: 636px; text-wrap: pretty; }
   /* Availability dot: a slow breath, the only idle motion on the page. */
   .hero__dot {
     display: inline-block;
     width: 7px;
     height: 7px;
-    margin-right: 8px;
+    margin-right: var(--space-2);
     border-radius: 50%;
     background: #0f8f5a;
     vertical-align: 1px;
@@ -158,22 +158,22 @@ const accent = 'actually understand'.split(' ');
 
   /* ---------- Work ---------- */
   .work { padding-top: 0; padding-bottom: var(--space-section); }
-  .work__label { margin-bottom: 48px; }
+  .work__label { margin-bottom: var(--space-11); }
   .work__grid {
     display: grid;
     grid-template-columns: repeat(12, minmax(0, 1fr));
     column-gap: var(--gutter);
-    row-gap: 80px;
+    row-gap: var(--space-16);
   }
 
   @media (max-width: 759px) {
-    .hero { gap: 40px; }
+    .hero { gap: var(--space-10); }
     .hero__status, .hero__lede { grid-column: 1 / -1; }
     /* Phone order follows importance: the paragraph before availability */
     .hero__lede { order: -1; }
     .hero__portrait { width: 1em; height: 1em; }
-    .work__label { margin-bottom: 32px; }
-    .work__grid { row-gap: 56px; }
+    .work__label { margin-bottom: var(--space-8); }
+    .work__grid { row-gap: var(--space-13); }
   }
 </style>
 

@@ -15,7 +15,7 @@ npm run test:e2e                  # navegador real (Playwright)
 - `static.test.mjs` recorre las 16 rutas generadas y valida canónicas, hreflang,
   switcher de idioma, enlaces/anclas, assets, títulos, metadatos sociales,
   sitemap, redirects de URL con barra final, ids, nombres accesibles, `alt`,
-  lazy-loading, spacing en base de 4 px y presupuestos de JS/CSS.
+  lazy-loading, spacing tokenizado en base de 4 px y presupuestos de JS/CSS.
 - `e2e.test.mjs` levanta un servidor estático que imita GitHub Pages (URLs sin
   `.html`) y prueba carga sin errores, cambio EN/ES con `?view=tldr` y `#hash`,
   continuidad de TL;DR entre casos, URLs con barra final, 404 bilingüe, tema

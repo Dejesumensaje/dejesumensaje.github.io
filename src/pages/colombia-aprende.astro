@@ -131,12 +131,12 @@ const pct = (v: number, of: number) => `${((v / of) * 100).toFixed(3)}%`;
   <section class="chapter wrap" aria-labelledby="ch-understanding" data-depth="full" data-reveal>
     <div class="split">
       <h2 id="ch-understanding" class="t-h3 split__label">The challenge</h2>
-      <div class="chapter__stack split__body" style="gap:36px">
+      <div class="chapter__stack split__body" style="gap:var(--space-9)">
         <div class="prose measure">
           <p>The main barrier to transforming Colombia Aprende was internal. The team and stakeholders across the Education Ministry were reluctant to change a platform that had existed for more than 17 years.</p>
           <p>So while we ran research interviews with our main audience, public-sector teachers, we also ran workshops, empathy maps and value-proposition canvases with almost every area of the Ministry.</p>
         </div>
-        <div class="measure" style="display:flex;flex-direction:column;gap:12px">
+        <div class="measure" style="display:flex;flex-direction:column;gap:var(--space-3)">
           <p class="t-small t-muted">Our research included</p>
           <ul class="dash-list list-reset" role="list">
             <li>Understanding user goals and needs.</li>
@@ -208,7 +208,7 @@ const pct = (v: number, of: number) => `${((v / of) * 100).toFixed(3)}%`;
   <section class="chapter chapter--section wrap" aria-labelledby="ch-lessons" data-reveal>
     <div class="split">
       <h2 id="ch-lessons" class="t-h3 split__label">Lessons</h2>
-      <div class="split__body" style="display:flex;flex-direction:column;gap:40px">
+      <div class="split__body" style="display:flex;flex-direction:column;gap:var(--space-10)">
         <div class="columns3">
           {lessons.map((l) => (
             <div><h3 class="t-h3">{l.t}</h3><p class="t-muted">{l.b}</p></div>

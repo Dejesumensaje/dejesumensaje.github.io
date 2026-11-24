@@ -29,7 +29,7 @@ const lang = getLang(Astro.url);
     position: relative;
     display: inline-grid;
     grid-template-columns: 1fr 1fr;
-    padding: 4px;
+    padding: var(--space-1);
     border-radius: var(--radius-pill);
     background: var(--surface);
     isolation: isolate;
@@ -38,7 +38,7 @@ const lang = getLang(Astro.url);
     position: relative;
     z-index: 1;
     min-height: 40px;
-    padding: 8px 20px;
+    padding: var(--space-2) var(--space-5);
     border-radius: var(--radius-pill);
     font-size: var(--text-button);
     font-weight: 600;
@@ -48,14 +48,14 @@ const lang = getLang(Astro.url);
   }
   .depth button:active { transform: scale(0.97); }
   .depth button[aria-checked='true'] { color: var(--on-ink); }
-  .depth__time { font-weight: 500; opacity: 0.7; margin-left: 4px; }
+  .depth__time { font-weight: 500; opacity: 0.7; margin-left: var(--space-1); }
   /* The thumb slides between options: it shows where you are and where you went. */
   .depth__thumb {
     position: absolute;
     z-index: 0;
-    top: 4px;
-    bottom: 4px;
-    left: 4px;
+    top: var(--space-1);
+    bottom: var(--space-1);
+    left: var(--space-1);
     width: calc(50% - 4px);
     border-radius: var(--radius-pill);
     background: var(--ink);
@@ -67,7 +67,7 @@ const lang = getLang(Astro.url);
   .depth--floating {
     position: fixed;
     left: 50%;
-    bottom: max(20px, env(safe-area-inset-bottom));
+    bottom: max(var(--space-5), env(safe-area-inset-bottom));
     z-index: 40;
     background: var(--glass);
     backdrop-filter: blur(14px) saturate(1.4);
@@ -82,13 +82,13 @@ const lang = getLang(Astro.url);
   .depth--floating.is-parked { transform: translate(-50%, calc(100% + 32px)); opacity: 0; }
 
   @media (max-width: 759px) {
-    .depth button { padding-inline: 16px; }
+    .depth button { padding-inline: var(--space-4); }
   }
   /* "Historia completa" + "Versión corta" need the room; the times are
      secondary on narrow phones and would push the control past the edge. */
   @media (max-width: 430px) {
     .depth { max-width: 100%; }
-    .depth button { padding-inline: 12px; }
+    .depth button { padding-inline: var(--space-3); }
     .depth__time { display: none; }
   }
   @media (prefers-reduced-motion: reduce) {

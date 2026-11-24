@@ -70,7 +70,7 @@ const pct = (v: number, of: number) => `${((v / of) * 100).toFixed(3)}%`;
 </section>
 
 <style>
-  .side { display: flex; flex-direction: column; gap: 48px; }
+  .side { display: flex; flex-direction: column; gap: var(--space-11); }
   .side__head {
     display: grid;
     grid-template-columns: repeat(12, minmax(0, 1fr));
@@ -78,8 +78,8 @@ const pct = (v: number, of: number) => `${((v / of) * 100).toFixed(3)}%`;
     align-items: center;
   }
   .side__label { grid-column: 1 / span 3; }
-  .side__intro { grid-column: 4 / span 6; padding-top: 4px; max-width: 636px; }
-  .side__controls { grid-column: 10 / -1; display: flex; gap: 12px; justify-content: flex-end; }
+  .side__intro { grid-column: 4 / span 6; padding-top: var(--space-1); max-width: 636px; }
+  .side__controls { grid-column: 10 / -1; display: flex; gap: var(--space-3); justify-content: flex-end; }
   @media (min-width: 900px) and (max-width: 1300px) {
     .side__label { grid-column: 1 / span 4; }
     .side__intro { grid-column: 5 / span 5; }
@@ -99,7 +99,7 @@ const pct = (v: number, of: number) => `${((v / of) * 100).toFixed(3)}%`;
     scroll-snap-type: x mandatory;
     scroll-padding-inline: var(--inset);
     padding-inline: var(--inset);
-    padding-block: 4px;
+    padding-block: var(--space-1);
     scrollbar-width: none;
   }
   .side__track::-webkit-scrollbar { display: none; }
@@ -138,12 +138,12 @@ const pct = (v: number, of: number) => `${((v / of) * 100).toFixed(3)}%`;
     inset: auto 0 0;
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    padding: 96px 28px 28px;
+    gap: var(--space-2);
+    padding: var(--space-18) var(--space-7) var(--space-7);
     background: linear-gradient(180deg, color-mix(in srgb, var(--card) 0%, transparent), var(--card) 62%);
     z-index: 1;
   }
-  .project__meta { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; }
+  .project__meta { display: flex; justify-content: space-between; align-items: flex-end; gap: var(--space-4); }
   .project__summary { max-width: 250px; color: #5b5e63; }
   .project--dark .project__summary { color: var(--on-color-muted); }
   .project__open {
@@ -167,11 +167,11 @@ const pct = (v: number, of: number) => `${((v / of) * 100).toFixed(3)}%`;
   }
 
   @media (max-width: 759px) {
-    .side { gap: 32px; }
-    .side__head { row-gap: 8px; }
+    .side { gap: var(--space-8); }
+    .side__head { row-gap: var(--space-2); }
     .side__label, .side__intro { grid-column: 1 / -1; }
     .side__controls { display: none; }
-    .project__caption { padding: 72px 20px 20px; }
+    .project__caption { padding: var(--space-15) var(--space-5) var(--space-5); }
   }
   @media (prefers-reduced-motion: reduce) {
     .project__art, .project__art :global(.phone), .project__browser { transition: none; }
