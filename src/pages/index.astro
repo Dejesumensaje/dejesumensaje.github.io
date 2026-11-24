@@ -36,9 +36,6 @@ const accent = 'actually understand'.split(' ');
         <span class="hero__dot" aria-hidden="true"></span>Open to senior and staff roles<br />
         <span class="t-muted">Remote · English and Spanish</span>
       </p>
-      <p class="t-lead hero__lede">
-        Journalist, teacher and film nerd in Medellín. Eight years across national education platforms and enterprise pricing tools.
-      </p>
     </div>
   </section>
 
@@ -92,7 +89,6 @@ const accent = 'actually understand'.split(' ');
     row-gap: var(--space-6);
   }
   .hero__status { grid-column: 1 / span 3; padding-top: var(--space-2); position: relative; }
-  .hero__lede { grid-column: 4 / span 6; max-width: 636px; text-wrap: pretty; }
   /* Availability dot: a slow breath, the only idle motion on the page. */
   .hero__dot {
     display: inline-block;
@@ -153,9 +149,7 @@ const accent = 'actually understand'.split(' ');
 
   @media (max-width: 759px) {
     .hero { gap: var(--space-10); }
-    .hero__status, .hero__lede { grid-column: 1 / -1; }
-    /* Phone order follows importance: the paragraph before availability */
-    .hero__lede { order: -1; }
+    .hero__status { grid-column: 1 / -1; }
     .hero__portrait { width: 1em; height: 1em; }
     .work__label { margin-bottom: var(--space-8); }
     .work__grid { row-gap: var(--space-13); }

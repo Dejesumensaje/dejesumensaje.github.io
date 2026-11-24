@@ -36,9 +36,6 @@ const accent = 'en herramientas claras'.split(' ');
         <span class="hero__dot" aria-hidden="true"></span>Disponible para roles senior y staff<br />
         <span class="t-muted">Remoto · Español e inglés</span>
       </p>
-      <p class="t-lead hero__lede">
-        Periodista, profesor y cinéfilo en Medellín. Ocho años entre plataformas educativas nacionales y herramientas empresariales de precios.
-      </p>
     </div>
   </section>
 
@@ -93,7 +90,6 @@ const accent = 'en herramientas claras'.split(' ');
     row-gap: var(--space-6);
   }
   .hero__status { grid-column: 1 / span 3; padding-top: var(--space-2); position: relative; }
-  .hero__lede { grid-column: 4 / span 6; max-width: 636px; text-wrap: pretty; }
   /* Availability dot: a slow breath, the only idle motion on the page. */
   .hero__dot {
     display: inline-block;
@@ -154,9 +150,7 @@ const accent = 'en herramientas claras'.split(' ');
 
   @media (max-width: 759px) {
     .hero { gap: var(--space-10); }
-    .hero__status, .hero__lede { grid-column: 1 / -1; }
-    /* Phone order follows importance: the paragraph before availability */
-    .hero__lede { order: -1; }
+    .hero__status { grid-column: 1 / -1; }
     .hero__portrait { width: 1em; height: 1em; }
     .work__label { margin-bottom: var(--space-8); }
     .work__grid { row-gap: var(--space-13); }
