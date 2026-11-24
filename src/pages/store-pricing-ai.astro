@@ -20,11 +20,11 @@ const overview = [
   { k: 'Challenge', v: 'HQ sends a store director up to a hundred price recommendations at a time. Each one has to be decided, scheduled and printed on a shelf tag.' },
   { k: 'Contribution', v: 'Product design and a working prototype built with AI, tested with store directors and documented decision by decision.' },
   { k: 'Constraints', v: 'Prices reach SAP only through scheduled batches, a store can’t print every tag at once, and the client stays anonymous: captures use a neutral skin and sample data.' },
-  { k: 'Outcome', v: 'In progress: a prototype that speaks the shelf’s language, with every design decision and its reason on record.' },
+  { k: 'Outcome', v: 'In progress: a working prototype tested with store directors, with 46 design decisions on record.' },
 ];
 const numbers = [
-  { v: '~100', k: 'HQ recommendations a director can receive at once' },
-  { v: '5', k: 'stores per director, on average' },
+  { v: '100', k: 'HQ recommendations a director can receive at once' },
+  { v: '21', k: 'store directors in moderated test sessions' },
   { v: '46', k: 'design decisions recorded, each with its reason' },
 ];
 const FLOOR = { w: 1296, h: 720 };
@@ -87,7 +87,7 @@ const floorPhones = [
       <div class="chapter__stack split__body">
         <p class="t-h2 pull">Don’t build a standard table. Show prices the way they look in the store.</p>
         <div class="prose measure">
-          <p>In a grocery store a change type isn’t metadata, it’s a physical object. A regular price lives on the white tag. A temporary promotion is a yellow tag with an end date. A new item gets a fresh tag, a discontinued one a clearance tag.</p>
+          <p>In a grocery store a change type isn’t metadata, it’s a physical object. A regular price lives on the white tag. A temporary promotion is a yellow tag with an end date. A new item gets a launch tag, a discontinued one a clearance tag.</p>
           <p>So the prototype speaks that language. The item panel previews the tag the shopper will actually see, updating as the director edits, and every change keeps its reason and dates so the next person doesn’t have to guess why a price moved.</p>
         </div>
       </div>
@@ -101,7 +101,6 @@ const floorPhones = [
         <img src="/assets/f/store-pricing-item.webp" width="1440" height="810" loading="lazy" alt="An item’s panel: a preview of the yellow sale tag and the crossed-out white tag, then the base and retail prices, each with its reason, dates and the HQ recommendation." />
       </div>
     </div>
-    <figcaption class="t-small">The item panel opens on the tag the shopper will see, then the decisions behind it</figcaption>
   </figure>
 
   <section class="chapter chapter--tight wrap" aria-labelledby="ch-testing" data-reveal>
@@ -109,7 +108,7 @@ const floorPhones = [
       <h2 id="ch-testing" class="t-h3 split__label">What testing changed</h2>
       <div class="chapter__stack split__body">
         <div class="prose measure">
-          <p>Moderated sessions with store directors measured how long each task took and where people got stuck. Two findings reshaped the flow.</p>
+          <p>We ran moderated sessions with 21 store directors. Task times weren’t conclusive. What was clear is that the new layout matches how directors think about their work: they had less trouble finding what to edit than in the previous interface, where information was scattered and tasks were hard to manage. Two findings reshaped the flow.</p>
         </div>
         <div class="grid2">
           <div>
@@ -121,7 +120,7 @@ const floorPhones = [
             <p class="t-muted">A store runs several batches at once, each scheduled on its own, because sending everything to SAP together would overload tag printing. Every decision now lands in a scheduled batch: the director picks the price, then which batch and when.</p>
           </div>
         </div>
-        <p class="measure" data-depth="full">People also loved the feeling of clearing the pile. An empty review queue read as “mission accomplished”, so the queue drains visibly as decisions are made.</p>
+        <p class="measure" data-depth="full">Participants also liked clearing the pile. An empty review queue read as “mission accomplished”, so the queue drains visibly as decisions are made.</p>
       </div>
     </div>
   </section>
@@ -158,7 +157,7 @@ const floorPhones = [
       <div class="chapter__stack split__body">
         <div class="prose measure">
           <p>The prototype is a working app built with AI, not a set of screens, so directors test real behavior: batches that schedule, queues that drain, line prices that move together.</p>
-          <p>Speed made one habit essential. Every decision is written down with its context, what we chose and what we gave up, so the reason survives the next iteration. Audits run by AI agents review flows, copy and accessibility, and their findings become decisions too.</p>
+          <p>Every decision is written down with its context, what we chose and what we gave up, so the reason survives the next iteration. Audits run by AI agents review flows, copy and accessibility, and their findings become decisions too.</p>
         </div>
         <p class="t-h2 pull">When building is fast, the scarce thing is knowing why each choice was made.</p>
       </div>
@@ -170,7 +169,7 @@ const floorPhones = [
       <h2 id="ch-next" class="t-h3 split__label">What’s next</h2>
       <div class="split__body" style="display:flex;flex-direction:column;gap:var(--space-10)">
         <div class="prose measure">
-          <p>The project is in progress. Next is multi-store work: a director should be able to take a price decision from one store and send it, through a single batch, to the other stores they run.</p>
+          <p>Next is multi-store work: a director should be able to take a price decision from one store and send it, through a single batch, to the other stores they run.</p>
         </div>
         <p class="tldr-note t-small" data-depth="tldr">This is the short version. The full story covers the three-price model, the move from a wizard to a worklist, the phone flows and how the decisions are recorded.</p>
       </div>

@@ -12,12 +12,12 @@ const overview = [
   { k: 'Reto', v: 'Convertir una plataforma educativa nacional envejecida en una experiencia clara y equitativa.' },
   { k: 'Aporte', v: 'Investigación con usuarios, arquitectura de información, prototipado, pruebas y dirección de producto con equipos multidisciplinarios.' },
   { k: 'Restricciones', v: '81.000 recursos, más de 70 micrositios, múltiples públicos y una fuerte resistencia interna al cambio.' },
-  { k: 'Resultado', v: 'Mayor conversión, contenidos fáciles de encontrar y respaldo directivo para seguir iterando.' },
+  { k: 'Resultado', v: 'Las descargas de contenidos crecieron un 81% en un año, salieron a la luz recursos más allá de la única línea que se usaba y hubo respaldo directivo para seguir iterando.' },
 ];
 const numbers = [
   { v: '81.000', k: 'recursos educativos' },
   { v: '70+', k: 'micrositios' },
-  { v: '17', k: 'años de historia de la plataforma' },
+  { v: '3,5M', k: 'usuarios en el pico de la pandemia' },
 ];
 const insights = [
   'Varios de los espacios más visibles estaban abandonados y desactualizados. El contenido útil quedaba enterrado bajo demasiados clics.',
@@ -25,8 +25,8 @@ const insights = [
   'Solo una línea de contenidos tenía uso real: Contenidos para Aprender, una colección para enseñar competencias básicas.',
 ];
 const lessons = [
-  { t: 'Los usuarios están en todas partes', b: 'No bastaba con atender al usuario final. Lograr un cambio duradero exigía sumar al equipo de Colombia Aprende y a las demás áreas del Ministerio.' },
-  { t: 'Todo empieza con una visión', b: 'Recoger hallazgos y analizar datos mejora los flujos, pero también ayuda a construir una meta común que movilice al equipo.' },
+  { t: 'Los usuarios internos también cuentan', b: 'No bastaba con atender al usuario final. Lograr un cambio duradero exigía sumar al equipo de Colombia Aprende y a las demás áreas del Ministerio.' },
+  { t: 'Todo empieza con una visión', b: 'Recoger hallazgos y analizar datos mejora los flujos, pero también ayuda a construir una visión común.' },
   { t: 'Mantenlo simple', b: 'En un portal tan grande y antiguo como Colombia Aprende, hay que atreverse a recortar y enfocar.' },
 ];
 const pct = (v: number, of: number) => `${((v / of) * 100).toFixed(3)}%`;
@@ -34,7 +34,7 @@ const pct = (v: number, of: number) => `${((v / of) * 100).toFixed(3)}%`;
 
 <CaseLayout
   title="Simplificar Colombia Aprende — William Montoya"
-  description="¿Cómo transformar una plataforma nacional de 17 años, con millones de usuarios, para mejorar el hallazgo de contenidos, la retención y la conversión?"
+  description="¿Cómo transformar una plataforma nacional de 17 años, con 3,5 millones de usuarios, para mejorar el hallazgo de contenidos, la retención y la conversión?"
   ogImage="https://dejesumensaje.com/assets/colombia-aprende-mockup.png"
   ogImageAlt="Rediseño de la plataforma Colombia Aprende"
   ogImageWidth={1026}
@@ -45,7 +45,7 @@ const pct = (v: number, of: number) => `${((v / of) * 100).toFixed(3)}%`;
   <CaseHeader
     lead="Simplificar Colombia Aprende para"
     accent="la inclusión y la equidad"
-    question="¿Cómo transformar una plataforma nacional de 17 años, con millones de usuarios, para mejorar el hallazgo de contenidos, la retención y la conversión?"
+    question="¿Cómo transformar una plataforma nacional de 17 años, con 3,5 millones de usuarios, para mejorar el hallazgo de contenidos, la retención y la conversión?"
     facts={[...facts, { k: 'Enlace', v: 'colombiaaprende.edu.co', href: 'https://colombiaaprende.edu.co' }]}
     overview={overview}
     readFull="8 min"
@@ -141,7 +141,6 @@ const pct = (v: number, of: number) => `${((v / of) * 100).toFixed(3)}%`;
         <div class="measure" style="display:flex;flex-direction:column;gap:var(--space-3)">
           <p class="t-small t-muted">Nuestra investigación incluyó</p>
           <ul class="dash-list list-reset" role="list">
-            <li>Entender las metas y necesidades de los usuarios.</li>
             <li>Identificar los puntos de dolor de usuarios finales e internos.</li>
             <li>Mapear los objetivos de funcionarios, docentes y rectores.</li>
             <li>Auditar contenidos y analizar plataformas educativas de otros países.</li>
@@ -160,7 +159,6 @@ const pct = (v: number, of: number) => `${((v / of) * 100).toFixed(3)}%`;
         <p class="t-h2 pull">En una colección, el usuario no navega archivos sueltos, sino un kit armado para cumplir un objetivo concreto.</p>
         <div class="prose measure">
           <p>Con talleres de ideación y card sorting, armamos un nuevo mapa del sitio donde la sección de contenidos ocupó el lugar principal y quedó visible en toda la navegación.</p>
-          <p>Planteamos la transformación desde una mirada sociotécnica para trazar una hoja de ruta sostenible y escalable, dos temas que preocupaban a las directivas.</p>
         </div>
       </div>
     </div>
@@ -200,8 +198,8 @@ const pct = (v: number, of: number) => `${((v / of) * 100).toFixed(3)}%`;
     <div class="split">
       <h2 id="ch-results" class="t-h3 split__label">Resultados</h2>
       <div class="prose measure split__body">
-        <p>Desde el lanzamiento en octubre de 2020, la conversión subió y los usuarios encuentran los contenidos con mucha mayor facilidad. Las colecciones también dieron visibilidad a recursos que antes quedaban ocultos tras Contenidos para Aprender.</p>
-        <p>Igual de importante: las entregas ágiles y el enfoque centrado en el usuario nos permitieron seguir iterando después del lanzamiento, ya sin oposición interna.</p>
+        <p>En el año siguiente al lanzamiento, en octubre de 2020, las descargas de contenidos crecieron un 81%. Las colecciones también sacaron a la luz recursos más allá de Contenidos para Aprender, la única línea que la gente usaba antes. Hoy, solo la sección de contenidos tiene unos 60.000 usuarios al mes.</p>
+        <p>Igual de importante: el enfoque centrado en el usuario nos permitió seguir iterando después del lanzamiento sin que volviera la resistencia interna.</p>
       </div>
     </div>
   </section>

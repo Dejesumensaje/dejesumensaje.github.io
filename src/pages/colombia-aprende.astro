@@ -12,21 +12,21 @@ const overview = [
   { k: 'Challenge', v: 'Transform a long-running national education platform into a clearer and more equitable experience.' },
   { k: 'Contribution', v: 'User research, information architecture, prototyping, testing and cross-functional product direction.' },
   { k: 'Constraints', v: '81,000 resources, 70+ microsites, multiple audiences and strong internal resistance to change.' },
-  { k: 'Outcome', v: 'Higher conversion, better content discovery and more room to keep iterating with stakeholder buy-in.' },
+  { k: 'Outcome', v: 'Content downloads up 81% in one year, resources surfaced beyond the one offering people used, and stakeholder buy-in to keep iterating.' },
 ];
 const numbers = [
   { v: '81,000', k: 'educational resources' },
   { v: '70+', k: 'microsites' },
-  { v: '17', k: 'years of platform history' },
+  { v: '3.5M', k: 'users at the pandemic peak' },
 ];
 const insights = [
-  'Many of the most prominent spaces were unused and outdated. Genuinely useful content was buried under layers of unnecessary clicks.',
+  'Many of the most prominent spaces were unused and outdated. Useful content was buried under layers of unnecessary clicks.',
   'Most users bounced as soon as they downloaded the resource they needed to prepare a class, only coming back months or years later.',
   'Only one content offering saw real use: Contenidos para Aprender, a collection of resources for teaching and building basic skills.',
 ];
 const lessons = [
-  { t: 'Users come from everywhere', b: "It wasn't just about our end users. Lasting transformation meant including Colombia Aprende's staff and key stakeholders across the Ministry." },
-  { t: 'It all begins with a vision', b: 'Gathering insights and analyzing data matters for improving user journeys, and for creating a common vision, an inspiring goal.' },
+  { t: 'Internal users count too', b: "It wasn't just about our end users. Lasting transformation meant including Colombia Aprende's staff and key stakeholders across the Ministry." },
+  { t: 'It all begins with a vision', b: 'Gathering insights and analyzing data matters for improving user journeys, and for building a shared vision.' },
   { t: 'Keep it simple', b: 'With a website as large and old as Colombia Aprende, you have to give yourself permission to make it a little smaller, to narrow the focus.' },
 ];
 const pct = (v: number, of: number) => `${((v / of) * 100).toFixed(3)}%`;
@@ -34,7 +34,7 @@ const pct = (v: number, of: number) => `${((v / of) * 100).toFixed(3)}%`;
 
 <CaseLayout
   title="Simplifying Colombia Aprende — William Montoya"
-  description="How do you transform a 17-year-old national platform with millions of users to improve discovery, retention and conversion?"
+  description="How do you transform a 17-year-old national platform with 3.5 million users to improve discovery, retention and conversion?"
   ogImage="https://dejesumensaje.com/assets/colombia-aprende-mockup.png"
   ogImageAlt="Colombia Aprende platform redesign"
   ogImageWidth={1026}
@@ -45,7 +45,7 @@ const pct = (v: number, of: number) => `${((v / of) * 100).toFixed(3)}%`;
   <CaseHeader
     lead="Simplifying Colombia Aprende for"
     accent="inclusion and equity"
-    question="How do you transform a 17-year-old national platform with millions of users to improve discovery, retention and conversion?"
+    question="How do you transform a 17-year-old national platform with 3.5 million users to improve discovery, retention and conversion?"
     facts={[...facts, { k: 'Link', v: 'colombiaaprende.edu.co', href: 'https://colombiaaprende.edu.co' }]}
     overview={overview}
     readFull="8 min"
@@ -101,7 +101,7 @@ const pct = (v: number, of: number) => `${((v / of) * 100).toFixed(3)}%`;
           ))}
         </div>
         <div class="prose measure">
-          <p>By this stage it was clear that we had to transform the whole experience. It wasn't just about ease of use: we needed to make Colombia Aprende useful, enjoyable and, above all, equitable.</p>
+          <p>By this stage it was clear that we had to transform the whole experience. It wasn't just about ease of use: Colombia Aprende had to be useful, clear and equitable.</p>
           <p>To do it, we mixed the Double Diamond framework with Lean UX.</p>
         </div>
       </div>
@@ -141,7 +141,6 @@ const pct = (v: number, of: number) => `${((v / of) * 100).toFixed(3)}%`;
         <div class="measure" style="display:flex;flex-direction:column;gap:var(--space-3)">
           <p class="t-small t-muted">Our research included</p>
           <ul class="dash-list list-reset" role="list">
-            <li>Understanding user goals and needs.</li>
             <li>Uncovering pain points of both end users and internal users.</li>
             <li>Mapping the goals of everyone involved, from administrators to teachers and school leaders.</li>
             <li>Auditing the content and benchmarking similar platforms around the world.</li>
@@ -160,7 +159,6 @@ const pct = (v: number, of: number) => `${((v / of) * 100).toFixed(3)}%`;
         <p class="t-h2 pull">In a content collection, users don't see individual resources. It's more like a kit the team publishes to achieve a specific goal.</p>
         <div class="prose measure">
           <p>By brainstorming and card-sorting, we created a new sitemap with the team, where the content section was the most important and visible through the whole navigation structure.</p>
-          <p>We approached the transformation with a socio-technical perspective, to provide a clear roadmap for sustainability and scalability, two things that worried our stakeholders.</p>
         </div>
       </div>
     </div>
@@ -200,8 +198,8 @@ const pct = (v: number, of: number) => `${((v / of) * 100).toFixed(3)}%`;
     <div class="split">
       <h2 id="ch-results" class="t-h3 split__label">Results</h2>
       <div class="prose measure split__body">
-        <p>Since the new Colombia Aprende launched in October 2020, conversion has risen and content has become far easier to discover. Content collections also helped surface resources beyond Contenidos para Aprender, the one offering people used before.</p>
-        <p>Just as important, agile delivery and a user-centered process let us keep iterating and refining the experience afterwards, without renewed resistance from stakeholders.</p>
+        <p>In the year after the new Colombia Aprende launched in October 2020, content downloads grew 81%. Content collections also helped surface resources beyond Contenidos para Aprender, the one offering people used before. Today the content section alone has about 60,000 users a month.</p>
+        <p>Just as important, the user-centered process let us keep iterating after launch without renewed resistance from stakeholders.</p>
       </div>
     </div>
   </section>

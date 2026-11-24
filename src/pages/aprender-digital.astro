@@ -15,23 +15,23 @@ const overview = [
   { k: 'Challenge', v: 'Create a product model for rural teachers who can’t rely on internet access as a default.' },
   { k: 'Contribution', v: 'UX, information architecture, value-proposition work and prototyping on a short timeline.' },
   { k: 'Research', v: 'Desk research plus interviews with 10 teachers and 5 ICT leaders serving low-connectivity schools.' },
-  { k: 'Outcome', v: 'An offline-ready content package model, a simpler publishing workflow and a clearer value proposition.' },
+  { k: 'Outcome', v: 'An offline-ready content package model and a simpler publishing workflow.' },
 ];
 const numbers = [
-  { v: '7M+', k: 'rural Colombians without internet access' },
-  { v: '47%', k: 'of rural schools with no network at all' },
+  { v: '7M+', k: 'rural Colombians without internet access in 2020' },
+  { v: '47%', k: 'of rural schools with no network at all in 2020' },
   { v: '3', k: 'months from new proposal to a tested MVP' },
 ];
 const prototypes = [
   {
     label: 'Aprender Digital website',
-    caption: 'The website, an iteration on the previous site (prototype in Spanish)',
+    caption: 'The website (prototype in Spanish)',
     src: 'https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FSRpGGNHHdLTeOvaZIIjZVz%2FAprender-Digital%3Fpage-id%3D0%253A1%26node-id%3D42%253A2211%26viewport%3D241%252C48%252C0.04%26scaling%3Dmin-zoom%26starting-point-node-id%3D42%253A2211',
     href: 'https://www.figma.com/proto/SRpGGNHHdLTeOvaZIIjZVz/Aprender-Digital?page-id=0%3A1&node-id=42%3A2211&scaling=min-zoom&starting-point-node-id=42%3A2211',
   },
   {
     label: 'Offline content package',
-    caption: 'The offline package: one file teachers carry to class, built on Material Design (prototype in Spanish)',
+    caption: 'The offline package (prototype in Spanish)',
     src: 'https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2F2OZPNtWxdH1iKL6p4GrCO5%2FContenido-offline%3Fpage-id%3D0%253A1%26node-id%3D4%253A2%26viewport%3D241%252C48%252C0.12%26scaling%3Dmin-zoom%26starting-point-node-id%3D4%253A2',
     href: 'https://www.figma.com/proto/2OZPNtWxdH1iKL6p4GrCO5/Contenido-offline?page-id=0%3A1&node-id=4%3A2&scaling=min-zoom&starting-point-node-id=4%3A2',
   },
@@ -79,8 +79,8 @@ const prototypes = [
       <h2 id="ch-background" class="t-h3 split__label">Background</h2>
       <div class="prose measure split__body">
         <p>Aprender Digital was a spin-off of Colombia Aprende, created to support the educational community with content and guidelines during the COVID-19 lockdown.</p>
-        <p>It was a temporary solution while we finished the new <a class="link" href="https://www.colombiaaprende.edu.co" target="_blank" rel="noopener noreferrer">colombiaaprende.edu.co</a>. When the new Colombia Aprende launched in October, Aprender Digital became redundant.</p>
-        <p>It had earned real recognition, though, so the Ministry gave us the chance to rethink it around a new value proposition with a single goal: a solution that works for people without an internet connection.</p>
+        <p>It was a temporary solution while we finished the new <a class="link" href="https://www.colombiaaprende.edu.co" target="_blank" rel="noopener noreferrer">colombiaaprende.edu.co</a>. When the new Colombia Aprende launched in October 2020, Aprender Digital became redundant.</p>
+        <p>The brand was already known, though, so the Ministry gave us the chance to rethink it around a new value proposition with a single goal: a solution that works for people without an internet connection.</p>
       </div>
     </div>
   </section>
@@ -91,12 +91,12 @@ const prototypes = [
       <div class="chapter__stack split__body">
         <div class="prose measure" data-depth="full">
           <p>Unlike Colombia Aprende, this ran on a short timeline: three months to propose a new value proposition, define the scope, build an MVP and test it with rural teachers.</p>
-          <p>We chose Lean UX to create value fast. Instead of defining requirements meticulously, we started from desk research to frame the problem.</p>
-          <p>More than 7 million rural Colombians lack internet access, and 47% of rural schools have no network infrastructure. A rural child receives about half the education of a peer in Bogotá or Medellín.</p>
+          <p>We chose Lean UX because of the timeline. Instead of defining requirements meticulously, we started from desk research to frame the problem.</p>
+          <p>In 2020, according to the Ministry of Education and the ICT Ministry, more than 7 million rural Colombians lacked internet access and 47% of rural schools had no network infrastructure. A rural child received about half the education of a peer in Bogotá or Medellín.</p>
         </div>
         <div class="grid2">
-          <div><h3 class="t-small t-muted">Problem statement</h3><p class="insight">The lack of access to educational resources is widening the gap between rich and poor, and hurting the work of rural teachers.</p></div>
-          <div><h3 class="t-small t-muted">Hypothesis</h3><p class="insight">If we deliver resources and guidelines consistently, even without internet, rural teachers can do better work, and education gets better with it.</p></div>
+          <div><h3 class="t-small t-muted">Problem statement</h3><p class="insight">The lack of access to educational resources is widening the gap between urban and rural Colombia, and hurting the work of rural teachers.</p></div>
+          <div><h3 class="t-small t-muted">Hypothesis</h3><p class="insight">If we deliver resources and guidelines consistently, even without internet, rural teachers can prepare their classes better, and education gets better with it.</p></div>
         </div>
       </div>
     </div>
@@ -106,7 +106,6 @@ const prototypes = [
     <div class="stage" style="aspect-ratio:1296/600">
       <img class="flat" src="/assets/lean-ux-framework.webp" width="600" height="600" loading="lazy" alt="The Lean UX cycle: think, make, check." style={`left:${pct(398, 1296)};top:${pct(50, 600)};width:${pct(500, 1296)}`} />
     </div>
-    <figcaption class="t-small">Lean UX: framing the problem from research instead of a full requirements phase</figcaption>
   </figure>
 
   <section class="chapter chapter--tight wrap" aria-labelledby="ch-users" data-depth="full" data-reveal>
@@ -123,14 +122,14 @@ const prototypes = [
     <div class="stage" style="aspect-ratio:1296/760">
       <img class="flat" src="/assets/user-persona.webp" width="1100" height="1080" loading="lazy" alt="Persona card for Carmen Gómez, a rural teacher in Colombia: goals, frustrations and context." style={`left:${pct(318, 1296)};top:${pct(48, 760)};width:${pct(680, 1296)}`} />
     </div>
-    <figcaption class="t-small">The persona of a rural teacher (in Spanish; the research was conducted in Spanish)</figcaption>
+    <figcaption class="t-small">Rural teacher persona (in Spanish)</figcaption>
   </figure>
 
   <section class="chapter chapter--tight wrap" aria-labelledby="ch-value" data-reveal>
     <div class="split">
       <h2 id="ch-value" class="t-h3 split__label">Creating value</h2>
       <div class="chapter__stack split__body">
-        <p class="measure" data-depth="full">To define the MVP we first set the new value proposition, running the exercise for both personas. The workshop produced the key insight: Secretariats needed content packages within two or three weeks of asking, and teachers needed them as one clear package, not resources downloaded one by one.</p>
+        <p class="measure" data-depth="full">To define the MVP we first set the new value proposition, running the exercise for both personas. The workshop produced the key insight: Secretariats waited two or three weeks to receive the content they requested, and teachers needed them as one clear package, not resources downloaded one by one.</p>
         <p class="t-h2 pull">A curated content package that teachers carry to class as a single file.</p>
         <p class="measure">Aprender Digital became a microsite of curated packages. Secretariats and teachers download a package as a self-contained HTML interface and carry that one file to the computers in rural schools. On our side, no one assembles packages by hand: we publish content as always, and the CMS does the rest.</p>
       </div>
@@ -170,7 +169,7 @@ const prototypes = [
     <div class="split">
       <h2 id="ch-results" class="t-h3 split__label">Results</h2>
       <div class="prose measure split__body">
-        <p>We shipped the MVP in three months. The site still draws about 1,200 visits a month from a niche audience: the teachers and Secretariats it was built for.</p>
+        <p>We shipped the MVP in three months. Five years later the portal is still live, draws about 1,200 visits a month, and the Ministry keeps adding content to it.</p>
       </div>
     </div>
   </section>

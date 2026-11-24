@@ -15,7 +15,7 @@ const overview = [
   { k: 'Reto', v: 'Teníamos un sistema de diseño sólido en Figma, pero quedaba fuera en cuanto los PM prototipaban con IA: vivía en un lugar al que esas herramientas no accedían.' },
   { k: 'Aporte', v: 'Implementación de la librería en React, arquitectura de tokens, paquete publicado en npm, playground de componentes y modelo de gobernanza para herramientas de IA.' },
   { k: 'Restricciones', v: 'Contexto empresarial con acuerdo de confidencialidad; los componentes deben renderizarse sin conflictos en cualquier entorno; las reglas deben ser lo bastante claras para que un agente las siga al pie de la letra.' },
-  { k: 'Resultado', v: 'Un paquete publicado y un Make Kit de Figma, adopción en varios equipos y una capa de revisión independiente que mantiene la interfaz generada con IA dentro del sistema.' },
+  { k: 'Resultado', v: 'Un paquete publicado y un Make Kit de Figma en uso en la línea de pricing del proyecto, y una capa de revisión independiente que mantiene la interfaz generada con IA dentro del sistema.' },
 ];
 const numbers = [
   { v: '2', k: 'puntos de entrada para la IA, un solo modelo de gobernanza' },
@@ -23,7 +23,7 @@ const numbers = [
   { v: '2,37:1', k: 'el contraste de advertencia que detectamos; WCAG exige 4,5:1' },
 ];
 const decisions = [
-  { t: 'El color de marca es escaso', b: 'Reservamos el verde de Deloitte para la acción principal y sus anillos de foco, nunca para estados activos o seleccionados. La decisión depende de un token y no del gusto personal: así un agente lo aplica sin dudar y un cambio de marca no deja rastros.' },
+  { t: 'El color de marca es escaso', b: 'Reservamos el verde de Deloitte para la acción principal y sus anillos de foco, nunca para estados activos o seleccionados. La decisión depende de un token y no del gusto personal: así un agente lo aplica sin dudar.' },
   { t: 'El contraste se mide, no se supone', b: 'El color de advertencia parecía legible a simple vista, pero al medirlo dio 2,37:1 frente al 4,5:1 que exige WCAG. Cambiamos el texto de advertencia a un token más oscuro que cumple el estándar y dejamos la validación en una auditoría automática, no solo en la documentación.' },
   { t: 'El sistema no toca lo que no es suyo', b: 'Los componentes corren dentro de prototipos a medio hacer y aplicaciones heredadas llenas de CSS. Por eso el paquete nunca inyecta estilos globales al HTML crudo: cero selectores sueltos como h1, body o button. Cada componente incluye su propio reset encapsulado.' },
   { t: 'Los tokens son contratos', b: 'Los nombres de los tokens calcan los de Figma, con todo y sus particularidades. Así, quien diseña en Figma y quien programa —o el agente que lee el código— hablan el mismo idioma. Cambiar un token sin acuerdo rompe el trabajo de los demás.' },
@@ -70,9 +70,9 @@ const decisions = [
     <div class="split">
       <h2 id="ch-problem" class="t-h3 split__label">El problema</h2>
       <div class="prose measure split__body">
-        <p>El equipo de diseño ya tenía un sistema maduro en Figma, creado por Grecia Gabriel y Rebecca Bradley, con componentes sólidos y fundamentos visuales claros.</p>
+        <p>El equipo de diseño ya tenía un sistema maduro en Figma, creado por Grecia Gabriel y Rebecca Bradley.</p>
         <p>El quiebre ocurrió cuando los product managers empezaron a usar Claude Code y Figma Make para explorar ideas con clientes. El sistema desapareció de la conversación: no por falta de calidad, sino porque esas herramientas no podían leerlo desde Figma.</p>
-        <p>La exploración ganó velocidad, pero la consistencia se desplomó. Los demos dejaron de compartir lenguaje visual, patrones de interacción y principios de UX. Cada PM improvisaba su propia interfaz y el sistema quedó reducido a un archivo de referencia que la IA no tocaba.</p>
+        <p>La exploración ganó velocidad, pero la consistencia cayó igual de rápido. Los demos dejaron de compartir lenguaje visual, patrones de interacción y principios de UX. Cada PM improvisaba su propia interfaz y el sistema quedó reducido a un archivo de referencia que la IA no tocaba.</p>
       </div>
     </div>
   </section>
@@ -94,7 +94,6 @@ const decisions = [
     <div class="stage" style="aspect-ratio:1296/680">
       <img class="flat" src="/assets/f/converge-button.webp" width="1600" height="1412" loading="lazy" alt="El componente Button en el playground: variantes, tamaños, íconos, estados y la barra de acciones masivas." style={`left:${pct(298, 1296)};top:${pct(48, 680)};width:${pct(700, 1296)}`} />
     </div>
-    <figcaption class="t-small">Componentes de producción en un playground, validados uno por uno antes de llegar a los equipos</figcaption>
   </figure>
 
   <section class="chapter wrap" aria-labelledby="ch-contribution" data-depth="full" data-reveal>
@@ -114,7 +113,7 @@ const decisions = [
     <div class="split">
       <h2 id="ch-decisions" class="t-h3 split__label">Las decisiones que lo sostienen</h2>
       <div class="chapter__stack split__body">
-        <p class="measure" data-depth="full">Un paquete para agentes solo funciona si sus reglas eliminan la ambigüedad. Un diseñador con experiencia sabe navegar zonas grises; un agente ejecuta al pie de la letra lo que dictan las reglas. Por eso tuvimos que afinar cada norma antes de publicarla.</p>
+        <p class="measure" data-depth="full">Un paquete para agentes solo funciona si sus reglas eliminan la ambigüedad. Un diseñador con experiencia sabe navegar zonas grises; un agente sigue las reglas al pie de la letra y rellena cualquier vacío adivinando. Por eso tuvimos que afinar cada norma antes de publicarla.</p>
         <div class="grid2">
           {decisions.map((d) => (
             <div><h3 class="t-h3">{d.t}</h3><p class="t-muted">{d.b}</p></div>
@@ -133,7 +132,7 @@ const decisions = [
 
   <section class="chapter wrap" aria-labelledby="ch-org" data-depth="full" data-reveal>
     <div class="split">
-      <h2 id="ch-org" class="t-h3 split__label">El verdadero reto era organizacional</h2>
+      <h2 id="ch-org" class="t-h3 split__label">Gobernar la exploración</h2>
       <div class="prose measure split__body">
         <p>Los PM necesitaban prototipar con IA frente a los clientes sin producir interfaces inconexas y difíciles de mantener.</p>
         <p>La solución no era frenar la exploración, sino darle estructura: un entorno controlado, componentes reales de producción en un playground, principios claros y un ciclo donde los conceptos explorados vuelven a diseño para refinarse antes de pasar a producción.</p>
@@ -145,11 +144,10 @@ const decisions = [
     <div class="split">
       <h2 id="ch-entry" class="t-h3 split__label">Un sistema, dos puntos de entrada</h2>
       <div class="chapter__stack split__body">
-        <p class="measure">Con el paquete listo, lo conectamos a los dos entornos donde trabajan personas y agentes.</p>
         <div class="grid2">
           <div>
             <h3 class="t-h3">Figma Make</h3>
-            <p class="t-muted">Mediante un Make Kit que reúne el paquete de npm, los tokens de la librería de Grecia y Rebecca y las pautas de uso. Así Figma Make sabe qué componentes existen y cuándo usarlos, y los PM prototipan con las mismas piezas que ingeniería lleva a producción.</p>
+            <p class="t-muted">Mediante un Make Kit que reúne el paquete de npm, los tokens de la librería de Figma y las pautas de uso. Así Figma Make sabe qué componentes existen y cuándo usarlos, y los PM prototipan con las mismas piezas que ingeniería lleva a producción.</p>
           </div>
           <div>
             <h3 class="t-h3">Claude Code</h3>
@@ -165,15 +163,14 @@ const decisions = [
     <div class="stage" style="aspect-ratio:1296/560">
       <img class="flat" src="/assets/f/converge-sidebar.webp" width="1600" height="796" loading="lazy" alt="El componente Sidebar en modo claro expandido y en modo oscuro colapsado." style={`left:${pct(248, 1296)};top:${pct(52, 560)};width:${pct(800, 1296)}`} />
     </div>
-    <figcaption class="t-small">Un componente con sus estados documentados para que tanto personas como agentes los entiendan</figcaption>
   </figure>
 
   <section class="chapter chapter--section wrap" aria-labelledby="ch-outcome" data-reveal>
     <div class="split">
       <h2 id="ch-outcome" class="t-h3 split__label">Primeros resultados</h2>
       <div class="prose measure split__body">
-        <p>El sistema sigue creciendo, pero ya entregó un Make Kit funcional para Figma Make, un paquete en npm que usan varios equipos, sesiones de transferencia para quienes trabajan con Claude Code y una hoja de ruta para escalar su adopción.</p>
-        <p>El mayor cambio fue cultural. Dejamos de discutir si la IA reemplaza al diseño y empezamos a definir las reglas que sostienen la calidad cuando la IA genera cada vez más pantallas.</p>
+        <p>El sistema está en uso en la línea de pricing del proyecto: un Make Kit funcional para Figma Make, el paquete publicado en npm, sesiones de transferencia para quienes trabajan con Claude Code y reglas que los PM ya usan para construir sus artefactos de diseño. Esas mismas reglas son la base de un lint de diseño que estamos creando.</p>
+        <p>Con esas reglas, los PM de la línea de pricing iteran sobre diseños cercanos al final, y mi tiempo va adonde debe: carga cognitiva, eficiencia y arquitectura de información.</p>
       </div>
     </div>
   </section>
@@ -182,7 +179,7 @@ const decisions = [
     <div class="split">
       <h2 id="ch-reflection" class="t-h3 split__label">Reflexión</h2>
       <div class="split__body" style="display:flex;flex-direction:column;gap:var(--space-10)">
-        <p class="t-h2 pull">Si cualquiera puede generar una pantalla en segundos, nuestro trabajo ya no es dibujarlas, sino codificar las reglas que mantienen coherentes a miles de ellas.</p>
+        <p class="t-h2 pull">Si cualquiera puede generar una pantalla en segundos, el trabajo pasa de dibujarlas a codificar las reglas que las mantienen coherentes.</p>
         <p class="tldr-note t-small" data-depth="tldr">Esta es la versión corta. La historia completa explica por qué la librería de Figma no bastaba, cómo construimos el paquete y cómo lo conectamos con Figma Make y Claude Code.</p>
       </div>
     </div>

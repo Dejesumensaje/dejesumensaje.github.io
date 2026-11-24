@@ -21,11 +21,11 @@ const overview = [
   { k: 'Reto', v: 'La sede central envía al director de tienda hasta cien recomendaciones de precio a la vez. Él debe revisar, programar e imprimir cada una en una etiqueta física.' },
   { k: 'Aporte', v: 'Diseño de producto y un prototipo funcional hecho con IA, probado con directores de tienda y documentado decisión por decisión.' },
   { k: 'Restricciones', v: 'Los precios llegan a SAP solo en lotes programados, una tienda no puede imprimir todas las etiquetas de golpe y el cliente es confidencial: las capturas usan una interfaz neutra y datos de muestra.' },
-  { k: 'Resultado', v: 'En curso: un prototipo que habla el idioma del estante, con cada decisión de diseño y su justificación documentadas.' },
+  { k: 'Resultado', v: 'En curso: un prototipo funcional probado con directores de tienda, con 46 decisiones de diseño documentadas.' },
 ];
 const numbers = [
-  { v: '~100', k: 'recomendaciones de la sede central que un director recibe de golpe' },
-  { v: '5', k: 'tiendas por director, en promedio' },
+  { v: '100', k: 'recomendaciones de la sede central que un director recibe de golpe' },
+  { v: '21', k: 'directores de tienda en sesiones de prueba moderadas' },
   { v: '46', k: 'decisiones de diseño documentadas, cada una con su justificación' },
 ];
 const FLOOR = { w: 1296, h: 720 };
@@ -76,7 +76,7 @@ const floorPhones = [
       <div class="chapter__stack split__body">
         <div class="prose measure">
           <p>Las primeras versiones de la tabla eran confusas, y el problema no era visual. El prototipo trataba las recomendaciones de la sede central como si ya estuvieran vigentes; así, el precio actual y el recomendado mostraban el mismo número y nadie podía distinguirlos.</p>
-          <p>Convertir la recomendación en una propuesta resolvió el modelo. Ahora cada producto muestra tres datos separados: el precio vigente en SAP, la propuesta de la sede central y la decisión del director. Ante una propuesta, el director puede aceptarla, fijar otro precio o mantener el actual, y aceptar nunca envía nada a producción por sí solo.</p>
+          <p>Convertir la recomendación en una propuesta resolvió el modelo. Ahora cada producto muestra tres datos separados: el precio vigente en SAP, la propuesta de la sede central y la decisión del director. Ante una propuesta, el director puede aceptarla, fijar otro precio o mantener el actual, y aceptar nunca envía nada por sí solo.</p>
         </div>
       </div>
     </div>
@@ -102,7 +102,6 @@ const floorPhones = [
         <img src="/assets/f/store-pricing-item.webp" width="1440" height="810" loading="lazy" alt="El panel de un producto: una vista previa de la etiqueta amarilla de oferta y la etiqueta blanca tachada, y debajo el precio base y el precio de venta, cada uno con su razón, sus fechas y la recomendación de la sede central." />
       </div>
     </div>
-    <figcaption class="t-small">El panel del producto abre con la etiqueta que verá el comprador y muestra debajo las decisiones que la respaldan</figcaption>
   </figure>
 
   <section class="chapter chapter--tight wrap" aria-labelledby="ch-testing" data-reveal>
@@ -110,7 +109,7 @@ const floorPhones = [
       <h2 id="ch-testing" class="t-h3 split__label">Lo que cambió con las pruebas</h2>
       <div class="chapter__stack split__body">
         <div class="prose measure">
-          <p>En sesiones moderadas con directores de tienda medimos el tiempo de cada tarea y los puntos de fricción. Dos hallazgos cambiaron el flujo por completo.</p>
+          <p>Hicimos sesiones moderadas con 21 directores de tienda. Los tiempos por tarea no fueron concluyentes. Lo que sí quedó claro es que la nueva distribución coincide con la forma en que los directores piensan su trabajo: les costaba menos encontrar lo que tenían que editar que en la interfaz anterior, donde la información estaba dispersa y gestionar las tareas era difícil. Dos hallazgos cambiaron el flujo.</p>
         </div>
         <div class="grid2">
           <div>
@@ -159,9 +158,9 @@ const floorPhones = [
       <div class="chapter__stack split__body">
         <div class="prose measure">
           <p>El prototipo es una aplicación funcional hecha con IA, no una maqueta estática. Por eso los directores prueban comportamientos reales: lotes que se programan, colas que se vacían y precios de una misma línea que cambian juntos.</p>
-          <p>Construir rápido nos exigió disciplina: documentamos cada decisión con su contexto, lo que elegimos y lo que descartamos, para no perder el hilo en la siguiente iteración. Además, agentes de IA auditan flujos, textos y accesibilidad, y sus hallazgos alimentan nuevas decisiones.</p>
+          <p>Documentamos cada decisión con su contexto, lo que elegimos y lo que descartamos, para no perder el hilo en la siguiente iteración. Además, agentes de IA auditan flujos, textos y accesibilidad, y sus hallazgos alimentan nuevas decisiones.</p>
         </div>
-        <p class="t-h2 pull">Cuando construir toma minutos, lo difícil es recordar por qué tomaste cada decisión.</p>
+        <p class="t-h2 pull">Cuando construir es rápido, lo escaso es saber por qué se tomó cada decisión.</p>
       </div>
     </div>
   </section>
@@ -171,7 +170,7 @@ const floorPhones = [
       <h2 id="ch-next" class="t-h3 split__label">Lo que sigue</h2>
       <div class="split__body" style="display:flex;flex-direction:column;gap:var(--space-10)">
         <div class="prose measure">
-          <p>El proyecto sigue activo. El próximo paso es el flujo multitienda: que un director tome una decisión de precio en una sucursal y la envíe, en un solo lote, a las demás tiendas a su cargo.</p>
+          <p>El próximo paso es el flujo multitienda: que un director tome una decisión de precio en una sucursal y la envíe, en un solo lote, a las demás tiendas a su cargo.</p>
         </div>
         <p class="tldr-note t-small" data-depth="tldr">Esta es la versión corta. La historia completa explica el modelo de tres precios, el paso de un asistente guiado a una lista de trabajo, los flujos móviles y cómo documentamos las decisiones.</p>
       </div>

@@ -12,10 +12,10 @@ const facts = [
   { k: 'Design system in Figma', v: 'Grecia Gabriel and Rebecca Bradley' },
 ];
 const overview = [
-  { k: 'Challenge', v: 'A polished Figma design system was being bypassed the moment PMs prototyped with AI tools. It lived where those tools couldn’t reach.' },
+  { k: 'Challenge', v: 'We had a solid design system in Figma, but it was bypassed the moment PMs prototyped with AI tools: it lived where those tools couldn’t reach.' },
   { k: 'Contribution', v: 'React implementation of the library, token architecture, a published npm package, a component playground and the governance model for AI tooling.' },
   { k: 'Constraints', v: 'NDA-bound enterprise context; components must render safely anywhere; rules must be unambiguous enough for an agent to follow.' },
-  { k: 'Outcome', v: 'A published package and Figma Make Kit, adoption across teams, and an independent review layer that keeps AI-generated UI on-system.' },
+  { k: 'Outcome', v: 'A published package and Figma Make Kit in use across the project’s pricing line, and an independent review layer that keeps AI-generated UI on-system.' },
 ];
 const numbers = [
   { v: '2', k: 'AI entry points, one governance model' },
@@ -23,7 +23,7 @@ const numbers = [
   { v: '2.37:1', k: 'the warning contrast we caught; WCAG asks for 4.5:1' },
 ];
 const decisions = [
-  { t: 'Brand color is scarce', b: 'The Deloitte green is reserved for the single most important action and its focus rings, nothing merely active or selected. It depends on a token, not on taste, so an agent can apply it without ambiguity, and rebranding stays clean.' },
+  { t: 'Brand color is scarce', b: 'The Deloitte green is reserved for the single most important action and its focus rings, nothing merely active or selected. It depends on a token, not on taste, so an agent can apply it without ambiguity.' },
   { t: 'Contrast is measured, not assumed', b: 'The warning color looked acceptable. Measured, it was 2.37:1 against the 4.5:1 WCAG asks for. Warning text now uses a darker token that passes, and the rule lives in an automated review layer, not just in the docs.' },
   { t: 'The system doesn’t touch what it doesn’t own', b: 'Components render in unfinished prototypes and legacy apps full of CSS, so the package never styles raw HTML globally. No bare h1, body or button selectors; each component ships its own scoped reset.' },
   { t: 'Tokens are contracts', b: 'Token names map directly to Figma, quirks included. The designer reading the library and the engineer or agent reading the code see the same concepts. Changing a token without agreement breaks something people already built on.' },
@@ -70,9 +70,9 @@ const decisions = [
     <div class="split">
       <h2 id="ch-problem" class="t-h3 split__label">The problem</h2>
       <div class="prose measure split__body">
-        <p>The design team already had a strong system in Figma: well-crafted components, clear visual foundations and a mature library. That work belonged to Grecia Gabriel and Rebecca Bradley, and it was solid.</p>
+        <p>The design team already had a mature system in Figma, built by Grecia Gabriel and Rebecca Bradley.</p>
         <p>The problem appeared when product managers started using Claude Code and Figma Make to explore ideas with clients. The system was no longer part of the conversation. Not because it was poorly designed, but because it lived somewhere those tools could not reach.</p>
-        <p>Exploration got much faster. Consistency dropped just as quickly. Demos no longer shared the system’s visual language, interaction patterns or UX principles. Every PM was reinventing the wheel, and the design system became decorative: present, but out of reach for anything AI could use.</p>
+        <p>Exploration got much faster. Consistency dropped just as quickly. Demos no longer shared the system’s visual language, interaction patterns or UX principles. Each PM improvised their own interface, and the design system became a reference file AI never touched.</p>
       </div>
     </div>
   </section>
@@ -94,7 +94,6 @@ const decisions = [
     <div class="stage" style="aspect-ratio:1296/680">
       <img class="flat" src="/assets/f/converge-button.webp" width="1600" height="1412" loading="lazy" alt="Button component in the playground: variants, sizes, icons, states and the bulk-action bar." style={`left:${pct(298, 1296)};top:${pct(48, 680)};width:${pct(700, 1296)}`} />
     </div>
-    <figcaption class="t-small">Production components in a playground, validated one by one before any team consumed them</figcaption>
   </figure>
 
   <section class="chapter wrap" aria-labelledby="ch-contribution" data-depth="full" data-reveal>
@@ -114,7 +113,7 @@ const decisions = [
     <div class="split">
       <h2 id="ch-decisions" class="t-h3 split__label">The decisions that hold it together</h2>
       <div class="chapter__stack split__body">
-        <p class="measure" data-depth="full">A package consumed by agents only works if its rules don’t depend on human judgment. A skilled designer can navigate ambiguity; an agent does exactly what its rules allow. So the rules had to be right before they were exposed.</p>
+        <p class="measure" data-depth="full">A package consumed by agents only works if its rules don’t depend on human judgment. A skilled designer can navigate ambiguity; an agent follows its rules literally and fills any gap with a guess. So the rules had to be right before they were exposed.</p>
         <div class="grid2">
           {decisions.map((d) => (
             <div><h3 class="t-h3">{d.t}</h3><p class="t-muted">{d.b}</p></div>
@@ -133,9 +132,9 @@ const decisions = [
 
   <section class="chapter wrap" aria-labelledby="ch-org" data-depth="full" data-reveal>
     <div class="split">
-      <h2 id="ch-org" class="t-h3 split__label">The real challenge was organizational</h2>
+      <h2 id="ch-org" class="t-h3 split__label">Governing exploration</h2>
       <div class="prose measure split__body">
-        <p>PMs needed to explore ideas with clients using AI without turning those explorations into disconnected, inconsistent, hard-to-maintain experiences.</p>
+        <p>PMs needed to explore ideas with clients using AI without turning those explorations into inconsistent experiences that are hard to maintain.</p>
         <p>The answer wasn’t to limit exploration but to give it structure: a controlled environment, real production components in a playground, a set of guiding principles, and a process where explored concepts return to the design team for refinement before they reach production.</p>
       </div>
     </div>
@@ -145,11 +144,10 @@ const decisions = [
     <div class="split">
       <h2 id="ch-entry" class="t-h3 split__label">One system, two entry points</h2>
       <div class="chapter__stack split__body">
-        <p class="measure">Once the package existed, it had to reach the two environments where people and agents actually work.</p>
         <div class="grid2">
           <div>
             <h3 class="t-h3">Figma Make</h3>
-            <p class="t-muted">Through a Make Kit: the npm package, the tokens and variables from Grecia and Rebecca’s library, and usage guidelines on top, so Figma Make knows which components exist and when to use them. PMs now prototype with the same components engineers ship.</p>
+            <p class="t-muted">Through a Make Kit: the npm package, the tokens and variables from the Figma library, and usage guidelines on top, so Figma Make knows which components exist and when to use them. PMs now prototype with the same components engineers ship.</p>
           </div>
           <div>
             <h3 class="t-h3">Claude Code</h3>
@@ -165,15 +163,14 @@ const decisions = [
     <div class="stage" style="aspect-ratio:1296/560">
       <img class="flat" src="/assets/f/converge-sidebar.webp" width="1600" height="796" loading="lazy" alt="Sidebar component in light expanded and dark collapsed states." style={`left:${pct(248, 1296)};top:${pct(52, 560)};width:${pct(800, 1296)}`} />
     </div>
-    <figcaption class="t-small">One component, its states documented where both people and agents read them</figcaption>
   </figure>
 
   <section class="chapter chapter--section wrap" aria-labelledby="ch-outcome" data-reveal>
     <div class="split">
       <h2 id="ch-outcome" class="t-h3 split__label">Early outcomes</h2>
       <div class="prose measure split__body">
-        <p>The system keeps evolving, but it has already produced a working Make Kit for Figma Make, a published npm package consumed across teams, knowledge-transfer sessions for teams working with Claude Code, and a roadmap for wider adoption.</p>
-        <p>The most meaningful outcome has been cultural. The conversation moved away from whether AI replaces design work, toward how design defines the principles and rules that let quality scale when more and more screens are generated with AI.</p>
+        <p>The system is in use across the project’s pricing line: a working Make Kit for Figma Make, the published npm package, knowledge-transfer sessions for teams working with Claude Code, and rules PMs now use to build their design artifacts. The same rules are the base of a design lint we’re building.</p>
+        <p>With those rules, PMs on the pricing line iterate on designs close to final, and my time goes where it should: cognitive load, efficiency and information architecture.</p>
       </div>
     </div>
   </section>
@@ -182,7 +179,7 @@ const decisions = [
     <div class="split">
       <h2 id="ch-reflection" class="t-h3 split__label">Reflection</h2>
       <div class="split__body" style="display:flex;flex-direction:column;gap:var(--space-10)">
-        <p class="t-h2 pull">Once anyone can generate a screen in seconds, the leverage moves from drawing screens to encoding the rules that keep thousands of them coherent.</p>
+        <p class="t-h2 pull">Once anyone can generate a screen in seconds, the work moves from drawing screens to encoding the rules that keep them coherent.</p>
         <p class="tldr-note t-small" data-depth="tldr">This is the short version. The full story covers why the Figma library wasn’t enough, how the package was built, and how it reaches Figma Make and Claude Code.</p>
       </div>
     </div>
