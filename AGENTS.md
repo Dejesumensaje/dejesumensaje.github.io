@@ -4,6 +4,8 @@ Project: William Montoya portfolio (Astro 7, bilingual EN/ES).
 
 Before changing layout, spacing, headings or shared UI, read
 [`docs/design-system.md`](docs/design-system.md).
+For metadata, structured data or analytics, read
+[`docs/seo-analytics.md`](docs/seo-analytics.md).
 
 ## Non-negotiables
 
@@ -15,6 +17,8 @@ Before changing layout, spacing, headings or shared UI, read
   1440px.
 - One `h1` per page, no skipped heading levels, pull quotes stay `<p>`.
 - Keep English at `/` and Spanish under `/es`; every page has a counterpart.
+- Keep JSON-LD valid; never add a second `Person` entity.
+- Analytics events must not contain PII; reuse the delegated tracker.
 - `src/pages/_legacy-*` and the non-`f/` legacy components are not built.
   Do not import them into live pages.
 

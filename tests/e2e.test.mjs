@@ -381,6 +381,39 @@ test('Spanish TL;DR shows the short version, not the full story', async () => {
   await context.close();
 });
 
+
+test('analytics captures key interactions', async () => {
+  const { context, page } = await newPage({ reducedMotion: 'reduce' });
+  await goto(page, '/es/aprender-digital');
+
+  await page.locator('[data-depth-toggle]:not([data-floating]) [data-value="tldr"]').click();
+  await page.locator('.theme-btn').first().click();
+  await page.waitForTimeout(150);
+
+  // Prevent the actual navigation so we can read the event queue afterwards.
+  await page.evaluate(() => {
+    document.querySelector('.nav__lang')?.addEventListener(
+      'click',
+      (event) => event.preventDefault(),
+      { once: true, capture: true }
+    );
+  });
+  await page.locator('.nav__lang').click();
+  await page.waitForTimeout(150);
+
+  const events = await page.evaluate(() =>
+    Array.from(window.dataLayer ?? [])
+      .map((entry) => Array.from(entry))
+      .filter((entry) => entry[0] === 'event')
+      .map((entry) => entry[1])
+  );
+
+  assert.ok(events.includes('depth_toggle'), `depth event missing: ${JSON.stringify(events)}`);
+  assert.ok(events.includes('theme_toggle'), `theme event missing: ${JSON.stringify(events)}`);
+  assert.ok(events.includes('language_switch'), `language event missing: ${JSON.stringify(events)}`);
+  await context.close();
+});
+
 test('footer game loads lazily only after the start action', async () => {
   const { context, page } = await newPage();
   await goto(page, '/');

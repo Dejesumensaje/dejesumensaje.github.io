@@ -4,6 +4,7 @@
 // (shown only in TL;DR). Everything else is in both.
 import Layout from './Layout.astro';
 import DepthToggle from '../components/f/DepthToggle.astro';
+import { cleanPath, getLang, localize } from '../i18n/ui';
 import '../styles/case.css';
 
 interface Props {
@@ -11,15 +12,65 @@ interface Props {
   description: string;
   ogImage?: string;
   ogImageAlt?: string;
+  ogImageWidth?: number;
+  ogImageHeight?: number;
   noindex?: boolean;
   readFull: string; // e.g. "8 min"
   readTldr: string; // e.g. "1 min"
 }
 const { readFull, readTldr, ...meta } = Astro.props;
+const lang = getLang(Astro.url);
+const site = Astro.site ?? new URL('https://dejesumensaje.com');
+const canonicalURL = new URL(cleanPath(Astro.url.pathname), site).href;
+const caseTitle = meta.title.replace(/ — William Montoya$/, '');
+const caseImage = meta.ogImage ?? 'https://dejesumensaje.com/assets/william-montoya.jpg';
+const siteURL = new URL('/', site).href;
+const caseJsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'CreativeWork',
+      '@id': `${canonicalURL}#case-study`,
+      headline: caseTitle,
+      description: meta.description,
+      image: caseImage,
+      url: canonicalURL,
+      mainEntityOfPage: `${canonicalURL}#webpage`,
+      inLanguage: lang,
+      genre: 'Case study',
+      author: { '@id': `${siteURL}#person` },
+      isPartOf: { '@id': `${siteURL}#website` },
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: lang === 'es' ? 'Inicio' : 'Home',
+          item: new URL(localize(lang, '/'), site).href,
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: lang === 'es' ? 'Trabajo' : 'Work',
+          item: new URL(localize(lang, '/#work'), site).href,
+        },
+        {
+          '@type': 'ListItem',
+          position: 3,
+          name: caseTitle,
+          item: canonicalURL,
+        },
+      ],
+    },
+  ],
+};
 ---
 
 <Layout {...meta} ogType="article">
   <Fragment slot="head">
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(caseJsonLd)} />
     <script is:inline>
       // Decide the reading depth before first paint (no flash of the wrong view).
       (function () {

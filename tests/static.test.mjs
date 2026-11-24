@@ -174,6 +174,8 @@ test('title and description are present and unique', () => {
     assert.ok(title, `missing title on ${route}`);
     assert.ok(description, `missing description on ${route}`);
     assert.ok(description.length >= 50, `description too short on ${route}`);
+    assert.ok(description.length <= 160, `description too long on ${route} (${description.length})`);
+    assert.ok(title.length <= 65, `title too long on ${route} (${title.length})`);
     if (!route.endsWith('/404')) {
       assert.ok(!titles.has(title), `duplicate title ${title} on ${route} and ${titles.get(title)}`);
       titles.set(title, route);
@@ -269,13 +271,71 @@ test('social metadata is localized and complete', () => {
     assert.ok(metas['og:description'], `og:description on ${route}`);
     assert.ok(metas['og:image']?.startsWith('https://'), `og:image on ${route}`);
     assert.ok(metas['og:image:alt'], `og:image:alt on ${route}`);
+    assert.ok(metas['og:image:width'], `og:image:width on ${route}`);
+    assert.ok(metas['og:image:height'], `og:image:height on ${route}`);
     assert.equal(metas['twitter:card'], 'summary_large_image', `twitter:card on ${route}`);
+    assert.equal(metas['twitter:title'], metas['og:title'], `twitter:title on ${route}`);
+    assert.equal(metas['twitter:description'], metas['og:description'], `twitter:description on ${route}`);
+    assert.equal(metas['twitter:image'], metas['og:image'], `twitter:image on ${route}`);
+    assert.equal(metas['twitter:image:alt'], metas['og:image:alt'], `twitter:image:alt on ${route}`);
+    assert.equal(metas.author, 'William Montoya', `author on ${route}`);
+    assert.match(
+      metas.robots,
+      route.endsWith('/404') ? /noindex, nofollow/ : /index, follow/,
+      `robots on ${route}`
+    );
   }
 
   for (const route of ROUTES.filter((r) => LANG_OF(r) === 'es')) {
     const alt = attr(tags(html[route], 'meta').find((t) => t.includes('property="og:image:alt"')) ?? '', 'content');
     assert.ok(!alt.includes('based in Medellín'), `og:image:alt should not use the English default on ${route}`);
   }
+});
+
+test('structured data is valid and complete', () => {
+  for (const route of ROUTES) {
+    const page = html[route];
+    const blocks = [...page.matchAll(/<script type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)];
+    assert.ok(blocks.length > 0, `structured data missing on ${route}`);
+
+    const entities = blocks.flatMap((block) => {
+      const data = JSON.parse(block[1]);
+      return data['@graph'] ?? [data];
+    });
+    const types = entities.map((entity) => entity['@type']);
+    const lang = LANG_OF(route);
+    assert.ok(types.includes('Person'), `Person schema on ${route}`);
+    assert.ok(types.includes('WebSite'), `WebSite schema on ${route}`);
+    assert.ok(types.includes('WebPage'), `WebPage schema on ${route}`);
+    assert.equal(types.filter((type) => type === 'Person').length, 1, `one Person on ${route}`);
+
+    const webPage = entities.find((entity) => entity['@type'] === 'WebPage');
+    assert.equal(webPage.url, canonicalFor(route), `schema url on ${route}`);
+    assert.equal(webPage.inLanguage, lang, `schema language on ${route}`);
+
+    const isCaseStudy = [
+      '/store-pricing-ai',
+      '/converge-design-system',
+      '/aprender-digital',
+      '/colombia-aprende',
+      '/es/store-pricing-ai',
+      '/es/converge-design-system',
+      '/es/aprender-digital',
+      '/es/colombia-aprende',
+    ].includes(route);
+    if (isCaseStudy) {
+      assert.ok(types.includes('CreativeWork'), `CreativeWork schema on ${route}`);
+      assert.ok(types.includes('BreadcrumbList'), `BreadcrumbList schema on ${route}`);
+      const breadcrumbs = entities.find((entity) => entity['@type'] === 'BreadcrumbList');
+      assert.equal(breadcrumbs.itemListElement.length, 3, `breadcrumb length on ${route}`);
+    }
+  }
+});
+
+test('robots.txt keeps demo and game URLs out of search', async () => {
+  const robots = await readFile(join(ROOT, 'robots.txt'), 'utf8');
+  assert.match(robots, /Disallow: \/play\//);
+  assert.match(robots, /Disallow: \/explorations\//);
 });
 
 test('performance budgets for shipped JS and CSS', async () => {

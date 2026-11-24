@@ -30,6 +30,8 @@ const pct = (v: number, of: number) => `${((v / of) * 100).toFixed(3)}%`;
         <a
           class:list={['project', { 'project--dark': p.dark }]}
           href={p.href}
+          data-analytics="side_project_open"
+          data-analytics-label={p.title}
           target="_blank"
           rel="noopener noreferrer"
           style={`--card:${p.color}`}

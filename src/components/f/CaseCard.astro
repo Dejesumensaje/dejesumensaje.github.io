@@ -11,7 +11,7 @@ const lang = getLang(Astro.url);
 ---
 
 <article class:list={['case', `case--${card.span}`, { 'case--featured': featured }]} data-reveal>
-  <Tag class="case__link" href={card.href}>
+  <Tag class="case__link" href={card.href} data-analytics={card.href ? 'case_study_open' : undefined} data-analytics-label={card.title}>
     <div class="stage case__stage" style={`aspect-ratio:${card.stage.w} / ${card.stage.h}`} data-tilt-zone={featured ? '' : undefined}>
       <div class="case__art">
         <Device box={card.stage} browser={card.browser} phone={card.phone} eager={eager} veil={card.confidential} />

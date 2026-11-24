@@ -9,6 +9,8 @@ interface Props {
   description: string;
   ogImage?: string;
   ogImageAlt?: string;
+  ogImageWidth?: number;
+  ogImageHeight?: number;
   ogType?: 'website' | 'article';
   noindex?: boolean;
 }
@@ -23,13 +25,58 @@ const {
   description,
   ogImage = 'https://dejesumensaje.com/assets/william-montoya.jpg',
   ogImageAlt = defaultOgImageAlt,
+  ogImageWidth = 1000,
+  ogImageHeight = 750,
   ogType = 'website',
   noindex = false,
 } = Astro.props;
 
-const canonicalURL = new URL(cleanPath(Astro.url.pathname), Astro.site).href;
-const enURL = new URL(alternate(Astro.url, 'en'), Astro.site).href;
-const esURL = new URL(alternate(Astro.url, 'es'), Astro.site).href;
+const site = Astro.site ?? new URL('https://dejesumensaje.com');
+const canonicalURL = new URL(cleanPath(Astro.url.pathname), site).href;
+const enURL = new URL(alternate(Astro.url, 'en'), site).href;
+const esURL = new URL(alternate(Astro.url, 'es'), site).href;
+const siteURL = new URL('/', site).href;
+const personID = `${siteURL}#person`;
+const websiteID = `${siteURL}#website`;
+const webPageID = `${canonicalURL}#webpage`;
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Person',
+      '@id': personID,
+      name: 'William Montoya',
+      jobTitle: 'Senior Product Designer',
+      url: siteURL,
+      image: 'https://dejesumensaje.com/assets/william-montoya.jpg',
+      email: 'mailto:william@dejesumensaje.com',
+      worksFor: { '@type': 'Organization', name: 'Globant' },
+      knowsLanguage: ['es', 'en'],
+      address: { '@type': 'PostalAddress', addressLocality: 'Medellín', addressCountry: 'CO' },
+      sameAs: ['https://www.linkedin.com/in/dejesumensaje/', 'https://medium.com/@dejesumensaje'],
+    },
+    {
+      '@type': 'WebSite',
+      '@id': websiteID,
+      url: siteURL,
+      name: 'William Montoya',
+      inLanguage: ['en', 'es'],
+      author: { '@id': personID },
+      publisher: { '@id': personID },
+    },
+    {
+      '@type': 'WebPage',
+      '@id': webPageID,
+      url: canonicalURL,
+      name: title,
+      description,
+      inLanguage: lang,
+      isPartOf: { '@id': websiteID },
+      about: { '@id': personID },
+      primaryImageOfPage: { '@type': 'ImageObject', url: ogImage },
+    },
+  ],
+};
 ---
 
 <!doctype html>
@@ -45,8 +92,6 @@ const esURL = new URL(alternate(Astro.url, 'es'), Astro.site).href;
     <link rel="alternate" hreflang="en" href={enURL} />
     <link rel="alternate" hreflang="es" href={esURL} />
     <link rel="alternate" hreflang="x-default" href={enURL} />
-    {noindex && <meta name="robots" content="noindex, nofollow" />}
-
     <meta property="og:type" content={ogType} />
     <meta property="og:site_name" content="William Montoya" />
     <meta property="og:locale" content={lang === 'es' ? 'es_CO' : 'en_US'} />
@@ -55,12 +100,21 @@ const esURL = new URL(alternate(Astro.url, 'es'), Astro.site).href;
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content={String(ogImageWidth)} />
+    <meta property="og:image:height" content={String(ogImageHeight)} />
     <meta property="og:image:alt" content={ogImageAlt} />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content={ogImageAlt} />
+    <meta name="author" content="William Montoya" />
+    <meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'} />
 
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
+    <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
 
     <link rel="preload" href="/fonts/fraunces-var.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/instrument-sans-var.woff2" as="font" type="font/woff2" crossorigin />
@@ -70,6 +124,7 @@ const esURL = new URL(alternate(Astro.url, 'es'), Astro.site).href;
       document.documentElement.classList.add('js');
       try { var t = localStorage.getItem('theme'); if (t === 'dark' || t === 'light') document.documentElement.dataset.theme = t; } catch (e) {}
     </script>
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
     <slot name="head" />
 
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-WY1Y0XF6F5"></script>
@@ -88,6 +143,76 @@ const esURL = new URL(alternate(Astro.url, 'es'), Astro.site).href;
       <slot />
     </main>
     <Footer />
+
+    <script>
+      // GA4 interaction events. No PII: only page/language and the clicked label.
+      type Gtag = (command: 'event', name: string, params?: Record<string, unknown>) => void;
+      const gtag = (window as Window & { gtag?: Gtag }).gtag;
+      const track = (name: string, params: Record<string, unknown> = {}) => {
+        if (!gtag) return;
+        gtag('event', name, {
+          page_language: document.documentElement.lang,
+          page_path: location.pathname,
+          transport_type: 'beacon',
+          ...params,
+        });
+      };
+      const labelOf = (el: Element | null) =>
+        el?.getAttribute('data-analytics-label') ?? el?.textContent?.trim().replace(/\s+/g, ' ').slice(0, 80) ?? '';
+
+      document.addEventListener('click', (event) => {
+        if (!(event instanceof MouseEvent) || event.button !== 0) return;
+        const target = event.target;
+        if (!(target instanceof Element)) return;
+
+        const themeButton = target.closest<HTMLButtonElement>('[data-theme-toggle]');
+        if (themeButton) {
+          const current = document.documentElement.dataset.theme
+            ?? (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+          track('theme_toggle', { to_theme: current === 'dark' ? 'light' : 'dark' });
+          return;
+        }
+
+        const depthButton = target.closest<HTMLButtonElement>('[data-value]');
+        if (depthButton?.closest('[data-depth-toggle]')) {
+          track('depth_toggle', { mode: depthButton.dataset.value ?? '' });
+          return;
+        }
+
+        const languageLink = target.closest<HTMLAnchorElement>('[data-lang-switch]');
+        if (languageLink) {
+          track('language_switch', { to_language: languageLink.getAttribute('hreflang') ?? '' });
+          return;
+        }
+
+        const tracked = target.closest<HTMLElement>('[data-analytics]');
+        if (tracked) {
+          const name = tracked.dataset.analytics;
+          if (name) track(name, { label: labelOf(tracked) });
+          return;
+        }
+
+        const link = target.closest<HTMLAnchorElement>('a[href]');
+        if (!link) return;
+        const href = link.href;
+        if (href.startsWith('mailto:')) {
+          track('email_click', { label: link.closest('header') ? 'header' : 'footer' });
+          return;
+        }
+        if (/\.pdf(?:$|[?#])/i.test(href)) {
+          track('cv_download', { label: labelOf(link) });
+          return;
+        }
+        if (link.target === '_blank') {
+          try {
+            const url = new URL(href);
+            if (url.origin !== location.origin) {
+              track('outbound_click', { domain: url.hostname, label: labelOf(link) });
+            }
+          } catch {}
+        }
+      }, { passive: true });
+    </script>
 
     <script>
       // One entrance per container: [data-reveal] blocks fade/rise once.

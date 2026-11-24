@@ -15,7 +15,7 @@ const next = caseOrder[(i + 1) % caseOrder.length];
   <div class="split">
     <h2 class="t-h3 split__label">{t(lang, 'next.title')}</h2>
     <div class="split__body">
-      <a href={next.href} data-next-story>
+      <a href={next.href} data-next-story data-analytics="next_story" data-analytics-label={next.title}>
         <span class="t-h2">{next.title} <span class="next__arrow" aria-hidden="true">→</span></span>
         <span class="t-small t-muted">{next.meta}</span>
       </a>

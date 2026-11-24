@@ -12,12 +12,12 @@ const subject = encodeURIComponent(t(lang, 'hola.subject'));
     <div class="footer__contact">
       <div class="footer__invite">
         <h2 id="footer-title" class="t-display">{t(lang, 'footer.title')}</h2>
-        <a class="footer__email link" href={`mailto:${email}?subject=${subject}`}>{email}</a>
+        <a class="footer__email link" href={`mailto:${email}?subject=${subject}`} data-analytics="email_click" data-analytics-label="footer">{email}</a>
       </div>
       <ul class="footer__links list-reset" role="list">
         <li>
           <span class="t-small footer__muted">{t(lang, 'footer.resume')}</span>
-          <a class="link" href={t(lang, 'cv.pdf')} download>{t(lang, 'footer.download')} <span aria-hidden="true">↓</span></a>
+          <a class="link" href={t(lang, 'cv.pdf')} download data-analytics="cv_download" data-analytics-label={lang}>{t(lang, 'footer.download')} <span aria-hidden="true">↓</span></a>
         </li>
         <li>
           <span class="t-small footer__muted">LinkedIn</span>
@@ -40,7 +40,7 @@ const subject = encodeURIComponent(t(lang, 'hola.subject'));
             <span class="crt__dot" aria-hidden="true"></span>
             <div class="crt__glass" aria-hidden="true"></div>
           </div>
-          <button class="crt__start" type="button" data-crt-start>
+          <button class="crt__start" type="button" data-crt-start data-analytics="game_start" data-analytics-label="alborada">
             <span class="sr-only">{t(lang, 'footer.play')}</span>
           </button>
         </div>

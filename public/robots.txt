@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /play/
+Disallow: /explorations/
 
 Sitemap: https://dejesumensaje.com/sitemap-index.xml
