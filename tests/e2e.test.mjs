@@ -463,8 +463,9 @@ test('reduced motion keeps the page usable', async () => {
   await context.close();
 });
 
-test('no heading leaves a single word on its last line', async () => {
-  const { context, page } = await newPage();
+test('no heading leaves a single word on a line', async () => {
+  // Measure the settled layout: entrance animations translate words by line.
+  const { context, page } = await newPage({ reducedMotion: 'reduce' });
   for (const width of [320, 360, 390, 768, 1024, 1440]) {
     await page.setViewportSize({ width, height: 900 });
     for (const route of ROUTES) {
@@ -505,10 +506,10 @@ test('no heading leaves a single word on its last line', async () => {
           }
           if (current.length) lines.push(current);
 
-          if (lines.length > 1 && lines.at(-1).length === 1) {
+          if (lines.length > 1 && lines.some((line) => line.length === 1)) {
             out.push({
               heading: heading.innerText.replace(/\s+/g, ' ').trim(),
-              orphan: lines.at(-1)[0].word,
+              lines: lines.map((line) => line.map((word) => word.word).join(' ')),
             });
           }
         }
@@ -518,7 +519,7 @@ test('no heading leaves a single word on its last line', async () => {
       assert.deepEqual(
         orphans,
         [],
-        `orphan heading words at ${width}px on ${route}: ${JSON.stringify(orphans)}`
+        `single-word heading line at ${width}px on ${route}: ${JSON.stringify(orphans)}`
       );
     }
   }
