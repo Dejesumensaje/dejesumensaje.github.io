@@ -463,6 +463,68 @@ test('reduced motion keeps the page usable', async () => {
   await context.close();
 });
 
+test('no heading leaves a single word on its last line', async () => {
+  const { context, page } = await newPage();
+  for (const width of [320, 360, 390, 768, 1024, 1440]) {
+    await page.setViewportSize({ width, height: 900 });
+    for (const route of ROUTES) {
+      await goto(page, route);
+      const orphans = await page.evaluate(() => {
+        const out = [];
+        const headings = [...document.querySelectorAll('h1,h2,h3')].filter((heading) => {
+          const rect = heading.getBoundingClientRect();
+          return rect.width > 0 && rect.height > 0;
+        });
+
+        for (const heading of headings) {
+          const words = [];
+          const walker = document.createTreeWalker(heading, NodeFilter.SHOW_TEXT);
+          let node;
+          while ((node = walker.nextNode())) {
+            for (const match of node.textContent.matchAll(/\S+/g)) {
+              const range = document.createRange();
+              range.setStart(node, match.index);
+              range.setEnd(node, match.index + match[0].length);
+              const rect = range.getBoundingClientRect();
+              if (rect.width) words.push({ word: match[0], top: Math.round(rect.top) });
+            }
+          }
+
+          if (words.length < 2) continue;
+          const lines = [];
+          let current = [];
+          let top = null;
+          for (const word of words) {
+            if (top === null || Math.abs(word.top - top) > 2) {
+              if (current.length) lines.push(current);
+              current = [word];
+              top = word.top;
+            } else {
+              current.push(word);
+            }
+          }
+          if (current.length) lines.push(current);
+
+          if (lines.length > 1 && lines.at(-1).length === 1) {
+            out.push({
+              heading: heading.innerText.replace(/\s+/g, ' ').trim(),
+              orphan: lines.at(-1)[0].word,
+            });
+          }
+        }
+        return out;
+      });
+
+      assert.deepEqual(
+        orphans,
+        [],
+        `orphan heading words at ${width}px on ${route}: ${JSON.stringify(orphans)}`
+      );
+    }
+  }
+  await context.close();
+});
+
 test('all images above the fold decode and no hero image is broken', async () => {
   const { context, page } = await newPage();
   for (const route of ['/', '/es', '/about', '/es/about']) {

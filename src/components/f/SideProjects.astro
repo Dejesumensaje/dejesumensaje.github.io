@@ -80,6 +80,14 @@ const pct = (v: number, of: number) => `${((v / of) * 100).toFixed(3)}%`;
   .side__label { grid-column: 1 / span 3; }
   .side__intro { grid-column: 4 / span 6; padding-top: 4px; max-width: 636px; }
   .side__controls { grid-column: 10 / -1; display: flex; gap: 12px; justify-content: flex-end; }
+  @media (min-width: 900px) and (max-width: 1300px) {
+    .side__label { grid-column: 1 / span 4; }
+    .side__intro { grid-column: 5 / span 5; }
+  }
+  @media (max-width: 899px) {
+    .side__label, .side__intro { grid-column: 1 / -1; }
+    .side__controls { grid-column: 1 / -1; justify-content: flex-start; }
+  }
 
   /* Full-bleed track that starts on the grid and runs off the right edge. */
   .side__track {

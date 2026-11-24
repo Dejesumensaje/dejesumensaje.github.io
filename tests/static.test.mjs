@@ -356,6 +356,49 @@ test('case kickers are gone and the home no longer renders How I think', () => {
   }
 });
 
+test('layout spacing uses a 4px base', async () => {
+  const ignored = new Set([
+    'src/components/Header.astro',
+    'src/components/Footer.astro',
+    'src/components/CaseNav.astro',
+    'src/components/CaseTOC.astro',
+    'src/components/ProjectCard.astro',
+    'src/components/PasswordGate.astro',
+    'src/layouts/BaseLayout.astro',
+  ]);
+
+  async function walk(dir) {
+    const out = [];
+    for (const entry of await readdir(dir, { withFileTypes: true })) {
+      const path = join(dir, entry.name);
+      if (entry.isDirectory()) out.push(...(await walk(path)));
+      else if (/\.(astro|css)$/.test(entry.name) && !entry.name.startsWith('_legacy')) out.push(path);
+    }
+    return out;
+  }
+
+  const files = (await walk(join(process.cwd(), 'src'))).filter((path) => {
+    const rel = path.replace(`${process.cwd()}/`, '');
+    return !ignored.has(rel);
+  });
+
+  const declaration = /\b(padding(?:-(?:block|inline|top|right|bottom|left))?|margin(?:-(?:block|inline|top|right|bottom|left))?|gap|row-gap|column-gap)\s*:\s*([^;{}]+)/g;
+
+  for (const file of files) {
+    const source = await readFile(file, 'utf8');
+    for (const match of source.matchAll(declaration)) {
+      for (const raw of match[2].split(/[\s,]+/)) {
+        const value = raw.trim();
+        const px = value.match(/^(-?\d+(?:\.\d+)?)px$/);
+        if (!px) continue;
+        const n = Math.abs(Number(px[1]));
+        if (n === 0 || n === 1) continue; // 0 and 1px hairlines / clipping
+        assert.equal(n % 4, 0, `off-scale spacing in ${file}: ${match[0].trim()}`);
+      }
+    }
+  }
+});
+
 test('no stale clean-URL regressions in generated HTML', () => {
   for (const route of ROUTES) {
     const page = html[route];

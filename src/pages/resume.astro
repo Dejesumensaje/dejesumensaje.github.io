@@ -182,7 +182,7 @@ const skills = [
     gap: 64px;
   }
   .cv-head__title { display: flex; flex-direction: column; gap: 24px; }
-  .cv-contact { display: flex; flex-direction: column; gap: 8px; padding-top: 6px; }
+  .cv-contact { display: flex; flex-direction: column; gap: 8px; padding-top: 8px; }
   .cv-contact a { overflow-wrap: anywhere; }
   .cv-lede { display: flex; flex-direction: column; gap: 32px; }
   .cv-actions { display: flex; gap: 12px; flex-wrap: wrap; }
@@ -214,6 +214,13 @@ const skills = [
   }
   .cv-skills dd { margin: 0; }
 
+  @media (max-width: 414px) {
+    .cv-head__title :global(.rise) { font-size: clamp(28px, 8.2vw, 32px); }
+    .cv-head__title :global(.rise__break) { white-space: nowrap; }
+  }
+  @media (max-width: 340px) {
+    .cv-head__title :global(.rise) { font-size: 28px; }
+  }
   @media (max-width: 759px) {
     .cv-head { gap: 40px; }
     .cv-head .split__body { order: -1; }
@@ -251,8 +258,8 @@ const skills = [
     :global(.measure) { max-width: none; }
     body { font-size: var(--text-body); line-height: 1.45; }
 
-    .cv-head { padding: 0 0 14px; gap: 12px; }
-    .cv-head__title { gap: 6px; }
+    .cv-head { padding: 0 0 16px; gap: 12px; }
+    .cv-head__title { gap: 8px; }
     .cv-head .split__body { order: 0; }
     .cv-head .cv-contact { float: left; width: 23%; }
     .cv-contact a { overflow-wrap: normal; white-space: nowrap; }
@@ -260,18 +267,18 @@ const skills = [
     :global(main [aria-hidden='true']) { display: none; }
     .cv-item__head > div { flex: 1 1 0; min-width: 0; }
     .cv-lede { gap: 0; }
-    .cv-contact { gap: 2px; padding-top: 2px; }
+    .cv-contact { gap: 4px; padding-top: 4px; }
     .cv-contact :global(.link), .cv-points, .cv-item p { text-decoration: none; }
 
-    .cv-section, .cv-section--last { padding: 11px 0 0; margin-top: 11px; border-top: 0.75px solid #dddfe3; }
-    .cv-items { gap: 11px; }
+    .cv-section, .cv-section--last { padding: 12px 0 0; margin-top: 12px; border-top: 0.75px solid #dddfe3; }
+    .cv-items { gap: 12px; }
     .cv-item { gap: 4px; break-inside: avoid; }
     .cv-item__head { flex-direction: row; align-items: baseline; }
-    .cv-item__head > div { gap: 1px; }
+    .cv-item__head > div { gap: 4px; }
     .cv-when { order: 0; }
-    .cv-points { gap: 3px; }
+    .cv-points { gap: 4px; }
     .cv-points li { gap: 8px; }
-    .cv-skills { gap: 5px; }
+    .cv-skills { gap: 8px; }
     .cv-skills div { grid-template-columns: 1.3fr 4fr; column-gap: 12px; }
     h2, h3 { break-after: avoid; }
   }

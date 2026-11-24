@@ -147,7 +147,7 @@ const home = localize(lang, '/');
   .nav__links ul { display: flex; gap: 40px; }
   .nav__link {
     font-weight: 500;
-    padding-block: 10px;
+    padding-block: 12px;
     text-decoration-line: underline;
     text-decoration-color: transparent;
     text-decoration-thickness: 1.5px;
@@ -204,7 +204,7 @@ const home = localize(lang, '/');
     font-weight: 600;
     letter-spacing: 0.04em;
     color: var(--muted);
-    padding: 10px 2px;
+    padding: 12px 4px;
     margin-right: -16px;
     transition: color 160ms ease;
   }
@@ -245,7 +245,7 @@ const home = localize(lang, '/');
   }
   .nav__menu-btn:active { transform: scale(0.94); }
 
-  @media (max-width: 759px) {
+  @media (max-width: 899px) {
     .nav__inner { padding-block: 16px; }
     .nav__links { display: none; }
     .nav__mobile { display: flex; }
@@ -307,7 +307,7 @@ const home = localize(lang, '/');
     padding: 24px var(--grid-margin) max(32px, env(safe-area-inset-bottom));
   }
   .menu__actions { display: flex; flex-direction: column; gap: 12px; }
-  .menu__cta, .menu__lang { width: 100%; padding-block: 14px; }
+  .menu__cta, .menu__lang { width: 100%; padding-block: 16px; }
 
   @media (prefers-reduced-motion: reduce) {
     .nav, .menu { transition: opacity 150ms ease; transform: none !important; }
@@ -421,6 +421,6 @@ const home = localize(lang, '/');
     opener.addEventListener('click', open);
     closer.addEventListener('click', close);
     menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', close));
-    window.matchMedia('(min-width: 760px)').addEventListener('change', (m) => { if (m.matches && !menu.hidden) close(); });
+    window.matchMedia('(min-width: 900px)').addEventListener('change', (m) => { if (m.matches && !menu.hidden) close(); });
   }
 </script>

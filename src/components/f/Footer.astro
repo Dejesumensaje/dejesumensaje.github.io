@@ -103,7 +103,7 @@ const subject = encodeURIComponent(t(lang, 'hola.subject'));
     gap: 8px;
     min-width: min(196px, 100%);
   }
-  .footer__links a { align-self: flex-start; padding-block: 2px; }
+  .footer__links a { align-self: flex-start; padding-block: 4px; }
 
   .footer__game {
     grid-column: 7 / -1;
@@ -122,7 +122,7 @@ const subject = encodeURIComponent(t(lang, 'hola.subject'));
   }
   .legend { display: flex; gap: 24px; align-items: center; }
   .legend__group { display: flex; gap: 8px; align-items: center; }
-  .legend__group span { margin-left: 2px; }
+  .legend__group span { margin-left: 4px; }
   kbd {
     display: inline-grid;
     place-items: center;
@@ -208,7 +208,7 @@ const subject = encodeURIComponent(t(lang, 'hola.subject'));
     top: 50%;
     width: 10px;
     height: 10px;
-    margin: -5px 0 0 -5px;
+    translate: -50% -50%;
     border-radius: 50%;
     background: #fff;
     box-shadow: 0 0 12px 4px rgba(200, 220, 255, 0.9), 0 0 40px 12px rgba(120, 160, 255, 0.35);
@@ -320,7 +320,7 @@ const subject = encodeURIComponent(t(lang, 'hola.subject'));
   .crt__knob--static::before { display: none; }
   .crt__knob[aria-pressed='true'] { transform: rotate(90deg); }
   .crt__knob[aria-pressed='true']::before { background: var(--signal); }
-  button.crt__knob::after { content: ''; position: absolute; inset: -14px; }
+  button.crt__knob::after { content: ''; position: absolute; inset: -16px; }
 
   @media (max-width: 759px) {
     .footer { margin-top: 0; padding: var(--space-chapter) 0 var(--space-page-top); }
@@ -329,10 +329,10 @@ const subject = encodeURIComponent(t(lang, 'hola.subject'));
     .footer__email { font-size: var(--text-lead); }
     .footer__links { flex-direction: column; gap: 24px; }
     .footer__game { margin-top: 0; gap: 16px; }
-    .crt { padding: 14px 14px 0; border-radius: 22px; }
+    .crt { padding: 16px 16px 0; border-radius: 22px; }
     .crt__tube, .crt__glass, .crt__start { border-radius: 16px; }
     .crt__tube { aspect-ratio: 334 / 242; }
-    .crt__chin { height: 40px; padding: 0 6px; }
+    .crt__chin { height: 40px; padding: 0 8px; }
     .crt__model { font-size: 10px; }
   }
 

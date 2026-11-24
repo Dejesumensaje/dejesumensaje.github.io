@@ -85,6 +85,13 @@ const accent = 'en herramientas claras'.split(' ');
   /* The accent phrase always lands on its own line, as in the comp. */
   .hero__accent { display: block; }
   .w { display: inline-block; }
+  @media (max-width: 414px) {
+    .hero__title { font-size: 34px; }
+    .hero__accent { white-space: nowrap; }
+  }
+  @media (max-width: 340px) {
+    .hero__title { font-size: 30px; }
+  }
   .hero__portrait {
     width: 0.89em;
     height: 0.89em;
@@ -100,7 +107,7 @@ const accent = 'en herramientas claras'.split(' ');
     column-gap: var(--gutter);
     row-gap: 24px;
   }
-  .hero__status { grid-column: 1 / span 3; padding-top: 5px; position: relative; }
+  .hero__status { grid-column: 1 / span 3; padding-top: 8px; position: relative; }
   .hero__lede { grid-column: 4 / span 6; max-width: 636px; text-wrap: pretty; }
   /* Availability dot: a slow breath, the only idle motion on the page. */
   .hero__dot {
