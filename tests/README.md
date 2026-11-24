@@ -7,7 +7,7 @@ Requiere **Node 22.23.4+** (el proyecto usa Node 24, ver `.nvmrc`).
 npm install
 npx playwright install chromium   # solo la primera vez
 npm run check                     # Astro + TypeScript
-npm test                          # build + 31 pruebas
+npm test                          # build + 33 pruebas
 npm run test:static               # enlaces, i18n, SEO, a11y estática, presupuestos
 npm run test:e2e                  # navegador real (Playwright)
 ```

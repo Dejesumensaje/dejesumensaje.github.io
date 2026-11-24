@@ -328,6 +328,55 @@ test('floating depth toggle keeps the reader in place', async () => {
   }
 });
 
+test('partially visible reveal blocks appear without extra scroll', async () => {
+  const { context, page } = await newPage({ viewport: { width: 1440, height: 900 } });
+  for (const route of ['/', '/es']) {
+    await goto(page, route);
+    const partiallyVisible = await page.evaluate(() => {
+      const rect = document.querySelector('.logos').getBoundingClientRect();
+      return rect.top < window.innerHeight && rect.bottom > 0;
+    });
+    assert.equal(partiallyVisible, true, `logo strip should peek into the first viewport on ${route}`);
+    await page.waitForFunction(() => document.querySelector('.logos')?.classList.contains('is-in'));
+    await page.waitForTimeout(700);
+    assert.equal(
+      await page.evaluate(() => getComputedStyle(document.querySelector('.logos')).opacity),
+      '1',
+      `logo strip should be visible on ${route}`
+    );
+  }
+  await context.close();
+});
+
+test('Spanish TL;DR shows the short version, not the full story', async () => {
+  const { context, page } = await newPage();
+  const visibleSections = () => page.evaluate(() => ({
+    count: [...document.querySelectorAll('.case-page section')]
+      .filter((section) => getComputedStyle(section).display !== 'none').length,
+    hiddenFull: [...document.querySelectorAll('[data-depth="full"]')]
+      .every((el) => getComputedStyle(el).display === 'none'),
+    note: document.querySelector('.tldr-note')?.textContent?.trim() ?? '',
+    noteVisible: (() => {
+      const note = document.querySelector('.tldr-note');
+      return note ? getComputedStyle(note).display !== 'none' : false;
+    })(),
+    tldrClass: document.documentElement.classList.contains('depth-tldr'),
+  }));
+
+  await goto(page, '/es/aprender-digital?view=tldr');
+  const tldr = await visibleSections();
+  assert.equal(tldr.tldrClass, true);
+  assert.equal(tldr.hiddenFull, true, 'full-only blocks must stay hidden in TL;DR');
+  assert.equal(tldr.noteVisible, true, 'the short-version note should be visible');
+  assert.match(tldr.note, /versión corta/i);
+
+  await goto(page, '/es/aprender-digital?view=full');
+  const full = await visibleSections();
+  assert.equal(full.tldrClass, false);
+  assert.ok(tldr.count < full.count, `TL;DR (${tldr.count}) should be shorter than full (${full.count})`);
+  await context.close();
+});
+
 test('footer game loads lazily only after the start action', async () => {
   const { context, page } = await newPage();
   await goto(page, '/');
