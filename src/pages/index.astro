@@ -4,11 +4,11 @@ import CaseCard from '../components/f/CaseCard.astro';
 import SideProjects from '../components/f/SideProjects.astro';
 import LogoStrip from '../components/f/LogoStrip.astro';
 import { getWork } from '../data/work';
-const { featured, cases, principles } = getWork('en');
+const { featured, cases } = getWork('en');
 
 // Headline split into words at build time so the entrance can rise by line.
 const lead = 'is a product designer who gives complex systems a shape people'.split(' ');
-const accent = 'actually understand.'.split(' ');
+const accent = 'actually understand'.split(' ');
 ---
 
 <Layout
@@ -67,22 +67,8 @@ const accent = 'actually understand.'.split(' ');
     </div>
   </section>
 
-  <SideProjects />
+  <div class="home-side"><SideProjects /></div>
 
-  <section class="think wrap" aria-labelledby="think-title">
-    <div class="split" data-reveal>
-      <h2 id="think-title" class="t-h3 split__label">How I think</h2>
-      <ol class="think__list list-reset split__body" role="list">
-        {principles.map((p) => (
-          <li>
-            <span class="t-small t-muted">{p.n}</span>
-            <h3 class="t-h3">{p.title}</h3>
-            <p class="t-muted">{p.body}</p>
-          </li>
-        ))}
-      </ol>
-    </div>
-  </section>
 </Layout>
 
 <style>
@@ -161,6 +147,8 @@ const accent = 'actually understand.'.split(' ');
   }
   @keyframes fade { from { opacity: 0; } }
 
+  .home-side { padding-bottom: var(--space-before-footer); }
+
   /* ---------- Work ---------- */
   .work { padding-top: 0; padding-bottom: var(--space-section); }
   .work__label { margin-bottom: 48px; }
@@ -171,16 +159,6 @@ const accent = 'actually understand.'.split(' ');
     row-gap: 80px;
   }
 
-  /* ---------- How I think ---------- */
-  .think { padding-top: var(--space-section); padding-bottom: var(--space-before-footer); }
-  .think__list {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    column-gap: var(--gutter);
-    row-gap: 40px;
-  }
-  .think__list li { display: flex; flex-direction: column; gap: 12px; }
-
   @media (max-width: 759px) {
     .hero { gap: 40px; }
     .hero__status, .hero__lede { grid-column: 1 / -1; }
@@ -189,7 +167,6 @@ const accent = 'actually understand.'.split(' ');
     .hero__portrait { width: 1em; height: 1em; }
     .work__label { margin-bottom: 32px; }
     .work__grid { row-gap: 56px; }
-    .think__list { grid-template-columns: 1fr; }
   }
 </style>
 

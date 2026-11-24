@@ -23,10 +23,10 @@ const numbers = [
   { v: '2.37:1', k: 'the warning contrast we caught; WCAG asks for 4.5:1' },
 ];
 const decisions = [
-  { t: 'Brand color is scarce.', b: 'The Deloitte green is reserved for the single most important action and its focus rings, nothing merely active or selected. It depends on a token, not on taste, so an agent can apply it without ambiguity, and rebranding stays clean.' },
-  { t: 'Contrast is measured, not assumed.', b: 'The warning color looked acceptable. Measured, it was 2.37:1 against the 4.5:1 WCAG asks for. Warning text now uses a darker token that passes, and the rule lives in an automated review layer, not just in the docs.' },
-  { t: 'The system doesn’t touch what it doesn’t own.', b: 'Components render in unfinished prototypes and legacy apps full of CSS, so the package never styles raw HTML globally. No bare h1, body or button selectors; each component ships its own scoped reset.' },
-  { t: 'Tokens are contracts.', b: 'Token names map directly to Figma, quirks included. The designer reading the library and the engineer or agent reading the code see the same concepts. Changing a token without agreement breaks something people already built on.' },
+  { t: 'Brand color is scarce', b: 'The Deloitte green is reserved for the single most important action and its focus rings, nothing merely active or selected. It depends on a token, not on taste, so an agent can apply it without ambiguity, and rebranding stays clean.' },
+  { t: 'Contrast is measured, not assumed', b: 'The warning color looked acceptable. Measured, it was 2.37:1 against the 4.5:1 WCAG asks for. Warning text now uses a darker token that passes, and the rule lives in an automated review layer, not just in the docs.' },
+  { t: 'The system doesn’t touch what it doesn’t own', b: 'Components render in unfinished prototypes and legacy apps full of CSS, so the package never styles raw HTML globally. No bare h1, body or button selectors; each component ships its own scoped reset.' },
+  { t: 'Tokens are contracts', b: 'Token names map directly to Figma, quirks included. The designer reading the library and the engineer or agent reading the code see the same concepts. Changing a token without agreement breaks something people already built on.' },
 ];
 ---
 
@@ -37,9 +37,8 @@ const decisions = [
   readTldr="1 min"
 >
   <CaseHeader
-    kicker="Case study · Deloitte · Converge for Restaurants"
     lead="Operationalizing a design system for"
-    accent="humans and AI agents."
+    accent="humans and AI agents"
     question="How do you make a design system that AI tools and agents actually use, instead of approximating it?"
     facts={facts}
     overview={overview}

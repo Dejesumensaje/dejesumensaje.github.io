@@ -55,7 +55,7 @@ const ui = {
     'hola.subject': '¡Hola, William!',
 
     'footer.contact': 'Contact',
-    'footer.title': "Let's connect.",
+    'footer.title': "Let's connect",
     'footer.resume': 'Résumé',
     'footer.download': 'Download PDF',
     'footer.writing': 'Writing',
@@ -107,7 +107,7 @@ const ui = {
     'hola.subject': '¡Hola, William!',
 
     'footer.contact': 'Contacto',
-    'footer.title': 'Hablemos.',
+    'footer.title': 'Hablemos',
     'footer.resume': 'Hoja de vida',
     'footer.download': 'Descargar PDF',
     'footer.writing': 'Escritos',

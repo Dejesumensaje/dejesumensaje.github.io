@@ -315,6 +315,47 @@ test('critical images declare dimensions and non-hero images are lazy', () => {
   }
 });
 
+test('heading outline is semantic and titles do not end with a period', () => {
+  for (const route of ROUTES) {
+    const page = html[route];
+    const headings = [...page.matchAll(/<h([1-6])\b[^>]*>([\s\S]*?)<\/h\1>/gi)].map((m) => ({
+      level: Number(m[1]),
+      text: m[2]
+        .replace(/<[^>]+>/g, ' ')
+        .replace(/&[^;]+;/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim(),
+    }));
+
+    assert.equal(headings.filter((h) => h.level === 1).length, 1, `one h1 on ${route}`);
+    let previous = 0;
+    for (const heading of headings) {
+      assert.ok(heading.text.length > 0, `empty h${heading.level} on ${route}`);
+      if (previous > 0) {
+        assert.ok(
+          heading.level <= previous + 1,
+          `heading level jumps from h${previous} to h${heading.level} on ${route}`
+        );
+      }
+      assert.ok(!heading.text.endsWith('.'), `heading ends with a period on ${route}: ${heading.text}`);
+      previous = heading.level;
+    }
+
+    // Pull quotes are emphasis paragraphs, never headings.
+    assert.ok(!/<h[1-6][^>]*class="[^"]*\bpull\b/.test(page), `pull quote used as a heading on ${route}`);
+  }
+});
+
+test('case kickers are gone and the home no longer renders How I think', () => {
+  for (const route of ROUTES) {
+    assert.ok(!html[route].includes('>Case study ·'), `English case kicker remains on ${route}`);
+    assert.ok(!html[route].includes('>Caso de estudio ·'), `Spanish case kicker remains on ${route}`);
+  }
+  for (const route of ['/', '/es']) {
+    assert.ok(!html[route].includes('id="think-title"'), `How I think still present on ${route}`);
+  }
+});
+
 test('no stale clean-URL regressions in generated HTML', () => {
   for (const route of ROUTES) {
     const page = html[route];

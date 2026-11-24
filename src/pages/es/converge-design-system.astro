@@ -23,10 +23,10 @@ const numbers = [
   { v: '2,37:1', k: 'el contraste de advertencia que detectamos; WCAG exige 4,5:1' },
 ];
 const decisions = [
-  { t: 'El color de marca es escaso.', b: 'Reservamos el verde de Deloitte para la acción principal y sus anillos de foco, nunca para estados activos o seleccionados. La decisión depende de un token y no del gusto personal: así un agente lo aplica sin dudar y un cambio de marca no deja rastros.' },
-  { t: 'El contraste se mide, no se supone.', b: 'El color de advertencia parecía legible a simple vista, pero al medirlo dio 2,37:1 frente al 4,5:1 que exige WCAG. Cambiamos el texto de advertencia a un token más oscuro que cumple el estándar y dejamos la validación en una auditoría automática, no solo en la documentación.' },
-  { t: 'El sistema no toca lo que no es suyo.', b: 'Los componentes corren dentro de prototipos a medio hacer y aplicaciones heredadas llenas de CSS. Por eso el paquete nunca inyecta estilos globales al HTML crudo: cero selectores sueltos como h1, body o button. Cada componente incluye su propio reset encapsulado.' },
-  { t: 'Los tokens son contratos.', b: 'Los nombres de los tokens calcan los de Figma, con todo y sus particularidades. Así, quien diseña en Figma y quien programa —o el agente que lee el código— hablan el mismo idioma. Cambiar un token sin acuerdo rompe el trabajo de los demás.' },
+  { t: 'El color de marca es escaso', b: 'Reservamos el verde de Deloitte para la acción principal y sus anillos de foco, nunca para estados activos o seleccionados. La decisión depende de un token y no del gusto personal: así un agente lo aplica sin dudar y un cambio de marca no deja rastros.' },
+  { t: 'El contraste se mide, no se supone', b: 'El color de advertencia parecía legible a simple vista, pero al medirlo dio 2,37:1 frente al 4,5:1 que exige WCAG. Cambiamos el texto de advertencia a un token más oscuro que cumple el estándar y dejamos la validación en una auditoría automática, no solo en la documentación.' },
+  { t: 'El sistema no toca lo que no es suyo', b: 'Los componentes corren dentro de prototipos a medio hacer y aplicaciones heredadas llenas de CSS. Por eso el paquete nunca inyecta estilos globales al HTML crudo: cero selectores sueltos como h1, body o button. Cada componente incluye su propio reset encapsulado.' },
+  { t: 'Los tokens son contratos', b: 'Los nombres de los tokens calcan los de Figma, con todo y sus particularidades. Así, quien diseña en Figma y quien programa —o el agente que lee el código— hablan el mismo idioma. Cambiar un token sin acuerdo rompe el trabajo de los demás.' },
 ];
 ---
 
@@ -37,9 +37,8 @@ const decisions = [
   readTldr="1 min"
 >
   <CaseHeader
-    kicker="Caso de estudio · Deloitte · Converge for Restaurants"
     lead="Llevar un sistema de diseño a la práctica para"
-    accent="personas y agentes de IA."
+    accent="personas y agentes de IA"
     question="¿Cómo lograr que las herramientas y los agentes de IA usen el sistema de diseño real en lugar de imitarlo?"
     facts={facts}
     overview={overview}
