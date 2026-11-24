@@ -10,6 +10,8 @@
     "build": "astro build && node scripts/clean-urls.mjs",
     "preview": "astro preview",
     "check": "astro check",
+    "lint": "node scripts/lint-spacing.mjs",
+    "lint:spacing": "node scripts/lint-spacing.mjs",
     "test": "npm run build && node --test --test-concurrency=1 tests/*.test.mjs",
     "test:static": "node --test tests/static.test.mjs",
     "test:e2e": "node --test tests/e2e.test.mjs"

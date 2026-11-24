@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { readFile, readdir, stat } from 'node:fs/promises';
 import { join } from 'node:path';
 import { gzipSync } from 'node:zlib';
+import { lintSpacing } from '../scripts/lint-spacing.mjs';
 import {
   ROOT,
   SITE,
@@ -357,48 +358,8 @@ test('case kickers are gone and the home no longer renders How I think', () => {
 });
 
 test('layout spacing is fully tokenized on a 4px base', async () => {
-  const ignored = new Set([
-    'src/components/Header.astro',
-    'src/components/Footer.astro',
-    'src/components/CaseNav.astro',
-    'src/components/CaseTOC.astro',
-    'src/components/ProjectCard.astro',
-    'src/components/PasswordGate.astro',
-    'src/layouts/BaseLayout.astro',
-  ]);
-
-  async function walk(dir) {
-    const out = [];
-    for (const entry of await readdir(dir, { withFileTypes: true })) {
-      const path = join(dir, entry.name);
-      if (entry.isDirectory()) out.push(...(await walk(path)));
-      else if (/\.(astro|css)$/.test(entry.name) && !entry.name.startsWith('_legacy')) out.push(path);
-    }
-    return out;
-  }
-
-  const files = (await walk(join(process.cwd(), 'src'))).filter((path) => {
-    const rel = path.replace(`${process.cwd()}/`, '');
-    return !ignored.has(rel);
-  });
-
-  const declaration = /\b(padding(?:-(?:block|inline|top|right|bottom|left))?|margin(?:-(?:block|inline|top|right|bottom|left))?|gap|row-gap|column-gap|scroll-padding(?:-(?:block|inline))?|scroll-margin(?:-(?:block|inline))?)\s*:\s*([^;{}]+)/g;
-
-  for (const file of files) {
-    const source = await readFile(file, 'utf8');
-    for (const match of source.matchAll(declaration)) {
-      assert.ok(
-        !/-?\d+(?:\.\d+)?(?:px|em|rem)\b/.test(match[2]),
-        `hardcoded spacing in ${file}: ${match[0].trim()}`
-      );
-    }
-  }
-
-  const tokens = [...(await readFile(join(process.cwd(), 'src/styles/f.css'), 'utf8'))
-    .matchAll(/--space-(\d+):\s*(\d+)px/g)]
-    .map((m) => Number(m[2]));
-  assert.ok(tokens.length >= 15, 'expected a full spacing scale');
-  for (const value of tokens) assert.equal(value % 4, 0, `spacing token off the 4px base: ${value}`);
+  const report = await lintSpacing();
+  assert.deepEqual(report.errors, [], report.errors.join('\n'));
 });
 
 test('no stale clean-URL regressions in generated HTML', () => {

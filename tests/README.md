@@ -1,11 +1,14 @@
 # QC suite
 
+Design and spacing rules: [`../docs/design-system.md`](../docs/design-system.md).
+
 Pruebas del portafolio construido en `dist/`. No usan el servidor de desarrollo.
 Requiere **Node 22.23.4+** (el proyecto usa Node 24, ver `.nvmrc`).
 
 ```bash
 npm install
 npx playwright install chromium   # solo la primera vez
+npm run lint                      # contrato de spacing tokenizado
 npm run check                     # Astro + TypeScript
 npm test                          # build + 37 pruebas
 npm run test:static               # enlaces, i18n, SEO, a11y estática, presupuestos
