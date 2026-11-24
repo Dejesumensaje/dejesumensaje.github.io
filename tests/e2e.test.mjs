@@ -364,6 +364,10 @@ test('Spanish TL;DR shows the short version, not the full story', async () => {
   }));
 
   await goto(page, '/es/aprender-digital?view=tldr');
+  assert.match(
+    await page.locator('[data-depth-toggle]:not([data-floating]) [data-value="tldr"]').innerText(),
+    /Versión corta/i
+  );
   const tldr = await visibleSections();
   assert.equal(tldr.tldrClass, true);
   assert.equal(tldr.hiddenFull, true, 'full-only blocks must stay hidden in TL;DR');

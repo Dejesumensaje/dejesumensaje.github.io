@@ -133,7 +133,7 @@ const ui = {
 
     'depth.label': 'Profundidad de lectura',
     'depth.full': 'Historia completa',
-    'depth.tldr': 'Resumen',
+    'depth.tldr': 'Versión corta',
     'next.title': 'Siguiente historia',
     'next.label': 'Siguiente caso de estudio',
 
