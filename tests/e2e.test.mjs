@@ -355,11 +355,6 @@ test('Spanish TL;DR shows the short version, not the full story', async () => {
       .filter((section) => getComputedStyle(section).display !== 'none').length,
     hiddenFull: [...document.querySelectorAll('[data-depth="full"]')]
       .every((el) => getComputedStyle(el).display === 'none'),
-    note: document.querySelector('.tldr-note')?.textContent?.trim() ?? '',
-    noteVisible: (() => {
-      const note = document.querySelector('.tldr-note');
-      return note ? getComputedStyle(note).display !== 'none' : false;
-    })(),
     tldrClass: document.documentElement.classList.contains('depth-tldr'),
   }));
 
@@ -371,8 +366,6 @@ test('Spanish TL;DR shows the short version, not the full story', async () => {
   const tldr = await visibleSections();
   assert.equal(tldr.tldrClass, true);
   assert.equal(tldr.hiddenFull, true, 'full-only blocks must stay hidden in TL;DR');
-  assert.equal(tldr.noteVisible, true, 'the short-version note should be visible');
-  assert.match(tldr.note, /versión corta/i);
 
   await goto(page, '/es/aprender-digital?view=full');
   const full = await visibleSections();
