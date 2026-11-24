@@ -84,6 +84,13 @@ const lang = getLang(Astro.url);
   @media (max-width: 759px) {
     .depth button { padding-inline: 14px; }
   }
+  /* "Historia completa" + "Versión corta" need the room; the times are
+     secondary on narrow phones and would push the control past the edge. */
+  @media (max-width: 430px) {
+    .depth { max-width: 100%; }
+    .depth button { padding-inline: 12px; }
+    .depth__time { display: none; }
+  }
   @media (prefers-reduced-motion: reduce) {
     .depth__thumb { transition: none; }
     .depth--floating { transition: opacity 150ms ease; transform: translate(-50%, 0); }
