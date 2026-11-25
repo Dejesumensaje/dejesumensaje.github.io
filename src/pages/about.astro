@@ -6,13 +6,8 @@ const pct = (v: number, of: number) => `${((v / of) * 100).toFixed(3)}%`;
 
 const now = [
   { k: 'Currently', v: 'Senior Product Designer at Globant, working on projects for Deloitte.' },
-  { k: 'Focus', v: 'Digital products and experiences with something to say, solve, or question.' },
-  { k: 'Strengths', v: 'Connecting ideas, finding unexpected solutions, and keeping the person on the other side of the screen in mind.' },
-];
-const beliefs = [
-  { t: 'Understand people', b: 'Design around their realities, not our assumptions.' },
-  { t: 'Learn from the unexpected', b: 'Recognize that people reshape and reinterpret what we design.' },
-  { t: 'Understand the system', b: 'Connect experiences with the needs and realities that shape them.' },
+  { k: 'Focus', v: 'Design systems, AI prototyping, and complex products in education and retail.' },
+  { k: 'Practice', v: 'Turning complex problems into clear flows, prototyping in code, and aligning business, design and engineering.' },
 ];
 const jobs = [
   { org: 'Globant / Deloitte', role: 'Senior Product Designer', what: 'Design systems, pricing tools and AI governance for Converge for Restaurants (KFC, Pizza Hut).', when: '2024–present' },
@@ -21,14 +16,13 @@ const jobs = [
   { org: 'Ministry of Education, Colombia', role: 'UX Lead', what: 'Led the redesign of Colombia Aprende and Aprender Digital, national platforms that reached 3.5 million users at the pandemic peak, with a team of 18.', when: '2019–2021' },
 ];
 const tools = [
-  { t: 'AI as a thinking and exploration partner', b: 'I use Claude, ChatGPT, and Kimi to research, explore alternatives, develop ideas, and test possible directions. Asking the right questions is only part of the work. I also need to assess what holds up, what doesn’t, and when a different approach is needed.' },
-  { t: 'Making ideas tangible', b: 'When a design artifact needs further development, I use Claude Design as a starting point and refine it manually. I work on contrast, visual hierarchy, and interaction details to make the idea clearer and guide attention where it matters.' },
-  { t: 'Carrying decisions into development', b: 'Figma is where I refine the design, document decisions, and prepare the handoff. With MCP integrations, I can create detailed documentation that helps preserve visual decisions during implementation and keeps the intended experience intact.' },
+  { t: 'AI as a thinking and exploration partner', b: 'I use Claude, ChatGPT, and Kimi to synthesize research, test hypotheses, and catch edge cases before designing. Then I check what holds up with users and drop what doesn’t.' },
+  { t: 'Making ideas tangible', b: 'When I need to test a flow on screen, I start with Claude Design and refine it by hand: contrast, visual hierarchy, and interaction states to validate the idea with PMs and users.' },
+  { t: 'Carrying decisions into development', b: 'In Figma I refine components, document rules, and prepare the engineering handoff. With MCP integrations I generate specs and artifacts tied to the design so visual decisions survive implementation.' },
 ];
 const skills = [
   { k: 'UX core', items: ['User research', 'Information architecture', 'Usability testing', 'UX writing', 'Wireframing', 'Prototyping', 'Design strategy'] },
   { k: 'Strengths', items: ['Systems thinking', 'Design direction', 'Accessibility', 'Design systems', 'Workshop facilitation', 'AI-assisted workflows'] },
-  { k: 'Tools in my current process', items: ['Claude', 'ChatGPT', 'Kimi', 'Claude Design', 'Figma', 'MCP integrations'] },
 ];
 const games = [
   { title: 'Consume Me', date: 'Sep 25', img: 'coajxj' },
@@ -41,12 +35,12 @@ const games = [
 
 <Layout
   title="About — William Montoya"
-  description="UX designer, journalist and educator. Designing clear bridges between people, business and technology."
+  description="UX designer, journalist and educator. Designing digital products around how people make them their own."
 >
   <!-- Header -->
   <header class="about-head wrap">
     <div class="about-head__title">
-      <RiseTitle lead="Designing clear bridges between" accent="people, business and technology" accentBreak />
+      <RiseTitle lead="Designing digital products around" accent="how people make them their own" accentBreak />
     </div>
 
     <div class="about-intro">
@@ -59,7 +53,7 @@ const games = [
         fetchpriority="high"
       />
       <div class="about-intro__text">
-        <p class="about-lede measure-wide">I’m a UX designer, journalist, and educator in interaction design and sensory thinking. I’m interested in understanding how people relate to technology and learning from those experiences to create meaningful products and interactions.</p>
+        <p class="about-lede measure-wide">I’m a UX designer, journalist, and educator in interaction design and sensory thinking. I pay attention to how people adopt technology in everyday life, and bring what I learn into the products I design.</p>
         <dl class="cols3">
           {now.map((n) => (
             <div><dt class="t-small t-muted">{n.k}</dt><dd>{n.v}</dd></div>
@@ -75,30 +69,12 @@ const games = [
       <h2 id="a-story" class="t-h3 split__label">My story</h2>
       <div class="split__body">
         <div class="prose measure">
-          <p>I’m a journalist with a degree from Universidad de Antioquia. I began my career in digital journalism, working on multimedia features. <strong>I was interested in bringing form and content together to tell stories not only through words and sounds, but also through what people perceived and did.</strong></p>
-          <p>My time at Colombia’s Ministry of Information Technologies and Communications (MinTIC) broadened my perspective on technology and its human dimension. <strong>A tool doesn’t solve a problem on its own. Its value depends on how people understand it and incorporate it into their social and cultural contexts.</strong></p>
+          <p>I’m a journalist with a degree from Universidad de Antioquia. I began my career in digital journalism, working on multimedia features. I was interested in bringing form and content together to tell stories with words, with sound, and with what people perceived and did.</p>
+          <p>My time at Colombia’s Ministry of Information Technologies and Communications (MinTIC) broadened my perspective on technology and its human dimension. <strong>A tool never solves a problem on its own: its value depends on how people understand it and bring it into their social and cultural contexts.</strong></p>
           <p>During my postgraduate studies at Universidad de los Andes, the capability approach and sociotechnical perspective helped me explore these ideas further.</p>
-          <p>At Colombia’s Ministry of Education, I had the opportunity to see how design decisions shaped what an educational community could do. I also came to understand that <strong>no design process can fully determine how a technology will be used or understood.</strong></p>
-          <p>There’s something beautiful about chance and human subjectivity.</p>
-          <p>People adapt, find shortcuts, and solve problems in unexpected ways.</p>
-          <p>I believe that letting go of the need for control helps us better understand the people who use what we design. Above all, it reminds us that <strong>we design for people, not for ourselves.</strong></p>
-          <p>Today, I approach design from the inside out, bringing together business goals, technical realities, and people’s needs.</p>
-          <p>I research to question assumptions, write to clarify and give shape to decisions, and <strong>iterate, iterate a lot, to truly learn from the people who use a product.</strong></p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- What I believe -->
-  <section class="chapter wrap" aria-labelledby="a-believe" data-reveal>
-    <div class="split">
-      <h2 id="a-believe" class="t-h3 split__label">What I believe</h2>
-      <div class="stack split__body">
-        <p class="t-h2 measure-wide">Design should create understanding</p>
-        <div class="cols3">
-          {beliefs.map((b) => (
-            <div><h3 class="t-h3">{b.t}</h3><p class="t-muted">{b.b}</p></div>
-          ))}
+          <p>At Colombia’s Ministry of Education, I had the good fortune to see how design decisions shaped what an educational community could do, while also learning that no process fully determines how a technology gets used or understood.</p>
+          <p><strong>There’s something beautiful about chance and human subjectivity.</strong> People adapt, find shortcuts, and solve problems in unexpected ways. Letting go of the need for control helps us understand the people who use what we design much better.</p>
+          <p>Today I approach design from the inside out. I research to question assumptions, write to clarify and give shape to decisions, and <strong>iterate, iterate a lot, to learn from the people who use the product.</strong></p>
         </div>
       </div>
     </div>
@@ -134,7 +110,7 @@ const games = [
     <div class="split">
       <h2 id="a-work" class="t-h3 split__label">How I work today</h2>
       <div class="stack split__body" style="gap:var(--space-14)">
-        <p class="about-lede measure-wide">My process brings together research, experimentation, judgment, and making. AI is part of that process: it helps me explore possibilities, while I remain responsible for the brief, the decisions, and the quality of the outcome.</p>
+        <p class="about-lede measure-wide">My process moves between research, prototyping, and editorial judgment. I use AI to explore options and speed up testing, while the brief and the final decisions stay with me.</p>
         <div class="cols3">
           {tools.map((t) => (
             <div><h3 class="t-h3 tools__title">{t.t}</h3><p class="t-muted">{t.b}</p></div>
@@ -160,7 +136,7 @@ const games = [
         <article class="beyond__row" data-reveal>
           <div class="beyond__text">
             <h3 class="t-h3">Teaching</h3>
-            <p class="t-muted">I teach sensory thinking at Universidad de Antioquia: how perception, emotion and attention shape the way people experience digital systems. In my teaching, I explore design as a language for expression—how form can communicate, move us and open up new interpretations.</p>
+            <p class="t-muted">I teach sensory thinking at Universidad de Antioquia: how perception and attention shape our relationship with digital systems, and how visual form also works as a language for expression.</p>
             <a class="link" href="https://catedra.dejesumensaje.com/" target="_blank" rel="noopener noreferrer">Cátedra, my course archive <span aria-hidden="true">↗</span></a>
             <div class="beyond__feature">
               <p class="t-small t-muted">Featured guide</p>
@@ -178,7 +154,7 @@ const games = [
         <article class="beyond__row" data-reveal>
           <div class="beyond__text">
             <h3 class="t-h3">Alucine</h3>
-            <p class="t-muted">A project about film and culture, where I explore stories, symbols and the ways narrative can shift how we understand the world.</p>
+            <p class="t-muted">A digital cultural publication with essays and reviews on film, TV series, and video games.</p>
             <a class="link" href="https://alucine.co/" target="_blank" rel="noopener noreferrer">alucine.co <span aria-hidden="true">↗</span></a>
           </div>
           <a class="stage beyond__stage" href="https://alucine.co/" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
