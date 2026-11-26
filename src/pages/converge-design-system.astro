@@ -15,7 +15,7 @@ const overview = [
   { k: 'Challenge', v: 'We had a solid design system in Figma, but it was bypassed the moment PMs prototyped with AI tools: it lived where those tools couldn’t reach.' },
   { k: 'Contribution', v: 'React implementation of the library, token architecture, a published npm package, a component playground and the governance model for AI tooling.' },
   { k: 'Constraints', v: 'NDA-bound enterprise context; components must render safely anywhere; rules must be unambiguous enough for an agent to follow.' },
-  { k: 'Outcome', v: 'A published package and Figma Make Kit in use across the project’s pricing line, and an independent review layer that keeps AI-generated UI on-system.' },
+  { k: 'Outcome', v: 'A published npm package and Figma Make Kit in use on the pricing line, now evolving into a portable Claude skill with a deterministic design linter.' },
 ];
 const numbers = [
   { v: '2', k: 'AI entry points, one governance model' },
@@ -164,12 +164,23 @@ const decisions = [
     </div>
   </figure>
 
+  <section class="chapter wrap" aria-labelledby="ch-claude" data-depth="full" data-reveal>
+    <div class="split">
+      <h2 id="ch-claude" class="t-h3 split__label">Moving directly to Claude</h2>
+      <div class="prose measure split__body">
+        <p>Next, we are taking the governance out of Figma Make and bringing it directly into Claude. Instead of relying on a Make Kit bridge, teams load a portable prototyping skill that works across claude.ai React Artifacts, standalone HTML and Claude Design canvases.</p>
+        <p>The skill packages progressive references for tokens and components alongside visual and copy anti-slop guardrails: one primary green CTA per view, realistic domain data, no decorative emojis or unrequested KPI rows, and sentence-case microcopy that states each fact once. A zero-dependency Node linter (design-lint.js) checks every prototype against the base-4 spacing scale, the published palette, native select controls, off-brand fonts and placeholder copy.</p>
+        <p>Collaboration stays explicit. PMs and engineers explore behavior in their own copy; when someone insists on breaking a rule, Claude builds what they asked and marks the handoff with “Design review:” naming the rule, so design catches every exception before integrating work into the main prototype.</p>
+      </div>
+    </div>
+  </section>
+
   <section class="chapter chapter--section wrap" aria-labelledby="ch-outcome" data-reveal>
     <div class="split">
       <h2 id="ch-outcome" class="t-h3 split__label">Early outcomes</h2>
       <div class="prose measure split__body">
-        <p>The pricing line now builds with the Make Kit, the npm package and shared rules for Claude Code, backed by knowledge-transfer sessions with the teams. Those same rules are the base of a design lint we’re building.</p>
-        <p>With those rules, PMs on the pricing line iterate on designs close to final, and my time goes where it should: cognitive load, efficiency and information architecture.</p>
+        <p>The pricing line already works with the npm package, the Make Kit, shared Claude Code rules and team knowledge-transfer sessions. Now those rules live in the portable Claude prototyping skill and its design linter, checking prototypes before they reach design review.</p>
+        <p>With those guardrails in place, PMs iterate on explorations close to production quality, and my time goes where it should: cognitive load, efficiency and information architecture.</p>
       </div>
     </div>
   </section>

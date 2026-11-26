@@ -15,7 +15,7 @@ const overview = [
   { k: 'Reto', v: 'Teníamos un sistema de diseño sólido en Figma, pero quedaba fuera en cuanto los PM prototipaban con IA: vivía en un lugar al que esas herramientas no accedían.' },
   { k: 'Aporte', v: 'Implementación de la librería en React, arquitectura de tokens, paquete publicado en npm, playground de componentes y modelo de gobernanza para herramientas de IA.' },
   { k: 'Restricciones', v: 'Contexto empresarial con acuerdo de confidencialidad; los componentes deben renderizarse sin conflictos en cualquier entorno; las reglas deben ser lo bastante claras para que un agente las siga al pie de la letra.' },
-  { k: 'Resultado', v: 'Un paquete publicado y un Make Kit de Figma en uso en la línea de pricing del proyecto, y una capa de revisión independiente que mantiene la interfaz generada con IA dentro del sistema.' },
+  { k: 'Resultado', v: 'Un paquete en npm y un Make Kit en uso en la línea de pricing, que ahora evolucionan hacia una skill portable para Claude con linter de diseño determinístico.' },
 ];
 const numbers = [
   { v: '2', k: 'puntos de entrada para la IA, un solo modelo de gobernanza' },
@@ -164,12 +164,23 @@ const decisions = [
     </div>
   </figure>
 
+  <section class="chapter wrap" aria-labelledby="ch-claude" data-depth="full" data-reveal>
+    <div class="split">
+      <h2 id="ch-claude" class="t-h3 split__label">Directo a Claude</h2>
+      <div class="prose measure split__body">
+        <p>El siguiente paso saca la gobernanza de Figma Make y la lleva directo a Claude. En lugar de depender del puente del Make Kit, los equipos cargan una skill portable de prototipado que funciona en React Artifacts de claude.ai, HTML autónomo y lienzos de Claude Design.</p>
+        <p>La skill reúne referencias progresivas de tokens y componentes junto con reglas anti-slop visuales y de microcopy: un solo CTA verde por vista, datos reales del dominio, cero emojis decorativos o filas de KPIs sin pedir, y textos directos sin repeticiones. Un linter en Node sin dependencias (design-lint.js) valida cada prototipo contra la escala de espaciado base 4, la paleta publicada, selectores nativos, tipografías fuera del sistema y textos de relleno.</p>
+        <p>La colaboración también queda explícita. Producto e ingeniería exploran el comportamiento en su propia copia; si alguien insiste en romper una regla, Claude construye lo pedido y marca la entrega con «Design review:» nombrando la regla, para que diseño detecte cada excepción antes de integrar el cambio al prototipo principal.</p>
+      </div>
+    </div>
+  </section>
+
   <section class="chapter chapter--section wrap" aria-labelledby="ch-outcome" data-reveal>
     <div class="split">
       <h2 id="ch-outcome" class="t-h3 split__label">Primeros resultados</h2>
       <div class="prose measure split__body">
-        <p>La línea de pricing ya trabaja con el Make Kit, el paquete de npm y reglas compartidas para Claude Code, acompañadas de sesiones de transferencia para los equipos. Esas mismas reglas son la base de un lint de diseño que estamos construyendo.</p>
-        <p>Con esas reglas, los PM de la línea de pricing iteran sobre diseños cercanos al final, y mi tiempo va adonde debe: carga cognitiva, eficiencia y arquitectura de información.</p>
+        <p>La línea de pricing ya trabaja con el paquete de npm, el Make Kit, reglas compartidas para Claude Code y sesiones de transferencia con los equipos. Ahora esas mismas reglas viven en la skill portable de prototipado para Claude y su linter de diseño, que valida cada prototipo antes de pasar a revisión.</p>
+        <p>Con esas reglas en marcha, los PM iteran sobre exploraciones cercanas a producción, y mi tiempo va adonde debe: carga cognitiva, eficiencia y arquitectura de información.</p>
       </div>
     </div>
   </section>
