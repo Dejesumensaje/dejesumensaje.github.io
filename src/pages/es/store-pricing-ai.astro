@@ -19,9 +19,9 @@ const facts = [
 ];
 const overview = [
   { k: 'Reto', v: 'La sede central envía al director de tienda hasta cien recomendaciones de precio a la vez. Él debe revisar, programar e imprimir cada una en una etiqueta física.' },
-  { k: 'Aporte', v: 'Diseño de producto y un prototipo funcional hecho con IA, probado con directores de tienda y documentado decisión por decisión.' },
+  { k: 'Aporte', v: 'Diseño de producto, prototipo funcional con IA para escritorio y lector de mano, y pruebas de usabilidad moderadas con directores de tienda.' },
   { k: 'Restricciones', v: 'Los precios llegan a SAP solo en lotes programados, una tienda no puede imprimir todas las etiquetas de golpe y el cliente es confidencial: las capturas usan una interfaz neutra y datos de muestra.' },
-  { k: 'Resultado', v: 'En curso: un prototipo funcional probado con directores de tienda, con 46 decisiones de diseño documentadas.' },
+  { k: 'Resultado', v: 'Arquitectura validada con directores de tienda, envío de lotes integrado en el flujo y 46 decisiones documentadas para la siguiente iteración.' },
 ];
 const numbers = [
   { v: '100', k: 'recomendaciones de la sede central que un director recibe de golpe' },
@@ -86,9 +86,9 @@ const floorPhones = [
     <div class="split">
       <h2 id="ch-shelf" class="t-h3 split__label">Hablar el idioma del estante</h2>
       <div class="chapter__stack split__body">
-        <p class="t-h2 pull">Nada de tablas genéricas: mostramos los precios tal como aparecen en la tienda.</p>
+        <p class="t-h2 pull">Mostrar los precios tal como aparecen en el estante.</p>
         <div class="prose measure">
-          <p>En un supermercado, el tipo de cambio es un objeto físico, no un metadato. El precio regular va en la etiqueta blanca; una promoción temporal, en la amarilla con fecha de fin; un producto nuevo recibe su etiqueta de lanzamiento y uno descontinuado, la de liquidación.</p>
+          <p>En un supermercado, cada tipo de cambio corresponde a un objeto físico. El precio regular va en la etiqueta blanca; una promoción temporal, en la amarilla con fecha de fin; un producto nuevo recibe su etiqueta de lanzamiento y uno descontinuado, la de liquidación.</p>
           <p>El prototipo replica esa lógica. El panel del producto abre con una vista previa de la etiqueta que verá el comprador —que cambia en tiempo real mientras el director edita— y guarda el motivo y las fechas de cada ajuste para que el siguiente turno no tenga que adivinar por qué cambió un precio.</p>
         </div>
       </div>
@@ -157,7 +157,7 @@ const floorPhones = [
       <h2 id="ch-ai" class="t-h3 split__label">Cómo construimos el prototipo</h2>
       <div class="chapter__stack split__body">
         <div class="prose measure">
-          <p>El prototipo es una aplicación funcional hecha con IA, no una maqueta estática. Por eso los directores prueban comportamientos reales: lotes que se programan, colas que se vacían y precios de una misma línea que cambian juntos.</p>
+          <p>Construir el prototipo como una aplicación funcional con IA permite que los directores prueben comportamientos reales: lotes que se programan, colas que se vacían y precios de una misma línea que cambian juntos.</p>
           <p>Documentamos cada decisión con su contexto, lo que elegimos y lo que descartamos, para no perder el hilo en la siguiente iteración. Además, agentes de IA auditan flujos, textos y accesibilidad, y sus hallazgos alimentan nuevas decisiones.</p>
         </div>
         <p class="t-h2 pull">Cuando construir es rápido, lo escaso es saber por qué se tomó cada decisión.</p>

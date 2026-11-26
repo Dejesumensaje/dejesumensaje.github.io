@@ -5,14 +5,14 @@ import NextStory from '../../components/f/NextStory.astro';
 
 const facts = [
   { k: 'Rol', v: 'Investigación con usuarios, arquitectura de información, prototipado, pruebas, gestión del proyecto' },
-  { k: 'Fecha', v: 'marzo de 2020 – en curso' },
+  { k: 'Fecha', v: '2020 – 2021' },
   { k: 'Equipo', v: 'Camilo Beltrán, líder de desarrollo\nCatalina Mendoza, diseño visual y de interacción\nNatalia Torres, diseño visual' },
 ];
 const overview = [
-  { k: 'Reto', v: 'Convertir una plataforma educativa nacional envejecida en una experiencia clara y equitativa.' },
+  { k: 'Reto', v: 'Reorganizar una plataforma nacional de 17 años donde 81.000 recursos quedaban enterrados y solo una línea de contenido tenía uso real.' },
   { k: 'Aporte', v: 'Investigación con usuarios, arquitectura de información, prototipado, pruebas y dirección de producto con equipos multidisciplinarios.' },
   { k: 'Restricciones', v: '81.000 recursos, más de 70 micrositios, múltiples públicos y una fuerte resistencia interna al cambio.' },
-  { k: 'Resultado', v: 'Las descargas de contenidos crecieron un 81% en un año, salieron a la luz recursos más allá de la única línea que se usaba y hubo respaldo directivo para seguir iterando.' },
+  { k: 'Resultado', v: '81% más descargas en el primer año, 60.000 usuarios mensuales en la sección de contenidos y respaldo interno para seguir iterando.' },
 ];
 const numbers = [
   { v: '81.000', k: 'recursos educativos' },
@@ -25,8 +25,8 @@ const insights = [
   'Solo una línea de contenidos tenía uso real: Contenidos para Aprender, una colección para enseñar competencias básicas.',
 ];
 const lessons = [
-  { t: 'Los usuarios internos también cuentan', b: 'No bastaba con atender al usuario final. Lograr un cambio duradero exigía sumar al equipo de Colombia Aprende y a las demás áreas del Ministerio.' },
-  { t: 'Todo empieza con una visión', b: 'Recoger hallazgos y analizar datos mejora los flujos, pero también ayuda a construir una visión común.' },
+  { t: 'Los usuarios internos también cuentan', b: 'Cambiar una plataforma pública de 17 años exigía sumar desde el inicio al equipo de Colombia Aprende y a las áreas del Ministerio, junto con los docentes.' },
+  { t: 'La evidencia destraba decisiones', b: 'Mostrar a las directivas la evaluación heurística, el concepto del panel de EAFIT y los datos reales de uso fue lo que destrabó la resistencia interna al rediseño.' },
   { t: 'Mantenlo simple', b: 'En un portal tan grande y antiguo como Colombia Aprende, hay que atreverse a recortar y enfocar.' },
 ];
 const pct = (v: number, of: number) => `${((v / of) * 100).toFixed(3)}%`;
@@ -101,7 +101,7 @@ const pct = (v: number, of: number) => `${((v / of) * 100).toFixed(3)}%`;
           ))}
         </div>
         <div class="prose measure">
-          <p>Estaba claro que había que rehacer la experiencia entera. No bastaba con hacerla usable: Colombia Aprende tenía que ser útil, clara y equitativa.</p>
+          <p>Con ese diagnóstico quedó claro que había que rehacer la experiencia completa para que los docentes de todo el país pudieran encontrar y usar el catálogo.</p>
           <p>Para lograrlo, combinamos el modelo Double Diamond (Doble Diamante) con Lean UX.</p>
         </div>
       </div>
@@ -155,7 +155,7 @@ const pct = (v: number, of: number) => `${((v / of) * 100).toFixed(3)}%`;
     <div class="split">
       <h2 id="ch-road" class="t-h3 split__label">Trazar el camino</h2>
       <div class="chapter__stack split__body">
-        <p class="measure">Al filtrar los datos, definimos un eje central: las colecciones de contenido, un servicio nuevo que ordena el recorrido del usuario agrupando recursos por tema, público y formato.</p>
+        <p class="measure">Al filtrar los datos, definimos un eje central: las colecciones de contenido, un servicio nuevo que ordena el recorrido del usuario y agrupa los recursos por tema, público y formato.</p>
         <p class="t-h2 pull">En una colección, el usuario no navega archivos sueltos, sino un kit armado para cumplir un objetivo concreto.</p>
         <div class="prose measure">
           <p>Con talleres de ideación y card sorting, armamos un nuevo mapa del sitio donde la sección de contenidos ocupó el lugar principal y quedó visible en toda la navegación.</p>
@@ -198,8 +198,8 @@ const pct = (v: number, of: number) => `${((v / of) * 100).toFixed(3)}%`;
     <div class="split">
       <h2 id="ch-results" class="t-h3 split__label">Resultados</h2>
       <div class="prose measure split__body">
-        <p>En el año siguiente al lanzamiento, en octubre de 2020, las descargas de contenidos crecieron un 81%. Las colecciones también sacaron a la luz recursos más allá de Contenidos para Aprender, la única línea que la gente usaba antes. Hoy, solo la sección de contenidos tiene unos 60.000 usuarios al mes.</p>
-        <p>Igual de importante: el enfoque centrado en el usuario nos permitió seguir iterando después del lanzamiento sin que volviera la resistencia interna.</p>
+        <p>En el año siguiente al lanzamiento de octubre de 2020, las descargas crecieron un 81%. Agrupar recursos en colecciones dio visibilidad a líneas distintas de Contenidos para Aprender —la única que se usaba antes— y llevó la sección de contenidos a unos 60.000 usuarios al mes.</p>
+        <p>El proceso centrado en usuarios también disipó la resistencia interna, de modo que el equipo pudo seguir iterando después del lanzamiento.</p>
       </div>
     </div>
   </section>

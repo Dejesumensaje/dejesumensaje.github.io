@@ -7,7 +7,7 @@ const pct = (v: number, of: number) => `${((v / of) * 100).toFixed(3)}%`;
 
 const facts = [
   { k: 'Role', v: 'UX, information architecture' },
-  { k: 'Date', v: 'July 2021 – ongoing' },
+  { k: 'Date', v: 'July – December 2021' },
   { k: 'Team', v: 'Camilo Beltrán, development lead\nNatalia Torres, visual design' },
   { k: 'Link', v: 'Aprender Digital', href: 'https://contenidos.colombiaaprende.edu.co' },
 ];
@@ -24,14 +24,12 @@ const numbers = [
 ];
 const prototypes = [
   {
-    label: 'Aprender Digital website',
-    caption: 'The website (prototype in Spanish)',
+    label: 'Aprender Digital website (prototype in Spanish)',
     src: 'https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FSRpGGNHHdLTeOvaZIIjZVz%2FAprender-Digital%3Fpage-id%3D0%253A1%26node-id%3D42%253A2211%26viewport%3D241%252C48%252C0.04%26scaling%3Dmin-zoom%26starting-point-node-id%3D42%253A2211',
     href: 'https://www.figma.com/proto/SRpGGNHHdLTeOvaZIIjZVz/Aprender-Digital?page-id=0%3A1&node-id=42%3A2211&scaling=min-zoom&starting-point-node-id=42%3A2211',
   },
   {
-    label: 'Offline content package',
-    caption: 'The offline package (prototype in Spanish)',
+    label: 'Offline content package (prototype in Spanish)',
     src: 'https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2F2OZPNtWxdH1iKL6p4GrCO5%2FContenido-offline%3Fpage-id%3D0%253A1%26node-id%3D4%253A2%26viewport%3D241%252C48%252C0.12%26scaling%3Dmin-zoom%26starting-point-node-id%3D4%253A2',
     href: 'https://www.figma.com/proto/2OZPNtWxdH1iKL6p4GrCO5/Contenido-offline?page-id=0%3A1&node-id=4%3A2&scaling=min-zoom&starting-point-node-id=4%3A2',
   },
@@ -90,9 +88,9 @@ const prototypes = [
       <h2 id="ch-process" class="t-h3 split__label">Process</h2>
       <div class="chapter__stack split__body">
         <div class="prose measure" data-depth="full">
-          <p>Unlike Colombia Aprende, this ran on a short timeline: three months to propose a new value proposition, define the scope, build an MVP and test it with rural teachers.</p>
+          <p>Unlike Colombia Aprende, we had a tight schedule to propose a new value proposition, define the scope, build an MVP and test it with rural teachers.</p>
           <p>We chose Lean UX because of the timeline. Instead of defining requirements meticulously, we started from desk research to frame the problem.</p>
-          <p>In 2020, according to the Ministry of Education and the ICT Ministry, more than 7 million rural Colombians lacked internet access and 47% of rural schools had no network infrastructure. A rural child received about half the education of a peer in Bogotá or Medellín.</p>
+          <p>Figures from the Ministry of Education and the ICT Ministry showed the scale of the gap: a rural child received about half the education of a peer in Bogotá or Medellín.</p>
         </div>
         <div class="grid2">
           <div><h3 class="t-small t-muted">Problem statement</h3><p class="insight">The lack of access to educational resources is widening the gap between urban and rural Colombia, and hurting the work of rural teachers.</p></div>
@@ -154,14 +152,13 @@ const prototypes = [
 
   {prototypes.map((p) => (
     <figure class="figure wrap" data-depth="full" data-reveal>
-      <div class="proto" data-proto={p.src} data-title={`${p.label} prototype (Figma)`}>
+      <div class="proto" data-proto={p.src} data-title={`${p.label} (Figma)`}>
         <div class="proto__inner">
           <p class="t-small t-muted">{p.label}</p>
           <button class="btn btn--primary" type="button">Load the prototype</button>
           <a class="link t-small" href={p.href} target="_blank" rel="noopener noreferrer">Open in Figma <span aria-hidden="true">↗</span></a>
         </div>
       </div>
-      <figcaption class="t-small">{p.caption}</figcaption>
     </figure>
   ))}
 

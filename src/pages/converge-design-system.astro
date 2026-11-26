@@ -23,8 +23,8 @@ const numbers = [
   { v: '2.37:1', k: 'the warning contrast we caught; WCAG asks for 4.5:1' },
 ];
 const decisions = [
-  { t: 'Brand color is scarce', b: 'The Deloitte green is reserved for the single most important action and its focus rings, nothing merely active or selected. It depends on a token, not on taste, so an agent can apply it without ambiguity.' },
-  { t: 'Contrast is measured, not assumed', b: 'The warning color looked acceptable. Measured, it was 2.37:1 against the 4.5:1 WCAG asks for. Warning text now uses a darker token that passes, and the rule lives in an automated review layer, not just in the docs.' },
+  { t: 'Brand color is scarce', b: 'The Deloitte green is reserved for the single most important action and its focus rings; active and selected states use separate tokens. Encoding that in tokens lets an agent apply it without ambiguity.' },
+  { t: 'Measured contrast', b: 'The warning color looked legible by eye, yet measured 2.37:1 against WCAG’s 4.5:1 threshold. Warning text now uses a darker token that passes, enforced by an automated review layer.' },
   { t: 'The system doesn’t touch what it doesn’t own', b: 'Components render in unfinished prototypes and legacy apps full of CSS, so the package never styles raw HTML globally. No bare h1, body or button selectors; each component ships its own scoped reset.' },
   { t: 'Tokens are contracts', b: 'Token names map directly to Figma, quirks included. The designer reading the library and the engineer or agent reading the code see the same concepts. Changing a token without agreement breaks something people already built on.' },
 ];
@@ -71,7 +71,7 @@ const decisions = [
       <h2 id="ch-problem" class="t-h3 split__label">The problem</h2>
       <div class="prose measure split__body">
         <p>The design team already had a mature system in Figma, built by Grecia Gabriel and Rebecca Bradley.</p>
-        <p>The problem appeared when product managers started using Claude Code and Figma Make to explore ideas with clients. The system was no longer part of the conversation. Not because it was poorly designed, but because it lived somewhere those tools could not reach.</p>
+        <p>The problem appeared when product managers started using Claude Code and Figma Make to explore ideas with clients. The system dropped out of the conversation because it lived where those tools could not reach.</p>
         <p>Exploration got much faster. Consistency dropped just as quickly. Demos no longer shared the system’s visual language, interaction patterns or UX principles. Each PM improvised their own interface, and the design system became a reference file AI never touched.</p>
       </div>
     </div>
@@ -101,8 +101,7 @@ const decisions = [
       <h2 id="ch-contribution" class="t-h3 split__label">My contribution</h2>
       <div class="chapter__stack split__body">
         <div class="prose measure">
-          <p>I took the system the team had built in Figma and led its translation into a working code package, the prerequisite a Make Kit needs.</p>
-          <p>That meant implementing the component library in React, designing the token architecture, publishing it as an npm package and building a playground where the system could be explored and validated component by component before reaching wider teams.</p>
+          <p>I took the Figma system and translated it into a working code package so Make Kits and coding agents could use it directly. That covered the React component library, token architecture, an npm release, and a playground to validate each component before opening it to other teams.</p>
         </div>
         <p class="t-h2 pull">Building the code was the vehicle. Governing it was the real challenge.</p>
       </div>
@@ -127,7 +126,7 @@ const decisions = [
     <div class="stage" style="aspect-ratio:1296/600">
       <img class="flat" src="/assets/f/converge-metriccard.webp" width="1600" height="1171" loading="lazy" alt="MetricCard and InformativeCard components with status badges." style={`left:${pct(318, 1296)};top:${pct(44, 600)};width:${pct(660, 1296)}`} />
     </div>
-    <figcaption class="t-small">Status lives in tokens, not in taste: an agent can apply “On track” or “Watch” without guessing</figcaption>
+    <figcaption class="t-small">Each status maps to a dedicated token, so an agent applies “On track” or “Watch” deterministically</figcaption>
   </figure>
 
   <section class="chapter wrap" aria-labelledby="ch-org" data-depth="full" data-reveal>
@@ -135,7 +134,7 @@ const decisions = [
       <h2 id="ch-org" class="t-h3 split__label">Governing exploration</h2>
       <div class="prose measure split__body">
         <p>PMs needed to explore ideas with clients using AI without turning those explorations into inconsistent experiences that are hard to maintain.</p>
-        <p>The answer wasn’t to limit exploration but to give it structure: a controlled environment, real production components in a playground, a set of guiding principles, and a process where explored concepts return to the design team for refinement before they reach production.</p>
+        <p>We gave exploration structure: a controlled environment, real production components in a playground, clear principles, and a review cycle where explored concepts return to design before reaching production.</p>
       </div>
     </div>
   </section>
@@ -147,7 +146,7 @@ const decisions = [
         <div class="grid2">
           <div>
             <h3 class="t-h3">Figma Make</h3>
-            <p class="t-muted">Through a Make Kit: the npm package, the tokens and variables from the Figma library, and usage guidelines on top, so Figma Make knows which components exist and when to use them. PMs now prototype with the same components engineers ship.</p>
+            <p class="t-muted">The Make Kit connects our published npm package, Figma tokens and usage rules directly inside Figma Make. PMs prototype with the same components engineers ship.</p>
           </div>
           <div>
             <h3 class="t-h3">Claude Code</h3>
@@ -169,7 +168,7 @@ const decisions = [
     <div class="split">
       <h2 id="ch-outcome" class="t-h3 split__label">Early outcomes</h2>
       <div class="prose measure split__body">
-        <p>The system is in use across the project’s pricing line: a working Make Kit for Figma Make, the published npm package, knowledge-transfer sessions for teams working with Claude Code, and rules PMs now use to build their design artifacts. The same rules are the base of a design lint we’re building.</p>
+        <p>The pricing line now builds with the Make Kit, the npm package and shared rules for Claude Code, backed by knowledge-transfer sessions with the teams. Those same rules are the base of a design lint we’re building.</p>
         <p>With those rules, PMs on the pricing line iterate on designs close to final, and my time goes where it should: cognitive load, efficiency and information architecture.</p>
       </div>
     </div>
