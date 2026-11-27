@@ -19,8 +19,8 @@ For metadata, structured data or analytics, read
 - Keep English at `/` and Spanish under `/es`; every page has a counterpart.
 - Keep JSON-LD valid; never add a second `Person` entity.
 - Analytics events must not contain PII; reuse the delegated tracker.
-- `src/pages/_legacy-*` and the non-`f/` legacy components are not built.
-  Do not import them into live pages.
+- Never name the client's internal products or show client data in copy,
+  captures or asset names; the client is named only as Deloitte.
 
 ## Before you finish
 

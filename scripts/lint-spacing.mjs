@@ -2,17 +2,6 @@ import { readdir, readFile } from 'node:fs/promises';
 import { join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-// Legacy files are not built. They stay out of the spacing contract.
-const IGNORED = new Set([
-  'src/components/Header.astro',
-  'src/components/Footer.astro',
-  'src/components/CaseNav.astro',
-  'src/components/CaseTOC.astro',
-  'src/components/ProjectCard.astro',
-  'src/components/PasswordGate.astro',
-  'src/layouts/BaseLayout.astro',
-]);
-
 const SPACING_DECLARATION =
   /\b(padding(?:-(?:block|inline|top|right|bottom|left))?|margin(?:-(?:block|inline|top|right|bottom|left))?|gap|row-gap|column-gap|scroll-padding(?:-(?:block|inline))?|scroll-margin(?:-(?:block|inline))?)\s*:\s*([^;{}]+)/g;
 
@@ -23,7 +12,7 @@ async function walk(dir) {
   for (const entry of await readdir(dir, { withFileTypes: true })) {
     const path = join(dir, entry.name);
     if (entry.isDirectory()) out.push(...(await walk(path)));
-    else if (/\.(astro|css)$/.test(entry.name) && !entry.name.startsWith('_legacy')) {
+    else if (/\.(astro|css)$/.test(entry.name)) {
       out.push(path);
     }
   }
@@ -33,9 +22,7 @@ async function walk(dir) {
 /** Deterministic spacing contract. Returns errors instead of exiting. */
 export async function lintSpacing(root = process.cwd()) {
   const errors = [];
-  const files = (await walk(join(root, 'src')))
-    .map((path) => relative(root, path))
-    .filter((path) => !IGNORED.has(path));
+  const files = (await walk(join(root, 'src'))).map((path) => relative(root, path));
 
   for (const file of files) {
     const source = await readFile(join(root, file), 'utf8');
