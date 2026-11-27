@@ -2,6 +2,7 @@
 import CaseLayout from '../../layouts/CaseLayout.astro';
 import CaseHeader from '../../components/f/CaseHeader.astro';
 import NextStory from '../../components/f/NextStory.astro';
+import BeforeAfter from '../../components/f/BeforeAfter.astro';
 
 const pct = (v: number, of: number) => `${((v / of) * 100).toFixed(3)}%`;
 
@@ -15,7 +16,56 @@ const overview = [
   { k: 'Reto', v: 'Teníamos un sistema de diseño sólido en Figma, pero quedaba fuera en cuanto los PM prototipaban con IA: vivía en un lugar al que esas herramientas no accedían.' },
   { k: 'Aporte', v: 'Implementación de la librería en React, arquitectura de tokens, paquete publicado en npm, playground de componentes y modelo de gobernanza para herramientas de IA.' },
   { k: 'Restricciones', v: 'Contexto empresarial con acuerdo de confidencialidad; los componentes deben renderizarse sin conflictos en cualquier entorno; las reglas deben ser lo bastante claras para que un agente las siga al pie de la letra.' },
-  { k: 'Resultado', v: 'Un paquete en npm y un Make Kit en uso en la línea de pricing, que ahora evolucionan hacia una skill portable para Claude con linter de diseño determinístico.' },
+  { k: 'Resultado', v: 'Un paquete en npm y un Make Kit en uso en la línea de pricing, y una skill portable para Claude con linter de diseño determinista. Un prototipo de pricing reconstruido con la skill pasó de 1.723 errores de lint a ninguno.' },
+];
+const skillFiles = [
+  { f: 'SKILL.md', d: 'El flujo de trabajo (lectura de diseño, construcción, autocrítica) y las reglas que siempre están activas: una sola acción principal verde por vista, espaciado en base 4, Open Sans en 400 y 600, un control por intención.' },
+  { f: 'references/foundations.md', d: 'Tokens de color, gráficos, tipografía y espaciado.' },
+  { f: 'references/components.md', d: 'El catálogo de componentes, una matriz de controles y los requisitos de WCAG 2.2 AA.' },
+  { f: 'references/anti-slop.md', d: 'Reglas visuales y de microcopy, cada una con un ejemplo malo y uno bueno.' },
+  { f: 'references/claude-ai-formats.md', d: 'Cómo construir para React Artifacts, HTML independiente y canvas de Claude.' },
+  { f: 'kit/', d: 'converge.css y una pantalla inicial para cada formato.' },
+  { f: 'scripts/design-lint.js', d: 'La revisión determinista. Errores por espaciado fuera de la escala, colores fuera de la paleta, selects nativos, encabezados de tabla fuera del estilo del sistema y marcado roto; advertencias por emojis, palabras de moda, fuentes y degradados.' },
+];
+const resultNumbers = [
+  { v: '1.723 → 0', k: 'errores de design-lint, primer prototipo frente a reconstrucción' },
+  { v: '59 → 137', k: 'pantallas y estados cubiertos, primer prototipo frente a reconstrucción' },
+  { v: '0', k: 'pasos añadidos o quitados del flujo' },
+];
+const ba = { labels: { before: 'Primer prototipo', after: 'Reconstruido con el sistema' }, range: 'Comparar el primer prototipo con la reconstrucción' };
+const pairs = [
+  {
+    t: 'Restricciones y objetivos',
+    b: 'Once pestañas de restricciones y una de objetivos, cada una con párrafos de explicación, pasan a ser una sola lista agrupada en objetivos, familias de producto y otras restricciones, con un estado en cada fila. Cada restricción se abre en un panel lateral, así la vista general no se pierde.',
+    img: 'constraints',
+    alt: ['Primer prototipo: doce pestañas de restricciones y objetivos sobre una tabla de familias y párrafos de explicación.', 'Reconstrucción: una lista de restricciones agrupada en objetivos, familias de producto y otras restricciones, con un estado en cada fila.'],
+  },
+  {
+    t: 'Familias de producto',
+    b: 'Cinco tarjetas de conteo y cuatro desplegables nativos pasan a ser pestañas por tipo con conteos, un buscador y un Select de Converge. Familias, restricciones y códigos de estrategia comparten un solo espacio de Settings.',
+    img: 'families',
+    alt: ['Primer prototipo: tarjetas de conteo, filtros con desplegables nativos y una tabla de familias densa.', 'Reconstrucción: Settings con pestañas, filtros por tipo con conteos, buscador, selector de categoría y la tabla de familias.'],
+  },
+  {
+    t: 'Un nombre que ya existe',
+    b: 'El error deja de ser una frase al pie del formulario y aparece en el campo; Next queda deshabilitado con su motivo al lado. Las zonas pasan a ser una lista de casillas con el número de tiendas y un “All zones” de tres estados, el control que la skill indica para selecciones múltiples cortas.',
+    img: 'name',
+    alt: ['Primer prototipo: botones de zona y una frase de error al pie del formulario.', 'Reconstrucción: el error bajo el campo de nombre, Next deshabilitado con su motivo y las zonas como lista de casillas con número de tiendas.'],
+  },
+  {
+    t: 'Editar una brecha de precio',
+    b: 'Párrafos, tarjetas de opción y una tabla de referencia se reducen a un campo con un control segmentado % | $ y un error “Required”. Los modales quedan para decisiones cortas, como piden las reglas de controles.',
+    img: 'dialog',
+    alt: ['Primer prototipo: un diálogo con párrafos, tarjetas de tipo de separación, un error y una tabla de referencia.', 'Reconstrucción: un diálogo compacto con un campo, un selector de porcentaje o dólares y un error Required.'],
+  },
+];
+const states = [
+  { img: 'check', a: 'Lista del paso 2 con estados de conflicto y advertencia, y el aviso Check finished.', c: 'La verificación de restricciones corre en segundo plano; las filas muestran conflictos y advertencias, y un aviso abre el detalle' },
+  { img: 'preview', a: 'Panel de vista previa de restricciones filtrado a dos reglas en conflicto.', c: 'Una vista previa de solo lectura de todas las reglas, filtrada a los conflictos; cada fila dice qué está mal' },
+  { img: 'blocked', a: 'Paso 3 con Run deshabilitado y un enlace al paso 2.', c: 'Run queda deshabilitado con su motivo y un enlace al conflicto' },
+  { img: 'failed', a: 'Un escenario fallido con su conflicto y un enlace a la configuración.', c: 'Una ejecución fallida nombra la regla en conflicto y enlaza a ella' },
+  { img: 'warnings', a: 'Resultados de un escenario con dos advertencias junto a All hard constraints met.', c: 'Las advertencias nunca bloquean una ejecución; siguen visibles en el resultado' },
+  { img: 'upload', a: 'Diálogo de revisión de carga con reglas nuevas y filas omitidas.', c: 'Una carga se revisa antes de aplicarse: qué se añade, qué se omite y por qué' },
 ];
 const numbers = [
   { v: '2', k: 'puntos de entrada para la IA, un solo modelo de gobernanza' },
@@ -172,6 +222,74 @@ const decisions = [
         <p>La skill reúne referencias progresivas de tokens y componentes junto con reglas anti-slop visuales y de microcopy: un solo CTA verde por vista, datos reales del dominio, cero emojis decorativos o filas de KPIs sin pedir, y textos directos sin repeticiones. Un linter en Node sin dependencias (design-lint.js) valida cada prototipo contra la escala de espaciado base 4, la paleta publicada, selectores nativos, tipografías fuera del sistema y textos de relleno.</p>
         <p>La colaboración también queda explícita. Producto e ingeniería exploran el comportamiento en su propia copia; si alguien insiste en romper una regla, Claude construye lo pedido y marca la entrega con «Design review:» nombrando la regla, para que diseño detecte cada excepción antes de integrar el cambio al prototipo principal.</p>
       </div>
+    </div>
+  </section>
+
+  <section class="chapter wrap" aria-labelledby="ch-skill" data-depth="full" data-reveal>
+    <div class="split">
+      <h2 id="ch-skill" class="t-h3 split__label">Por dentro de la skill</h2>
+      <div class="chapter__stack split__body">
+        <p class="measure">La skill carga solo la referencia que necesita cada tarea.</p>
+        <dl class="files">
+          {skillFiles.map((s) => (
+            <div><dt>{s.f}</dt><dd class="t-muted">{s.d}</dd></div>
+          ))}
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="chapter chapter--tight wrap" aria-labelledby="ch-result" data-reveal>
+    <div class="split">
+      <h2 id="ch-result" class="t-h3 split__label">Resultado: un prototipo, antes y después</h2>
+      <div class="chapter__stack split__body">
+        <div class="prose measure">
+          <p>El prototipo es una herramienta de optimización de precios para una cadena de supermercados: los equipos arman escenarios de optimización, definen las restricciones que deben respetar los precios, los ejecutan y publican el resultado.</p>
+          <p>Un PM construyó el primer prototipo sin la skill y luego lo reconstruyó con ella. Yo pulí esa segunda versión: recorté el texto y la llevé por rondas con stakeholders del cliente. La versión pulida es la que documenta el hand-off en Figma.</p>
+          <p>El linter encontró en el primer prototipo 1.281 colores fuera de la paleta, 408 valores de espaciado fuera de la escala de base 4 y 34 selects nativos; la reconstrucción no tiene ninguno. Las dos versiones de abajo muestran la misma pantalla desde el mismo preset, con datos de prueba.</p>
+        </div>
+        <div class="columns3 numbers">
+          {resultNumbers.map((n) => (
+            <div><p class="t-h2">{n.v}</p><p class="t-muted">{n.k}</p></div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ba-list wrap">
+    {pairs.map((p) => (
+      <figure class="ba-item" data-reveal>
+        <div class="split">
+          <h3 class="t-h3 split__label">{p.t}</h3>
+          <p class="t-muted split__body ba-item__note">{p.b}</p>
+        </div>
+        <BeforeAfter
+          before={{ src: `/assets/f/converge-po-${p.img}-v1.webp`, alt: p.alt[0] }}
+          after={{ src: `/assets/f/converge-po-${p.img}-v3.webp`, alt: p.alt[1] }}
+          width={1600}
+          height={1138}
+          labels={ba.labels}
+          rangeLabel={`${ba.range}: ${p.t}`}
+        />
+      </figure>
+    ))}
+  </div>
+
+  <section class="chapter wrap" aria-labelledby="ch-states" data-reveal>
+    <div class="chapter__stack">
+      <div class="split">
+        <h2 id="ch-states" class="t-h3 split__label">Estados que el primer prototipo no tenía</h2>
+        <p class="t-muted split__body ba-item__note">Las restricciones pueden contradecirse, así que ejecutar un escenario necesitaba estados para verificar, bloquear, fallar y advertir. La verificación, la vista previa y la revisión de cargas salieron de una ronda con stakeholders.</p>
+      </div>
+      <ul class="shots">
+        {states.map((s) => (
+          <li>
+            <img src={`/assets/f/converge-po-${s.img}.webp`} width="1600" height="1138" loading="lazy" decoding="async" alt={s.a} />
+            <p class="t-small t-muted">{s.c}</p>
+          </li>
+        ))}
+      </ul>
     </div>
   </section>
 

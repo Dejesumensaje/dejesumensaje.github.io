@@ -192,3 +192,42 @@ html.depth-tldr [data-depth='full'] { display: none !important; }
   /* On a phone the embed needs height more than width to be usable */
   .proto { aspect-ratio: 3 / 4; }
 }
+
+/* ---------- Skill anatomy: file on the left, what it holds on the right ---------- */
+.files { display: flex; flex-direction: column; margin: 0; border-top: var(--hairline) solid var(--line); }
+.files > div {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+  column-gap: var(--gutter);
+  row-gap: var(--space-1);
+  padding-block: var(--space-4);
+  border-bottom: var(--hairline) solid var(--line);
+}
+.files dt { font-family: var(--font-mono); font-size: var(--text-small); overflow-wrap: anywhere; padding-top: var(--space-1); }
+.files dd { margin: 0; }
+@media (max-width: 759px) { .files > div { grid-template-columns: 1fr; } }
+
+/* ---------- Before / after pairs ---------- */
+.ba-list { display: flex; flex-direction: column; gap: var(--space-16); padding-bottom: var(--space-chapter); }
+.ba-item { display: flex; flex-direction: column; gap: var(--space-6); margin: 0; }
+.ba-item .split { row-gap: var(--space-2); }
+.ba-item__note { max-width: 640px; }
+
+/* States that only exist after the rebuild */
+.shots {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr));
+  column-gap: var(--gutter);
+  row-gap: var(--space-10);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.shots li { display: flex; flex-direction: column; gap: var(--space-3); }
+.shots img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 0 0 var(--hairline) var(--line);
+  filter: brightness(var(--shot-dim));
+}

@@ -2,6 +2,7 @@
 import CaseLayout from '../layouts/CaseLayout.astro';
 import CaseHeader from '../components/f/CaseHeader.astro';
 import NextStory from '../components/f/NextStory.astro';
+import BeforeAfter from '../components/f/BeforeAfter.astro';
 
 const pct = (v: number, of: number) => `${((v / of) * 100).toFixed(3)}%`;
 
@@ -15,7 +16,56 @@ const overview = [
   { k: 'Challenge', v: 'We had a solid design system in Figma, but it was bypassed the moment PMs prototyped with AI tools: it lived where those tools couldn’t reach.' },
   { k: 'Contribution', v: 'React implementation of the library, token architecture, a published npm package, a component playground and the governance model for AI tooling.' },
   { k: 'Constraints', v: 'NDA-bound enterprise context; components must render safely anywhere; rules must be unambiguous enough for an agent to follow.' },
-  { k: 'Outcome', v: 'A published npm package and Figma Make Kit in use on the pricing line, now evolving into a portable Claude skill with a deterministic design linter.' },
+  { k: 'Outcome', v: 'A published npm package and Figma Make Kit in use on the pricing line, plus a portable Claude skill with a deterministic design linter. A pricing prototype rebuilt on the skill went from 1,723 lint errors to none.' },
+];
+const skillFiles = [
+  { f: 'SKILL.md', d: 'The workflow (design read, build, self-critique) and the rules that are always on: one green primary action per view, base-4 spacing, Open Sans at 400 and 600, one control per intent.' },
+  { f: 'references/foundations.md', d: 'Tokens for color, charts, type and spacing.' },
+  { f: 'references/components.md', d: 'The component catalog, a control matrix and the WCAG 2.2 AA requirements.' },
+  { f: 'references/anti-slop.md', d: 'Visual and copy guardrails, each with a bad and a good example.' },
+  { f: 'references/claude-ai-formats.md', d: 'How to build for React Artifacts, standalone HTML and Claude canvases.' },
+  { f: 'kit/', d: 'converge.css and a starter screen for each format.' },
+  { f: 'scripts/design-lint.js', d: 'The deterministic check. Errors for spacing off the scale, colors outside the palette, native selects, table headers off the system style and broken markup; warnings for emoji, buzzwords, fonts and gradients.' },
+];
+const resultNumbers = [
+  { v: '1,723 → 0', k: 'design-lint errors, first prototype vs. rebuild' },
+  { v: '59 → 137', k: 'screens and states covered, first prototype vs. rebuild' },
+  { v: '0', k: 'steps added or removed from the flow' },
+];
+const ba = { labels: { before: 'First prototype', after: 'Rebuilt on the system' }, range: 'Compare the first prototype with the rebuild' };
+const pairs = [
+  {
+    t: 'Constraints and objectives',
+    b: 'Eleven constraint tabs and an objectives tab, each with paragraphs of explanation, become one list grouped by objectives, product families and other constraints, with a status on every row. Each constraint opens in a drawer, so the overview stays in place.',
+    img: 'constraints',
+    alt: ['First prototype: twelve constraint and objective tabs above a family table and paragraphs of explanation.', 'Rebuild: one list of constraints grouped by objectives, product families and other constraints, with a status badge on each row.'],
+  },
+  {
+    t: 'Product families',
+    b: 'Five count tiles and four native dropdowns become type tabs with counts, a search and a Converge Select. Families, constraints and strategy codes share one Settings area.',
+    img: 'families',
+    alt: ['First prototype: count tiles, native dropdown filters and a dense family table.', 'Rebuild: Settings with tabs, type filters with counts, a search, a category select and the family table.'],
+  },
+  {
+    t: 'A name already in use',
+    b: 'The error moves from a sentence under the form to the field itself, and Next stays disabled with its reason beside it. Zones become a checkbox list with store counts and a tri-state “All zones”, the control the skill prescribes for short multi-selects.',
+    img: 'name',
+    alt: ['First prototype: zone buttons and an error sentence at the bottom of the form.', 'Rebuild: the error under the name field, a disabled Next with its reason, and zones as a checkbox list with store counts.'],
+  },
+  {
+    t: 'Editing a gap threshold',
+    b: 'Paragraphs, radio cards and a reference table become one field with a % | $ segmented control and a “Required” error. Modals stay for short decisions, as the control rules ask.',
+    img: 'dialog',
+    alt: ['First prototype: a dialog with paragraphs, gap-type cards, an error and a reference table.', 'Rebuild: a compact dialog with one field, a percent or dollar toggle and a Required error.'],
+  },
+];
+const states = [
+  { img: 'check', a: 'Step 2 list with conflict and warning badges and a Check finished toast.', c: 'The constraint check runs in the background; rows show conflicts and warnings, and a toast opens the details' },
+  { img: 'preview', a: 'Constraints preview drawer filtered to two conflicting rules.', c: 'A read-only preview of every rule, filtered to conflicts; each row says what is wrong' },
+  { img: 'blocked', a: 'Step 3 with Run disabled and a View in step 2 link.', c: 'Run is disabled with its reason and a link to the conflict' },
+  { img: 'failed', a: 'A failed scenario with its conflict and a View in setup link.', c: 'A failed run names the conflicting rule and links to it' },
+  { img: 'warnings', a: 'Scenario results with two soft warnings next to All hard constraints met.', c: 'Warnings never block a run; they stay visible on the result' },
+  { img: 'upload', a: 'Review upload dialog listing new rules and skipped rows.', c: 'An upload is reviewed before it applies: what is added, what is skipped and why' },
 ];
 const numbers = [
   { v: '2', k: 'AI entry points, one governance model' },
@@ -172,6 +222,74 @@ const decisions = [
         <p>The skill packages progressive references for tokens and components alongside visual and copy anti-slop guardrails: one primary green CTA per view, realistic domain data, no decorative emojis or unrequested KPI rows, and sentence-case microcopy that states each fact once. A zero-dependency Node linter (design-lint.js) checks every prototype against the base-4 spacing scale, the published palette, native select controls, off-brand fonts and placeholder copy.</p>
         <p>Collaboration stays explicit. PMs and engineers explore behavior in their own copy; when someone insists on breaking a rule, Claude builds what they asked and marks the handoff with “Design review:” naming the rule, so design catches every exception before integrating work into the main prototype.</p>
       </div>
+    </div>
+  </section>
+
+  <section class="chapter wrap" aria-labelledby="ch-skill" data-depth="full" data-reveal>
+    <div class="split">
+      <h2 id="ch-skill" class="t-h3 split__label">Inside the skill</h2>
+      <div class="chapter__stack split__body">
+        <p class="measure">The skill loads only the reference a task needs.</p>
+        <dl class="files">
+          {skillFiles.map((s) => (
+            <div><dt>{s.f}</dt><dd class="t-muted">{s.d}</dd></div>
+          ))}
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="chapter chapter--tight wrap" aria-labelledby="ch-result" data-reveal>
+    <div class="split">
+      <h2 id="ch-result" class="t-h3 split__label">Result: one prototype, before and after</h2>
+      <div class="chapter__stack split__body">
+        <div class="prose measure">
+          <p>The prototype is a price optimization tool for a grocery retailer: teams build optimization scenarios, set the constraints prices must respect, run them and publish the result.</p>
+          <p>A PM built the first prototype without the skill, then rebuilt it with the skill. I polished that second version: I cut the copy and took it through stakeholder rounds with the client. The polished version is the one the Figma hand-off documents.</p>
+          <p>The linter found 1,281 colors outside the palette, 408 spacing values off the base-4 scale and 34 native selects in the first prototype; the rebuild passes with none. Both versions below render the same screen from the same preset, with mock data.</p>
+        </div>
+        <div class="columns3 numbers">
+          {resultNumbers.map((n) => (
+            <div><p class="t-h2">{n.v}</p><p class="t-muted">{n.k}</p></div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ba-list wrap">
+    {pairs.map((p) => (
+      <figure class="ba-item" data-reveal>
+        <div class="split">
+          <h3 class="t-h3 split__label">{p.t}</h3>
+          <p class="t-muted split__body ba-item__note">{p.b}</p>
+        </div>
+        <BeforeAfter
+          before={{ src: `/assets/f/converge-po-${p.img}-v1.webp`, alt: p.alt[0] }}
+          after={{ src: `/assets/f/converge-po-${p.img}-v3.webp`, alt: p.alt[1] }}
+          width={1600}
+          height={1138}
+          labels={ba.labels}
+          rangeLabel={`${ba.range}: ${p.t}`}
+        />
+      </figure>
+    ))}
+  </div>
+
+  <section class="chapter wrap" aria-labelledby="ch-states" data-reveal>
+    <div class="chapter__stack">
+      <div class="split">
+        <h2 id="ch-states" class="t-h3 split__label">States the first prototype didn’t have</h2>
+        <p class="t-muted split__body ba-item__note">Constraints can contradict each other, so running a scenario needed states for checking, blocking, failing and warning. The check, the preview and the upload review came out of a stakeholder round.</p>
+      </div>
+      <ul class="shots">
+        {states.map((s) => (
+          <li>
+            <img src={`/assets/f/converge-po-${s.img}.webp`} width="1600" height="1138" loading="lazy" decoding="async" alt={s.a} />
+            <p class="t-small t-muted">{s.c}</p>
+          </li>
+        ))}
+      </ul>
     </div>
   </section>
 
