@@ -12,7 +12,7 @@ export const ROUTES = [
   '/resume',
   '/404',
   '/store-pricing-ai',
-  '/converge-design-system',
+  '/design-system-ai-agents',
   '/aprender-digital',
   '/colombia-aprende',
   '/es',
@@ -20,7 +20,7 @@ export const ROUTES = [
   '/es/resume',
   '/es/404',
   '/es/store-pricing-ai',
-  '/es/converge-design-system',
+  '/es/design-system-ai-agents',
   '/es/aprender-digital',
   '/es/colombia-aprende',
 ];

@@ -18,7 +18,7 @@ const cases: CardText[] = [
     title: 'Un sistema de diseño para personas y agentes de IA',
     summary: 'De una librería en Figma que los demos con IA ignoraban a un paquete de código con reglas estrictas que cualquier agente puede seguir.',
     meta: 'Deloitte · Sistemas de diseño · 2024–hoy',
-    alt: 'Documentación del sistema de diseño Converge: la página de color con muestras de marca, neutros y texto.',
+    alt: 'Documentación del sistema de diseño: la página de color con muestras de marca, neutros y texto.',
   },
   {
     title: 'Llevar el aprendizaje a aulas rurales sin internet',

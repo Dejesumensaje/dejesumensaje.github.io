@@ -9,7 +9,7 @@ const pct = (v: number, of: number) => `${((v / of) * 100).toFixed(3)}%`;
 const facts = [
   { k: 'Rol', v: 'Ingeniería de sistemas de diseño, arquitectura de tokens, herramientas de IA y gobernanza' },
   { k: 'Fecha', v: '2025 – en curso' },
-  { k: 'Cliente', v: 'Deloitte Converge for Restaurants' },
+  { k: 'Cliente', v: 'Deloitte, productos para restaurantes y retail' },
   { k: 'Sistema de diseño en Figma', v: 'Grecia Gabriel y Rebecca Bradley' },
 ];
 const overview = [
@@ -24,7 +24,7 @@ const skillFiles = [
   { f: 'references/components.md', d: 'El catálogo de componentes, una matriz de controles y los requisitos de WCAG 2.2 AA.' },
   { f: 'references/anti-slop.md', d: 'Reglas visuales y de microcopy, cada una con un ejemplo malo y uno bueno.' },
   { f: 'references/claude-ai-formats.md', d: 'Cómo construir para React Artifacts, HTML independiente y canvas de Claude.' },
-  { f: 'kit/', d: 'converge.css y una pantalla inicial para cada formato.' },
+  { f: 'kit/', d: 'La hoja de estilos del sistema y una pantalla inicial para cada formato.' },
   { f: 'scripts/design-lint.js', d: 'La revisión determinista. Errores por espaciado fuera de la escala, colores fuera de la paleta, selects nativos, encabezados de tabla fuera del estilo del sistema y marcado roto; advertencias por emojis, palabras de moda, fuentes y degradados.' },
 ];
 const resultNumbers = [
@@ -42,7 +42,7 @@ const pairs = [
   },
   {
     t: 'Familias de producto',
-    b: 'Cinco tarjetas de conteo y cuatro desplegables nativos pasan a ser pestañas por tipo con conteos, un buscador y un Select de Converge. Familias, restricciones y códigos de estrategia comparten un solo espacio de Settings.',
+    b: 'Cinco tarjetas de conteo y cuatro desplegables nativos pasan a ser pestañas por tipo con conteos, un buscador y el Select del sistema. Familias, restricciones y códigos de estrategia comparten un solo espacio de Settings.',
     img: 'families',
     alt: ['Primer prototipo: tarjetas de conteo, filtros con desplegables nativos y una tabla de familias densa.', 'Reconstrucción: Settings con pestañas, filtros por tipo con conteos, buscador, selector de categoría y la tabla de familias.'],
   },
@@ -73,7 +73,7 @@ const numbers = [
   { v: '2,37:1', k: 'el contraste de advertencia que detectamos; WCAG exige 4,5:1' },
 ];
 const decisions = [
-  { t: 'El color de marca es escaso', b: 'Reservamos el verde de Deloitte para la acción principal y sus anillos de foco; los estados activos y seleccionados usan tokens aparte. Dejar esa regla en tokens permite que un agente la aplique sin dudar.' },
+  { t: 'El color de marca es escaso', b: 'Reservamos el verde de marca para la acción principal y sus anillos de foco; los estados activos y seleccionados usan tokens aparte. Dejar esa regla en tokens permite que un agente la aplique sin dudar.' },
   { t: 'Contraste medido', b: 'El color de advertencia parecía legible a simple vista, pero midió 2,37:1 frente al 4,5:1 que exige WCAG. Cambiamos el texto a un token más oscuro que cumple el estándar y dejamos la validación en una auditoría automática.' },
   { t: 'El sistema no toca lo que no es suyo', b: 'Los componentes corren dentro de prototipos a medio hacer y aplicaciones heredadas llenas de CSS. Por eso el paquete nunca inyecta estilos globales al HTML crudo: cero selectores sueltos como h1, body o button. Cada componente incluye su propio reset encapsulado.' },
   { t: 'Los tokens son contratos', b: 'Los nombres de los tokens calcan los de Figma, con todo y sus particularidades. Así, quien diseña en Figma y quien programa —o el agente que lee el código— hablan el mismo idioma. Cambiar un token sin acuerdo rompe el trabajo de los demás.' },
@@ -100,7 +100,7 @@ const decisions = [
     <div class="stage" style="aspect-ratio:1296/640">
       <div class="browser" style={`left:${pct(148, 1296)};top:${pct(56, 640)};width:${pct(1000, 1296)}`}>
         <div class="browser__bar" aria-hidden="true"><i></i><i></i><i></i></div>
-        <img src="/assets/f/converge-ds.webp" width="1440" height="810" alt="El playground del sistema de diseño Converge: los fundamentos de color, con tokens de marca, neutros, texto y selección." fetchpriority="high" />
+        <img src="/assets/f/ds-colors.webp" width="1440" height="810" alt="El playground del sistema de diseño: los fundamentos de color, con tokens de marca, neutros, texto y selección." fetchpriority="high" />
       </div>
     </div>
   </figure>
@@ -142,7 +142,7 @@ const decisions = [
 
   <figure class="figure wrap" data-depth="full" data-reveal>
     <div class="stage" style="aspect-ratio:1296/680">
-      <img class="flat" src="/assets/f/converge-button.webp" width="1600" height="1412" loading="lazy" alt="El componente Button en el playground: variantes, tamaños, íconos, estados y la barra de acciones masivas." style={`left:${pct(298, 1296)};top:${pct(48, 680)};width:${pct(700, 1296)}`} />
+      <img class="flat" src="/assets/f/ds-button.webp" width="1600" height="1412" loading="lazy" alt="El componente Button en el playground: variantes, tamaños, íconos, estados y la barra de acciones masivas." style={`left:${pct(298, 1296)};top:${pct(48, 680)};width:${pct(700, 1296)}`} />
     </div>
   </figure>
 
@@ -174,7 +174,7 @@ const decisions = [
 
   <figure class="figure wrap" data-depth="full" data-reveal>
     <div class="stage" style="aspect-ratio:1296/600">
-      <img class="flat" src="/assets/f/converge-metriccard.webp" width="1600" height="1171" loading="lazy" alt="Los componentes MetricCard e InformativeCard con insignias de estado." style={`left:${pct(318, 1296)};top:${pct(44, 600)};width:${pct(660, 1296)}`} />
+      <img class="flat" src="/assets/f/ds-metriccard.webp" width="1600" height="1171" loading="lazy" alt="Los componentes MetricCard e InformativeCard con insignias de estado." style={`left:${pct(318, 1296)};top:${pct(44, 600)};width:${pct(660, 1296)}`} />
     </div>
     <figcaption class="t-small">Cada estado tiene su propio token: un agente aplica «On track» o «Watch» sin adivinar</figcaption>
   </figure>
@@ -210,7 +210,7 @@ const decisions = [
 
   <figure class="figure wrap" data-depth="full" data-reveal>
     <div class="stage" style="aspect-ratio:1296/560">
-      <img class="flat" src="/assets/f/converge-sidebar.webp" width="1600" height="796" loading="lazy" alt="El componente Sidebar en modo claro expandido y en modo oscuro colapsado." style={`left:${pct(248, 1296)};top:${pct(52, 560)};width:${pct(800, 1296)}`} />
+      <img class="flat" src="/assets/f/ds-sidebar.webp" width="1600" height="796" loading="lazy" alt="El componente Sidebar en modo claro expandido y en modo oscuro colapsado." style={`left:${pct(248, 1296)};top:${pct(52, 560)};width:${pct(800, 1296)}`} />
     </div>
   </figure>
 
@@ -265,8 +265,8 @@ const decisions = [
           <p class="t-muted split__body ba-item__note">{p.b}</p>
         </div>
         <BeforeAfter
-          before={{ src: `/assets/f/converge-po-${p.img}-v1.webp`, alt: p.alt[0] }}
-          after={{ src: `/assets/f/converge-po-${p.img}-v3.webp`, alt: p.alt[1] }}
+          before={{ src: `/assets/f/ds-pricing-${p.img}-v1.webp`, alt: p.alt[0] }}
+          after={{ src: `/assets/f/ds-pricing-${p.img}-v3.webp`, alt: p.alt[1] }}
           width={1600}
           height={1138}
           labels={ba.labels}
@@ -285,7 +285,7 @@ const decisions = [
       <ul class="shots">
         {states.map((s) => (
           <li>
-            <img src={`/assets/f/converge-po-${s.img}.webp`} width="1600" height="1138" loading="lazy" decoding="async" alt={s.a} />
+            <img src={`/assets/f/ds-pricing-${s.img}.webp`} width="1600" height="1138" loading="lazy" decoding="async" alt={s.a} />
             <p class="t-small t-muted">{s.c}</p>
           </li>
         ))}
@@ -312,5 +312,5 @@ const decisions = [
     </div>
   </section>
 
-  <NextStory current="/converge-design-system" />
+  <NextStory current="/design-system-ai-agents" />
 </CaseLayout>

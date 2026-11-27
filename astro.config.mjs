@@ -7,6 +7,11 @@ const NOINDEX_SLUGS = ['404', 'es/404'];
 export default defineConfig({
   site: 'https://dejesumensaje.com',
   output: 'static',
+  // Old case URL, kept so links already shared keep working.
+  redirects: {
+    '/converge-design-system': '/design-system-ai-agents',
+    '/es/converge-design-system': '/es/design-system-ai-agents',
+  },
   build: {
     assets: '_astro',
     format: 'file',

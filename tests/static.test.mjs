@@ -315,11 +315,11 @@ test('structured data is valid and complete', () => {
 
     const isCaseStudy = [
       '/store-pricing-ai',
-      '/converge-design-system',
+      '/design-system-ai-agents',
       '/aprender-digital',
       '/colombia-aprende',
       '/es/store-pricing-ai',
-      '/es/converge-design-system',
+      '/es/design-system-ai-agents',
       '/es/aprender-digital',
       '/es/colombia-aprende',
     ].includes(route);

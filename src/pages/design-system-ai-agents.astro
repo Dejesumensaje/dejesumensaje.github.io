@@ -9,7 +9,7 @@ const pct = (v: number, of: number) => `${((v / of) * 100).toFixed(3)}%`;
 const facts = [
   { k: 'Role', v: 'Design systems engineering, token architecture, AI tooling and governance' },
   { k: 'Date', v: '2025 – ongoing' },
-  { k: 'Client', v: 'Deloitte Converge for Restaurants' },
+  { k: 'Client', v: 'Deloitte, restaurant and retail products' },
   { k: 'Design system in Figma', v: 'Grecia Gabriel and Rebecca Bradley' },
 ];
 const overview = [
@@ -24,7 +24,7 @@ const skillFiles = [
   { f: 'references/components.md', d: 'The component catalog, a control matrix and the WCAG 2.2 AA requirements.' },
   { f: 'references/anti-slop.md', d: 'Visual and copy guardrails, each with a bad and a good example.' },
   { f: 'references/claude-ai-formats.md', d: 'How to build for React Artifacts, standalone HTML and Claude canvases.' },
-  { f: 'kit/', d: 'converge.css and a starter screen for each format.' },
+  { f: 'kit/', d: 'The system stylesheet and a starter screen for each format.' },
   { f: 'scripts/design-lint.js', d: 'The deterministic check. Errors for spacing off the scale, colors outside the palette, native selects, table headers off the system style and broken markup; warnings for emoji, buzzwords, fonts and gradients.' },
 ];
 const resultNumbers = [
@@ -42,7 +42,7 @@ const pairs = [
   },
   {
     t: 'Product families',
-    b: 'Five count tiles and four native dropdowns become type tabs with counts, a search and a Converge Select. Families, constraints and strategy codes share one Settings area.',
+    b: 'Five count tiles and four native dropdowns become type tabs with counts, a search and the system’s Select. Families, constraints and strategy codes share one Settings area.',
     img: 'families',
     alt: ['First prototype: count tiles, native dropdown filters and a dense family table.', 'Rebuild: Settings with tabs, type filters with counts, a search, a category select and the family table.'],
   },
@@ -73,7 +73,7 @@ const numbers = [
   { v: '2.37:1', k: 'the warning contrast we caught; WCAG asks for 4.5:1' },
 ];
 const decisions = [
-  { t: 'Brand color is scarce', b: 'The Deloitte green is reserved for the single most important action and its focus rings; active and selected states use separate tokens. Encoding that in tokens lets an agent apply it without ambiguity.' },
+  { t: 'Brand color is scarce', b: 'The brand green is reserved for the single most important action and its focus rings; active and selected states use separate tokens. Encoding that in tokens lets an agent apply it without ambiguity.' },
   { t: 'Measured contrast', b: 'The warning color looked legible by eye, yet measured 2.37:1 against WCAG’s 4.5:1 threshold. Warning text now uses a darker token that passes, enforced by an automated review layer.' },
   { t: 'The system doesn’t touch what it doesn’t own', b: 'Components render in unfinished prototypes and legacy apps full of CSS, so the package never styles raw HTML globally. No bare h1, body or button selectors; each component ships its own scoped reset.' },
   { t: 'Tokens are contracts', b: 'Token names map directly to Figma, quirks included. The designer reading the library and the engineer or agent reading the code see the same concepts. Changing a token without agreement breaks something people already built on.' },
@@ -100,7 +100,7 @@ const decisions = [
     <div class="stage" style="aspect-ratio:1296/640">
       <div class="browser" style={`left:${pct(148, 1296)};top:${pct(56, 640)};width:${pct(1000, 1296)}`}>
         <div class="browser__bar" aria-hidden="true"><i></i><i></i><i></i></div>
-        <img src="/assets/f/converge-ds.webp" width="1440" height="810" alt="The Converge design system playground: the color foundations, with brand, neutral, text and selection tokens." fetchpriority="high" />
+        <img src="/assets/f/ds-colors.webp" width="1440" height="810" alt="The design system playground: the color foundations, with brand, neutral, text and selection tokens." fetchpriority="high" />
       </div>
     </div>
   </figure>
@@ -142,7 +142,7 @@ const decisions = [
 
   <figure class="figure wrap" data-depth="full" data-reveal>
     <div class="stage" style="aspect-ratio:1296/680">
-      <img class="flat" src="/assets/f/converge-button.webp" width="1600" height="1412" loading="lazy" alt="Button component in the playground: variants, sizes, icons, states and the bulk-action bar." style={`left:${pct(298, 1296)};top:${pct(48, 680)};width:${pct(700, 1296)}`} />
+      <img class="flat" src="/assets/f/ds-button.webp" width="1600" height="1412" loading="lazy" alt="Button component in the playground: variants, sizes, icons, states and the bulk-action bar." style={`left:${pct(298, 1296)};top:${pct(48, 680)};width:${pct(700, 1296)}`} />
     </div>
   </figure>
 
@@ -174,7 +174,7 @@ const decisions = [
 
   <figure class="figure wrap" data-depth="full" data-reveal>
     <div class="stage" style="aspect-ratio:1296/600">
-      <img class="flat" src="/assets/f/converge-metriccard.webp" width="1600" height="1171" loading="lazy" alt="MetricCard and InformativeCard components with status badges." style={`left:${pct(318, 1296)};top:${pct(44, 600)};width:${pct(660, 1296)}`} />
+      <img class="flat" src="/assets/f/ds-metriccard.webp" width="1600" height="1171" loading="lazy" alt="MetricCard and InformativeCard components with status badges." style={`left:${pct(318, 1296)};top:${pct(44, 600)};width:${pct(660, 1296)}`} />
     </div>
     <figcaption class="t-small">Each status maps to a dedicated token, so an agent applies “On track” or “Watch” deterministically</figcaption>
   </figure>
@@ -210,7 +210,7 @@ const decisions = [
 
   <figure class="figure wrap" data-depth="full" data-reveal>
     <div class="stage" style="aspect-ratio:1296/560">
-      <img class="flat" src="/assets/f/converge-sidebar.webp" width="1600" height="796" loading="lazy" alt="Sidebar component in light expanded and dark collapsed states." style={`left:${pct(248, 1296)};top:${pct(52, 560)};width:${pct(800, 1296)}`} />
+      <img class="flat" src="/assets/f/ds-sidebar.webp" width="1600" height="796" loading="lazy" alt="Sidebar component in light expanded and dark collapsed states." style={`left:${pct(248, 1296)};top:${pct(52, 560)};width:${pct(800, 1296)}`} />
     </div>
   </figure>
 
@@ -265,8 +265,8 @@ const decisions = [
           <p class="t-muted split__body ba-item__note">{p.b}</p>
         </div>
         <BeforeAfter
-          before={{ src: `/assets/f/converge-po-${p.img}-v1.webp`, alt: p.alt[0] }}
-          after={{ src: `/assets/f/converge-po-${p.img}-v3.webp`, alt: p.alt[1] }}
+          before={{ src: `/assets/f/ds-pricing-${p.img}-v1.webp`, alt: p.alt[0] }}
+          after={{ src: `/assets/f/ds-pricing-${p.img}-v3.webp`, alt: p.alt[1] }}
           width={1600}
           height={1138}
           labels={ba.labels}
@@ -285,7 +285,7 @@ const decisions = [
       <ul class="shots">
         {states.map((s) => (
           <li>
-            <img src={`/assets/f/converge-po-${s.img}.webp`} width="1600" height="1138" loading="lazy" decoding="async" alt={s.a} />
+            <img src={`/assets/f/ds-pricing-${s.img}.webp`} width="1600" height="1138" loading="lazy" decoding="async" alt={s.a} />
             <p class="t-small t-muted">{s.c}</p>
           </li>
         ))}
@@ -312,5 +312,5 @@ const decisions = [
     </div>
   </section>
 
-  <NextStory current="/converge-design-system" />
+  <NextStory current="/design-system-ai-agents" />
 </CaseLayout>
