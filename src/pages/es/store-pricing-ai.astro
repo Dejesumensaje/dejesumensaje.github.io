@@ -4,11 +4,17 @@ import CaseHeader from '../../components/f/CaseHeader.astro';
 import NextStory from '../../components/f/NextStory.astro';
 import Device from '../../components/f/Device.astro';
 import Phone from '../../components/f/Phone.astro';
+import Evolution from '../../components/f/Evolution.astro';
 import { getWork } from '../../data/work';
 
 // Story sourced from the project's own records (DECISIONS, usability test plan, UX audit,
 // multi-store plan). The client stays anonymous: no name, logo or brand colors.
-const { featured } = getWork('es');
+const { cases } = getWork('es');
+const card = cases.find((c) => c.href?.endsWith('/store-pricing-ai'))!;
+// Lead capture: this case's own card, laid out at full width.
+const LEAD = { w: 1296, h: 560 };
+const leadBrowser = { ...card.browser!, x: 330, y: 64, width: 1100 };
+const leadPhone = { ...card.phone!, x: 90, y: 29, width: 240, screenH: 489, radius: 41, tilt: true };
 const pct = (v: number, of: number) => `${((v / of) * 100).toFixed(3)}%`;
 
 const facts = [
@@ -21,7 +27,7 @@ const overview = [
   { k: 'Reto', v: 'La sede central envía al director de tienda hasta cien recomendaciones de precio a la vez. Él debe revisar, programar e imprimir cada una en una etiqueta física.' },
   { k: 'Aporte', v: 'Diseño de producto, prototipo funcional con IA para escritorio y lector de mano, y pruebas de usabilidad moderadas con directores de tienda.' },
   { k: 'Restricciones', v: 'Los precios llegan a SAP solo en lotes programados, una tienda no puede imprimir todas las etiquetas de golpe y el cliente es confidencial: las capturas usan una interfaz neutra y datos de muestra.' },
-  { k: 'Resultado', v: 'Arquitectura validada con directores de tienda, envío de lotes integrado en el flujo y 46 decisiones documentadas para la siguiente iteración.' },
+  { k: 'Resultado', v: 'Un diseño que coincide con el modelo mental de los directores, una propuesta que el cliente validó y desde la que arrancó el desarrollo, y 46 decisiones documentadas.' },
 ];
 const numbers = [
   { v: '100', k: 'recomendaciones de la sede central que un director recibe de golpe' },
@@ -32,6 +38,12 @@ const FLOOR = { w: 1296, h: 720 };
 const floorPhones = [
   { src: '/assets/f/store-pricing-phone-home.webp', alt: 'La pantalla de inicio de la app en el teléfono: Store Walk para editar precios ahora y enviarlos después, o Item Maintenance para enviar los cambios al instante.', x: 368, y: 44, width: 270, screenH: 551, radius: 46, island: true, rot: [14, 4, -3] as [number, number, number], depth: 14 },
   { src: '/assets/f/store-pricing-phone-scan.webp', alt: 'Store Walk a la espera de un código de barras, que se escanea con el gatillo lateral del lector de mano.', x: 668, y: 72, width: 250, screenH: 510, radius: 43, island: true, rot: [-14, 4, 3] as [number, number, number], depth: 13 },
+];
+const evolution = [
+  { date: '18 jun', phase: 'Prueba de concepto', title: 'Primera versión', note: 'Una sola columna de precio y una bandeja de lotes aparte. Cada fila abre un panel lateral para editar sus precios.', src: '/assets/f/store-pricing-evo-jun18.webp', alt: 'La primera versión: una columna de precio, un tipo de precio y un enlace para editar en cada fila, con la bandeja de lotes en otra pestaña.' },
+  { date: '22 jun', phase: 'Prueba de concepto', title: 'Tres precios, no uno', note: 'El precio en SAP, la recomendación de la sede central y el precio del director tienen cada uno su columna, así una propuesta no pasa por un precio vigente.', src: '/assets/f/store-pricing-evo-jun22.webp', alt: 'Columnas separadas para el precio actual en SAP, la recomendación de la sede central y el precio del director.' },
+  { date: '1 jul', phase: 'Prueba de concepto', title: 'La versión que probaron los directores', note: 'Los precios se leen como etiquetas de góndola, con la amarilla de oferta. Las propuestas de la sede esperan tras un aviso de revisión, y cada cambio va a un lote programado.', src: '/assets/f/store-pricing-evo-jul01.webp', alt: 'Precios como etiquetas de góndola, un aviso con recomendaciones de la sede por revisar, un botón de lotes y estados como programado, enviando y fallido.' },
+  { date: '27 jul', phase: 'Propuesta validada', title: 'Lo que aprobó el cliente', note: 'El feedback del cliente acotó el alcance: salieron los lotes, la programación y el envío a varias tiendas. Ediciones y propuestas de la sede comparten una lista con tres estados: vigente, por revisar y editado.', src: '/assets/f/store-pricing-evo-jul27.webp', alt: 'La versión validada: una lista con todos los artículos y las recomendaciones de la sede, precios como etiquetas y estados de editado o por revisar, sin lotes.' },
 ];
 ---
 
@@ -52,9 +64,9 @@ const floorPhones = [
   />
 
   <figure class="figure figure--lead wrap" data-reveal>
-    <div class="stage" style={`aspect-ratio:${featured.stage.w}/${featured.stage.h}`}>
+    <div class="stage" style={`aspect-ratio:${LEAD.w}/${LEAD.h}`}>
       <div style="position:absolute;inset:0">
-        <Device box={featured.stage} browser={featured.browser} phone={featured.phone} eager />
+        <Device box={LEAD} browser={leadBrowser} phone={leadPhone} eager />
       </div>
     </div>
   </figure>
@@ -117,8 +129,8 @@ const floorPhones = [
             <p class="t-muted">Antes, el envío estaba en una pantalla aparte de lotes. Un participante recorrió toda la app buscándolo porque insistía en enviar desde el mismo panel del producto. Cambiar de pantalla daba la sensación de haber perdido los cambios, así que movimos el envío al mismo contexto de la edición.</p>
           </div>
           <div>
-            <h3 class="t-h3">Los lotes son el verdadero control</h3>
-            <p class="t-muted">Cada tienda maneja varios lotes programados al mismo tiempo, porque enviar todo junto a SAP saturaría las impresoras de etiquetas. Ahora cada decisión entra directo a un lote: el director elige el precio, asigna el lote y define la fecha.</p>
+            <h3 class="t-h3">Los lotes eran el verdadero control</h3>
+            <p class="t-muted">Cada tienda maneja varios lotes programados al mismo tiempo, porque enviar todo junto a SAP saturaría las impresoras de etiquetas. Cada decisión entraba directo a un lote: el director elegía el precio, asignaba el lote y definía la fecha.</p>
           </div>
         </div>
         <p class="measure" data-depth="full">Los participantes también disfrutaban vaciar la pila de pendientes. Ver la cola en cero significaba «misión cumplida», así que la lista se limpia a la vista conforme avanzan las decisiones.</p>
@@ -131,7 +143,7 @@ const floorPhones = [
       <h2 id="ch-worklist" class="t-h3 split__label">Una lista de trabajo, no un asistente paso a paso</h2>
       <div class="prose measure split__body">
         <p>Revisar las propuestas una por una ayudaba a enfocarse, pero con cien artículos resultaba agotador. Además, ocultaba el contexto que necesita un director para decidir: los productos vecinos, los patrones y los artículos que puede aprobar en bloque.</p>
-        <p>Convertimos la revisión en una lista escaneable. Los productos que exigen atención aparecen primero, los de rutina se aprueban en bloque y cualquier fila abre el panel completo si requiere detalle. Lo que el director resuelve sale de la lista para siempre, incluso después de enviar su lote.</p>
+        <p>Convertimos la revisión en una lista escaneable. Los productos que exigen atención aparecen primero, los de rutina se aprueban en bloque y cualquier fila abre el panel completo si requiere detalle. Lo que el director resuelve sale de la lista para siempre.</p>
       </div>
     </div>
   </section>
@@ -152,6 +164,19 @@ const floorPhones = [
     <figcaption class="t-small">En los pasillos: eliges el modo de trabajo y escaneas</figcaption>
   </figure>
 
+  <section class="chapter chapter--tight wrap" aria-labelledby="ch-evolution" data-reveal>
+    <div class="split">
+      <h2 id="ch-evolution" class="t-h3 split__label">Cómo cambió el prototipo</h2>
+      <div class="prose measure split__body">
+        <p>Cada una es una versión funcional tomada del historial del proyecto, capturada con datos de muestra.</p>
+      </div>
+    </div>
+  </section>
+
+  <figure class="figure wrap" data-reveal>
+    <Evolution id="evo" stops={evolution} label="Versiones del prototipo" width={1600} height={900} />
+  </figure>
+
   <section class="chapter wrap" aria-labelledby="ch-ai" data-depth="full" data-reveal>
     <div class="split">
       <h2 id="ch-ai" class="t-h3 split__label">Cómo construimos el prototipo</h2>
@@ -167,10 +192,10 @@ const floorPhones = [
 
   <section class="chapter chapter--section wrap" aria-labelledby="ch-next" data-reveal>
     <div class="split">
-      <h2 id="ch-next" class="t-h3 split__label">Lo que sigue</h2>
+      <h2 id="ch-next" class="t-h3 split__label">En qué va</h2>
       <div class="split__body" style="display:flex;flex-direction:column;gap:var(--space-10)">
         <div class="prose measure">
-          <p>El próximo paso es el flujo multitienda: que un director tome una decisión de precio en una sucursal y la envíe, en un solo lote, a las demás tiendas a su cargo.</p>
+          <p>El desarrollo arrancó desde la versión del 27 de julio, la propuesta que validó el cliente.</p>
         </div>
       </div>
     </div>

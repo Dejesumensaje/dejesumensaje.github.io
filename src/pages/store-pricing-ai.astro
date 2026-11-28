@@ -4,10 +4,16 @@ import CaseHeader from '../components/f/CaseHeader.astro';
 import NextStory from '../components/f/NextStory.astro';
 import Device from '../components/f/Device.astro';
 import Phone from '../components/f/Phone.astro';
-import { featured } from '../data/work';
+import Evolution from '../components/f/Evolution.astro';
+import { cases } from '../data/work';
 
 // Story sourced from the project's own records (DECISIONS, usability test plan, UX audit,
 // multi-store plan). The client stays anonymous: no name, logo or brand colors.
+const card = cases.find((c) => c.href?.endsWith('/store-pricing-ai'))!;
+// Lead capture: this case's own card, laid out at full width.
+const LEAD = { w: 1296, h: 560 };
+const leadBrowser = { ...card.browser!, x: 330, y: 64, width: 1100 };
+const leadPhone = { ...card.phone!, x: 90, y: 29, width: 240, screenH: 489, radius: 41, tilt: true };
 const pct = (v: number, of: number) => `${((v / of) * 100).toFixed(3)}%`;
 
 const facts = [
@@ -20,7 +26,7 @@ const overview = [
   { k: 'Challenge', v: 'HQ sends a store director up to a hundred price recommendations at a time. Each one has to be decided, scheduled and printed on a shelf tag.' },
   { k: 'Contribution', v: 'Product design, an AI-built working prototype across desktop and handheld, and moderated usability testing with store directors.' },
   { k: 'Constraints', v: 'Prices reach SAP only through scheduled batches, a store can’t print every tag at once, and the client stays anonymous: captures use a neutral skin and sample data.' },
-  { k: 'Outcome', v: 'Validated layout matching directors’ mental model, inline batch sending, and 46 documented decisions guiding the next iteration.' },
+  { k: 'Outcome', v: 'A layout that matches directors’ mental model, a proposal the client validated and development started from, and 46 documented decisions.' },
 ];
 const numbers = [
   { v: '100', k: 'HQ recommendations a director can receive at once' },
@@ -31,6 +37,12 @@ const FLOOR = { w: 1296, h: 720 };
 const floorPhones = [
   { src: '/assets/f/store-pricing-phone-home.webp', alt: 'The phone app home: Store Walk to edit prices now and send later, or Item Maintenance to send changes instantly.', x: 368, y: 44, width: 270, screenH: 551, radius: 46, island: true, rot: [14, 4, -3] as [number, number, number], depth: 14 },
   { src: '/assets/f/store-pricing-phone-scan.webp', alt: 'Store Walk waiting for a barcode, scanned with the handheld’s side trigger.', x: 668, y: 72, width: 250, screenH: 510, radius: 43, island: true, rot: [-14, 4, 3] as [number, number, number], depth: 13 },
+];
+const evolution = [
+  { date: 'Jun 18', phase: 'Proof of concept', title: 'First build', note: 'One price column and a separate batch tray. Every row opens in a drawer to edit its prices.', src: '/assets/f/store-pricing-evo-jun18.webp', alt: 'The first build: one price column, a price type and an Edit prices link on each row, with a separate Batch tray tab.' },
+  { date: 'Jun 22', phase: 'Proof of concept', title: 'Three prices, not one', note: 'The price in SAP, HQ’s recommendation and the director’s own price each get a column, so a proposal can’t pass for a live price.', src: '/assets/f/store-pricing-evo-jun22.webp', alt: 'Separate columns for the current SAP price, the HQ recommendation and the director’s price.' },
+  { date: 'Jul 1', phase: 'Proof of concept', title: 'The version directors tested', note: 'Prices read like shelf tags, with the yellow sale tag. HQ’s proposals wait behind a review banner, and every change goes into a scheduled batch.', src: '/assets/f/store-pricing-evo-jul01.webp', alt: 'Prices shown as shelf tags, a banner with HQ recommendations to review, a Batches button and statuses such as Scheduled, Sending and Failed.' },
+  { date: 'Jul 27', phase: 'Validated proposal', title: 'What the client approved', note: 'Client feedback narrowed the scope: batches, scheduling and multi-store sending came out. Edits and HQ’s proposals share one list with three statuses: live, needs review and edited.', src: '/assets/f/store-pricing-evo-jul27.webp', alt: 'The validated version: one list with All items and HQ recs, shelf-tag prices and Edited or Needs review statuses, without batches.' },
 ];
 ---
 
@@ -51,9 +63,9 @@ const floorPhones = [
   />
 
   <figure class="figure figure--lead wrap" data-reveal>
-    <div class="stage" style={`aspect-ratio:${featured.stage.w}/${featured.stage.h}`}>
+    <div class="stage" style={`aspect-ratio:${LEAD.w}/${LEAD.h}`}>
       <div style="position:absolute;inset:0">
-        <Device box={featured.stage} browser={featured.browser} phone={featured.phone} eager />
+        <Device box={LEAD} browser={leadBrowser} phone={leadPhone} eager />
       </div>
     </div>
   </figure>
@@ -116,8 +128,8 @@ const floorPhones = [
             <p class="t-muted">Sending lived on a separate batch screen. A participant circled the app looking for it, and kept trying to reach it from the item panel. Moving to another screen made the changes feel lost, so sending moved into the same context as the edits.</p>
           </div>
           <div>
-            <h3 class="t-h3">Batches are the real control</h3>
-            <p class="t-muted">A store runs several batches at once, each scheduled on its own, because sending everything to SAP together would overload tag printing. Every decision now lands in a scheduled batch: the director picks the price, then which batch and when.</p>
+            <h3 class="t-h3">Batches were the real control</h3>
+            <p class="t-muted">A store runs several batches at once, each scheduled on its own, because sending everything to SAP together would overload tag printing. Every decision landed in a scheduled batch: the director picked the price, then which batch and when.</p>
           </div>
         </div>
         <p class="measure" data-depth="full">Participants also liked clearing the pile. An empty review queue read as “mission accomplished”, so the queue drains visibly as decisions are made.</p>
@@ -130,7 +142,7 @@ const floorPhones = [
       <h2 id="ch-worklist" class="t-h3 split__label">A worklist, not a wizard</h2>
       <div class="prose measure split__body">
         <p>Reviewing HQ’s proposals one at a time felt focused, but with up to a hundred of them it was exhausting, and it hid the context a director decides with: neighboring items, patterns, what can be accepted together.</p>
-        <p>Review became a scannable list instead. Items that need attention come first, routine ones can be accepted in bulk, and any row opens the full panel when it deserves a closer look. Decided items leave the list for good, even after their batch is sent.</p>
+        <p>Review became a scannable list instead. Items that need attention come first, routine ones can be accepted in bulk, and any row opens the full panel when it deserves a closer look. Decided items leave the list for good.</p>
       </div>
     </div>
   </section>
@@ -151,6 +163,19 @@ const floorPhones = [
     <figcaption class="t-small">On the floor: pick a way of working, then scan</figcaption>
   </figure>
 
+  <section class="chapter chapter--tight wrap" aria-labelledby="ch-evolution" data-reveal>
+    <div class="split">
+      <h2 id="ch-evolution" class="t-h3 split__label">How the prototype changed</h2>
+      <div class="prose measure split__body">
+        <p>Each version is a working build from the project’s history, captured with sample data.</p>
+      </div>
+    </div>
+  </section>
+
+  <figure class="figure wrap" data-reveal>
+    <Evolution id="evo" stops={evolution} label="Prototype versions" width={1600} height={900} />
+  </figure>
+
   <section class="chapter wrap" aria-labelledby="ch-ai" data-depth="full" data-reveal>
     <div class="split">
       <h2 id="ch-ai" class="t-h3 split__label">How the prototype gets made</h2>
@@ -166,10 +191,10 @@ const floorPhones = [
 
   <section class="chapter chapter--section wrap" aria-labelledby="ch-next" data-reveal>
     <div class="split">
-      <h2 id="ch-next" class="t-h3 split__label">What’s next</h2>
+      <h2 id="ch-next" class="t-h3 split__label">Where it stands</h2>
       <div class="split__body" style="display:flex;flex-direction:column;gap:var(--space-10)">
         <div class="prose measure">
-          <p>Next is multi-store work: a director should be able to take a price decision from one store and send it, through a single batch, to the other stores they run.</p>
+          <p>Development started from the Jul 27 version, the proposal the client validated.</p>
         </div>
       </div>
     </div>

@@ -355,10 +355,12 @@ test('performance budgets for shipped JS and CSS', async () => {
 });
 
 test('critical images declare dimensions and non-hero images are lazy', () => {
-  // The home hero and the featured case shot are above the fold by design.
+  // The home hero and each case's lead shot are above the fold by design.
   const eagerByDesign = new Set([
     '/assets/f/portrait.webp',
     '/assets/f/ds-colors.webp',
+    '/assets/f/store-pricing-desktop.webp',
+    '/assets/f/store-pricing-phone.webp',
   ]);
   for (const route of ROUTES) {
     const page = html[route];
