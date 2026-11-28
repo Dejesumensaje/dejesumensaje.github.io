@@ -17,8 +17,8 @@ const facts = [
 const overview = [
   { k: 'Challenge', v: 'We had a solid design system in Figma, but it was bypassed the moment PMs prototyped with AI tools: it lived where those tools couldn’t reach.' },
   { k: 'Contribution', v: 'React implementation of the library, token architecture, a published npm package, a component playground and the governance model for AI tooling.' },
-  { k: 'Constraints', v: 'NDA-bound enterprise context; components must render safely anywhere; rules must be unambiguous enough for an agent to follow.' },
-  { k: 'Outcome', v: 'A published npm package, a Figma Make Kit, and a portable Claude skill with a deterministic design linter. Two PMs actively use the skill; a pricing prototype rebuilt on it went from 1,723 lint errors to none.' },
+  { k: 'Constraints', v: 'NDA-bound enterprise context. Components must render safely anywhere, and rules must be unambiguous enough for an agent to follow.' },
+  { k: 'Outcome', v: 'A published npm package, a Figma Make Kit, and a portable Claude skill with a deterministic design linter. Two PMs actively use the skill, and a pricing prototype rebuilt on it went from 1,723 lint errors to none.' },
 ];
 const skillFiles = [
   { f: 'SKILL.md', d: 'The workflow (design read, build, self-critique) and the rules that are always on: one green primary action per view, base-4 spacing, Open Sans at 400 and 600, one control per intent.' },
@@ -27,7 +27,7 @@ const skillFiles = [
   { f: 'references/anti-slop.md', d: 'Visual and copy guardrails, each with a bad and a good example.' },
   { f: 'references/claude-ai-formats.md', d: 'How to build for React Artifacts, standalone HTML and Claude canvases.' },
   { f: 'kit/', d: 'The system stylesheet and a starter screen for each format.' },
-  { f: 'scripts/design-lint.js', d: 'The deterministic check. Errors for spacing off the scale, colors outside the palette, native selects, table headers off the system style and broken markup; warnings for emoji, buzzwords, fonts and gradients.' },
+  { f: 'scripts/design-lint.js', d: 'The deterministic check. Errors for spacing off the scale, colors outside the palette, native selects, table headers off the system style and broken markup. Warnings for emoji, buzzwords, fonts and gradients.' },
 ];
 const resultNumbers = [
   { v: '1,723 → 0', k: 'design-lint errors, first prototype vs. rebuild' },
@@ -62,17 +62,17 @@ const pairs = [
   },
 ];
 const states = [
-  { img: 'check', a: 'Step 2 list with conflict and warning badges and a Check finished toast.', c: 'The constraint check runs in the background; rows show conflicts and warnings, and a toast opens the details' },
-  { img: 'preview', a: 'Constraints preview drawer filtered to two conflicting rules.', c: 'A read-only preview of every rule, filtered to conflicts; each row says what is wrong' },
+  { img: 'check', a: 'Step 2 list with conflict and warning badges and a Check finished toast.', c: 'The constraint check runs in the background. Rows show conflicts and warnings, and a toast opens the details' },
+  { img: 'preview', a: 'Constraints preview drawer filtered to two conflicting rules.', c: 'A read-only preview of every rule, filtered to conflicts. Each row says what is wrong' },
   { img: 'blocked', a: 'Step 3 with Run disabled and a View in step 2 link.', c: 'Run is disabled with its reason and a link to the conflict' },
   { img: 'failed', a: 'A failed scenario with its conflict and a View in setup link.', c: 'A failed run names the conflicting rule and links to it' },
-  { img: 'warnings', a: 'Scenario results with two soft warnings next to All hard constraints met.', c: 'Warnings never block a run; they stay visible on the result' },
+  { img: 'warnings', a: 'Scenario results with two soft warnings next to All hard constraints met.', c: 'Warnings never block a run. They stay visible on the result' },
   { img: 'upload', a: 'Review upload dialog listing new rules and skipped rows.', c: 'An upload is reviewed before it applies: what is added, what is skipped and why' },
 ];
 const decisions = [
-  { t: 'Brand color is scarce', b: 'The brand green is reserved for the single most important action and its focus rings; active and selected states use separate tokens. Encoding that in tokens lets an agent apply it without ambiguity.' },
+  { t: 'Brand color is scarce', b: 'The brand green is reserved for the single most important action and its focus rings. Active and selected states use separate tokens. Encoding that in tokens lets an agent apply it without ambiguity.' },
   { t: 'Measured contrast', b: 'The warning color looked legible by eye, yet measured 2.37:1 against WCAG’s 4.5:1 threshold. Warning text now uses a darker token that passes, enforced by an automated review layer.' },
-  { t: 'The system doesn’t touch what it doesn’t own', b: 'Components render in unfinished prototypes and legacy apps full of CSS, so the package never styles raw HTML globally. No bare h1, body or button selectors; each component ships its own scoped reset.' },
+  { t: 'The system doesn’t touch what it doesn’t own', b: 'Components render in unfinished prototypes and legacy apps full of CSS, so the package never styles raw HTML globally. No bare h1, body or button selectors. Each component ships its own scoped reset.' },
   { t: 'Tokens are contracts', b: 'Token names map directly to Figma, quirks included. The designer reading the library and the engineer or agent reading the code see the same concepts. Changing a token without agreement breaks something people already built on.' },
 ];
 ---
@@ -123,7 +123,7 @@ const decisions = [
     <div class="split">
       <h2 id="ch-decisions" class="t-h3 split__label">The decisions that hold it together</h2>
       <div class="chapter__stack split__body">
-        <p class="measure" data-depth="full">A package consumed by agents only works if its rules don’t depend on human judgment. A skilled designer can navigate ambiguity; an agent follows its rules literally and fills any gap with a guess. So the rules had to be right before they were exposed.</p>
+        <p class="measure" data-depth="full">A package consumed by agents only works if its rules don’t depend on human judgment. A skilled designer can navigate ambiguity, while an agent follows its rules literally and fills any gap with a guess. So the rules had to be right before they were exposed.</p>
         <div class="grid2">
           {decisions.map((d) => (
             <div><h3 class="t-h3">{d.t}</h3><p class="t-muted">{d.b}</p></div>
@@ -168,7 +168,7 @@ const decisions = [
       <h2 id="ch-claude" class="t-h3 split__label">Moving directly to Claude</h2>
       <div class="prose measure split__body">
         <p>Because none of the PMs adopted Figma Make, we moved the governance directly into Claude. Instead of relying on a Make Kit bridge, teams load a portable prototyping skill that works across claude.ai React Artifacts, standalone HTML and Claude Design canvases.</p>
-        <p>Collaboration stays explicit. PMs and engineers explore behavior in their own copy; when someone insists on breaking a rule, Claude builds what they asked and marks the handoff with “Design review:” naming the rule, so design catches every exception before integrating work into the main prototype.</p>
+        <p>Collaboration stays explicit. PMs and engineers explore behavior in their own copy. When someone insists on breaking a rule, Claude builds what they asked and marks the handoff with “Design review:” naming the rule, so design catches every exception before integrating work into the main prototype.</p>
       </div>
     </div>
   </section>
@@ -194,7 +194,7 @@ const decisions = [
         <div class="prose measure">
           <p>The prototype is a price optimization tool for a grocery retailer: teams build optimization scenarios, set the constraints prices must respect, run them and publish the result.</p>
           <p>A PM built the first prototype without the skill, then rebuilt it with the skill. I polished that second version: I cut the copy and took it through stakeholder rounds with the client. The polished version is the one the Figma hand-off documents.</p>
-          <p>The linter found 1,281 colors outside the palette, 408 spacing values off the base-4 scale and 34 native selects in the first prototype; the rebuild passes with none. Both versions below render the same screen from the same preset, with mock data.</p>
+          <p>The linter found 1,281 colors outside the palette, 408 spacing values off the base-4 scale and 34 native selects in the first prototype. The rebuild passes with none. Both versions below render the same screen from the same preset, with mock data.</p>
         </div>
         <div class="columns3 numbers">
           {resultNumbers.map((n) => (

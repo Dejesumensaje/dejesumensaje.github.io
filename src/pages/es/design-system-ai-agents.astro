@@ -17,8 +17,8 @@ const facts = [
 const overview = [
   { k: 'Reto', v: 'Teníamos un sistema de diseño sólido en Figma, pero quedaba fuera en cuanto los PM prototipaban con IA: vivía en un lugar al que esas herramientas no accedían.' },
   { k: 'Aporte', v: 'Implementación de la librería en React, arquitectura de tokens, paquete publicado en npm, playground de componentes y modelo de gobernanza para herramientas de IA.' },
-  { k: 'Restricciones', v: 'Contexto empresarial con acuerdo de confidencialidad; los componentes deben renderizarse sin conflictos en cualquier entorno; las reglas deben ser lo bastante claras para que un agente las siga al pie de la letra.' },
-  { k: 'Resultado', v: 'Un paquete en npm, un Make Kit y una skill portable para Claude con linter de diseño determinista. Dos PM ya usan la skill de forma activa; un prototipo de pricing reconstruido con ella pasó de 1.723 errores de lint a ninguno.' },
+  { k: 'Restricciones', v: 'Contexto empresarial con acuerdo de confidencialidad. Los componentes deben renderizarse sin conflictos en cualquier entorno y las reglas deben ser lo bastante claras para que un agente las siga al pie de la letra.' },
+  { k: 'Resultado', v: 'Un paquete en npm, un Make Kit y una skill portable para Claude con linter de diseño determinista. Dos PM ya usan la skill de forma activa, y un prototipo de pricing reconstruido con ella pasó de 1723 errores de lint a ninguno.' },
 ];
 const skillFiles = [
   { f: 'SKILL.md', d: 'El flujo de trabajo (lectura de diseño, construcción, autocrítica) y las reglas que siempre están activas: una sola acción principal verde por vista, espaciado en base 4, Open Sans en 400 y 600, un control por intención.' },
@@ -27,10 +27,10 @@ const skillFiles = [
   { f: 'references/anti-slop.md', d: 'Reglas visuales y de microcopy, cada una con un ejemplo malo y uno bueno.' },
   { f: 'references/claude-ai-formats.md', d: 'Cómo construir para React Artifacts, HTML independiente y canvas de Claude.' },
   { f: 'kit/', d: 'La hoja de estilos del sistema y una pantalla inicial para cada formato.' },
-  { f: 'scripts/design-lint.js', d: 'La revisión determinista. Errores por espaciado fuera de la escala, colores fuera de la paleta, selects nativos, encabezados de tabla fuera del estilo del sistema y marcado roto; advertencias por emojis, palabras de moda, fuentes y degradados.' },
+  { f: 'scripts/design-lint.js', d: 'La revisión determinista. Errores por espaciado fuera de la escala, colores fuera de la paleta, selects nativos, encabezados de tabla fuera del estilo del sistema y marcado roto. Advertencias por emojis, palabras de moda, fuentes y degradados.' },
 ];
 const resultNumbers = [
-  { v: '1.723 → 0', k: 'errores de design-lint, primer prototipo frente a reconstrucción' },
+  { v: '1723 → 0', k: 'errores de design-lint, primer prototipo frente a reconstrucción' },
   { v: '59 → 137', k: 'pantallas y estados cubiertos, primer prototipo frente a reconstrucción' },
   { v: '0', k: 'pasos añadidos o quitados del flujo' },
 ];
@@ -50,27 +50,27 @@ const pairs = [
   },
   {
     t: 'Un nombre que ya existe',
-    b: 'El error deja de ser una frase al pie del formulario y aparece en el campo; Next queda deshabilitado con su motivo al lado. Las zonas pasan a ser una lista de casillas con el número de tiendas y un “All zones” de tres estados, el control que la skill indica para selecciones múltiples cortas.',
+    b: 'El error deja de ser una frase al pie del formulario y aparece en el campo, y Next queda deshabilitado con su motivo al lado. Las zonas pasan a ser una lista de casillas con el número de tiendas y un «All zones» de tres estados, el control que la skill indica para selecciones múltiples cortas.',
     img: 'name',
     alt: ['Primer prototipo: botones de zona y una frase de error al pie del formulario.', 'Reconstrucción: el error bajo el campo de nombre, Next deshabilitado con su motivo y las zonas como lista de casillas con número de tiendas.'],
   },
   {
     t: 'Editar una brecha de precio',
-    b: 'Párrafos, tarjetas de opción y una tabla de referencia se reducen a un campo con un control segmentado % | $ y un error “Required”. Los modales quedan para decisiones cortas, como piden las reglas de controles.',
+    b: 'Párrafos, tarjetas de opción y una tabla de referencia se reducen a un campo con un control segmentado % | $ y un error «Required». Los modales quedan para decisiones cortas, como piden las reglas de controles.',
     img: 'dialog',
     alt: ['Primer prototipo: un diálogo con párrafos, tarjetas de tipo de separación, un error y una tabla de referencia.', 'Reconstrucción: un diálogo compacto con un campo, un selector de porcentaje o dólares y un error Required.'],
   },
 ];
 const states = [
-  { img: 'check', a: 'Lista del paso 2 con estados de conflicto y advertencia, y el aviso Check finished.', c: 'La verificación de restricciones corre en segundo plano; las filas muestran conflictos y advertencias, y un aviso abre el detalle' },
-  { img: 'preview', a: 'Panel de vista previa de restricciones filtrado a dos reglas en conflicto.', c: 'Una vista previa de solo lectura de todas las reglas, filtrada a los conflictos; cada fila dice qué está mal' },
+  { img: 'check', a: 'Lista del paso 2 con estados de conflicto y advertencia, y el aviso Check finished.', c: 'La verificación de restricciones corre en segundo plano. Las filas muestran conflictos y advertencias, y un aviso abre el detalle' },
+  { img: 'preview', a: 'Panel de vista previa de restricciones filtrado a dos reglas en conflicto.', c: 'Una vista previa de solo lectura de todas las reglas, filtrada a los conflictos. Cada fila dice qué está mal' },
   { img: 'blocked', a: 'Paso 3 con Run deshabilitado y un enlace al paso 2.', c: 'Run queda deshabilitado con su motivo y un enlace al conflicto' },
   { img: 'failed', a: 'Un escenario fallido con su conflicto y un enlace a la configuración.', c: 'Una ejecución fallida nombra la regla en conflicto y enlaza a ella' },
-  { img: 'warnings', a: 'Resultados de un escenario con dos advertencias junto a All hard constraints met.', c: 'Las advertencias nunca bloquean una ejecución; siguen visibles en el resultado' },
+  { img: 'warnings', a: 'Resultados de un escenario con dos advertencias junto a All hard constraints met.', c: 'Las advertencias nunca bloquean una ejecución. Siguen visibles en el resultado' },
   { img: 'upload', a: 'Diálogo de revisión de carga con reglas nuevas y filas omitidas.', c: 'Una carga se revisa antes de aplicarse: qué se añade, qué se omite y por qué' },
 ];
 const decisions = [
-  { t: 'El color de marca es escaso', b: 'Reservamos el verde de marca para la acción principal y sus anillos de foco; los estados activos y seleccionados usan tokens aparte. Dejar esa regla en tokens permite que un agente la aplique sin dudar.' },
+  { t: 'El color de marca es escaso', b: 'Reservamos el verde de marca para la acción principal y sus anillos de foco. Los estados activos y seleccionados usan tokens aparte. Dejar esa regla en tokens permite que un agente la aplique sin dudar.' },
   { t: 'Contraste medido', b: 'El color de advertencia parecía legible a simple vista, pero midió 2,37:1 frente al 4,5:1 que exige WCAG. Cambiamos el texto a un token más oscuro que cumple el estándar y dejamos la validación en una auditoría automática.' },
   { t: 'El sistema no toca lo que no es suyo', b: 'Los componentes corren dentro de prototipos a medio hacer y aplicaciones heredadas llenas de CSS. Por eso el paquete nunca inyecta estilos globales al HTML crudo: cero selectores sueltos como h1, body o button. Cada componente incluye su propio reset encapsulado.' },
   { t: 'Los tokens son contratos', b: 'Los nombres de los tokens calcan los de Figma, con todo y sus particularidades. Así, quien diseña en Figma y quien programa —o el agente que lee el código— hablan el mismo idioma. Cambiar un token sin acuerdo rompe el trabajo de los demás.' },
@@ -104,7 +104,7 @@ const decisions = [
       <h2 id="ch-problem" class="t-h3 split__label">El problema</h2>
       <div class="prose measure split__body">
         <p>El equipo de diseño ya tenía un sistema maduro en Figma, creado por Grecia Gabriel y Rebecca Bradley.</p>
-        <p>Cuando los product managers empezaron a usar Claude Code y Figma Make para explorar ideas con clientes, cada uno improvisó su propia interfaz. Los demos se alejaron de los patrones visuales y de interacción del sistema, y la librería en Figma quedó como un archivo de referencia que esas herramientas nunca tocaban.</p>
+        <p>Cuando los product managers empezaron a usar Claude Code y Figma Make para explorar ideas con clientes, cada uno improvisó su propia interfaz. Las demos se alejaron de los patrones visuales y de interacción del sistema, y la librería en Figma quedó como un archivo de referencia que esas herramientas nunca tocaban.</p>
       </div>
     </div>
   </section>
@@ -114,7 +114,7 @@ const decisions = [
       <h2 id="ch-why" class="t-h3 split__label">Por qué un buen sistema en Figma no bastaba</h2>
       <div class="prose measure split__body">
         <p>Figma Make integra sistemas de diseño reales en prototipos con IA mediante Make Kits: un paquete de componentes, los tokens y estilos de Figma, y las pautas de uso para que la herramienta use el sistema real en lugar de inventar uno parecido.</p>
-        <p>El cuello de botella es técnico: no puedes armar un Make Kit directo desde Figma. Primero necesitas un paquete de React publicado; solo entonces lo conectas al Make Kit y sumas las guías.</p>
+        <p>El cuello de botella es técnico: no puedes armar un Make Kit directo desde Figma. Primero necesitas un paquete de React publicado. Solo entonces lo conectas al Make Kit y sumas las guías.</p>
       </div>
     </div>
   </section>
@@ -123,7 +123,7 @@ const decisions = [
     <div class="split">
       <h2 id="ch-decisions" class="t-h3 split__label">Las decisiones que lo sostienen</h2>
       <div class="chapter__stack split__body">
-        <p class="measure" data-depth="full">Un paquete para agentes solo funciona si sus reglas eliminan la ambigüedad. Un diseñador con experiencia sabe navegar zonas grises; un agente sigue las reglas al pie de la letra y rellena cualquier vacío adivinando. Por eso tuvimos que afinar cada norma antes de publicarla.</p>
+        <p class="measure" data-depth="full">Un paquete para agentes solo funciona si sus reglas eliminan la ambigüedad. Un diseñador con experiencia sabe navegar zonas grises, mientras que un agente sigue las reglas al pie de la letra y rellena cualquier vacío adivinando. Por eso tuvimos que afinar cada norma antes de publicarla.</p>
         <div class="grid2">
           {decisions.map((d) => (
             <div><h3 class="t-h3">{d.t}</h3><p class="t-muted">{d.b}</p></div>
@@ -168,7 +168,7 @@ const decisions = [
       <h2 id="ch-claude" class="t-h3 split__label">Directo a Claude</h2>
       <div class="prose measure split__body">
         <p>Como ningún PM adoptó Figma Make, sacamos la gobernanza de ahí y la llevamos directo a Claude. En lugar de depender del puente del Make Kit, los equipos cargan una skill portable de prototipado que funciona en React Artifacts de claude.ai, HTML autónomo y lienzos de Claude Design.</p>
-        <p>La colaboración también queda explícita. Producto e ingeniería exploran el comportamiento en su propia copia; si alguien insiste en romper una regla, Claude construye lo pedido y marca la entrega con «Design review:» nombrando la regla, para que diseño detecte cada excepción antes de integrar el cambio al prototipo principal.</p>
+        <p>La colaboración también queda explícita. Producto e ingeniería exploran el comportamiento en su propia copia. Si alguien insiste en romper una regla, Claude construye lo pedido y marca la entrega con «Design review:» y el nombre de la regla, para que diseño detecte cada excepción antes de integrar el cambio al prototipo principal.</p>
       </div>
     </div>
   </section>
@@ -194,7 +194,7 @@ const decisions = [
         <div class="prose measure">
           <p>El prototipo es una herramienta de optimización de precios para una cadena de supermercados: los equipos arman escenarios de optimización, definen las restricciones que deben respetar los precios, los ejecutan y publican el resultado.</p>
           <p>Un PM construyó el primer prototipo sin la skill y luego lo reconstruyó con ella. Yo pulí esa segunda versión: recorté el texto y la llevé por rondas con stakeholders del cliente. La versión pulida es la que documenta el hand-off en Figma.</p>
-          <p>El linter encontró en el primer prototipo 1.281 colores fuera de la paleta, 408 valores de espaciado fuera de la escala de base 4 y 34 selects nativos; la reconstrucción no tiene ninguno. Las dos versiones de abajo muestran la misma pantalla desde el mismo preset, con datos de prueba.</p>
+          <p>El linter encontró en el primer prototipo 1281 colores fuera de la paleta, 408 valores de espaciado fuera de la escala de base 4 y 34 selects nativos. La reconstrucción no tiene ninguno. Las dos versiones de abajo muestran la misma pantalla desde el mismo preset, con datos de prueba.</p>
         </div>
         <div class="columns3 numbers">
           {resultNumbers.map((n) => (
@@ -246,7 +246,7 @@ const decisions = [
       <h2 id="ch-outcome" class="t-h3 split__label">Primeros resultados</h2>
       <div class="prose measure split__body">
         <p>Todavía es una iteración temprana que seguimos probando con el equipo. Dos PM ya usan la skill de Claude de forma activa, frente a ninguna adopción en el Make Kit de Figma Make.</p>
-        <p>Ese contraste definió dos decisiones. Primera: integrarme a la forma de trabajo que los PM ya tienen en lugar de imponer pasos adicionales. Segunda: mostrar valor desde el primer prototipo; el antes y después de arriba refleja mejoras tanto en consistencia visual como en la experiencia de usuario.</p>
+        <p>Ese contraste definió dos decisiones. Primera: integrarme a la forma de trabajo que los PM ya tienen en lugar de imponer pasos adicionales. Segunda: mostrar valor desde el primer prototipo. El antes y después de arriba refleja mejoras tanto en consistencia visual como en la experiencia de usuario.</p>
       </div>
     </div>
   </section>
