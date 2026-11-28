@@ -36,15 +36,19 @@ const cases: CardText[] = [
 
 const sideProjects: SideText[] = [
   {
-    summary: 'La tienda de un taller de joyería que cambia de luz entre cinco paletas de color.',
+    summary: 'El oráculo de Alucine lee tus cartas y te recomienda qué ver cada noche.',
+    alts: ['El oráculo de Alucine: cartas al estilo del tarot que recomiendan una película.'],
+  },
+  {
+    summary: 'La tienda de un taller de joyería que se siente única en cada visita.',
     alts: ['Inicio de Sortícula en su paleta cobalto.', 'Inicio de Sortícula en su paleta cálida.'],
   },
   {
-    summary: 'El sitio de un hostal en Tenza, Boyacá: siete habitaciones y planes por el valle.',
+    summary: 'La página de un hostal que realmente es un hub para conocer el valle de Tenza en Boyacá.',
     browserAlt: 'Hostal Santa Ana en escritorio: un afiche del valle de Tenza y una barra de reservas.',
   },
   {
-    summary: 'Un juego de dados para lanzar con la mano, inspirado en mi papá.',
+    summary: 'El juego con el que mi papá me enseñó a sumar.',
     alts: ['Pantalla de inicio de Pare o siga, con dados y el logo del juego.'],
   },
   {
@@ -54,10 +58,6 @@ const sideProjects: SideText[] = [
   {
     summary: 'Un cruce de calles bajo la lluvia, desde cinco puntos de vista. Toca lo que parezca vivo.',
     browserAlt: 'El cruce en escritorio: un cruce de calles en 3D, de noche y bajo la lluvia.',
-  },
-  {
-    summary: 'El oráculo de Alucine lee tus cartas y te recomienda qué ver esta noche.',
-    alts: ['El oráculo de Alucine: cartas al estilo del tarot que recomiendan una película.'],
   },
 ];
 

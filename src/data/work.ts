@@ -122,8 +122,18 @@ const shot = (src: string, alt: string) => ({ src, alt });
 
 export const sideProjects: SideProject[] = [
   {
+    title: 'El Oráculo',
+    summary: "Alucine's oracle reads your cards and recommends what to watch each night.",
+    href: 'https://alucine.co/oraculo',
+    color: 'var(--project-oraculo)',
+    dark: true,
+    phones: [
+      { ...shot('/assets/f/oraculo.webp', "Alucine's oracle: tarot-style cards that recommend a film."), x: 73, y: -57, width: 270, screenH: 554, radius: 46, rot: [0.5, 51, 0], depth: 13 },
+    ],
+  },
+  {
     title: 'Sortícula',
-    summary: "A jewelry workshop's store that changes its light across five color palettes.",
+    summary: "A jewelry workshop's store that feels one of a kind on every visit.",
     href: 'https://sorticula.com/',
     color: 'var(--project-sorticula)',
     dark: true,
@@ -134,7 +144,7 @@ export const sideProjects: SideProject[] = [
   },
   {
     title: 'Hostal Santa Ana',
-    summary: 'A hostel site for Tenza, Boyacá: seven rooms and what to do around the valley.',
+    summary: 'A hostel site that is really a hub for exploring the Tenza valley in Boyacá.',
     href: 'https://tenzasantaana.netlify.app/',
     color: 'var(--project-hostal)',
     dark: false,
@@ -147,7 +157,7 @@ export const sideProjects: SideProject[] = [
   },
   {
     title: 'Pare o siga',
-    summary: 'A dice game you throw with your hand, inspired by my dad.',
+    summary: 'The game my dad used to teach me how to add.',
     href: 'https://catedra.dejesumensaje.com/demos/pare-o-siga/',
     color: 'var(--project-pare)',
     dark: true,
@@ -180,16 +190,6 @@ export const sideProjects: SideProject[] = [
       alt: 'El cruce on desktop: a 3D city intersection at night in the rain.',
       w: 1200, h: 750, x: 21, y: 27, width: 432, rot: [-33, 33, 7.5],
     },
-  },
-  {
-    title: 'El Oráculo',
-    summary: "Alucine's oracle reads your cards and recommends what to watch tonight.",
-    href: 'https://alucine.co/oraculo',
-    color: 'var(--project-oraculo)',
-    dark: true,
-    phones: [
-      { ...shot('/assets/f/oraculo.webp', "Alucine's oracle: tarot-style cards that recommend a film."), x: 73, y: -57, width: 270, screenH: 554, radius: 46, rot: [0.5, 51, 0], depth: 13 },
-    ],
   },
 ];
 
