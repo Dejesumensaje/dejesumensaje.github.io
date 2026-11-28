@@ -18,7 +18,7 @@ const overview = [
   { k: 'Challenge', v: 'We had a solid design system in Figma, but it was bypassed the moment PMs prototyped with AI tools: it lived where those tools couldn’t reach.' },
   { k: 'Contribution', v: 'React implementation of the library, token architecture, a published npm package, a component playground and the governance model for AI tooling.' },
   { k: 'Constraints', v: 'NDA-bound enterprise context; components must render safely anywhere; rules must be unambiguous enough for an agent to follow.' },
-  { k: 'Outcome', v: 'A published npm package and Figma Make Kit in use on the pricing line, plus a portable Claude skill with a deterministic design linter. A pricing prototype rebuilt on the skill went from 1,723 lint errors to none.' },
+  { k: 'Outcome', v: 'A published npm package, a Figma Make Kit, and a portable Claude skill with a deterministic design linter. Two PMs actively use the skill; a pricing prototype rebuilt on it went from 1,723 lint errors to none.' },
 ];
 const skillFiles = [
   { f: 'SKILL.md', d: 'The workflow (design read, build, self-critique) and the rules that are always on: one green primary action per view, base-4 spacing, Open Sans at 400 and 600, one control per intent.' },
@@ -104,8 +104,7 @@ const decisions = [
       <h2 id="ch-problem" class="t-h3 split__label">The problem</h2>
       <div class="prose measure split__body">
         <p>The design team already had a mature system in Figma, built by Grecia Gabriel and Rebecca Bradley.</p>
-        <p>The problem appeared when product managers started using Claude Code and Figma Make to explore ideas with clients. The system dropped out of the conversation because it lived where those tools could not reach.</p>
-        <p>Exploration got much faster. Consistency dropped just as quickly. Demos no longer shared the system’s visual language, interaction patterns or UX principles. Each PM improvised their own interface, and the design system became a reference file AI never touched.</p>
+        <p>When product managers started using Claude Code and Figma Make to explore ideas with clients, each PM improvised their own interface. Demos drifted away from the system’s visual and interaction patterns, and the Figma library became a reference file those tools never touched.</p>
       </div>
     </div>
   </section>
@@ -113,25 +112,9 @@ const decisions = [
   <section class="chapter chapter--tight wrap" aria-labelledby="ch-why" data-depth="full" data-reveal>
     <div class="split">
       <h2 id="ch-why" class="t-h3 split__label">Why a strong system wasn’t enough</h2>
-      <div class="chapter__stack split__body">
-        <div class="prose measure">
-          <p>Figma Make can bring a real design system into AI-generated prototypes through Make Kits: a component package, the tokens and styles from a Figma library, and usage guidelines, so generated screens use the real system instead of an approximation.</p>
-          <p>The catch: a Make Kit can’t be built from a Figma file. It needs a published React package first. Only then can it become part of a Make Kit, and only then can guidelines be layered on top.</p>
-        </div>
-        <p class="t-h2 pull">The system was strong in Figma, but nothing AI used could consume it. It needed to become code.</p>
-      </div>
-    </div>
-  </section>
-
-
-  <section class="chapter wrap" aria-labelledby="ch-contribution" data-depth="full" data-reveal>
-    <div class="split">
-      <h2 id="ch-contribution" class="t-h3 split__label">My contribution</h2>
-      <div class="chapter__stack split__body">
-        <div class="prose measure">
-          <p>I took the Figma system and translated it into a working code package so Make Kits and coding agents could use it directly. That covered the React component library, token architecture, an npm release, and a playground to validate each component before opening it to other teams.</p>
-        </div>
-        <p class="t-h2 pull">Building the code was the vehicle. Governing it was the real challenge.</p>
+      <div class="prose measure split__body">
+        <p>Figma Make can bring a real design system into AI-generated prototypes through Make Kits: a component package, the tokens and styles from a Figma library, and usage guidelines, so generated screens use the real system instead of an approximation.</p>
+        <p>The catch: a Make Kit can’t be built from a Figma file. It needs a published React package first. Only then can it become part of a Make Kit, and only then can guidelines be layered on top.</p>
       </div>
     </div>
   </section>
@@ -155,16 +138,6 @@ const decisions = [
     <figcaption class="t-small">One rule in three places: the Figma variable, the token in the package, and the linter error when a prototype breaks it</figcaption>
   </figure>
 
-  <section class="chapter wrap" aria-labelledby="ch-org" data-depth="full" data-reveal>
-    <div class="split">
-      <h2 id="ch-org" class="t-h3 split__label">Governing exploration</h2>
-      <div class="prose measure split__body">
-        <p>PMs needed to explore ideas with clients using AI without turning those explorations into inconsistent experiences that are hard to maintain.</p>
-        <p>We gave exploration structure: a controlled environment, real production components in a playground, clear principles, and a review cycle where explored concepts return to design before reaching production.</p>
-      </div>
-    </div>
-  </section>
-
   <section class="chapter chapter--tight wrap" aria-labelledby="ch-entry" data-depth="full" data-reveal>
     <div class="split">
       <h2 id="ch-entry" class="t-h3 split__label">One system, two entry points</h2>
@@ -172,7 +145,7 @@ const decisions = [
         <div class="grid2">
           <div>
             <h3 class="t-h3">Figma Make</h3>
-            <p class="t-muted">The Make Kit connects our published npm package, Figma tokens and usage rules directly inside Figma Make. PMs prototype with the same components engineers ship.</p>
+            <p class="t-muted">The Make Kit puts the published React components inside Figma Make, so prototypes can use the same pieces engineers ship.</p>
           </div>
           <div>
             <h3 class="t-h3">Claude Code</h3>
@@ -194,8 +167,7 @@ const decisions = [
     <div class="split">
       <h2 id="ch-claude" class="t-h3 split__label">Moving directly to Claude</h2>
       <div class="prose measure split__body">
-        <p>Next, we are taking the governance out of Figma Make and bringing it directly into Claude. Instead of relying on a Make Kit bridge, teams load a portable prototyping skill that works across claude.ai React Artifacts, standalone HTML and Claude Design canvases.</p>
-        <p>The skill packages progressive references for tokens and components alongside visual and copy anti-slop guardrails: one primary green CTA per view, realistic domain data, no decorative emojis or unrequested KPI rows, and sentence-case microcopy that states each fact once. A zero-dependency Node linter (design-lint.js) checks every prototype against the base-4 spacing scale, the published palette, native select controls, off-brand fonts and placeholder copy.</p>
+        <p>Because none of the PMs adopted Figma Make, we moved the governance directly into Claude. Instead of relying on a Make Kit bridge, teams load a portable prototyping skill that works across claude.ai React Artifacts, standalone HTML and Claude Design canvases.</p>
         <p>Collaboration stays explicit. PMs and engineers explore behavior in their own copy; when someone insists on breaking a rule, Claude builds what they asked and marks the handoff with “Design review:” naming the rule, so design catches every exception before integrating work into the main prototype.</p>
       </div>
     </div>
@@ -273,17 +245,8 @@ const decisions = [
     <div class="split">
       <h2 id="ch-outcome" class="t-h3 split__label">Early outcomes</h2>
       <div class="prose measure split__body">
-        <p>The pricing line already works with the npm package, the Make Kit, shared Claude Code rules and team knowledge-transfer sessions. Now those rules live in the portable Claude prototyping skill and its design linter, checking prototypes before they reach design review.</p>
-        <p>With those guardrails in place, PMs iterate on explorations close to production quality, and my time goes where it should: cognitive load, efficiency and information architecture.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="chapter chapter--section wrap" aria-labelledby="ch-reflection" data-reveal>
-    <div class="split">
-      <h2 id="ch-reflection" class="t-h3 split__label">Reflection</h2>
-      <div class="split__body" style="display:flex;flex-direction:column;gap:var(--space-10)">
-        <p class="t-h2 pull">Once anyone can generate a screen in seconds, the work moves from drawing screens to encoding the rules that keep them coherent.</p>
+        <p>This is still an early iteration, and we are testing it with the team. Two PMs already use the Claude skill actively, compared to zero adoption on the Figma Make Kit.</p>
+        <p>That contrast shaped two decisions. First, fit into the tools and workflow PMs already use instead of adding extra steps. Second, show value from the first prototype: the before-and-after above shows gains in both visual consistency and the user experience itself.</p>
       </div>
     </div>
   </section>
