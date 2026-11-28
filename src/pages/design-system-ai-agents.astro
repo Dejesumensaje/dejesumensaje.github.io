@@ -3,6 +3,8 @@ import CaseLayout from '../layouts/CaseLayout.astro';
 import CaseHeader from '../components/f/CaseHeader.astro';
 import NextStory from '../components/f/NextStory.astro';
 import BeforeAfter from '../components/f/BeforeAfter.astro';
+import DsSpecimen from '../components/f/DsSpecimen.astro';
+import DsRuleTrio from '../components/f/DsRuleTrio.astro';
 
 const pct = (v: number, of: number) => `${((v / of) * 100).toFixed(3)}%`;
 
@@ -67,11 +69,6 @@ const states = [
   { img: 'warnings', a: 'Scenario results with two soft warnings next to All hard constraints met.', c: 'Warnings never block a run; they stay visible on the result' },
   { img: 'upload', a: 'Review upload dialog listing new rules and skipped rows.', c: 'An upload is reviewed before it applies: what is added, what is skipped and why' },
 ];
-const numbers = [
-  { v: '2', k: 'AI entry points, one governance model' },
-  { v: '3', k: 'independent auditors on every component' },
-  { v: '2.37:1', k: 'the warning contrast we caught; WCAG asks for 4.5:1' },
-];
 const decisions = [
   { t: 'Brand color is scarce', b: 'The brand green is reserved for the single most important action and its focus rings; active and selected states use separate tokens. Encoding that in tokens lets an agent apply it without ambiguity.' },
   { t: 'Measured contrast', b: 'The warning color looked legible by eye, yet measured 2.37:1 against WCAG’s 4.5:1 threshold. Warning text now uses a darker token that passes, enforced by an automated review layer.' },
@@ -97,24 +94,10 @@ const decisions = [
   />
 
   <figure class="figure figure--lead wrap" data-reveal>
-    <div class="stage" style="aspect-ratio:1296/640">
-      <div class="browser" style={`left:${pct(148, 1296)};top:${pct(56, 640)};width:${pct(1000, 1296)}`}>
-        <div class="browser__bar" aria-hidden="true"><i></i><i></i><i></i></div>
-        <img src="/assets/f/ds-colors.webp" width="1440" height="810" alt="The design system playground: the color foundations, with brand, neutral, text and selection tokens." fetchpriority="high" />
-      </div>
-    </div>
+    <DsSpecimen label="Specimen of the design system: stepper, buttons, a name field with its error, a percent or dollar threshold, a zone checklist with store counts, status badges, the bulk-action bar and a toast." />
+    <figcaption class="t-small">The system’s components, rebuilt here in HTML with its tokens</figcaption>
   </figure>
 
-  <section class="chapter chapter--section wrap" aria-labelledby="ch-numbers" data-reveal>
-    <div class="split">
-      <h2 id="ch-numbers" class="t-h3 split__label">In numbers</h2>
-      <div class="columns3 numbers split__body">
-        {numbers.map((n) => (
-          <div><p class="t-display">{n.v}</p><p class="t-muted">{n.k}</p></div>
-        ))}
-      </div>
-    </div>
-  </section>
 
   <section class="chapter wrap" aria-labelledby="ch-problem" data-depth="full" data-reveal>
     <div class="split">
@@ -140,11 +123,6 @@ const decisions = [
     </div>
   </section>
 
-  <figure class="figure wrap" data-depth="full" data-reveal>
-    <div class="stage" style="aspect-ratio:1296/680">
-      <img class="flat" src="/assets/f/ds-button.webp" width="1600" height="1412" loading="lazy" alt="Button component in the playground: variants, sizes, icons, states and the bulk-action bar." style={`left:${pct(298, 1296)};top:${pct(48, 680)};width:${pct(700, 1296)}`} />
-    </div>
-  </figure>
 
   <section class="chapter wrap" aria-labelledby="ch-contribution" data-depth="full" data-reveal>
     <div class="split">
@@ -172,11 +150,9 @@ const decisions = [
     </div>
   </section>
 
-  <figure class="figure wrap" data-depth="full" data-reveal>
-    <div class="stage" style="aspect-ratio:1296/600">
-      <img class="flat" src="/assets/f/ds-metriccard.webp" width="1600" height="1171" loading="lazy" alt="MetricCard and InformativeCard components with status badges." style={`left:${pct(318, 1296)};top:${pct(44, 600)};width:${pct(660, 1296)}`} />
-    </div>
-    <figcaption class="t-small">Each status maps to a dedicated token, so an agent applies “On track” or “Watch” deterministically</figcaption>
+  <figure class="figure wrap" data-reveal>
+    <DsRuleTrio labels={{ figma: 'The Figma variables', code: 'The same tokens in the npm package', lint: 'The linter output for the first prototype and the rebuild' }} />
+    <figcaption class="t-small">One rule in three places: the Figma variable, the token in the package, and the linter error when a prototype breaks it</figcaption>
   </figure>
 
   <section class="chapter wrap" aria-labelledby="ch-org" data-depth="full" data-reveal>

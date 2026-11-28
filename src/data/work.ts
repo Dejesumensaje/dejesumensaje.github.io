@@ -44,37 +44,37 @@ export interface CaseCard {
 }
 
 export const featured: CaseCard = {
-  title: 'Prototyping store pricing with AI',
-  summary:
-    'Working prototypes, built with AI, to test experience directions in days instead of weeks: desktop for the office, mobile for the store floor.',
-  meta: 'Deloitte · US grocery retail · In progress',
-  href: '/store-pricing-ai',
+  title: 'A design system for humans and AI agents',
+  summary: 'From a Figma library that AI demos were bypassing to a code package and governance agents can follow.',
+  meta: 'Deloitte · Design systems · 2024–now',
+  href: '/design-system-ai-agents',
   span: 12,
   stage: { w: 1296, h: 560 },
   browser: {
-    src: '/assets/f/store-pricing-desktop.webp',
-    alt: 'Store pricing prototype on desktop: a table of items with base and retail prices, promotions, HQ recommendations and status.',
-    w: 1440, h: 810, x: 330, y: 64, width: 1100,
-  },
-  phone: {
-    src: '/assets/f/store-pricing-phone.webp',
-    alt: 'The same prototype on a phone, editing the price of a single item on the store floor.',
-    x: 90, y: 29, width: 240, screenH: 489, radius: 41, island: true, rot: [3, 0, 0], tilt: true,
+    src: '/assets/f/ds-colors.webp',
+    alt: 'Design system documentation: the color page with brand, neutral and text swatches.',
+    w: 1440, h: 810, x: 148, y: 64, width: 1000,
   },
 };
 
 export const cases: CaseCard[] = [
   {
-    title: 'A design system for humans and AI agents',
-    summary: 'From a Figma library that AI demos were bypassing to a code package and governance agents can follow.',
-    meta: 'Deloitte · Design systems · 2024–now',
-    href: '/design-system-ai-agents',
+    title: 'Prototyping store pricing with AI',
+    summary:
+      'Working prototypes, built with AI, to test experience directions in days instead of weeks: desktop for the office, mobile for the store floor.',
+    meta: 'Deloitte · US grocery retail · In progress',
+    href: '/store-pricing-ai',
     span: 7,
     stage: { w: 746, h: 480 },
     browser: {
-      src: '/assets/f/ds-colors.webp',
-      alt: 'Design system documentation: the color page with brand, neutral and text swatches.',
-      w: 1440, h: 810, x: 48, y: 43, width: 650,
+      src: '/assets/f/store-pricing-desktop.webp',
+      alt: 'Store pricing prototype on desktop: a table of items with base and retail prices, promotions, HQ recommendations and status.',
+      w: 1440, h: 810, x: 190, y: 48, width: 620,
+    },
+    phone: {
+      src: '/assets/f/store-pricing-phone.webp',
+      alt: 'The same prototype on a phone, editing the price of a single item on the store floor.',
+      x: 48, y: 40, width: 172, screenH: 350, radius: 30, island: true, rot: [3, 0, 0],
     },
   },
   {

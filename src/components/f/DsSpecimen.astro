@@ -1,0 +1,235 @@
+---
+// A specimen board of the design system, built in HTML with the system's own
+// tokens (light mode, Open Sans 400/600, base-4 spacing). Non-interactive:
+// the controls are spans, and the board is announced as one image.
+interface Props { label: string }
+const { label } = Astro.props;
+---
+
+<div class="dss" role="img" aria-label={label}>
+  <div class="dss__grid" aria-hidden="true">
+    <div class="dss__card dss__steps">
+      <span class="dss-step is-done"><i>✓</i>Name, category, zones</span>
+      <span class="dss-step__rule"></span>
+      <span class="dss-step is-on"><i>2</i>Objectives and constraints</span>
+      <span class="dss-step__rule is-dim"></span>
+      <span class="dss-step"><i>3</i>Optimization settings</span>
+    </div>
+
+    <div class="dss__card dss__kit">
+      <div class="dss__buttons">
+        <span class="dss-btn dss-btn--primary">Next</span>
+        <span class="dss-btn">Save as draft</span>
+        <span class="dss-btn dss-btn--ghost">Preview</span>
+        <span class="dss-btn dss-btn--disabled">Run</span>
+      </div>
+      <div class="dss__badges">
+        <span class="dss-badge dss-badge--success">Gross profit · default</span>
+        <span class="dss-badge">Global default</span>
+        <span class="dss-badge">Not set</span>
+        <span class="dss-badge dss-badge--warning">Warning</span>
+        <span class="dss-badge dss-badge--error">Conflict</span>
+      </div>
+    </div>
+
+    <div class="dss__card dss__zones">
+      <span class="dss-check"><span class="dss-box is-mixed"></span><b>All zones</b><span class="dss-count">212 stores</span></span>
+      <span class="dss-check"><span class="dss-box is-on"></span>zone_1<span class="dss-count">88</span></span>
+      <span class="dss-check"><span class="dss-box is-on"></span>zone_2<span class="dss-count">64</span></span>
+      <span class="dss-check"><span class="dss-box"></span>zone_3<span class="dss-count">60</span></span>
+    </div>
+
+    <div class="dss__card dss__form">
+      <span class="dss-field">
+        <span class="dss-label">Scenario name</span>
+        <span class="dss-input is-error">Spring bread reset</span>
+        <span class="dss-error">This name is already in use</span>
+      </span>
+      <span class="dss-field">
+        <span class="dss-label">Gap threshold</span>
+        <span class="dss-row">
+          <span class="dss-seg"><span class="is-on">%</span><span>$</span></span>
+          <span class="dss-input is-empty">Enter a value</span>
+        </span>
+        <span class="dss-error">Required</span>
+      </span>
+    </div>
+
+    <div class="dss__float">
+      <span class="dss-bar">3 items selected<span class="dss-btn dss-btn--dark">Download</span><span class="dss-btn dss-btn--primary">Delete</span><span class="dss-bar__x">✕</span></span>
+      <span class="dss-toast"><span class="dss-dot"></span>Check finished: 2 conflicts<b>View</b></span>
+    </div>
+  </div>
+</div>
+
+<style>
+  @font-face {
+    font-family: 'Open Sans';
+    src: url('/fonts/open-sans-400-600.woff2') format('woff2');
+    font-weight: 400 600;
+    font-display: swap;
+  }
+
+  /* Tokens copied from the system's foundations (light mode). */
+  .dss {
+    --ds-bg: #f8f8f8;
+    --ds-surface: #ffffff;
+    --ds-fg: #212121;
+    --ds-fg2: #595959;
+    --ds-fg3: #767676;
+    --ds-ctl: #9e9e9e;
+    --ds-gray1: #f5f5f5;
+    --ds-border: #ebebeb;
+    --ds-primary: #26890d;
+    --ds-success: #207f19;
+    --ds-success-bg: #e6f5eb;
+    --ds-warning: #9f6514;
+    --ds-warning-bg: #fef6ea;
+    --ds-error: #da291c;
+    --ds-error-bg: #fdf5f4;
+    --ds-dark: #282728;
+    --ds-elev-lg: 0 10px 15px -3px #0000001a, 0 4px 6px -2px #0000000d;
+
+    background: var(--ds-bg);
+    border-radius: var(--radius-sm);
+    padding: clamp(var(--space-4), 4vw, var(--space-13));
+    font-family: 'Open Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--ds-fg);
+    font-variant-numeric: tabular-nums;
+    filter: brightness(var(--shot-dim));
+  }
+  .dss b { font-weight: 600; }
+
+  .dss__grid {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: var(--space-4);
+    max-width: 1040px;
+    margin-inline: auto;
+  }
+  .dss__grid > * { min-width: 0; }
+  .dss__card {
+    background: var(--ds-surface);
+    border: 1px solid var(--ds-border);
+    border-radius: 16px;
+    padding: var(--space-6);
+  }
+  .dss__steps { grid-column: 1 / -1; display: flex; align-items: center; gap: var(--space-3); flex-wrap: wrap; }
+  .dss__kit { grid-column: span 7; display: flex; flex-direction: column; justify-content: center; gap: var(--space-6); }
+  .dss__buttons, .dss__badges { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+  .dss__zones { grid-column: span 5; display: flex; flex-direction: column; gap: var(--space-1); }
+  .dss__form { grid-column: span 7; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-4); align-content: center; }
+  .dss__float { grid-column: span 5; display: flex; flex-direction: column; gap: var(--space-4); justify-content: center; align-items: flex-start; }
+
+  @media (max-width: 1199px) {
+    .dss__form { grid-column: 1 / -1; }
+    .dss__float { grid-column: 1 / -1; flex-direction: row; flex-wrap: wrap; justify-content: space-between; align-items: center; }
+  }
+  @media (max-width: 899px) {
+    .dss__kit, .dss__form, .dss__zones, .dss__float { grid-column: 1 / -1; }
+  }
+  @media (max-width: 559px) {
+    .dss__form { grid-template-columns: 1fr; }
+    .dss__card { padding: var(--space-4); }
+    .dss-step__rule { display: none; }
+  }
+
+  /* Stepper */
+  .dss-step { display: inline-flex; align-items: center; gap: var(--space-2); color: var(--ds-fg2); white-space: nowrap; }
+  .dss-step i {
+    font-style: normal; font-size: 12px; font-weight: 600;
+    width: 24px; height: 24px; border-radius: 50%;
+    display: grid; place-items: center;
+    box-shadow: inset 0 0 0 1.5px var(--ds-ctl);
+  }
+  .dss-step.is-done { color: var(--ds-fg); font-weight: 600; }
+  .dss-step.is-done i { background: var(--ds-fg); color: #fff; box-shadow: none; }
+  .dss-step.is-on { color: var(--ds-fg); font-weight: 600; }
+  .dss-step.is-on i { box-shadow: inset 0 0 0 1.5px var(--ds-fg); }
+  .dss-step__rule { flex: 1 1 24px; min-width: 24px; height: 2px; background: var(--ds-fg); }
+  .dss-step__rule.is-dim { background: var(--ds-border); }
+
+  /* Buttons */
+  .dss-btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    font-weight: 600; white-space: nowrap;
+    border-radius: 100px;
+    padding: var(--space-2) var(--space-4);
+    min-height: 40px;
+    background: var(--ds-surface);
+    box-shadow: inset 0 0 0 1px var(--ds-ctl);
+  }
+  .dss-btn--primary { background: var(--ds-primary); color: #fff; box-shadow: none; }
+  .dss-btn--ghost { box-shadow: none; }
+  .dss-btn--disabled { background: var(--ds-gray1); color: var(--ds-ctl); box-shadow: none; }
+  .dss-btn--dark { background: #3d3c3d; color: #fff; box-shadow: none; }
+
+  /* Fields */
+  .dss-field { display: flex; flex-direction: column; gap: var(--space-1); }
+  .dss-label { font-size: 12px; font-weight: 600; }
+  .dss-row { display: flex; gap: var(--space-2); align-items: center; }
+  .dss-row .dss-input { flex: 1; min-width: 0; }
+  .dss-input {
+    display: block;
+    border-radius: 8px;
+    padding: var(--space-2) var(--space-3);
+    box-shadow: inset 0 0 0 1px var(--ds-ctl);
+    background: var(--ds-surface);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .dss-input.is-error { box-shadow: inset 0 0 0 1px var(--ds-error); }
+  .dss-input.is-empty { color: var(--ds-fg3); box-shadow: inset 0 0 0 1px var(--ds-error); }
+  .dss-error { font-size: 12px; color: var(--ds-error); }
+  .dss-seg { display: inline-flex; background: var(--ds-gray1); border-radius: 100px; padding: var(--space-1); flex: none; }
+  .dss-seg span { padding: var(--space-1) var(--space-3); border-radius: 100px; font-weight: 600; color: var(--ds-fg2); }
+  .dss-seg .is-on { background: #000; color: #fff; }
+
+  /* Checkbox list */
+  .dss-check { display: flex; align-items: center; gap: var(--space-3); padding-block: var(--space-1); }
+  .dss-count { margin-left: auto; font-size: 12px; color: var(--ds-fg2); }
+  .dss-box {
+    width: 16px; height: 16px; border-radius: 4px; flex: none;
+    box-shadow: inset 0 0 0 1.5px var(--ds-ctl);
+    display: grid; place-items: center;
+  }
+  .dss-box.is-on, .dss-box.is-mixed { background: #000; box-shadow: none; }
+  .dss-box.is-on::after {
+    content: ''; width: 8px; height: 4px;
+    border: 2px solid #fff; border-top: 0; border-right: 0;
+    transform: translateY(-1px) rotate(-45deg);
+  }
+  .dss-box.is-mixed::after { content: ''; width: 8px; height: 2px; background: #fff; }
+
+  /* Badges */
+  .dss-badge { font-size: 12px; font-weight: 600; padding: var(--space-1) var(--space-3); border-radius: 100px; background: var(--ds-gray1); color: var(--ds-fg2); white-space: nowrap; }
+  .dss-badge--success { background: var(--ds-success-bg); color: var(--ds-success); }
+  .dss-badge--warning { background: var(--ds-warning-bg); color: var(--ds-warning); }
+  .dss-badge--error { background: var(--ds-error-bg); color: var(--ds-error); }
+
+  /* Floating: bulk bar and toast */
+  .dss-bar {
+    display: inline-flex; align-items: center; gap: var(--space-2);
+    background: var(--ds-dark); color: #fff;
+    border-radius: 100px;
+    padding: var(--space-2) var(--space-2) var(--space-2) var(--space-6);
+    box-shadow: var(--ds-elev-lg);
+    white-space: nowrap;
+  }
+  .dss-bar .dss-btn { min-height: 32px; padding: var(--space-1) var(--space-3); }
+  .dss-bar > .dss-btn:first-child { margin-left: var(--space-2); }
+  .dss-bar__x { padding-inline: var(--space-2); opacity: 0.7; }
+  .dss-toast {
+    display: inline-flex; align-items: center; gap: var(--space-3);
+    background: var(--ds-surface);
+    border-radius: 8px;
+    padding: var(--space-3) var(--space-4);
+    box-shadow: var(--ds-elev-lg);
+  }
+  .dss-toast b { color: var(--ds-primary); margin-left: var(--space-2); }
+  .dss-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ds-success); flex: none; }
+  @media (max-width: 559px) {
+    .dss-bar { padding-left: var(--space-4); }
+  }
+</style>

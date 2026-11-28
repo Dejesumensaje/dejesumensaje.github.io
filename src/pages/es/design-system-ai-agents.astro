@@ -3,6 +3,8 @@ import CaseLayout from '../../layouts/CaseLayout.astro';
 import CaseHeader from '../../components/f/CaseHeader.astro';
 import NextStory from '../../components/f/NextStory.astro';
 import BeforeAfter from '../../components/f/BeforeAfter.astro';
+import DsSpecimen from '../../components/f/DsSpecimen.astro';
+import DsRuleTrio from '../../components/f/DsRuleTrio.astro';
 
 const pct = (v: number, of: number) => `${((v / of) * 100).toFixed(3)}%`;
 
@@ -67,11 +69,6 @@ const states = [
   { img: 'warnings', a: 'Resultados de un escenario con dos advertencias junto a All hard constraints met.', c: 'Las advertencias nunca bloquean una ejecución; siguen visibles en el resultado' },
   { img: 'upload', a: 'Diálogo de revisión de carga con reglas nuevas y filas omitidas.', c: 'Una carga se revisa antes de aplicarse: qué se añade, qué se omite y por qué' },
 ];
-const numbers = [
-  { v: '2', k: 'puntos de entrada para la IA, un solo modelo de gobernanza' },
-  { v: '3', k: 'auditores independientes por componente' },
-  { v: '2,37:1', k: 'el contraste de advertencia que detectamos; WCAG exige 4,5:1' },
-];
 const decisions = [
   { t: 'El color de marca es escaso', b: 'Reservamos el verde de marca para la acción principal y sus anillos de foco; los estados activos y seleccionados usan tokens aparte. Dejar esa regla en tokens permite que un agente la aplique sin dudar.' },
   { t: 'Contraste medido', b: 'El color de advertencia parecía legible a simple vista, pero midió 2,37:1 frente al 4,5:1 que exige WCAG. Cambiamos el texto a un token más oscuro que cumple el estándar y dejamos la validación en una auditoría automática.' },
@@ -97,24 +94,10 @@ const decisions = [
   />
 
   <figure class="figure figure--lead wrap" data-reveal>
-    <div class="stage" style="aspect-ratio:1296/640">
-      <div class="browser" style={`left:${pct(148, 1296)};top:${pct(56, 640)};width:${pct(1000, 1296)}`}>
-        <div class="browser__bar" aria-hidden="true"><i></i><i></i><i></i></div>
-        <img src="/assets/f/ds-colors.webp" width="1440" height="810" alt="El playground del sistema de diseño: los fundamentos de color, con tokens de marca, neutros, texto y selección." fetchpriority="high" />
-      </div>
-    </div>
+    <DsSpecimen label="Muestrario del sistema de diseño: stepper, botones, un campo de nombre con su error, un umbral en porcentaje o dólares, una lista de zonas con número de tiendas, insignias de estado, la barra de acciones masivas y un aviso." />
+    <figcaption class="t-small">Los componentes del sistema, recreados aquí en HTML con sus tokens</figcaption>
   </figure>
 
-  <section class="chapter chapter--section wrap" aria-labelledby="ch-numbers" data-reveal>
-    <div class="split">
-      <h2 id="ch-numbers" class="t-h3 split__label">En cifras</h2>
-      <div class="columns3 numbers split__body">
-        {numbers.map((n) => (
-          <div><p class="t-display">{n.v}</p><p class="t-muted">{n.k}</p></div>
-        ))}
-      </div>
-    </div>
-  </section>
 
   <section class="chapter wrap" aria-labelledby="ch-problem" data-depth="full" data-reveal>
     <div class="split">
@@ -140,11 +123,6 @@ const decisions = [
     </div>
   </section>
 
-  <figure class="figure wrap" data-depth="full" data-reveal>
-    <div class="stage" style="aspect-ratio:1296/680">
-      <img class="flat" src="/assets/f/ds-button.webp" width="1600" height="1412" loading="lazy" alt="El componente Button en el playground: variantes, tamaños, íconos, estados y la barra de acciones masivas." style={`left:${pct(298, 1296)};top:${pct(48, 680)};width:${pct(700, 1296)}`} />
-    </div>
-  </figure>
 
   <section class="chapter wrap" aria-labelledby="ch-contribution" data-depth="full" data-reveal>
     <div class="split">
@@ -172,11 +150,9 @@ const decisions = [
     </div>
   </section>
 
-  <figure class="figure wrap" data-depth="full" data-reveal>
-    <div class="stage" style="aspect-ratio:1296/600">
-      <img class="flat" src="/assets/f/ds-metriccard.webp" width="1600" height="1171" loading="lazy" alt="Los componentes MetricCard e InformativeCard con insignias de estado." style={`left:${pct(318, 1296)};top:${pct(44, 600)};width:${pct(660, 1296)}`} />
-    </div>
-    <figcaption class="t-small">Cada estado tiene su propio token: un agente aplica «On track» o «Watch» sin adivinar</figcaption>
+  <figure class="figure wrap" data-reveal>
+    <DsRuleTrio labels={{ figma: 'Las variables en Figma', code: 'Los mismos tokens en el paquete de npm', lint: 'La salida del linter para el primer prototipo y la reconstrucción' }} />
+    <figcaption class="t-small">Una regla en tres lugares: la variable en Figma, el token en el paquete y el error del linter cuando un prototipo la rompe</figcaption>
   </figure>
 
   <section class="chapter wrap" aria-labelledby="ch-org" data-depth="full" data-reveal>

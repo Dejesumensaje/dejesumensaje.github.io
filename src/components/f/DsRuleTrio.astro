@@ -1,0 +1,107 @@
+---
+// One rule seen in the three places it lives: the Figma variable, the token in
+// the npm package, and the linter error when a prototype breaks it.
+interface Props { labels: { figma: string; code: string; lint: string } }
+const { labels } = Astro.props;
+const vars = [
+  { n: 'primary', h: '#26890D' },
+  { n: 'success', h: '#207F19' },
+  { n: 'selection', h: '#000000' },
+  { n: 'warning-foreground', h: '#9F6514' },
+];
+---
+
+<div class="trio">
+  <div role="group" class="trio__pane" aria-label={labels.figma}>
+    <p class="trio__bar">Figma · Variables</p>
+    <div class="trio__body trio__vars">
+      <p class="trio__group">Color</p>
+      {vars.map((v) => (
+        <p class="trio__var"><span class="trio__sw" style={`background:${v.h}`}></span><span>{v.n}</span><span class="trio__hex">{v.h}</span></p>
+      ))}
+    </div>
+  </div>
+
+  <div role="group" class="trio__pane trio__pane--code" aria-label={labels.code}>
+    <p class="trio__bar">tokens.css · npm</p>
+    <pre class="trio__body"><code><span class="c">/* One primary action per view */</span>
+<span class="k">--primary</span>: <span class="s">#26890d</span>;
+<span class="k">--success</span>: <span class="s">#207f19</span>; <span class="c">/* hover */</span>
+
+<span class="c">/* Selected states never use the brand */</span>
+<span class="k">--selection</span>: <span class="s">#000000</span>;
+
+<span class="c">/* #ed8b00 measured 2.37:1 */</span>
+<span class="k">--warning-foreground</span>: <span class="s">#9f6514</span>;</code></pre>
+  </div>
+
+  <div role="group" class="trio__pane trio__pane--code" aria-label={labels.lint}>
+    <p class="trio__bar">design-lint.js</p>
+    <pre class="trio__body"><code><span class="e">ERROR</span> color
+  #ff9800 is not a DS color token
+<span class="e">ERROR</span> spacing
+  gap&#58; 10px is off the base-4 scale
+<span class="e">ERROR</span> select
+  native &lt;select&gt;; use the Select popover
+
+first-prototype.html: <span class="e">1,723 error(s)</span> -> FAIL
+rebuild.html: <span class="s">0 error(s)</span> -> PASS</code></pre>
+  </div>
+</div>
+
+<style>
+  .trio {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-4);
+    background: var(--surface);
+    border-radius: var(--radius-sm);
+    padding: clamp(var(--space-4), 4vw, var(--space-13));
+  }
+  @media (max-width: 1023px) { .trio { grid-template-columns: 1fr; } }
+
+  .trio__pane {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    background: #ffffff;
+    color: #212121;
+    box-shadow: 0 0 0 var(--hairline) rgba(23, 24, 26, 0.08), 0 12px 32px -8px rgba(23, 24, 26, 0.14);
+    filter: brightness(var(--shot-dim));
+  }
+  .trio__bar {
+    font-family: var(--font-mono, 'Geist Mono', ui-monospace, monospace);
+    font-size: 12px;
+    color: #6b6f75;
+    background: #f5f5f5;
+    padding: var(--space-3) var(--space-4);
+    border-bottom: var(--hairline) solid #ebebeb;
+  }
+  .trio__body { padding: var(--space-4); margin: 0; min-width: 0; }
+
+  .trio__vars { display: flex; flex-direction: column; font-family: 'Inter', system-ui, sans-serif; font-size: 13px; }
+  .trio__group { font-weight: 600; padding-bottom: var(--space-2); }
+  .trio__var {
+    display: flex; align-items: center; gap: var(--space-3);
+    padding-block: var(--space-2);
+    border-top: var(--hairline) solid #ebebeb;
+  }
+  .trio__sw { width: 18px; height: 18px; border-radius: 4px; flex: none; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1); }
+  .trio__hex { margin-left: auto; color: #767676; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 12px; }
+
+  .trio__pane--code { background: #16191b; color: #d6dde0; }
+  .trio__pane--code .trio__bar { background: #202426; color: #8f999d; border-bottom-color: #2a2f32; }
+  .trio pre {
+    font-family: 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 12.5px;
+    line-height: 1.65;
+    overflow-x: auto;
+    white-space: pre;
+  }
+  .k { color: #7fc8ff; }
+  .s { color: #a6e39a; }
+  .c { color: #7d878c; }
+  .e { color: #ff8a80; }
+</style>

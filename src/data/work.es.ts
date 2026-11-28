@@ -5,20 +5,20 @@ type SideText = { summary: string; alts?: string[]; browserAlt?: string };
 type Principle = { n: string; title: string; body: string };
 
 const featured: CardText = {
-  title: 'Prototipar los precios de una tienda con IA',
-  summary:
-    'Prototipos funcionales, hechos con IA, para probar flujos en días y no en semanas: escritorio para la oficina, celular para los pasillos.',
-  meta: 'Deloitte · Supermercados en EE. UU. · En curso',
-  alt: 'Prototipo de precios de tienda en escritorio: una tabla de artículos con precio base y de venta, promociones, recomendaciones de la sede central y estado.',
-  phoneAlt: 'El mismo prototipo en un celular, editando el precio de un producto en los pasillos.',
+  title: 'Un sistema de diseño para personas y agentes de IA',
+  summary: 'De una librería en Figma que los demos con IA ignoraban a un paquete de código con reglas estrictas que cualquier agente puede seguir.',
+  meta: 'Deloitte · Sistemas de diseño · 2024–hoy',
+  alt: 'Documentación del sistema de diseño: la página de color con muestras de marca, neutros y texto.',
 };
 
 const cases: CardText[] = [
   {
-    title: 'Un sistema de diseño para personas y agentes de IA',
-    summary: 'De una librería en Figma que los demos con IA ignoraban a un paquete de código con reglas estrictas que cualquier agente puede seguir.',
-    meta: 'Deloitte · Sistemas de diseño · 2024–hoy',
-    alt: 'Documentación del sistema de diseño: la página de color con muestras de marca, neutros y texto.',
+    title: 'Prototipar los precios de una tienda con IA',
+    summary:
+      'Prototipos funcionales, hechos con IA, para probar flujos en días y no en semanas: escritorio para la oficina, celular para los pasillos.',
+    meta: 'Deloitte · Supermercados en EE. UU. · En curso',
+    alt: 'Prototipo de precios de tienda en escritorio: una tabla de artículos con precio base y de venta, promociones, recomendaciones de la sede central y estado.',
+    phoneAlt: 'El mismo prototipo en un celular, editando el precio de un producto en los pasillos.',
   },
   {
     title: 'Llevar el aprendizaje a aulas rurales sin internet',

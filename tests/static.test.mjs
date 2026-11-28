@@ -358,8 +358,7 @@ test('critical images declare dimensions and non-hero images are lazy', () => {
   // The home hero and the featured case shot are above the fold by design.
   const eagerByDesign = new Set([
     '/assets/f/portrait.webp',
-    '/assets/f/store-pricing-desktop.webp',
-    '/assets/f/store-pricing-phone.webp',
+    '/assets/f/ds-colors.webp',
   ]);
   for (const route of ROUTES) {
     const page = html[route];
